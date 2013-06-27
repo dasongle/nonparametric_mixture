@@ -1,0 +1,118 @@
+\section{Sample Complexity Analysis}
+
+\subsection{Robust Tensor Power Method}
+We recap the robust tensor power method for finding the tensor eigen-pairs, analyzed in detail in~\cite{AnandkumarEtal:community12}.
+
+\begin{algorithm}
+\caption{$\{\lambda, \Phi\}\leftarrow $TensorEigen$(T,\, \{v_i\}_{i\in [L]}, N)$}\label{alg:robustpower}
+\begin{algorithmic}
+\renewcommand{\algorithmicrequire}{\textbf{Input: }}
+\renewcommand{\algorithmicensure}{\textbf{Output: }}
+\REQUIRE Tensor $T\in \R^{k \times k \times k}$, set of $L$ initialization vectors $\{v_i\}_{i\in L}$, number of
+iterations  $N$.
+%\ENSURE Eigenpairs:  $\lambda$ is the vector of eigenvalues and $\Phi$ is the matrix of eigenvectors of  $T$.
+\ENSURE the estimated eigenvalue/eigenvector pairs $\{\lambda, \Phi\}$, where $\lambda$ is the vector of eigenvalues and $\Phi$ is the matrix of eigenvectors.
+
+\FOR{$i =1$ to $k$}
+\FOR{$\tau = 1$ to $L$}
+\STATE $\th{0}\leftarrow v_\tau$.
+\FOR{$t = 1$ to $N$}
+\STATE $\tilde{T}\leftarrow T$.
+\FOR{$j=1$ to $i-1$ (when $i>1$)}
+\IF{$|\lambda_j \inner{\th{t}^{(\tau)}, \phi_j}|>\xi$}
+\STATE $\tilde{T}\leftarrow \tilde{T}- \lambda_j \phi_j^{\otimes 3}$.
+\ENDIF
+\ENDFOR
+
+\STATE Compute power iteration update
+$
+\th{t}^{(\tau)}  :=
+\frac{\tilde{T}(I, \th{t-1}^{(\tau)}, \th{t-1}^{(\tau)})}
+{\|\tilde{T}(I, \th{t-1}^{(\tau)}, \th{t-1}^{(\tau)})\|}
+$\ENDFOR
+\ENDFOR
+
+\STATE Let $\tau^* := \arg\max_{\tau \in L} \{ \tilde{T}(\th{N}^{(\tau)},
+\th{N}^{(\tau)}, \th{N}^{(\tau)}) \}$.
+
+\STATE Do $N$ power iteration updates starting from
+$\th{N}^{(\tau^*)}$ to obtain eigenvector estimate $\phi_i$, and set $\lambda_i :=
+\tilde{T}(\phi_i, \phi_i, \phi_i)$.
+
+\ENDFOR
+\RETURN the estimated eigenvalue/eigenvectors
+$(\lambda, \Phi)$.
+
+\end{algorithmic}
+\end{algorithm}
+
+
+We now recap the result of~\cite[Thm. 13]{AnandkumarEtal:community12} that establishes bounds on the eigen-estimates under good initialization vectors for the above procedure. 
+Let $T=\sum_{i\in [k]}\lambda_i v_i$, where $v_i$ are orthonormal vectors and $\lambda_1\geq \lambda_2\geq\ldots \lambda_k$. Let $\tT=T+E$ be the perturbed tensor with $\|E\|\leq \epsilon$. Recall that $N$ denotes the number of iterations of the tensor power method.
+We call an initialization vector $u$ to be $(\gamma, R_0)$-good  if there exists $v_i$ such that $\inner{u, v_i}> R_0$
+  and $|\inner{u, v_i}| -\max_{j<i} |\inner{u,v_j}| > \gamma  |\inner{u,v_i}|$.   Choose $\gamma=1/100$.
+
+
+\begin{theorem}
+\label{thm:robustpower}
+There exists universal constants $C_1, C_2 > 0$  such that the
+following holds.
+\beq\label{eqn:robustpowerconditions}
+\epsilon \leq C_1 \cdot \lambda_{\min} R_0^2,
+\qquad
+N \geq C_2 \cdot \left( \log(k) + \log\log\left(
+\frac{\lambdamax}{\eps} \right) \right)
+,
+\eeq Assume there is at least one good initialization vector corresponding to each $v_i$, $i\in [k]$. The parameter $\xi$ for choosing deflation vectors in each iteration of the tensor power method in Procedure~\ref{alg:robustpower}  is chosen as $\xi\geq 25 \eps$. We obtain  eigenvalue-eigenvector pairs  $(\hat\lambda_1,\hat{v}_1), (\hat\lambda_2,\hat{v}_2), \dotsc,
+(\hat\lambda_k,\hat{v}_k)$ such that  there exists a permutation $\pi$ on
+$[k]$ with
+\[
+\|v_{\pi(j)}-\hat{v}_j\| \leq 8 \epsilon/\lambda_{\pi(j)}
+, \qquad
+|\lambda_{\pi(j)}-\hat\lambda_j| \leq 5\epsilon , \quad \forall j \in [k]
+,
+\]
+and
+\[
+\left\|
+T - \sum_{j=1}^k \hat\lambda_j \hat{v}_j^{\otimes 3}
+\right\| \leq 55\eps .
+\]
+\end{theorem}
+
+In the sequel, we establish concentration bounds that allows us to translate the above condition on tensor perturbation~\eqref{eqn:robustpowerconditions}  to sample complexity bounds.
+
+\subsection{Concentration Bounds}
+
+\subsubsection{Analysis of Whitening} 
+
+Recall that we use the covariance operator $\Ccal_{X_1,X_2}$ for whitening the third-order operator \aacomment{a better term for this?} $\Ccal_{X_1, X_2, X_3}$. We first analyze the perturbation in whitening when sample estimates are employed. 
+
+Let $\h{\Ccal}_{X_1,X_2}$ denote the sample covariance operator between variables $X_1$ and $X_2$, and let \[B:=0.5(\h{\Ccal}_{X_1,X_2}+ \h{\Ccal}_{X_1,X_2}^\top)=\h{U}\h{S}\h{U}^\top\] denote the SVD.
+Let $U_k$ and $S_k$ denote the restriction to top-$k$ eigen-pairs, and let $B_{k} := U_k S_k U_k^\top$. Recall that the whitening matrix is given by $\h{W}:=\h{U}_k \h{S}_k^{-1/2}$. Now $\h{W}$ whitens $B_k$, i.e. $\h{W}^\top B_{k} \h{W}=I$.
+
+Now consider the SVD of
+\[ \h{W}^\top \Ccal_{X_1,X_2} \h{W}= A D A^\top,\] and define \[W:= \h{W} AD^{-1/2}A^\top, \] and $W$ whitens $\Ccal_{X_1,X_2}$ since $W^\top \Ccal_{X_1, X_2} W=I$.
+Recall that by exchangeability assumption, 
+\[ \Ccal_{X_1,X_{2}}
+  = \sum_{j=1}^k \pi_j \cdot \mu_{X|j} \otimes \mu_{X|j}= M \Diag(\pi) M^\top, \] where the $j^{\tha}$ column of $M$, $M_j = \mu_{X|j}$.
+
+We now establish the following perturbation bound on the whitening procedure. Recall from \eqref{eqn:deltapairs}, $ \epsilon_{pairs}:=\nbr{\Ccal_{X_1,X_{2}} - \widehat \Ccal_{X_1,X_{2}}}_{HS}$. Let $\sigma_1(\cdot) \geq \sigma_2(\cdot)\ldots$ denote the singular values of a matrix.\aacomment{will have to define the generalization to infinite dimensional objects}
+
+\aacomment{Spectral norm will have to be replaced by HS norm.}
+
+\begin{lemma}[Whitening perturbation]
+\beq \epsilon_{W}:= \|\Diag(\pi)^{1/2}M^\top(\h{W}-W)\|= O\left( \frac{ \epsilon_{pairs}}{ \sigma_{k}(\Ccal_{X_1, X_2})}\right)\eeq
+\end{lemma}
+
+\bprf The proof is along the lines of~\cite[Lemma 16]{AnandkumarEtal:community12}, but adapted to whitening using the covariance operator here.
+ \begin{align*}\|\Diag(\pi)^{1/2} M^\top(\h{W}-W)\|&= 
+\|\Diag(\pi)^{1/2} M^\top W(A D^{1/2} A^\top -I)\|\\ &\leq\|\Diag(\pi)^{1/2} M^\top W\| \|D^{1/2}-I\|. \end{align*} Since $W$ whitens $\Ccal_{X_1, X_2}=M \Diag(\pi) M^\top$, we have that $\|\Diag(\pi)^{1/2} M^\top W\|=1$. Now we control $\|D^{1/2}-I\|$.  Let $E_{pairs}:= \Ccal_{X_1,X_{2}} -B_k$, where recall that $B=0.5( \widehat \Ccal_{X_1,X_{2}}+ \h{\Ccal}_{X_1, X_2}^\top)$ and $B_k$ is its restriction to top-$k$ singular values. Thus, we have $\|E_{pairs}\|_{HS} \leq \epsilon_{pairs} + \sigma_{k+1}(B)\leq 2\epsilon_{pairs} $.
+ We now have
+\begin{align*}
+\|D^{1/2}-I\|&\leq \|(D^{1/2}-I)(D^{1/2}+I)\|\leq \|D-I\|
+\\ &=\|AD A^\top - I\| = \|\h{W}^\top \Ccal_{X_1, X_2}  \h{W} -I\|\\ &=\| \h{W}^\top  E_{pairs} \h{W}\| = O\left( \|\h{W}\|^2 \epsilon_{pairs}\right)\\ &= O\left( \frac{ \epsilon_{pairs}}{ \sigma_{k}(\Ccal_{X_1, X_2})}\right), 
+\end{align*} where the last line is due to the fact that $W^\top \Ccal_{X_1, X_2} W=I$.
+\eprf
+
+\subsubsection{Tensor Concentration Bounds}

@@ -24,7 +24,7 @@
 \newcommand{\hmu}{\widehat{\mu}}
 \newcommand{\hCcal}{\widehat{\Ccal}}
 \newcommand\tl{\tilde}
-
+\input{tensor-macros}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title{Nonparametric Estimation of Multiview Latent Variable Models}
@@ -319,13 +319,13 @@ Similarly, for the joint distribution of the two observed variable in~\eq{eq:joi
 % 	\item $\widetilde{\Tcal} = \Ccal_{123} \bullet_1 (\widetilde{\Ucal}_1 \widetilde{\Scal}_1^{-1/2})^\top  \bullet_2 (\widetilde{\Ucal}_2 \widetilde{\Scal}_2^{-1/2})^\top \bullet_3 (\widetilde{\Ucal}_3 \widetilde{\Scal}_3^{-1/2})^\top$
 % \end{itemize}
 
-For simplicity of exposition, assume that $\mu_{X_t|j} = \mu_{X_{t'}|j}$ for $t\neq t'$. Then the parameters, $\{\pi_j, \mu_{X_t|j}\}_{j \in [k]}$, of the multiview latent variable model can be recovered from $\Ccal_{X_t,X_{t'}}$ and $\Ccal_{X_1,X_2,X_3}$ using the following simple algorithm
+For simplicity of exposition, assume that $\mu_{X_t|j} = \mu_{X_{t'}|j}$ for $t\neq t'$, i.e. the random variables are {\em exchangeable}. Our analysis can be easily extended to the general multi-view setting, see~\cite{AnandkumarEtal:tensor12} for details. For exchangeable random variables,  the parameters $\{\pi_j, \mu_{X_t|j}\}_{j \in [k]}$, of the multiview latent variable model can be recovered from $\Ccal_{X_t,X_{t'}}$ and $\Ccal_{X_1,X_2,X_3}$ using the following simple algorithm.
 \begin{enumerate}
   \item Singular value decomposition for $\Ccal_{X_t,X_{t'}}$,
     $$\Ccal_{X_t,X_{t'}} = U\, S\,\, V^\top$$
   \item Let the leading $k$ eigen-vectors corresponding to the largest $k$ eigen-value be $U_k$, and the corresponding submatrix of $S$ containing these eigen-values be $S_k$.
-  \item Whiten the embedding $\Ccal_{X_1,X_2,X_3}$,
-    $$\Tcal := \Ccal_{X_1,X_2,X_3} \times_1 (S_k^{-1/2}U_k^\top) \times_2 (S_k^{-1/2}U_k^\top) \times_3 (S_k^{-1/2}U_k^\top)$$
+  \item Whiten the embedding $\Ccal_{X_1,X_2,X_3}$ using whitening matrix $W:=S_k^{-1/2}U_k^\top$. 
+    $$\Tcal := \Ccal_{X_1,X_2,X_3} \times_1 (W^\top) \times_2 (W^\top) \times_3 (W^\top)$$
     where $\times_i$ denotes mode-$i$ tensor-matrix multiplication.
   \item Find the leading $k$ tensor eigen-vectors $V_k$ for $\Tcal$ using tensor power method.
   \item Recover the embedding $\mu_{X_t|j}$ by
@@ -336,7 +336,7 @@ For simplicity of exposition, assume that $\mu_{X_t|j} = \mu_{X_{t'}|j}$ for $t\
 
 Given $m$ observation $\Dcal_{X_1,X_2,X_3}=\{(x_1^i,x_2^i,x_3^i)\}_{i \in [m]}$ drawn~\iid~from a multi-view latent variable model $P(X_1,X_2,X_3)$, we now design a kernel algorithm to estimate the latent parameters from data. Although the empirical kernel embedding has infinite dimensions, we can carry out the decomposition using just the kernel matrices.
 
-First, we will perform a kernel singular value decomposition of the empirical estimate of $\widehat \Ccal_{X_t,X_{t'}}:= \frac{1}{m} \sum_{i=1}^m \phi(x_t^i) \otimes \phi(x_{t'}^i)$. Denote the implicitly formed feature matrix for variable $X_t$ by $\Phi := (\phi(x_t^1),  \phi(x_t^2), \ldots, \phi(x_t^m))$, and that for variable $X_{t'}$ by $\Psi := (\phi(x_{t'}^1), \phi(x_{t'}^2), \ldots, \phi(x_{t'}^m))$ respectively. And the corresponding kernel matrix be $K = \Phi^\top \Phi$ and $L = \Psi^\top \Psi$. Using the feature matrice, $\Ccal_{X_t,X_{t'}}$ can be expressed as
+First, we will perform a kernel singular value decomposition of the empirical estimate of $\widehat \Ccal_{X_t,X_{t'}}:= \frac{1}{m} \sum_{i=1}^m \phi(x_t^i) \otimes \phi(x_{t'}^i)$. Denote the implicitly formed feature matrix for variable $X_t$ by $\Phi := (\phi(x_t^1),  \phi(x_t^2), \ldots, \phi(x_t^m))$, and that for variable $X_{t'}$ by $\Psi := (\phi(x_{t'}^1), \phi(x_{t'}^2), \ldots, \phi(x_{t'}^m))$ respectively. And the corresponding kernel matrix be $K = \Phi^\top \Phi$ and $L = \Psi^\top \Psi$. Using the feature matrix, $\Ccal_{X_t,X_{t'}}$ can be expressed as
 $$
 	\Ccal_{X_t,X_{t'}} = \frac{1}{m} \Phi \Psi^\top.
 $$
@@ -387,9 +387,9 @@ Next, we run tensor power method on the finite dimension tensor $\widehat \Tcal$
 
 Concentration results for the singular value decomposition of empirical operators.
 
-\begin{theorem} Let $\kappa:=\sup_{x \in \Omega} k(x,x)$, and $\| \cdot\|_{HS}$ be the Hilbert-Schdmit norm, we have
+\begin{theorem} Let $\kappa:=\sup_{x \in \Omega} k(x,x)$, and $\| \cdot\|_{HS}$ be the Hilbert-Schmidt norm, we have for \beq \epsilon_{pairs}:=\nbr{\Ccal_{X_t,X_{t'}} - \widehat \Ccal_{X_t,X_{t'}}}_{HS},\label{eqn:deltapairs} \eeq
 \begin{eqnarray}
-	\PP \cbr{ \nbr{\Ccal_{X_t,X_{t'}} - \widehat \Ccal_{X_t,X_{t'}}}_{HS} \leqslant \frac{2\sqrt{2}\kappa \sqrt{\delta}}{\sqrt{n}} } \geqslant 1-2\exp(-\delta). \label{eq:operator_concentration}
+	\PP \cbr{\epsilon_{pairs}  \leqslant \frac{2\sqrt{2}\kappa \sqrt{\delta}}{\sqrt{n}} } \geqslant 1-2\exp(-\delta). \label{eq:operator_concentration}
 \end{eqnarray}
 \end{theorem}
 
@@ -408,12 +408,14 @@ which implies that $\nbr{\Ccal_{X_t,X_{t'}}}_{HS} \leqslant \kappa$, and $\nbr{\
 
 Use analysis for tensor paper and then concentration inequality for Hilbert space embeddings.
 
-\section{Intepretation with Parametric Family}
+\section{Interpretation with Parametric Family}
 
 For interpretable results, we can project the nonparametric representation to parametric family of distributions (\eg,~exponential families) as post-processing.
 
+\input{concentration-bounds}
 \bibliographystyle{unsrt}
-\bibliography{../../../newbibfile/bibfile} % L
+\bibliography{nonparametric_mixture}
+%{../../../newbibfile/bibfile} % L
 % \bibliography{../../../../newbibfile/bibfile} % L
 
 \end{document}
