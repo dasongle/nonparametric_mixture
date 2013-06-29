@@ -48,7 +48,7 @@ $(\lambda, \Phi)$.
 
 
 We now recap the result of~\cite[Thm. 13]{AnandkumarEtal:community12} that establishes bounds on the eigen-estimates under good initialization vectors for the above procedure. 
-Let $T=\sum_{i\in [k]}\lambda_i v_i$, where $v_i$ are orthonormal vectors and $\lambda_1\geq \lambda_2\geq\ldots \lambda_k$. Let $\tT=T+E$ be the perturbed tensor with $\|E\|\leq \epsilon$. Recall that $N$ denotes the number of iterations of the tensor power method.
+Let $\Tcal=\sum_{i\in [k]}\lambda_i v_i$, where $v_i$ are orthonormal vectors and $\lambda_1\geq \lambda_2\geq\ldots \lambda_k$. Let $\h{\Tcal}=\Tcal+E$ be the perturbed tensor with $\|E\|\leq \epsilon_{T}$. Recall that $N$ denotes the number of iterations of the tensor power method.
 We call an initialization vector $u$ to be $(\gamma, R_0)$-good  if there exists $v_i$ such that $\inner{u, v_i}> R_0$
   and $|\inner{u, v_i}| -\max_{j<i} |\inner{u,v_j}| > \gamma  |\inner{u,v_i}|$.   Choose $\gamma=1/100$.
 
@@ -58,10 +58,10 @@ We call an initialization vector $u$ to be $(\gamma, R_0)$-good  if there exists
 There exists universal constants $C_1, C_2 > 0$  such that the
 following holds.
 \beq\label{eqn:robustpowerconditions}
-\epsilon \leq C_1 \cdot \lambda_{\min} R_0^2,
+\epsilon_{T} \leq C_1 \cdot \lambda_{\min} R_0^2,
 \qquad
 N \geq C_2 \cdot \left( \log(k) + \log\log\left(
-\frac{\lambdamax}{\eps} \right) \right)
+\frac{\lambdamax}{\epsilon_{tensor}} \right) \right)
 ,
 \eeq Assume there is at least one good initialization vector corresponding to each $v_i$, $i\in [k]$. The parameter $\xi$ for choosing deflation vectors in each iteration of the tensor power method in Procedure~\ref{alg:robustpower}  is chosen as $\xi\geq 25 \eps$. We obtain  eigenvalue-eigenvector pairs  $(\hat\lambda_1,\hat{v}_1), (\hat\lambda_2,\hat{v}_2), \dotsc,
 (\hat\lambda_k,\hat{v}_k)$ such that  there exists a permutation $\pi$ on
@@ -75,7 +75,7 @@ $[k]$ with
 and
 \[
 \left\|
-T - \sum_{j=1}^k \hat\lambda_j \hat{v}_j^{\otimes 3}
+\Tcal - \sum_{j=1}^k \hat\lambda_j \hat{v}_j^{\otimes 3}
 \right\| \leq 55\eps .
 \]
 \end{theorem}
@@ -95,24 +95,95 @@ Now consider the SVD of
 \[ \h{W}^\top \Ccal_{X_1,X_2} \h{W}= A D A^\top,\] and define \[W:= \h{W} AD^{-1/2}A^\top, \] and $W$ whitens $\Ccal_{X_1,X_2}$ since $W^\top \Ccal_{X_1, X_2} W=I$.
 Recall that by exchangeability assumption, 
 \[ \Ccal_{X_1,X_{2}}
-  = \sum_{j=1}^k \pi_j \cdot \mu_{X|j} \otimes \mu_{X|j}= M \Diag(\pi) M^\top, \] where the $j^{\tha}$ column of $M$, $M_j = \mu_{X|j}$.
+  = \sum_{j=1}^k \pi_j \cdot \mu_{X|j} \otimes \mu_{X|j} \tcr{+  E_{X_1, X_2}}= M \Diag(\pi) M^\top  \tcr{+E_{X_1, X_2}}, \] where the $j^{\tha}$ column of $M$, $M_j = \mu_{X|j}$.
 
 We now establish the following perturbation bound on the whitening procedure. Recall from \eqref{eqn:deltapairs}, $ \epsilon_{pairs}:=\nbr{\Ccal_{X_1,X_{2}} - \widehat \Ccal_{X_1,X_{2}}}_{HS}$. Let $\sigma_1(\cdot) \geq \sigma_2(\cdot)\ldots$ denote the singular values of a matrix.\aacomment{will have to define the generalization to infinite dimensional objects}
 
-\aacomment{Spectral norm will have to be replaced by HS norm.}
+\aacomment{Spectral norm will have to be replaced by HS norm. My suggestion is to use $\| \cdot\|$ to denote HS norm.}
 
-\begin{lemma}[Whitening perturbation]
-\beq \epsilon_{W}:= \|\Diag(\pi)^{1/2}M^\top(\h{W}-W)\|= O\left( \frac{ \epsilon_{pairs}}{ \sigma_{k}(\Ccal_{X_1, X_2})}\right)\eeq
+\begin{lemma}[Whitening perturbation]\label{lemma:whiten} Assuming that $\epsilon_{pairs} < 0.5 \sigma_k(\Ccal_{X_1, X_2})$,
+\beq \epsilon_{W}:= \|\Diag(\pi)^{1/2}M^\top(\h{W}-W)\|\leq \frac{2(2\epsilon_{pairs} \tcr{+\sigma_{k+1}(\Ccal_{X_1,X_2})})}{ \sigma_{k}(\Ccal_{X_1, X_2})}\tcr{\cdot (1+ \sigma_{k+1}(\Ccal_{X_1, X_2}))}\eeq
 \end{lemma}
+
+\paragraph{Remark: }Note that $\sigma_{k}(\Ccal_{X_1, X_2}) = \sigma_{k}^2(M)$.
+
+\aacomment{term in red for the more general case}
 
 \bprf The proof is along the lines of~\cite[Lemma 16]{AnandkumarEtal:community12}, but adapted to whitening using the covariance operator here.
  \begin{align*}\|\Diag(\pi)^{1/2} M^\top(\h{W}-W)\|&= 
-\|\Diag(\pi)^{1/2} M^\top W(A D^{1/2} A^\top -I)\|\\ &\leq\|\Diag(\pi)^{1/2} M^\top W\| \|D^{1/2}-I\|. \end{align*} Since $W$ whitens $\Ccal_{X_1, X_2}=M \Diag(\pi) M^\top$, we have that $\|\Diag(\pi)^{1/2} M^\top W\|=1$. Now we control $\|D^{1/2}-I\|$.  Let $E_{pairs}:= \Ccal_{X_1,X_{2}} -B_k$, where recall that $B=0.5( \widehat \Ccal_{X_1,X_{2}}+ \h{\Ccal}_{X_1, X_2}^\top)$ and $B_k$ is its restriction to top-$k$ singular values. Thus, we have $\|E_{pairs}\|_{HS} \leq \epsilon_{pairs} + \sigma_{k+1}(B)\leq 2\epsilon_{pairs} $.
+\|\Diag(\pi)^{1/2} M^\top W(A D^{1/2} A^\top -I)\|\\ &\leq\|\Diag(\pi)^{1/2} M^\top W\| \|D^{1/2}-I\|. \end{align*} Since $W$ whitens $\Ccal_{X_1, X_2}=M \Diag(\pi) M^\top\tcr{+E}$, we have that $\|\Diag(\pi)^{1/2} M^\top W\|=1$ \tcr{or $\|\Diag(\pi)^{1/2} M^\top W\|\leq \|I-E\|^{1/2}\leq 1+ \sigma_{k+1}(\Ccal_{X_1, X_2})$}. Now we control $\|D^{1/2}-I\|$.  Let $\tl{E}:= \Ccal_{X_1,X_{2}} -B_k$, where recall that $B=0.5( \widehat \Ccal_{X_1,X_{2}}+ \h{\Ccal}_{X_1, X_2}^\top)$ and $B_k$ is its restriction to top-$k$ singular values. Thus, we have $\|\tl{E}\|_{HS} \leq \epsilon_{pairs} + \sigma_{k+1}(B)\leq 2\epsilon_{pairs}\tcr{+\sigma_{k+1}(\Ccal_{X_1,X_2})} $.
  We now have
 \begin{align*}
 \|D^{1/2}-I\|&\leq \|(D^{1/2}-I)(D^{1/2}+I)\|\leq \|D-I\|
-\\ &=\|AD A^\top - I\| = \|\h{W}^\top \Ccal_{X_1, X_2}  \h{W} -I\|\\ &=\| \h{W}^\top  E_{pairs} \h{W}\| = O\left( \|\h{W}\|^2 \epsilon_{pairs}\right)\\ &= O\left( \frac{ \epsilon_{pairs}}{ \sigma_{k}(\Ccal_{X_1, X_2})}\right), 
-\end{align*} where the last line is due to the fact that $W^\top \Ccal_{X_1, X_2} W=I$.
+\\ &=\|AD A^\top - I\| = \|\h{W}^\top \Ccal_{X_1, X_2}  \h{W} -I\|\\ &=\| \h{W}^\top  \tl{E} \h{W}\| \leq \|\h{W}\|^2 ( 2 \epsilon_{pairs}\tcr{+\sigma_{k+1}(\Ccal_{X_1,X_2})}).
+\end{align*}Now
+\[ \|\h{W}^2\| \leq\frac{1}{ \sigma_k(\h{\Ccal}_{X_1, X_2})}\leq \frac{2}{\sigma_k(\Ccal_{X_1, X_2})},\] when  $\epsilon_{pairs}<0.5 \sigma_k(\Ccal_{X_1, X_2})$.
 \eprf
 
 \subsubsection{Tensor Concentration Bounds}
+
+Recall that the whitened tensor from samples is given by
+$$\h{\Tcal} := \h{\Ccal}_{X_1,X_2,X_3} \times_1 (\h{W}^\top) \times_2 (\h{W}^\top) \times_3 (\h{W}^\top).$$ We want to establish its perturbation from the whitened tensor using exact statistics
+$$\Tcal := \Ccal_{X_1,X_2,X_3} \times_1 (W^\top) \times_2 (W^\top) \times_3 (W^\top).$$ Further, we have 
+$$\Ccal_{X_1,X_2,X_3}= \sum_{i\in [k]} \pi_i \mu_{X|i}^{\otimes 3}\tcr{+ E_{X_1, X_2, X_3}}$$
+
+Let $\epsilon_{triples}:= \|\h{\Ccal}_{X_1,X_2,X_3}-\Ccal_{X_1,X_2,X_3}\|_{HS}$. Let $\pi_{\min}:=\min_{i\in [k]}\pi_i$.
+
+\begin{lemma}[Tensor perturbation bound]
+Assuming that $\epsilon_{pairs} < 0.5 \sigma_k(\Ccal_{X_1, X_2})$, we have
+\beq\label{eqn:epsilonT} \epsilon_T:= \|\h{\Tcal} - \Tcal\|
+\leq \frac{2\sqrt{2}\epsilon_{triples}}{\sigma_k(\Ccal_{X_1, X_2})^{1.5} }+\frac{\epsilon_W^3}{\sqrt{\pi_{\min}}}
+\tcr{+ \|E_{X_1,X_2,X_3}\| \frac{\epsilon_W^3}{\pi_{\min}^{1.5} \sigma_k(M)^3} }.\eeq
+\end{lemma} 
+
+
+\bprf  Define
+  intermediate tensor
+\begin{align*} \tl{\Tcal}&:= \Ccal_{X_1,X_2,X_3} \times_1 (\h{W}^\top) \times_2 (\h{W}^\top) \times_3 (\h{W}^\top).\end{align*}
+We will bound $\|\h{\Tcal}-\tl{\Tcal}\|$  and $\| \h{\Tcal}-\Tcal\|$  separately. 
+\begin{align*}
+\|\h{\Tcal}-\tl{\Tcal}\| &\leq \|\h{\Ccal}_{X_1, X_2, X_2} - \Ccal_{X_1, X_2, X_3}\| \|\h{W}\|^3\leq \frac{2\sqrt{2}\epsilon_{triples}}{\sigma_k(\Ccal_{X_1, X_2})^{1.5} },
+\end{align*}using the bound on $\|\h{W}\|$ in Lemma~\ref{lemma:whiten}. For the other term,
+first note that
+\[ \Ccal_{X_1, X_2, X_3} = \sum_{i\in [k]} \pi_i M_i^{\otimes 3}\tcr{+ E_{X_1, X_2, X_3}}, \]
+ \tcr{ where $\|E_{X_1, X_2, X_3}\|$ is the residual and we need to bound this in non-parametric case.}
+\begin{align*} \|\h{\Tcal}-\Tcal\|&= \| \Ccal_{X_1, X_2, X_3}\times_1 (\h{W} -W)^\top \times_2 (\h{W} -W)^\top \times_3 (\h{W}-W)^\top\| \\
+&\leq \frac{ \| \Diag(\pi)^{1/2}M^\top(\h{W}-W)\|^3}{\sqrt{\pi_{\min}}}
+\tcr{+ \|E_{X_1,X_2,X_3}\| \|\h{W}-W\|^3}\\
+&= \frac{\epsilon_W^3}{\sqrt{\pi_{\min}}}
+\tcr{+ \|E_{X_1,X_2,X_3}\| \frac{\epsilon_W^3}{\pi_{\min}^{1.5} \sigma_k(M)^3} }
+\end{align*}
+\eprf\\
+
+
+We obtain a condition on the above perturbation $\epsilon_T$ in \eqref{eqn:epsilonT} by applying Theorem~\ref{thm:robustpower} as
+$ \epsilon_T\leq C_1\lambda_{\min} R_0^2$. Here, we have $\lambda_{i} = 1/\sqrt{\pi_{i}}\geq 1$. For random initialization, we have that $R_0 \sim 1/\sqrt{k}$, with probability $1-\delta$ using $\poly(k) \poly(1/\delta)$ trials~\cite[Thm. 5.1]{AnandkumarEtal:tensor12}. Thus, we require that $ \epsilon_T  \leq \frac{C_1}{k}$. Summarizing, we require for the following conditions to hold 
+\beq\epsilon_{pairs}\leq 0.5 \sigma_k(\Ccal_{X_1, X_2}), \quad \epsilon_T  \leq \frac{C_1}{k}.\eeq
+
+\aacomment{need to substitute for $\epsilon_{pairs}$ and $\epsilon_{triples}$ and if we bound the residuals, we are done.}
+
+\subsubsection{Concentration bounds for Empirical Operators}
+
+Concentration results for the singular value decomposition of empirical operators.
+
+\begin{theorem} Let $\kappa:=\sup_{x \in \Omega} k(x,x)$, and $\| \cdot\|_{HS}$ be the Hilbert-Schmidt norm, we have for \beq \epsilon_{pairs}:=\nbr{\Ccal_{X_t,X_{t'}} - \widehat \Ccal_{X_t,X_{t'}}}_{HS},\label{eqn:deltapairs} \eeq
+\begin{eqnarray}
+	\PP \cbr{\epsilon_{pairs}  \leqslant \frac{2\sqrt{2}\kappa \sqrt{\delta}}{\sqrt{n}} } \geqslant 1-2\exp(-\delta). \label{eq:operator_concentration}
+\end{eqnarray}
+\end{theorem}
+
+\begin{proof}
+We will use similar arguments as in~\cite{RosBelVit2010} which deals with symmetric operator. Let $\xi_{i}$ be defined as
+\begin{eqnarray}
+\xi_{i}\, =\, \phi(x_t^i) \otimes \phi(x_{t'}^i) - \Ccal_{X_t,X_{t'}}.
+\end{eqnarray}
+It is easy to see that $\mathbb{E}[\xi_{i}] = 0$. Further, we have
+\begin{eqnarray}
+	\sup_{x_t,x_{t'}} \nbr{\phi(x_t) \otimes \phi(x_{t'})}^{2}_{HS} \leqslant \kappa^{2},
+\end{eqnarray}
+which implies that $\nbr{\Ccal_{X_t,X_{t'}}}_{HS} \leqslant \kappa$, and $\nbr{\xi_i}_{HS} \leqslant 2 \kappa$. The result then follows from the Hoeffding's inequality in Hilbert space.
+\end{proof}
+
+
+Use analysis for tensor paper and then concentration inequality for Hilbert space embeddings.
+ 

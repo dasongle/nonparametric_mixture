@@ -261,7 +261,7 @@ The definition of the conditional embedding operator in~\eq{eq:conditionalembedd
         \end{array}
     }^{\Large -1}}_{\Ccal_{XX}^{-1}}. \label{eq:conditionalprobabilitytable}
 \end{align}
-As a second example, let $Y$ from a general domain $\Omega$ while $X$ being discrete. In this case, there are $k$ different conditional distributions, $P(Y|x=t),\,t\in[k]$, one for each value of the discrete conditing variable $X$. Using Kronecker delta kernel for $X$, the conditional embedding operator is simply a column concatenation of the embeddings for each $P(Y|x)$,~\ie,
+As a second example, let $Y$ from a general domain $\Omega$ while $X$ being discrete. In this case, there are $k$ different conditional distributions, $P(Y|x=t),\,t\in[k]$, one for each value of the discrete conditioning variable $X$. Using Kronecker delta kernel for $X$, the conditional embedding operator is simply a column concatenation of the embeddings for each $P(Y|x)$,~\ie,
 \begin{align}
   \Ccal_{Y|X} = \rbr{\mu_{Y|x=1},\ \mu_{Y|x=2},\ \ldots,\ \mu_{Y|x=k}}
 \end{align}
@@ -369,7 +369,7 @@ The resulting singular vectors satisfy $u_j^\top u_{j'} = \betab_l^\top \Phi^\to
   \label{alg:svd}
 \end{algorithm}
 
-Second, we will whiten the empirical embedding $\widehat \Ccal_{X_1,X_2,X_3}:=\frac{1}{m}\sum_{i=1}^m \phi(x_1^i) \otimes \phi(x_2^i) \otimes \phi(x_3^i)$ by
+Second, we   whiten the empirical embedding $\widehat \Ccal_{X_1,X_2,X_3}:=\frac{1}{m}\sum_{i=1}^m \phi(x_1^i) \otimes \phi(x_2^i) \otimes \phi(x_3^i)$ to obtain 
 \begin{align}
 	\widehat \Tcal := \frac{1}{m}\sum_{i=1}^m \widetilde K_{:x_1^i} \otimes \widetilde K_{:x_2^i} \otimes \widetilde K_{:x_3^i} \quad \in \quad \RR^{k\times k \times k},
 \end{align}
@@ -382,31 +382,6 @@ Next, we run tensor power method on the finite dimension tensor $\widehat \Tcal$
 \begin{align}
 	(\mu_{X_t|j})_{j\in[k]} = \Phi (\betab_1,\ldots,\betab_k) S_k^{1/2} V_k
 \end{align}
-
-\section{Statistical Analysis}
-
-Concentration results for the singular value decomposition of empirical operators.
-
-\begin{theorem} Let $\kappa:=\sup_{x \in \Omega} k(x,x)$, and $\| \cdot\|_{HS}$ be the Hilbert-Schmidt norm, we have for \beq \epsilon_{pairs}:=\nbr{\Ccal_{X_t,X_{t'}} - \widehat \Ccal_{X_t,X_{t'}}}_{HS},\label{eqn:deltapairs} \eeq
-\begin{eqnarray}
-	\PP \cbr{\epsilon_{pairs}  \leqslant \frac{2\sqrt{2}\kappa \sqrt{\delta}}{\sqrt{n}} } \geqslant 1-2\exp(-\delta). \label{eq:operator_concentration}
-\end{eqnarray}
-\end{theorem}
-
-\begin{proof}
-We will use similar arguments as in~\cite{RosBelVit2010} which deals with symmetric operator. Let $\xi_{i}$ be defined as
-\begin{eqnarray}
-\xi_{i}\, =\, \phi(x_t^i) \otimes \phi(x_{t'}^i) - \Ccal_{X_t,X_{t'}}.
-\end{eqnarray}
-It is easy to see that $\mathbb{E}[\xi_{i}] = 0$. Further, we have
-\begin{eqnarray}
-	\sup_{x_t,x_{t'}} \nbr{\phi(x_t) \otimes \phi(x_{t'})}^{2}_{HS} \leqslant \kappa^{2},
-\end{eqnarray}
-which implies that $\nbr{\Ccal_{X_t,X_{t'}}}_{HS} \leqslant \kappa$, and $\nbr{\xi_i}_{HS} \leqslant 2 \kappa$. The result then follows from the Hoeffding's inequality in Hilbert space.
-\end{proof}
-
-
-Use analysis for tensor paper and then concentration inequality for Hilbert space embeddings.
 
 \section{Interpretation with Parametric Family}
 
