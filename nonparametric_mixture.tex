@@ -220,8 +220,8 @@ In practice, the inversion of the operator can be replaced by the regularized in
 \end{align}
 where $\Phi:=(\phi(x^1),\ldots,\phi(x^m))$ and $\Upsilon:=(\phi(h^1),\ldots,\phi(h^m))$ are implicitly formed feature matrix, and $L=\Upsilon^\top \Upsilon$ is the Gram matrix for samples from variable $H$. Furthermore, we need the additional regularization parameter $\lambda$ to avoid overfitting. Then $\hmu_{X|h}=\widehat{\Ccal}_{X|H}\phi(h)$ becomes a weighted sum of feature mapped data points from $X$,
 \begin{align}
-    & \hmu_{X|h} = \sum_{i=1}^m \beta^i(h) \phi(x^i) = \Phi\, \betab(x) \quad \text{where} \,  \label{eq:conditionalembeddingestimator}\\
-    & \betab(x) := \rbr{\beta^1(h), \ldots, \beta^m(h)}^\top = (L + \lambda I)^{-1} L_{: h}, \nonumber
+    & \hmu_{X|h} = \sum_{i=1}^m \beta^i(h) \phi(x^i) = \Phi\, \betab(h) \quad \text{where} \,  \label{eq:conditionalembeddingestimator}\\
+    & \betab(h) := \rbr{\beta^1(h), \ldots, \beta^m(h)}^\top = (L + \lambda I)^{-1} L_{: h}, \nonumber
 \end{align}
 and $L_{: h}=(l(h,h^1),\ldots,l(h,h^m))^\top$.
 The empirical estimator of the conditional embedding
