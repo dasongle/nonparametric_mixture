@@ -82,15 +82,19 @@ $
   \EE_{X} [f(X)] = \inner{\mu_{X}}{f}_{\Fcal}, \, \forall f\in\Fcal.
 $
 
-Kernel embeddings can be readily generalized to joint distributions of two or more variables using tensor product feature maps. For instance, we can embed a joint distribution of two variables $X_1$ and $X_2$ into a tensor product feature space $\Fcal\otimes \Fcal$ by
+Kernel embeddings can be readily generalized to joint distributions of two or more variables using tensor product feature maps. For instance, we can embed a joint distribution of two variables $X_1$ and $X_2$ into a tensor product feature space $\Fcal\times \Fcal$ by
 \begin{align}
-    \Ccal_{X_1X_2} \, := \, \EE_{X_1X_2}[\phi(X_1)\otimes \phi(X_2)] \, = \, \int_{\Xcal \times \Xcal} \phi(x_1) \otimes \phi(x_2) \, \PP(dx_1,dx_2)
+    \Ccal_{X_1X_2} \, := \, \EE_{X_1X_2}[\phi(X_1)\otimes \phi(X_2)] \, = \, \int_{\Xcal \times \Xcal} \phi(x_1) \otimes \phi(x_2) \, \PP(dx_1 \times dx_2)
 \end{align}
 where the reproducing kernel for the tensor product features satisfies
 \[
-	\inner{\phi(x_1)\otimes \phi(x_2) }{\phi(x_1')\otimes \phi(x_2') }_{\Fcal\otimes \Fcal} \, = \,  k(x_1,x_1')\,k(x_2,x_2').
+	\inner{\phi(x_1)\otimes \phi(x_2) }{\phi(x_1')\otimes \phi(x_2') }_{\Fcal\times \Fcal} \, = \,  k(x_1,x_1')\,k(x_2,x_2').
 \]
 
+Kernel embedding of distributions have both rich representational power. The mapping is injective for characteristic kernels~\cite{SriGreFukLanetal08}. That is, if two distributions, $\PP(X)$ and $\QQ(X)$, are different, they will be mapped to two distinct points in the RKHS. For domain $\RR^d$, many commonly used kernels are characteristic, such as the Gaussian RBF kernel $\exp(-\sigma \|x - x'\|^2)$ and Laplace kernel $\exp(-\sigma \|x - x'\|)$.
+This injective property of kernel embeddings has been exploited to design  state-of-the-art two-sample tests~\cite{GreBorRasSchetal12} and  independence tests~\cite{GreFukTeoSonetal08}.
+
+{\bf Kernel embeddings as multilinear operators.} 
 The joint embeddings can also be viewed as an uncentered cross-covariance operator $\Ccal_{X_1X_2}:\Fcal\mapsto \Fcal$ by the standard equivalence between a tensor product feature and a linear map.
 That is, given two functions $f_1,f_2\in\Fcal$, their covariance can be computed by
 $
@@ -98,14 +102,32 @@ $
 $
 , or equivalently
 $
-\inner{f_1\otimes f_2}{\Ccal_{X_1X_2}}_{\Fcal\otimes\Fcal},
+\inner{f_1\otimes f_2}{\Ccal_{X_1X_2}}_{\Fcal\times\Fcal},
 $
 where in the former we view $\Ccal_{XY}$ as an operator while in the latter we view it as an element in tensor product feature space.
-By analogy, $\Ccal_{X_1X_2X_3} := \EE_{X_1X_2X_3}[\phi(X_1)\otimes\phi(X_2)\otimes \phi(X_3)]$ can also be defined, which can be regarded as a multi-linear operator from $\Fcal\otimes\Fcal\otimes\Fcal$ to $\RR$.
+By analogy, $\Ccal_{X_1X_2X_3} := \EE_{X_1X_2X_3}[\phi(X_1)\otimes\phi(X_2)\otimes \phi(X_3)]$ can also be defined, which can be regarded as a multi-linear operator from $\Fcal\times\Fcal\times\Fcal$ to $\RR$.
 It will be clear from the context whether we use $\Ccal_{XY}$ as an operator between two spaces or as an element from a tensor product feature space.
 
-Kernel embedding of distributions have both rich representational power. The mapping is injective for characteristic kernels~\cite{SriGreFukLanetal08}. That is, if two distributions, $\PP(X)$ and $\QQ(X)$, are different, they will be mapped to two distinct points in the RKHS. For domain $\RR^d$, many commonly used kernels are characteristic, such as the Gaussian RBF kernel $\exp(-\sigma \|x - x'\|^2)$ and Laplace kernel $\exp(-\sigma \|x - x'\|)$.
-This injective property of kernel embeddings has been exploited to design  state-of-the-art two-sample tests~\cite{GreBorRasSchetal12} and  independence tests~\cite{GreFukTeoSonetal08}.
+More generally, the kernel embedding $\Ccal_{X_{1:\ell}}$ for a joint distribution $\PP(X_1,X_2,\ldots,X_{\ell})$ can be viewed as a multi-linear operator (tensor) of order $\ell$ mapping from $\Fcal\times\ldots\times \Fcal$ to $\RR$. (For generic introduction to tensor and tensor notation, please see~\cite{KolBad09}). The operator is linear in each argument (mode) when fixing other arguments. Furthermore, the application of the operator to a set of elements $\cbr{f_i \in \Fcal}_{i \in [\ell]}$ can be defined using the inner product from the tensor product feature space,~\ie,
+\begin{align}
+	\Ccal_{X_{1:\ell}} \times_1 f_1 \times_2 \ldots \times_\ell f_\ell := 	\inner{\Ccal_{X_{1:\ell}}}{\;f_1\otimes\ldots\otimes f_\ell}_{\Fcal^d}=\EE_{X_{1:\ell}}\sbr{\prod_{i \in [\ell]} \inner{\phi(X_i)}{~f_i}_{\Fcal}},
+\end{align}
+where $\times_i$ means applying $f_i$ to the $i$-th argument of $\Ccal_{X_{1:\ell}}$. Furthermore, we can define the Hilbert-Schmidt norm $\nbr{\cdot}_{HS}$ of $\Ccal_{X_{1:\ell}}$ as
+\[
+ \nbr{\Ccal_{X_{1:\ell}}}_{HS}^2 = \sum_{i_1 = 1}^\infty \cdots \sum_{i_\ell = 1}^\infty \rbr{\Ccal_{X_{1:\ell}} \times_1 u_{i_1} \times_2 \ldots \times_\ell u_{i_\ell}}^2
+\]
+using a collection of orthonormal bases $\cbr{u_{i_1}}_{i_1=1}^\infty, \ldots, \cbr{u_{i_\ell}}_{i_\ell=1}^\infty$. We can also define the inner product for the space of such operator that $\nbr{\Ccal_{X_{1:\ell}}}_{HS}<\infty$ as
+\begin{align}
+	\inner{\Ccal_{X_{1:\ell}}}{~\widetilde{\Ccal}_{X_{1:\ell}}}_{HS}  =  \sum_{i_1 = 1}^\infty \cdots \sum_{i_\ell = 1}^\infty \rbr{\Ccal_{X_{1:\ell}} \times_1 u_{i_1} \times_2 \ldots \times_\ell u_{i_\ell}}\, \rbr{\widetilde{\Ccal}_{X_{1:\ell}} \times_1 u_{i_1} \times_2 \ldots \times_\ell u_{i_\ell}}.
+\end{align}
+% When $\Ccal_{X_{1:\ell}}$ has the form of $\EE_{X_{1:\ell}}\sbr{\phi(X_1)\otimes\ldots\otimes \phi(X_\ell)}$, the above inner product reduces to $\EE_{X_{1:\ell}}[\widetilde{\Ccal}_{X_{1:\ell}} \times_1 \phi(X_1) \times_2 \ldots \times_\ell \phi(X_\ell)]$.
+
+
+The joint embedding, $\Ccal_{X_1 X_2}$, is a 2nd order tensor, and we can essentially use notation and operations for matrices. For instance, we can perform singular value decomposition
+\[
+    \Ccal_{X_1X_2} = \sum_{i=1}^{\infty} \sigma_i \cdot u_{i_1} \otimes u_{i_2}
+\]
+where $\sigma_i \in \RR$ are singular values ordered in nonincreasing manner, and $\cbr{u_{i_1}}_{i_1=1}^{\infty} \subset \Fcal, \cbr{u_{i_2}}_{i_2=1}^{\infty} \subset \Fcal$ are singular vectors and orthonormal bases. The rank of $\Ccal_{X_1X_2}$ is the smallest $k$ such that $\sigma_i = 0$ for $i > k$. 
 
 {\bf Example 1.} The probability vector of a discrete variable $X \in [n]$, and the joint probability table of two discrete variables $X_1 \in [n]$ and $X_2 \in [n]$, are both kernel embeddings. To see this, let the kernel be the Kronecker delta kernel $k(x,x') = \delta(x,x')$. The corresponding feature map $\phi(x)$ is then the standard basis of $e_{x}$ in $\RR^n$. Then
 \begin{align}
@@ -141,7 +163,7 @@ the covariance operator can then be estimated as
  \widehat \Ccal_{X_1X_2} =\frac{1}{m}\sum_{i=1}^m \phi(x_1^i) \otimes \phi(x_2^i). \label{eq:empirical_covariance}
 \end{align}
 
-By virtue of the kernel trick, most of the computation required for statistical inference using kernel embeddings can be reduced to the Gram matrix manipulation. The entries in the Gram matrix $K$ correspond to the kernel value between data points $x^i$ and $x^j$, \, \ie, \, $K_{ij} = k(x^i,x^j)$, and therefore its size is determined by the number of data points in the sample. The size of the Gram matrix is in general much smaller than the dimension of the feature spaces (which can be infinite). This enables efficient nonparametric methods using the kernel embedding representation. If the sample size is large, the computation in kernel embedding methods may be expensive. In this case, a popular solution is to use a low-rank approximation of the Gram matrix, such as incomplete Cholesky factorization~\cite{FinSch01}, which is known to work very effectively in reducing computational cost of kernel methods, while maintaining the approximation accuracy.
+By virtue of the kernel trick, most of the computation required for statistical inference using kernel embeddings can be reduced to the Gram matrix manipulation. The entries in the Gram matrix $K$ correspond to the kernel value between data points $x^i$ and $x^j$,~\ie,~$K_{ij} = k(x^i,x^j)$, and therefore its size is determined by the number of data points in the sample. The size of the Gram matrix is in general much smaller than the dimension of the feature spaces (which can be infinite). This enables efficient nonparametric methods using the kernel embedding representation. If the sample size is large, the computation in kernel embedding methods may be expensive. In this case, a popular solution is to use a low-rank approximation of the Gram matrix, such as incomplete Cholesky factorization~\cite{FinSch01}, which is known to work very effectively in reducing computational cost of kernel methods, while maintaining the approximation accuracy.
 
 \noindent {\bf Relation between kernel embedding and the density function.} Basically kernel embeddings maps the density to a function in the RKHS. See Steinwardt and Vert (need to say more).
 
@@ -214,6 +236,20 @@ In practice, the inversion of the operator can be replaced by the regularized in
   \Ccal_{X|H} = \rbr{\mu_{X|h=1},\ \mu_{X|h=2},\ \ldots,\ \mu_{X|h=k}},~\text{and}~\mu_{X|h} = \Ccal_{X|H} e_h.
 \end{align}
 
+{\bf $k$-restricted conditional embedding operator.} Let $\cbr{u_i}_{i=1}^{\infty}$ and $\cbr{v_i}_{i=1}^{\infty}$ be orthonormal bases of $\Fcal$ and $\Gcal$ respectively, such that the conditional embedding operator $\Ccal_{X|H}$ have the following singular value decomposition
+\begin{align}
+ \Ccal_{X|H} = \sum_{i=1}^{\infty} \sigma_i \cdot u_i \otimes v_i,  
+\end{align}
+where the singular values are ordered in non-increasing manner. Let $\cbr{\tilde v_i}_{i\in [k]}$ be a set of $k$ orthonormal vectors in $\Gcal$, we may approximate the conditional embedding operator by 
+\begin{align}
+ \Ccal_{X|H} \approx \Ccal_{X|H} \, \Vcal \Vcal^\top 
+\end{align}
+where $\Vcal:=\sum_{i\in [k]} \tilde v_i \otimes e_i$ is an operator mapping from $\RR^k$ to $\Fcal$, and $\Vcal^\top$ is its ajoint. The composition of $\Vcal$ and $\Vcal^\ast$ form a projection operator which essentially reduces a vector in the potentially infinite dimensional RKHS $\Gcal$ to one in $k$ dimensional space, and them bring it back to $\Gcal$. We will define
+\begin{align}
+ \widetilde \Ccal_{X|H} := \Ccal_{X|H}\, \Vcal
+\end{align}
+as $k$-restricted conditional embedding operator which maps from a $k$-dimensional subspace of $\Gcal$ to $\Fcal$. 
+
 {\bf Finite sample estimate.} Given a dataset $\Dcal_{XH}=\cbr{(x^i,h^i)}_{i\in[m]}$ of size $m$ drawn~\iid~from $\PP(X,H)$, we can estimate the conditional embedding operator as
 \begin{align}
     & \widehat{\Ccal}_{X|H} := \Phi (L + \lambda I)^{-1} \Upsilon^\top  \label{eq:embeddingoperatorestimator}
@@ -233,13 +269,70 @@ observations which are, in turn, determined by the value $h$ of the conditioning
 variable. These non-uniform weights reflect the effects of
 conditioning on the embeddings. It can also be shown that this empirical estimate converges to its population counterpart in RKHS norm, $\nbr{\hmu_{X|h} - \mu_{X|h}}_{\Fcal}$, with rate of $O_p(m^{-\frac{1}{4}})$ if one decreases the regularization $\lambda$ with rate $O(m^{-\frac{1}{2}})$.
 
-{\bf Truncation of the conditional embedding operator.}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Multiview Latent Variable Models}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{figure}[h]
+Multi-view latent variable models (\eg, \, na\"ive Bayes models) are a
+special class of Bayesian networks in which observed variables $X_1, X_2,
+\ldots, X_\ell$ are conditionally independent given a latent variable $H$, and
+the conditional distributions, $\PP(X_t|H)$, of the $X_t, t \in [\ell]$ given the hidden variable $H$ can be different. The conditional independent structure of a multiview latent variable model can be found in Figure~\ref{fig:graphical-model}(a), and many complicated graphical models, such as the hidden Markov model in Figure~\ref{fig:graphical-model}(b), can be reduced to a multiview latent variable model. 
+
+For simplicity of exposition, we now consider a simple model with three observed variables, $X_1, X_2$ and $X_3$ which are conditionally independent given $H$, and furthermore the conditional distributions, $\PP(X_t|H)$, are the same for $t \in \cbr{1,2,3}$. Then the joint distributions, $\PP(X_1,X_2)$ and $\PP(X_1,X_2,X_3)$, can be factorized respectively as 
+\begin{align} 
+ \PP(dx_1 \times dx_2) &= \int_{\Hcal}\, \PP(dx_1 | h )\, \PP(d x_2 | h)\, \PP(dh) \\
+  \PP(dx_1 \times dx_2\times dx_3) &= \int_{\Hcal}\, \PP(dx_1 | h )\, \PP(dx_2 | h)\, \PP(dx_3 | h)\, \PP(dh),   
+\end{align}
+and the corresponding kernel embeddings can be factorized respectively as 
+\begin{align} 
+  \Ccal_{X_1X_2} 
+  &= \int_{\Xcal\times \Xcal \times \Hcal}\, \phi(x_1) \otimes \phi(x_2)\, \PP(dx_1 | h )\, \PP(dx_2 | h)\, \PP(dh) \\
+  &= \int_{\Hcal} \rbr{\int_\Xcal \phi(x_1)\, \PP(dx_1|h)} \otimes \rbr{\int_\Xcal \phi(x_2)\, \PP(dx_2 |h)} \PP(dh) \\
+  &= \int_{\Hcal} \rbr{\Ccal_{X|H} \psi(h)} \otimes \rbr{\Ccal_{X|H} \psi(h)}\, \PP(dh) \\
+  &= \Ccal_{X|H}\, \rbr{\int_{\Hcal} \psi(h) \otimes \psi(h)\, \PP(dh)}\, \Ccal_{X|H}^\top\\
+  &= \Ccal_{X|H}\, \Ccal_{HH}\, \Ccal_{X|H}^\top \\
+%   &= \Ccal_{HH} \times_1 \Ccal_{X|H} \times_2 \Ccal_{X|H} \\
+  \Ccal_{X_1 X_2 X_3}  
+  &= \int_{\Xcal\times \Xcal \times \Xcal \times \Hcal}\, \phi(x_1) \otimes \phi(x_2) \otimes \phi(x_3) \, \PP(dx_1 | h )\, \PP(dx_2 | h)\, \PP(dx_3 | h)\,  \PP(dh) \\
+  &= \Ccal_{HHH} \times_1 \Ccal_{X|H} \times_2 \Ccal_{X|H} \times_3 \Ccal_{X|H}
+\end{align}
+
+{\bf $k$-restricted factorization.} If we use $k$-restricted conditional embedding operator to form approximations of the above operators, then we have 
+\begin{align}
+  \widetilde \Ccal_{X_1X_2} &:= \widetilde \Ccal_{X|H}\, (\Vcal^\top \Ccal_{HH} \Vcal)\, \widetilde \Ccal_{X|H}^\top \\ 
+  \widetilde \Ccal_{X_1X_2X_3} &:= \rbr{\Ccal_{HHH} \times_1 \Vcal^\top \times_2 \Vcal^\top \times_3 \Vcal^\top} \times_1 \widetilde \Ccal_{X|H} \times_2 \widetilde \Ccal_{X|H} \times_3 \widetilde \Ccal_{X|H}
+\end{align}
+Let the singular value decomposition of $\Ccal_{HH}$ be $\sum_{i=1}^{\infty} \sigma_i \cdot v_i \otimes v_i$, and we construct $\Vcal$ using the leading $k$ singular vectors. Then $\Vcal^\top \Ccal_{HH} \Vcal$ is a diagonal matrix with entries
+\begin{align}
+ \Vcal^\top \Ccal_{HH} \Vcal = \rbr{	
+  \begin{array}{cccc}
+    \sigma_1 & 0 & \ldots & 0 \cr
+    0 & \sigma_2 & \ldots & 0 \cr
+    \vdots & \vdots & \ddots & \vdots \cr
+    0 & 0 & \ldots & \sigma_k
+  \end{array}
+ }
+\end{align}
+but  
+\begin{align}
+ \Ccal_{HHH} \times_1 \Vcal^\top \times_2 \Vcal^\top \times_3 \Vcal^\top = \EE_{H} \sbr{ (\Vcal^\top \psi(h)) \otimes (\Vcal^\top \psi(h)) \otimes (\Vcal^\top \psi(h))}   
+\end{align}
+is not diagonal tensor in general. 
+
+{\bf Example 4.} When the hidden variable $H$ is discrete and taking value in $[k]$, let
+\[
+ P_j(X_t) \ :=\ P(X_t\, |\, H = j),\quad j \in [k],\ t \in \{1,2,3\}
+\]
+We first note that the distribution factorizes as follows
+\begin{align}
+P( X_t, X_{t'} )
+\ & =\ \sum_{j=1}^k \pi_j \cdot P_j(X_t) \cdot P_j(X_{t'}),
+\quad \{t,t'\} \subset \{1,2,3\} ,\ t \neq t' \label{eq:joint2} \\
+P(X_1, X_2, X_3)
+\ & =\ \sum_{j=1}^k \pi_j \cdot P_j(X_1) \cdot P_j(X_2) \cdot P_j(X_3). \label{eq:joint3}
+\end{align}
+
+\begin{figure}[t]
 \begin{center}
 \subfigure[Multi-view models]{\label{fig:exchangeable}
 \begin{tikzpicture}
@@ -257,27 +350,27 @@ conditioning on the embeddings. It can also be shown that this empirical estimat
   \draw [->] (h) to (x2);
   \draw [->] (h) to (xl);
 \end{tikzpicture}}
-% \hfil\subfigure[Hidden Markov model]{\label{fig:hmm}
-% \begin{tikzpicture}
-%   [
-%     scale=1.0,
-%     observed/.style={circle,minimum size=0.7cm,inner sep=0mm,draw=black,fill=black!20},
-%     hidden/.style={circle,minimum size=0.7cm,inner sep=0mm,draw=black},
-%   ]
-%   \node [hidden,name=h1] at ($(-1.2,0)$) {$H_1$};
-%   \node [hidden,name=h2] at ($(0,0)$) {$H_2$};
-%   \node [name=hd] at ($(1.2,0)$) {$\dotsb$};
-%   \node [hidden,name=hl] at ($(2.4,0)$) {$H_\ell$};
-%   \node [observed,name=x1] at ($(-1.2,-1)$) {$X_1$};
-%   \node [observed,name=x2] at ($(0,-1)$) {$X_2$};
-%   \node [observed,name=xl] at ($(2.4,-1)$) {$X_\ell$};
-%   \draw [->] (h1) to (h2);
-%   \draw [->] (h2) to (hd);
-%   \draw [->] (hd) to (hl);
-%   \draw [->] (h1) to (x1);
-%   \draw [->] (h2) to (x2);
-%   \draw [->] (hl) to (xl);
-% \end{tikzpicture}}
+\hfil\subfigure[Hidden Markov model]{\label{fig:hmm}
+\begin{tikzpicture}
+  [
+    scale=1.0,
+    observed/.style={circle,minimum size=0.7cm,inner sep=0mm,draw=black,fill=black!20},
+    hidden/.style={circle,minimum size=0.7cm,inner sep=0mm,draw=black},
+  ]
+  \node [hidden,name=h1] at ($(-1.2,0)$) {$H_1$};
+  \node [hidden,name=h2] at ($(0,0)$) {$H_2$};
+  \node [name=hd] at ($(1.2,0)$) {$\dotsb$};
+  \node [hidden,name=hl] at ($(2.4,0)$) {$H_\ell$};
+  \node [observed,name=x1] at ($(-1.2,-1)$) {$X_1$};
+  \node [observed,name=x2] at ($(0,-1)$) {$X_2$};
+  \node [observed,name=xl] at ($(2.4,-1)$) {$X_\ell$};
+  \draw [->] (h1) to (h2);
+  \draw [->] (h2) to (hd);
+  \draw [->] (hd) to (hl);
+  \draw [->] (h1) to (x1);
+  \draw [->] (h2) to (x2);
+  \draw [->] (hl) to (xl);
+\end{tikzpicture}}
 \end{center}
 \vspace{-5mm}
 \caption{Examples of latent variable models.
@@ -285,22 +378,6 @@ conditioning on the embeddings. It can also be shown that this empirical estimat
 \label{fig:graphical-model}
 \vspace{-1mm}
 \end{figure}
-
-Multi-view latent variable models (\eg, \, na\"ive Bayes models) are a
-special class of Bayesian networks in which observed variables $X_1, X_2,
-\ldots, X_\ell$ are conditionally independent given a latent variable $H$, and
-the conditional distributions, $P(X_t|H)$, of the $X_t, t \in [\ell]$ given the hidden variable $H$ can be different. Two examples of latent variable models in this class can be found in \, Figure \, \ref{fig:graphical-model}. For simplicity of exposition, we now consider three random variables, $X_1, X_2$ and $X_3$ which are conditionally independent given $H$, and
-\[
- P_j(X_t) \ :=\ P(X_t\, |\, H = j),\quad j \in [k],\ t \in \{1,2,3\}
-\]
-We first note that the distribution factorizes as follows
-\begin{align}
-P( X_t, X_{t'} )
-\ & =\ \sum_{j=1}^k \pi_j \cdot P_j(X_t) \cdot P_j(X_{t'}),
-\quad \{t,t'\} \subset \{1,2,3\} ,\ t \neq t' \label{eq:joint2} \\
-P(X_1, X_2, X_3)
-\ & =\ \sum_{j=1}^k \pi_j \cdot P_j(X_1) \cdot P_j(X_2) \cdot P_j(X_3). \label{eq:joint3}
-\end{align}
 
 \noindent {\bf Identifiability.} Allman et al. showed that, under mild conditions, finite mixture of nonparametric product distributions is identifiable. The multiview latent variable model in \, \eq{eq:joint3} has the same form as  the finite mixture of nonparametric product distribution, and therefore we can adapt Allman's results to the current setting.
 \begin{theorem}
@@ -337,7 +414,7 @@ Similarly, for the joint distribution of the two observed variable in \, \eq{eq:
 % \begin{itemize}
 % 	\item $\widetilde{\Ccal}_{12} = \Ccal_{12} \Ucal_2^\top$; $\widetilde{\Ccal}_{13} = \Ccal_{13} \Ucal_3^\top$; $\widetilde{\Ccal}_{23} = \Ucal_{2} \Ccal_{23} \Ucal_3^\top$
 % 	\item $\widetilde{\Ccal}_{11} = \widetilde{\Ccal}_{12} (\widetilde{\Ccal}_{32})^{-1} \widetilde{\Ccal}_{31}^\top = \widetilde{\Ucal}_1 \widetilde{\Scal}_1 \widetilde{\Ucal}_1^\top$
-% 	\item $\widetilde{\Tcal} = \Ccal_{123} \bullet_1 (\widetilde{\Ucal}_1 \widetilde{\Scal}_1^{-1/2})^\top  \bullet_2 (\widetilde{\Ucal}_2 \widetilde{\Scal}_2^{-1/2})^\top \bullet_3 (\widetilde{\Ucal}_3 \widetilde{\Scal}_3^{-1/2})^\top$
+% 	\item $\widetilde{\Tcal} = \Ccal_{123} \times_1 (\widetilde{\Ucal}_1 \widetilde{\Scal}_1^{-1/2})^\top  \times_2 (\widetilde{\Ucal}_2 \widetilde{\Scal}_2^{-1/2})^\top \times_3 (\widetilde{\Ucal}_3 \widetilde{\Scal}_3^{-1/2})^\top$
 % \end{itemize}
 
 For simplicity of exposition, assume that $\mu_{X_t|j} = \mu_{X_{t'}|j}$ for $t\neq t'$, i.e. the random variables are {\em exchangeable}. Our analysis can be easily extended to the general multi-view setting, see \, \cite{AnandkumarEtal:tensor12} for details. For exchangeable random variables,  the parameters $\{\pi_j, \mu_{X_t|j}\}_{j \in [k]}$, of the multiview latent variable model can be recovered from $\Ccal_{X_t,X_{t'}}$ and $\Ccal_{X_1,X_2,X_3}$ using the following simple algorithm.
