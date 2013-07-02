@@ -47,7 +47,7 @@ $(\lambda, \Phi)$.
 \end{algorithm}
 
 
-We now recap the result of~\cite[Thm. 13]{AnandkumarEtal:community12} that establishes bounds on the eigen-estimates under good initialization vectors for the above procedure. 
+We now recap the result of~\cite[Thm. 13]{AnandkumarEtal:community12} that establishes bounds on the eigen-estimates under good initialization vectors for the above procedure.
 Let $\Tcal=\sum_{i\in [k]}\lambda_i v_i$, where $v_i$ are orthonormal vectors and $\lambda_1\geq \lambda_2\geq\ldots \lambda_k$. Let $\h{\Tcal}=\Tcal+E$ be the perturbed tensor with $\|E\|\leq \epsilon_{T}$. Recall that $N$ denotes the number of iterations of the tensor power method.
 We call an initialization vector $u$ to be $(\gamma, R_0)$-good  if there exists $v_i$ such that $\inner{u, v_i}> R_0$
   and $|\inner{u, v_i}| -\max_{j<i} |\inner{u,v_j}| > \gamma  |\inner{u,v_i}|$.   Choose $\gamma=1/100$.
@@ -61,7 +61,7 @@ following holds.
 \epsilon_{T} \leq C_1 \cdot \lambda_{\min} R_0^2,
 \qquad
 N \geq C_2 \cdot \left( \log(k) + \log\log\left(
-\frac{\lambdamax}{\epsilon_{tensor}} \right) \right)
+\frac{\lambdamax}{\epsilon_T} \right) \right)
 ,
 \eeq Assume there is at least one good initialization vector corresponding to each $v_i$, $i\in [k]$. The parameter $\xi$ for choosing deflation vectors in each iteration of the tensor power method in Procedure~\ref{alg:robustpower}  is chosen as $\xi\geq 25 \eps$. We obtain  eigenvalue-eigenvector pairs  $(\hat\lambda_1,\hat{v}_1), (\hat\lambda_2,\hat{v}_2), \dotsc,
 (\hat\lambda_k,\hat{v}_k)$ such that  there exists a permutation $\pi$ on
@@ -84,16 +84,16 @@ In the sequel, we establish concentration bounds that allows us to translate the
 
 \subsection{Concentration Bounds}
 
-\subsubsection{Analysis of Whitening} 
+\subsubsection{Analysis of Whitening}
 
-Recall that we use the covariance operator $\Ccal_{X_1 X_2}$ for whitening the 3rd order embedding $\Ccal_{X_1, X_2, X_3}$. We first analyze the perturbation in whitening when sample estimates are employed. 
+Recall that we use the covariance operator $\Ccal_{X_1 X_2}$ for whitening the 3rd order embedding $\Ccal_{X_1, X_2, X_3}$. We first analyze the perturbation in whitening when sample estimates are employed.
 
 Let $\h{\Ccal}_{X_1 X_2}$ denote the sample covariance operator between variables $X_1$ and $X_2$, and let \[B:=0.5(\h{\Ccal}_{X_1 X_2}+ \h{\Ccal}_{X_1 X_2}^\top)=\h{\Ucal}\h{S}\h{\Ucal}^\top\] denote the SVD.
-Let $\Ucal_k$ and $S_k$ denote the restriction to top-$k$ eigen-pairs, and let $B_{k} := \Ucal_k S_k \Ucal_k^\top$. Recall that the whitening matrix is given by $\h{\Wcal}:=\h{\Ucal}_k \h{S}_k^{-1/2}$. Now $\h{\Wcal}$ whitens $B_k$, i.e. $\h{\Wcal}^\top B_{k} \h{\Wcal}=I$.
+Let $\h{\Ucal}_k$ and $\h{S}_k$ denote the restriction to top-$k$ eigen-pairs, and let $B_{k} := \h{\Ucal}_k \h{S}_k \h{\Ucal}_k^\top$. Recall that the whitening matrix is given by $\h{\Wcal}:=\h{\Ucal}_k \h{S}_k^{-1/2}$. Now $\h{\Wcal}$ whitens $B_k$, i.e. $\h{\Wcal}^\top B_{k} \h{\Wcal}=I$.
 
 Now consider the SVD of
 \[ \h{\Wcal}^\top \Ccal_{X_1 X_2} \h{\Wcal}= A D A^\top,\] and define \[\Wcal:= \h{\Wcal} AD^{-1/2}A^\top, \] and $\Wcal$ whitens $\Ccal_{X_1 X_2}$ since $\Wcal^\top  \Ccal_{X_1 X_2} W=I$.
-Recall that by exchangeability assumption, 
+Recall that by exchangeability assumption,
 \[ \Ccal_{X_1,X_{2}}
   = \sum_{j=1}^k \pi_j \cdot \mu_{X|j} \otimes \mu_{X|j} \tcr{+  E_{X_1 X_2}}= M \Diag(\pi) M^\top  \tcr{+E_{X_1 X_2}}, \] where the $j^{\tha}$ column of $M$, $M_j = \mu_{X|j}$.
 
@@ -106,7 +106,7 @@ We now establish the following perturbation bound on the whitening procedure. Re
 \paragraph{Remark: }Note that $\sigma_{k}(\Ccal_{X_1 X_2}) = \sigma_{k}^2(M)$.
 
 \bprf The proof is along the lines of~\cite[Lemma 16]{AnandkumarEtal:community12}, but adapted to whitening using the covariance operator here.
- \begin{align*}\|\Diag(\pi)^{1/2} M^\top(\h{\Wcal}-\Wcal)\|&= 
+ \begin{align*}\|\Diag(\pi)^{1/2} M^\top(\h{\Wcal}-\Wcal)\|&=
 \|\Diag(\pi)^{1/2} M^\top W(A D^{1/2} A^\top -I)\|\\ &\leq\|\Diag(\pi)^{1/2} M^\top \Wcal\| \|D^{1/2}-I\|. \end{align*} Since $\Wcal$ whitens $\Ccal_{X_1 X_2}=M \Diag(\pi) M^\top\tcr{+E}$, we have that $\|\Diag(\pi)^{1/2} M^\top \Wcal\|=1$ \tcr{or $\|\Diag(\pi)^{1/2} M^\top \Wcal\|\leq \|I-E\|^{1/2}\leq 1+ \sigma_{k+1}(\Ccal_{X_1 X_2})$}. Now we control $\|D^{1/2}-I\|$.  Let $\tl{E}:= \Ccal_{X_1,X_{2}} -B_k$, where recall that $B=0.5( \widehat \Ccal_{X_1,X_{2}}+ \h{\Ccal}_{X_1 X_2}^\top)$ and $B_k$ is its restriction to top-$k$ singular values. Thus, we have $\|\tl{E}\|_{HS} \leq \epsilon_{pairs} + \sigma_{k+1}(B)\leq 2\epsilon_{pairs}\tcr{+\sigma_{k+1}(\Ccal_{X_1 X_2})} $.
  We now have
 \begin{align*}
@@ -120,7 +120,7 @@ We now establish the following perturbation bound on the whitening procedure. Re
 
 Recall that the whitened tensor from samples is given by
 $$\h{\Tcal} := \h{\Ccal}_{X_1 X_2 X_3} \times_1 (\h{\Wcal}^\top) \times_2 (\h{\Wcal}^\top) \times_3 (\h{\Wcal}^\top).$$ We want to establish its perturbation from the whitened tensor using exact statistics
-$$\Tcal := \Ccal_{X_1 X_2 X_3} \times_1 (\Wcal^\top ) \times_2 (\Wcal^\top ) \times_3 (\Wcal^\top ).$$ Further, we have 
+$$\Tcal := \Ccal_{X_1 X_2 X_3} \times_1 (\Wcal^\top ) \times_2 (\Wcal^\top ) \times_3 (\Wcal^\top ).$$ Further, we have
 $$\Ccal_{X_1 X_2 X_3}= \sum_{h\in [k]} \pi_h \cdot \mu_{X|h} \otimes \mu_{X|h} \otimes \mu_{X|h} \tcr{+ E_{X_1, X_2, X_3}}$$
 
 Let $\epsilon_{triples}:= \|\h{\Ccal}_{X_1 X_2 X_3}-\Ccal_{X_1 X_2 X_3}\|_{}$. Let $\pi_{\min}:=\min_{h\in [k]}\pi_h$.
@@ -130,13 +130,13 @@ Assuming that $\epsilon_{pairs} < 0.5 \sigma_k(\Ccal_{X_1 X_2})$, we have
 \beq\label{eqn:epsilonT} \epsilon_T:= \|\h{\Tcal} - \Tcal\|
 \leq \frac{2\sqrt{2}\epsilon_{triples}}{\sigma_k(\Ccal_{X_1 X_2})^{1.5} }+\frac{\epsilon_W^3}{\sqrt{\pi_{\min}}}
 \tcr{+ \|E_{X_1 X_2 X_3}\| \frac{\epsilon_W^3}{\pi_{\min}^{1.5} \sigma_k(M)^3} }.\eeq
-\end{lemma} 
+\end{lemma}
 
 
 \bprf  Define
   intermediate tensor
 \begin{align*} \tl{\Tcal}&:= \Ccal_{X_1 X_2 X_3} \times_1 (\h{\Wcal}^\top) \times_2 (\h{\Wcal}^\top) \times_3 (\h{\Wcal}^\top).\end{align*}
-We will bound $\|\h{\Tcal}-\tl{\Tcal}\|$  and $\| \h{\Tcal}-\Tcal\|$  separately. 
+We will bound $\|\h{\Tcal}-\tl{\Tcal}\|$  and $\| \h{\Tcal}-\Tcal\|$  separately.
 \begin{align*}
 \|\h{\Tcal}-\tl{\Tcal}\| &\leq \|\h{\Ccal}_{X_1, X_2, X_2} - \Ccal_{X_1, X_2, X_3}\| \|\h{\Wcal}\|^3\leq \frac{2\sqrt{2}\epsilon_{triples}}{\sigma_k(\Ccal_{X_1 X_2})^{1.5} },
 \end{align*}using the bound on $\|\h{\Wcal}\|$ in Lemma~\ref{lemma:whiten}. For the other term,
@@ -153,7 +153,7 @@ first note that
 
 
 We obtain a condition on the above perturbation $\epsilon_T$ in \eqref{eqn:epsilonT} by applying Theorem~\ref{thm:robustpower} as
-$ \epsilon_T\leq C_1\lambda_{\min} R_0^2$. Here, we have $\lambda_{i} = 1/\sqrt{\pi_{i}}\geq 1$. For random initialization, we have that $R_0 \sim 1/\sqrt{k}$, with probability $1-\delta$ using $\poly(k) \poly(1/\delta)$ trials~\cite[Thm. 5.1]{AnandkumarEtal:tensor12}. Thus, we require that $ \epsilon_T  \leq \frac{C_1}{k}$. Summarizing, we require for the following conditions to hold 
+$ \epsilon_T\leq C_1\lambda_{\min} R_0^2$. Here, we have $\lambda_{i} = 1/\sqrt{\pi_{i}}\geq 1$. For random initialization, we have that $R_0 \sim 1/\sqrt{k}$, with probability $1-\delta$ using $\poly(k) \poly(1/\delta)$ trials~\cite[Thm. 5.1]{AnandkumarEtal:tensor12}. Thus, we require that $ \epsilon_T  \leq \frac{C_1}{k}$. Summarizing, we require for the following conditions to hold
 \beq\epsilon_{pairs}\leq 0.5 \sigma_k(\Ccal_{X_1 X_2}), \quad \epsilon_T  \leq \frac{C_1}{k}.\eeq
 
 \aacomment{need to substitute for $\epsilon_{pairs}$ and $\epsilon_{triples}$ and if we bound the residuals, we are done.}
