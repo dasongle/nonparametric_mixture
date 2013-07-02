@@ -94,7 +94,7 @@ where the reproducing kernel for the tensor product features satisfies
 Kernel embedding of distributions have both rich representational power. The mapping is injective for characteristic kernels~\cite{SriGreFukLanetal08}. That is, if two distributions, $\PP(X)$ and $\QQ(X)$, are different, they will be mapped to two distinct points in the RKHS. For domain $\RR^d$, many commonly used kernels are characteristic, such as the Gaussian RBF kernel $\exp(-\sigma \|x - x'\|^2)$ and Laplace kernel $\exp(-\sigma \|x - x'\|)$.
 This injective property of kernel embeddings has been exploited to design  state-of-the-art two-sample tests~\cite{GreBorRasSchetal12} and  independence tests~\cite{GreFukTeoSonetal08}.
 
-{\bf Kernel embeddings as multilinear operators.} 
+{\bf Kernel embeddings as multilinear operators.}
 The joint embeddings can also be viewed as an uncentered cross-covariance operator $\Ccal_{X_1X_2}:\Fcal\mapsto \Fcal$ by the standard equivalence between a tensor product feature and a linear map.
 That is, given two functions $f_1,f_2\in\Fcal$, their covariance can be computed by
 $
@@ -127,7 +127,7 @@ The joint embedding, $\Ccal_{X_1 X_2}$, is a 2nd order tensor, and we can essent
 \[
     \Ccal_{X_1X_2} = \sum_{i=1}^{\infty} \sigma_i \cdot u_{i_1} \otimes u_{i_2}
 \]
-where $\sigma_i \in \RR$ are singular values ordered in nonincreasing manner, and $\cbr{u_{i_1}}_{i_1=1}^{\infty} \subset \Fcal, \cbr{u_{i_2}}_{i_2=1}^{\infty} \subset \Fcal$ are singular vectors and orthonormal bases. The rank of $\Ccal_{X_1X_2}$ is the smallest $k$ such that $\sigma_i = 0$ for $i > k$. 
+where $\sigma_i \in \RR$ are singular values ordered in nonincreasing manner, and $\cbr{u_{i_1}}_{i_1=1}^{\infty} \subset \Fcal, \cbr{u_{i_2}}_{i_2=1}^{\infty} \subset \Fcal$ are singular vectors and orthonormal bases. The rank of $\Ccal_{X_1X_2}$ is the smallest $k$ such that $\sigma_i = 0$ for $i > k$.
 
 {\bf Example 1.} The probability vector of a discrete variable $X \in [n]$, and the joint probability table of two discrete variables $X_1 \in [n]$ and $X_2 \in [n]$, are both kernel embeddings. To see this, let the kernel be the Kronecker delta kernel $k(x,x') = \delta(x,x')$. The corresponding feature map $\phi(x)$ is then the standard basis of $e_{x}$ in $\RR^n$. Then
 \begin{align}
@@ -238,17 +238,17 @@ In practice, the inversion of the operator can be replaced by the regularized in
 
 {\bf $k$-restricted conditional embedding operator.} Let $\cbr{u_i}_{i=1}^{\infty}$ and $\cbr{v_i}_{i=1}^{\infty}$ be orthonormal bases of $\Fcal$ and $\Gcal$ respectively, such that the conditional embedding operator $\Ccal_{X|H}$ have the following singular value decomposition
 \begin{align}
- \Ccal_{X|H} = \sum_{i=1}^{\infty} \sigma_i \cdot u_i \otimes v_i,  
+ \Ccal_{X|H} = \sum_{i=1}^{\infty} \sigma_i \cdot u_i \otimes v_i,
 \end{align}
-where the singular values are ordered in non-increasing manner. Let $\cbr{\tilde v_i}_{i\in [k]}$ be a set of $k$ orthonormal vectors in $\Gcal$, we may approximate the conditional embedding operator by 
+where the singular values are ordered in non-increasing manner. Let $\cbr{\tilde v_i}_{i\in [k]}$ be a set of $k$ orthonormal vectors in $\Gcal$, we may approximate the conditional embedding operator by
 \begin{align}
- \Ccal_{X|H} \approx \Ccal_{X|H} \, \Vcal \Vcal^\top 
+ \Ccal_{X|H} \approx \Ccal_{X|H} \, \Vcal \Vcal^\top
 \end{align}
 where $\Vcal:=\sum_{i\in [k]} \tilde v_i \otimes e_i$ is an operator mapping from $\RR^k$ to $\Fcal$, and $\Vcal^\top$ is its ajoint. The composition of $\Vcal$ and $\Vcal^\ast$ form a projection operator which essentially reduces a vector in the potentially infinite dimensional RKHS $\Gcal$ to one in $k$ dimensional space, and them bring it back to $\Gcal$. We will define
 \begin{align}
  \widetilde \Ccal_{X|H} := \Ccal_{X|H}\, \Vcal
 \end{align}
-as $k$-restricted conditional embedding operator which maps from a $k$-dimensional subspace of $\Gcal$ to $\Fcal$. 
+as $k$-restricted conditional embedding operator which maps from a $k$-dimensional subspace of $\Gcal$ to $\Fcal$.
 
 {\bf Finite sample estimate.} Given a dataset $\Dcal_{XH}=\cbr{(x^i,h^i)}_{i\in[m]}$ of size $m$ drawn~\iid~from $\PP(X,H)$, we can estimate the conditional embedding operator as
 \begin{align}
@@ -276,35 +276,35 @@ conditioning on the embeddings. It can also be shown that this empirical estimat
 Multi-view latent variable models (\eg, \, na\"ive Bayes models) are a
 special class of Bayesian networks in which observed variables $X_1, X_2,
 \ldots, X_\ell$ are conditionally independent given a latent variable $H$, and
-the conditional distributions, $\PP(X_t|H)$, of the $X_t, t \in [\ell]$ given the hidden variable $H$ can be different. The conditional independent structure of a multiview latent variable model can be found in Figure~\ref{fig:graphical-model}(a), and many complicated graphical models, such as the hidden Markov model in Figure~\ref{fig:graphical-model}(b), can be reduced to a multiview latent variable model. 
+the conditional distributions, $\PP(X_t|H)$, of the $X_t, t \in [\ell]$ given the hidden variable $H$ can be different. The conditional independent structure of a multiview latent variable model can be found in Figure~\ref{fig:graphical-model}(a), and many complicated graphical models, such as the hidden Markov model in Figure~\ref{fig:graphical-model}(b), can be reduced to a multiview latent variable model.
 
-For simplicity of exposition, we now consider a simple model with three observed variables, $X_1, X_2$ and $X_3$ which are conditionally independent given $H$, and furthermore the conditional distributions, $\PP(X_t|H)$, are the same for $t \in \cbr{1,2,3}$. Then the joint distributions, $\PP(X_1,X_2)$ and $\PP(X_1,X_2,X_3)$, can be factorized respectively as 
-\begin{align} 
+For simplicity of exposition, we now consider a simple model with three observed variables, $X_1, X_2$ and $X_3$ which are conditionally independent given $H$, and furthermore the conditional distributions, $\PP(X_t|H)$, are the same for $t \in \cbr{1,2,3}$. Then the joint distributions, $\PP(X_1,X_2)$ and $\PP(X_1,X_2,X_3)$, can be factorized respectively as
+\begin{align}
  \PP(dx_1 \times dx_2) &= \int_{\Hcal}\, \PP(dx_1 | h )\, \PP(d x_2 | h)\, \PP(dh) \\
-  \PP(dx_1 \times dx_2\times dx_3) &= \int_{\Hcal}\, \PP(dx_1 | h )\, \PP(dx_2 | h)\, \PP(dx_3 | h)\, \PP(dh),   
+  \PP(dx_1 \times dx_2\times dx_3) &= \int_{\Hcal}\, \PP(dx_1 | h )\, \PP(dx_2 | h)\, \PP(dx_3 | h)\, \PP(dh),
 \end{align}
-and the corresponding kernel embeddings can be factorized respectively as 
-\begin{align} 
-  \Ccal_{X_1X_2} 
+and the corresponding kernel embeddings can be factorized respectively as
+\begin{align}
+  \Ccal_{X_1X_2}
   &= \int_{\Xcal\times \Xcal \times \Hcal}\, \phi(x_1) \otimes \phi(x_2)\, \PP(dx_1 | h )\, \PP(dx_2 | h)\, \PP(dh) \\
   &= \int_{\Hcal} \rbr{\int_\Xcal \phi(x_1)\, \PP(dx_1|h)} \otimes \rbr{\int_\Xcal \phi(x_2)\, \PP(dx_2 |h)} \PP(dh) \\
   &= \int_{\Hcal} \rbr{\Ccal_{X|H} \psi(h)} \otimes \rbr{\Ccal_{X|H} \psi(h)}\, \PP(dh) \\
   &= \Ccal_{X|H}\, \rbr{\int_{\Hcal} \psi(h) \otimes \psi(h)\, \PP(dh)}\, \Ccal_{X|H}^\top\\
   &= \Ccal_{X|H}\, \Ccal_{HH}\, \Ccal_{X|H}^\top \\
 %   &= \Ccal_{HH} \times_1 \Ccal_{X|H} \times_2 \Ccal_{X|H} \\
-  \Ccal_{X_1 X_2 X_3}  
+  \Ccal_{X_1 X_2 X_3}
   &= \int_{\Xcal\times \Xcal \times \Xcal \times \Hcal}\, \phi(x_1) \otimes \phi(x_2) \otimes \phi(x_3) \, \PP(dx_1 | h )\, \PP(dx_2 | h)\, \PP(dx_3 | h)\,  \PP(dh) \\
   &= \Ccal_{HHH} \times_1 \Ccal_{X|H} \times_2 \Ccal_{X|H} \times_3 \Ccal_{X|H}
 \end{align}
 
-{\bf $k$-restricted factorization.} If we use $k$-restricted conditional embedding operator to form approximations of the above operators, then we have 
+{\bf $k$-restricted factorization.} If we use $k$-restricted conditional embedding operator to form approximations of the above operators, then we have
 \begin{align}
-  \widetilde \Ccal_{X_1X_2} &:= \widetilde \Ccal_{X|H}\, (\Vcal^\top \Ccal_{HH} \Vcal)\, \widetilde \Ccal_{X|H}^\top \\ 
+  \widetilde \Ccal_{X_1X_2} &:= \widetilde \Ccal_{X|H}\, (\Vcal^\top \Ccal_{HH} \Vcal)\, \widetilde \Ccal_{X|H}^\top \\
   \widetilde \Ccal_{X_1X_2X_3} &:= \rbr{\Ccal_{HHH} \times_1 \Vcal^\top \times_2 \Vcal^\top \times_3 \Vcal^\top} \times_1 \widetilde \Ccal_{X|H} \times_2 \widetilde \Ccal_{X|H} \times_3 \widetilde \Ccal_{X|H}
 \end{align}
 Let the singular value decomposition of $\Ccal_{HH}$ be $\sum_{i=1}^{\infty} \sigma_i \cdot v_i \otimes v_i$, and we construct $\Vcal$ using the leading $k$ singular vectors. Then $\Vcal^\top \Ccal_{HH} \Vcal$ is a diagonal matrix with entries
 \begin{align}
- \Vcal^\top \Ccal_{HH} \Vcal = \rbr{	
+ \Vcal^\top \Ccal_{HH} \Vcal = \rbr{
   \begin{array}{cccc}
     \sigma_1 & 0 & \ldots & 0 \cr
     0 & \sigma_2 & \ldots & 0 \cr
@@ -313,11 +313,18 @@ Let the singular value decomposition of $\Ccal_{HH}$ be $\sum_{i=1}^{\infty} \si
   \end{array}
  }
 \end{align}
-but  
+which means that $\int_{\Hcal} v_i(h)\, v_{i'}(h)\, \PP(dh) = 0$ for $i\neq i'$.
+But
 \begin{align}
- \Ccal_{HHH} \times_1 \Vcal^\top \times_2 \Vcal^\top \times_3 \Vcal^\top = \EE_{H} \sbr{ (\Vcal^\top \psi(h)) \otimes (\Vcal^\top \psi(h)) \otimes (\Vcal^\top \psi(h))}   
+ \Ccal_{HHH} \times_1 \Vcal^\top \times_2 \Vcal^\top \times_3 \Vcal^\top
+	& = \EE_{H} \sbr{ (\Vcal^\top \psi(h)) \otimes (\Vcal^\top \psi(h)) \otimes (\Vcal^\top \psi(h))}  \\
+	& = \rbr{ \int_{\Hcal} v_i(h)\, v_{i'}(h)\, v_{i''}(h)\, \PP(dh) }_{i,i',i'' \in [k]}
 \end{align}
-is not diagonal tensor in general. 
+is not diagonal tensor in general. We can assume that $\Ccal_{HHH}$ is approximately diagonalizable by $\Vcal$, that is
+\begin{align}
+ 	a := \sum_{i,i',i''~\text{not all equal}} \rbr{\int_{\Hcal} v_i(h)\, v_{i'}(h)\, v_{i''}(h)\, \PP(dh)}^2
+\end{align}
+is negligible in size.
 
 {\bf Example 4.} When the hidden variable $H$ is discrete and taking value in $[k]$, let
 \[
