@@ -1,7 +1,7 @@
-\section{Sample Complexity Analysis}
+\section{Algorithm and Sample Complexity Bounds}
 
 \subsection{Robust Tensor Power Method}
-We recap the robust tensor power method for finding the tensor eigen-pairs, analyzed in detail in~\cite{AnandkumarEtal:community12}.
+We recap the robust tensor power method for finding the tensor eigen-pairs, analyzed in detail in~\cite{AnandkumarEtal:community12}. \aacomment{I will add some more discussion later}
 
 \begin{algorithm}
 \caption{$\{\lambda, \Phi\}\leftarrow $TensorEigen$(T,\, \{v_i\}_{i\in [L]}, N)$}\label{alg:robustpower}
@@ -46,6 +46,52 @@ $(\lambda, \Phi)$.
 \end{algorithmic}
 \end{algorithm}
 
+\subsection{Sample Bounds}
+
+Let $\kappa:=\sup_{x \in \Omega} k(x,x)$,   $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, $\pi_{\min}:=\min_{i\in [k]} \pi_i$ and $\sigma_k(\Ccal_{X_1, X_2})$ be the $k^{\tha}$ singular value of $\Ccal_{X_1, X_2}$.
+
+\begin{theorem}[Sample Bounds]\label{thm:samplebound}
+Pick  any $\delta\in (0,1)$. When the number of samples $m$ satisfies
+\beq m >\frac{\rho\kappa^2  \log\frac{\delta}{2}}{\sigma_k(\Ccal_{X_1, X_2})}, 
+\quad \rho:= \max\left(\frac{512  }{\sigma^3_k(\Ccal_{X_1, X_2})}, \frac{C' k^2 }{\sigma_k^{3}(\Ccal_{X_1, X_2})},\frac{C^{''} k^{\frac{2}{3}} }{\pi_{\min}^{\frac{1}{3}} }\right),\eeq for some constants $C', C^{''}>0$, and the number of iterations $N$  and  the number of random initialization vectors $L$  (drawn uniformly on the sphere $\mathcal{S}^{k-1}$)  satisfy
+\begin{align*}
+N \geq C_2 \cdot \biggl( \log(k) + \log\log\Bigl(
+\frac{1}{\sqrt{\pi}_{\min}\epsilon_T} \Bigr) \biggr),\\
+\sqrt{\frac{\ln(L/\log_2(k/\delta))}{\ln(k)}}
+\cdot \Biggl( 1 - \frac{\ln(\ln(L/\log_2(k/\delta))) +
+C_3}{4\ln(L/\log_2(k/\delta))} -
+\sqrt{\frac{\ln(8)}{\ln(L/\log_2(k/\delta))}} \Biggr)
+\geq 1.02 \Biggl( 1 + \sqrt{\frac{\ln(4)}{\ln(k)}}
+\Biggr)
+.
+\end{align*}
+for constants $C_2,C_3>0$. (Note that the condition on $L$ holds with $L = \poly(k) \log(1/\delta)$.) The robust power method in Algorithm~\ref{alg:robustpower} yields eigen-pairs $(\h{\lambda}_i, \h{\phi}_i)$ such that there exists a permutation $\eta$, with probability $1-4\delta$, we have
+\[
+\|\pi^{-1/2}_{j} \mu_{X|h=j}-\h{\phi}_{\eta(j)}\| \leq 8 \epsilon_T \cdot\pi^{-1/2}_{j}
+, \qquad
+|\pi^{-1/2}_{j}-\h{\lambda}_{\eta(j)}| \leq  5\epsilon_T, \quad \forall j \in [k]
+,
+\]
+and
+\[
+\biggl\|
+T - \sum_{j=1}^k \hat\lambda_j \hat{\phi}_j^{\otimes 3}
+\biggr\| \leq 55\eps_T,
+\] where $\eps_T$ is the tensor perturbation bound
+\[ \eps_T := \|\h{\Tcal} - \Tcal\| \leq 
+\frac{12 \kappa \sqrt{\log\frac{\delta}{2}}}{\sqrt{m} \, \sigma_k^{1.5}(\Ccal_{X_1, X_2})} + \frac{512 \sqrt{2} \kappa^3 \left(\log\frac{\delta}{2}\right)^{1.5}}{m^{1.5} \,\sigma_k^{3}(\Ccal_{X_1, X_2}) \sqrt{\pi}_{\min}}\]
+
+\end{theorem}
+
+Thus, the above result provides bounds on the estimated eigen-pairs using the robust tensor power method.
+The proof is in Appendix~\ref{app:samplebound}.
+
+
+\begin{appendix}
+
+\section{Proof of Theorem~\ref{thm:samplebound}}\label{app:samplebound}
+
+\subsection{Recap of Perturbation Bounds for the Tensor Power Method}
 
 We now recap the result of~\cite[Thm. 13]{AnandkumarEtal:community12} that establishes bounds on the eigen-estimates under good initialization vectors for the above procedure.
 Let $\Tcal=\sum_{i\in [k]}\lambda_i v_i$, where $v_i$ are orthonormal vectors and $\lambda_1\geq \lambda_2\geq\ldots \lambda_k$. Let $\h{\Tcal}=\Tcal+E$ be the perturbed tensor with $\|E\|\leq \epsilon_{T}$. Recall that $N$ denotes the number of iterations of the tensor power method.
@@ -63,20 +109,20 @@ following holds.
 N \geq C_2 \cdot \left( \log(k) + \log\log\left(
 \frac{\lambdamax}{\epsilon_T} \right) \right)
 ,
-\eeq Assume there is at least one good initialization vector corresponding to each $v_i$, $i\in [k]$. The parameter $\xi$ for choosing deflation vectors in each iteration of the tensor power method in Procedure~\ref{alg:robustpower}  is chosen as $\xi\geq 25 \eps$. We obtain  eigenvalue-eigenvector pairs  $(\hat\lambda_1,\hat{v}_1), (\hat\lambda_2,\hat{v}_2), \dotsc,
-(\hat\lambda_k,\hat{v}_k)$ such that  there exists a permutation $\pi$ on
+\eeq Assume there is at least one good initialization vector corresponding to each $v_i$, $i\in [k]$. The parameter $\xi$ for choosing deflation vectors in each iteration of the tensor power method in Procedure~\ref{alg:robustpower}  is chosen as $\xi\geq 25 \eps_T$. We obtain  eigenvalue-eigenvector pairs  $(\hat\lambda_1,\hat{v}_1), (\hat\lambda_2,\hat{v}_2), \dotsc,
+(\hat\lambda_k,\hat{v}_k)$ such that  there exists a permutation $\eta$ on
 $[k]$ with
 \[
-\|v_{\pi(j)}-\hat{v}_j\| \leq 8 \epsilon/\lambda_{\pi(j)}
+\|v_{\eta(j)}-\hat{v}_j\| \leq 8 \epsilon_T/\lambda_{\eta(j)}
 , \qquad
-|\lambda_{\pi(j)}-\hat\lambda_j| \leq 5\epsilon , \quad \forall j \in [k]
+|\lambda_{\eta(j)}-\hat\lambda_j| \leq 5\epsilon_T , \quad \forall j \in [k]
 ,
 \]
 and
 \[
 \left\|
 \Tcal - \sum_{j=1}^k \hat\lambda_j \hat{v}_j^{\otimes 3}
-\right\| \leq 55\eps .
+\right\| \leq 55\eps_T .
 \]
 \end{theorem}
 
@@ -94,8 +140,8 @@ Let $\h{\Ucal}_k$ and $\h{S}_k$ denote the restriction to top-$k$ eigen-pairs, a
 Now consider the SVD of
 \[ \h{\Wcal}^\top \Ccal_{X_1 X_2} \h{\Wcal}= A D A^\top,\] and define \[\Wcal:= \h{\Wcal} AD^{-1/2}A^\top, \] and $\Wcal$ whitens $\Ccal_{X_1 X_2}$ since $\Wcal^\top  \Ccal_{X_1 X_2} W=I$.
 Recall that by exchangeability assumption,
-\[ \Ccal_{X_1,X_{2}}
-  = \sum_{j=1}^k \pi_j \cdot \mu_{X|j} \otimes \mu_{X|j} \tcr{+  E_{X_1 X_2}}= M \Diag(\pi) M^\top  \tcr{+E_{X_1 X_2}}, \] where the $j^{\tha}$ column of $M$, $M_j = \mu_{X|j}$.
+\beq\label{eqn:pairsexpression} \Ccal_{X_1,X_{2}}
+  = \sum_{j=1}^k \pi_j \cdot \mu_{X|j} \otimes \mu_{X|j} \tcr{+  E_{X_1 X_2}}= M \Diag(\pi) M^\top  \tcr{+E_{X_1 X_2}}, \eeq where the $j^{\tha}$ column of $M$, $M_j = \mu_{X|j}$.
 
 We now establish the following perturbation bound on the whitening procedure. Recall from \eqref{eqn:deltapairs}, $ \epsilon_{pairs}:=\nbr{\Ccal_{X_1,X_{2}} - \widehat \Ccal_{X_1,X_{2}}}_{}$. Let $\sigma_1(\cdot) \geq \sigma_2(\cdot)\ldots$ denote the singular values of an operator.
 
@@ -121,7 +167,7 @@ We now establish the following perturbation bound on the whitening procedure. Re
 Recall that the whitened tensor from samples is given by
 $$\h{\Tcal} := \h{\Ccal}_{X_1 X_2 X_3} \times_1 (\h{\Wcal}^\top) \times_2 (\h{\Wcal}^\top) \times_3 (\h{\Wcal}^\top).$$ We want to establish its perturbation from the whitened tensor using exact statistics
 $$\Tcal := \Ccal_{X_1 X_2 X_3} \times_1 (\Wcal^\top ) \times_2 (\Wcal^\top ) \times_3 (\Wcal^\top ).$$ Further, we have
-$$\Ccal_{X_1 X_2 X_3}= \sum_{h\in [k]} \pi_h \cdot \mu_{X|h} \otimes \mu_{X|h} \otimes \mu_{X|h} \tcr{+ E_{X_1, X_2, X_3}}$$
+\beq\label{eqn:triplesexpression}\Ccal_{X_1 X_2 X_3}= \sum_{h\in [k]} \pi_h \cdot \mu_{X|h} \otimes \mu_{X|h} \otimes \mu_{X|h} \tcr{+ E_{X_1, X_2, X_3}}\eeq
 
 Let $\epsilon_{triples}:= \|\h{\Ccal}_{X_1 X_2 X_3}-\Ccal_{X_1 X_2 X_3}\|_{}$. Let $\pi_{\min}:=\min_{h\in [k]}\pi_h$.
 
@@ -152,19 +198,36 @@ first note that
 \eprf\\
 
 
+
+\bprfof{Theorem~\ref{thm:samplebound}}
+
 We obtain a condition on the above perturbation $\epsilon_T$ in \eqref{eqn:epsilonT} by applying Theorem~\ref{thm:robustpower} as
 $ \epsilon_T\leq C_1\lambda_{\min} R_0^2$. Here, we have $\lambda_{i} = 1/\sqrt{\pi_{i}}\geq 1$. For random initialization, we have that $R_0 \sim 1/\sqrt{k}$, with probability $1-\delta$ using $\poly(k) \poly(1/\delta)$ trials~\cite[Thm. 5.1]{AnandkumarEtal:tensor12}. Thus, we require that $ \epsilon_T  \leq \frac{C_1}{k}$. Summarizing, we require for the following conditions to hold
 \beq\epsilon_{pairs}\leq 0.5 \sigma_k(\Ccal_{X_1 X_2}), \quad \epsilon_T  \leq \frac{C_1}{k}.\eeq
+We now substitute for $\epsilon_{pairs}$ and $\epsilon_{triples}$ in \eqref{eqn:epsilonT} using Lemma~\ref{lemma:pairs} and Lemma~\ref{lemma:triples}. First consider the case when   $H$ is exactly a $k$-way categorical variable.
 
-\aacomment{need to substitute for $\epsilon_{pairs}$ and $\epsilon_{triples}$ and if we bound the residuals, we are done.}
+\paragraph{Case of $k$-component mixture: }Here, $E_{X_1, X_2}=0$ and $E_{X_1,X_2,X_3}=0$ in \eqref{eqn:pairsexpression} and \eqref{eqn:triplesexpression}. We have that
+\[ \epsilon_W \leq \frac{4\epsilon_{pairs}}{\sigma_k(\Ccal_{X_1, X_2})} 
+\leq \frac{8\sqrt{2}\kappa \sqrt{\log\frac{\delta}{2}}}{\sqrt{m} \,\sigma_k(\Ccal_{X_1, X_2})}, \]with probability $1-\delta$. It is required that $\epsilon_W < 0.5 \sigma_k(\Ccal_{X_1, X_2})$, which yields that \beq\label{eqn:cond1} m > \frac{512 \kappa^2 \log\frac{\delta}{2}}{\sigma^4_k(\Ccal_{X_1, X_2})}.\eeq
+Further we require that $\epsilon_T \leq C_1/k$, which implies that each of the terms in \eqref{eqn:epsilonT} is less than $C/k$, for some constant $C$. Thus, we have
+\[ \frac{2\sqrt{2} \epsilon_{triples}}{\sigma_k^{1.5}(\Ccal_{X_1, X_2})} < \frac{C}{k}\quad\Rightarrow\quad m > \frac{C' k^2 \kappa^2 \log \frac{\delta}{2}}{\sigma_k^{3}(\Ccal_{X_1, X_2})},\]
+for some constant $C'$ with probability $1-\delta$. Similarly for the second term in \eqref{eqn:epsilonT}, we have
+\[\frac{\epsilon_W^3}{\sqrt{\pi_{\min}}}< \frac{C}{k} \quad\Rightarrow\quad m > \frac{C^{''} k^{\frac{2}{3}} \kappa^2 \log\frac{\delta}{2}}{\pi_{\min}^{\frac{1}{3}} \sigma_k(\Ccal_{X_1, X_2})}, \]for some other constant $C^{''}$ with probability $1-\delta$. Thus, we have the result in Theorem~\ref{thm:samplebound}.
+
+\aacomment{let me know if the extension beyond $k$-mixture is interesting and I will add it.}
+
+
+\eprfof
 
 \subsubsection{Concentration bounds for Empirical Operators}
 
+\aacomment{I changed the notation slightly}
+
 Concentration results for the singular value decomposition of empirical operators.
 
-\begin{lemma} Let $\kappa:=\sup_{x \in \Omega} k(x,x)$, and $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, we have for \beq \epsilon_{pairs}:=\nbr{\Ccal_{X_1 X_2} - \widehat \Ccal_{X_1 X_2}}_{},\label{eqn:deltapairs} \eeq
+\begin{lemma}[Concentration bounds for pairs]\label{lemma:pairs} Let $\kappa:=\sup_{x \in \Omega} k(x,x)$, and $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, we have for \beq \epsilon_{pairs}:=\nbr{\Ccal_{X_1 X_2} - \widehat \Ccal_{X_1 X_2}}_{},\label{eqn:deltapairs} \eeq
 \begin{eqnarray}
-	\Pr \cbr{\epsilon_{pairs}  \leqslant \frac{2\sqrt{2}\kappa \sqrt{\delta}}{\sqrt{m}} } \geqslant 1-2\exp(-\delta). \label{eq:operator_concentration}
+	\Pr \cbr{\epsilon_{pairs}  \leqslant \frac{2\sqrt{2}\kappa \sqrt{\log\frac{\delta}{2}}}{\sqrt{m}} } \geqslant 1-\delta. \label{eq:operator_concentration}
 \end{eqnarray}
 \end{lemma}
 
@@ -180,10 +243,11 @@ It is easy to see that $\mathbb{E}[\xi_{i}] = 0$. Further, we have
 which implies that $\nbr{\Ccal_{X_1 X_2}}_{} \leqslant \kappa$, and $\nbr{\xi_i}_{} \leqslant 2 \kappa$. The result then follows from the Hoeffding's inequality in Hilbert space.
 \end{proof}
 
-Similarly, we have the concentration bound for 3rd order embedding
+Similarly, we have the concentration bound for 3rd order embedding.
 
-\begin{lemma} Let $\kappa:=\sup_{x \in \Omega} k(x,x)$, and $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, we have for \beq \epsilon_{pairs}:=\nbr{\Ccal_{X_1 X_2 X_3} - \widehat \Ccal_{X_1 X_2 X_3}}_{},\label{eqn:deltapairs} \eeq
+\begin{lemma}[Concentration bounds for triples]\label{lemma:triples} Let $\kappa:=\sup_{x \in \Omega} k(x,x)$, and $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, we have for \beq \epsilon_{triples}:=\nbr{\Ccal_{X_1 X_2 X_3} - \widehat \Ccal_{X_1 X_2 X_3}}_{},\label{eqn:deltapairs} \eeq
 \begin{eqnarray}
-	\Pr \cbr{\epsilon_{triples}  \leqslant \frac{3\sqrt{2}\kappa \sqrt{\delta}}{\sqrt{m}} } \geqslant 1-2\exp(-\delta). \label{eq:operator_concentration2}
+	\Pr \cbr{\epsilon_{triples}  \leqslant \frac{3\sqrt{2}\kappa \sqrt{\log\frac{\delta}{2}}}{\sqrt{m}} } \geqslant 1-\delta. \label{eq:operator_concentration2}
 \end{eqnarray}
 \end{lemma}
+\end{appendix}
