@@ -1,0 +1,297 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% ICML 2013 EXAMPLE LATEX SUBMISSION FILE %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Use the following line _only_ if you're still using LaTeX 2.09.
+%\documentstyle[icml2013,epsf,natbib]{article}
+% If you rely on Latex2e packages, like most moden people use this:
+\documentclass[11pt]{article}
+
+% For figures
+\usepackage{graphicx} % more modern
+%\usepackage{epsfig} % less modern
+\usepackage{subfigure}
+
+% For math symbol
+\usepackage{amsmath,amsfonts,amssymb}
+
+% For theorem
+\usepackage{amsthm}
+
+% For citations
+\usepackage{natbib}
+
+% For algorithms
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+% For appendix
+\usepackage[title,titletoc,toc]{appendix}
+
+% For graphical model
+% \usepackage{tikz}
+% \usetikzlibrary{fit,positioning}
+% \usetikzlibrary{arrows,shapes}
+% As of 2011, we use the hyperref package to produce hyperlinks in the
+% resulting PDF.  If this breaks your system, please commend out the
+% following usepackage line and replace \usepackage{icml2013} with
+% \usepackage[nohyperref]{icml2013} above.
+\usepackage{hyperref}
+
+% Packages hyperref and algorithmic misbehave sometimes.  We can fix
+% this with the following command.
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+\newcommand{\trans}{\top}
+\newcommand{\bm}{\mathbf}
+
+\newcommand{\comment}[1]{}
+
+% theorem macro
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+
+% Employ the following version of the ``usepackage'' statement for
+% submitting the draft version of the paper for review.  This will set
+% the note in the first column to ``Under review.  Do not distribute.''
+% \usepackage{icml2013}
+% \usepackage[accepted]{icml2013}
+% Employ this version of the ``usepackage'' statement after the paper has
+% been accepted, when creating the final version.  This will set the
+% note in the first column to ``Proceedings of the...''
+% \usepackage[accepted]{icml2013}
+
+\usepackage{fullpage}
+\usepackage{xcolor}
+% The \icmltitle you define below is probably too long as a header.
+% Therefore, a short form for the running title is supplied here:
+% \icmltitlerunning{Submission and Formatting Instructions for ICML 2013}
+
+
+\title{Appendix}
+
+\begin{document}
+\maketitle
+
+%\twocolumn[
+%\icmltitle{}
+
+% It is OKAY to include author information, even for blind
+% submissions: the style file will automatically remove it for you
+% unless you've provided the [accepted] option to the icml2013
+% package.
+
+% \icmlauthor{Your Name}{email@yourdomain.edu}
+% \icmladdress{Your Fantastic Institute,
+%            314159 Pi St., Palo Alto, CA 94306 USA}
+%\icmlauthor{Your CoAuthor's Name}{email@coauthordomain.edu}
+%\icmladdress{Their Fantastic Institute,
+%            27182 Exp St., Toronto, ON M6H 2T1 CANADA}
+
+% You may provide any keywords that you
+% find helpful for describing your paper; these are used to populate
+% the "keywords" metadata in the PDF but will not be shown in the document
+
+%\icmlkeywords{exponential family harmonium, markov random fields, Deep Boltzmann Machine, Gaussian Integral trick}
+
+%\vskip 0.3in
+%]
+
+%\section{Multiview Latent Variable Models}
+
+In multiview latent variable models, the conditional probability $p(x_i|h)$ are different. We have two spectral methods deal with this problem different in estimating which moments.
+
+\section{Symmetrization}
+In this section, we deal with the kernelization of multi-view latent variable models with differnt observation distribution for each view following the \cite{Anima12}.
+
+As we known,
+%
+\begin{eqnarray*}
+{\mathcal{C}}_{X_1X_2} &=& \sum_{h \in [k]} \pi_h \mu_{X_1|h}\otimes \mu_{X_2|h}\\
+{\mathcal{C}}_{X_2X_3} &=& \sum_{h \in [k]} \pi_h \mu_{X_2|h}\otimes \mu_{X_3|h}\\
+{\mathcal{C}}_{X_3X_1} &=& \sum_{h \in [k]} \pi_h \mu_{X_3|h}\otimes \mu_{X_1|h}\\
+{\mathcal{C}}_{X_1X_2X_3} &=& \sum_{h \in [k]} \pi_h \mu_{X_1|h}\otimes \mu_{X_2|h} \otimes \mu_{X_3|h}\\
+\end{eqnarray*}
+%
+where ${\mathcal{C}}_{X_i|h} = [\mu_{X_i|h=k}]_k$ and $\pi_h = p(h)$.
+
+Although the second/third-order operators are not symmetric which cannot directly be decomposed by power method. We could symmetrize them similar to \cite{Anima12}.
+
+Assume the probability distribution for $\{X_1, X_2, X_3\}$ are in the \textit{RKHS} with kernels $\{\mathcal{K, L, G}\}$ respectively, with the feature mapping $\{\phi,\psi, \upsilon\}$
+
+Given the observations $\mathcal{D}_{X_1X_2X_3}=\{(x_1^i, x_2^i, x_3^i)\}_{i\in[m]}$ drawn \emph{i.i.d.} from the multiview latent variable mode $\mathbb{P}(X_1, X_2, X_3)$, we have the empirical estimation of the second/third-order embedding as
+%
+\begin{eqnarray*}
+\hat{\mathcal{C}}_{X1X2} = \frac{1}{m} \sum_{i=1}^m \phi(x_1^i)\otimes \psi(x_2^i) = \frac{1}{m}\Phi \Psi^\trans\\
+\hat{\mathcal{C}}_{X3X1} = \frac{1}{m} \sum_{i=1}^m \upsilon(x_1^i)\otimes \phi(x_2^i) = \frac{1}{m}\Upsilon \Phi^\trans\\
+\hat{\mathcal{C}}_{X2X3} = \frac{1}{m} \sum_{i=1}^m \psi(x_1^i)\otimes \upsilon(x_2^i) = \frac{1}{m}\Psi \Upsilon^\trans\\
+\hat{\mathcal{C}}_{X1X2X3} = [\bm{I}_n; \Phi, \Psi, \Upsilon] =
+\frac{1}{m}\bm{I}_n \times_1 \Phi \times_2 \Psi \times_3 \Upsilon
+\end{eqnarray*}
+%
+Find two arbitrary matrices $\bm{A,B}\in \mathbb{R}^{k \times \infty}$, so that $\bm{A}\hat{\mathcal{C}}_{X1X2}\bm{B}^\trans$ is invertible. For simplicity, we set $\bm{A} = \Phi_k^\trans, \bm{B} = \Psi_k^\trans$. \textcolor{red}{Randomly selecting k column from $\Phi$ and $\Psi$ could work only if the locations of the selected $k$ points are near the leading eigen-vector directions. Thus, we could select them via kernel $k$-means or directly use the first $k$ leading eigenvectors.} Then, we have
+%
+\begin{eqnarray*}
+\widetilde{\mathcal{C}_{X1X2}} = \frac{1}{m}\Phi_k^\trans\Phi\Psi^\trans\Psi_k = \frac{1}{m}\mathcal{K}_{nk}^\trans\mathcal{L}_{nk}\\
+\widetilde{\mathcal{C}_{X3X1}} = \hat{\mathcal{C}}_{X3X1}\Phi_k = \frac{1}{m}\Upsilon\mathcal{K}_{nk}\\
+\widetilde{\mathcal{C}_{X3X2}} = \hat{\mathcal{C}}_{X3X2}\Psi_k = \frac{1}{m}\Upsilon\mathcal{L}_{nk}\\
+\widetilde{\mathcal{C}_{X1X2X3}} =
+\hat{\mathcal{C}}_{X1X2X3}\times_1\Phi_k^\trans
+\times_2\Psi_k^\trans = \frac{1}{m} \bm{I}_n \times_1
+\mathcal{K}_{nk}^\trans \times_2 \mathcal{L}_{nk}^\trans \times_3
+\Upsilon
+\end{eqnarray*}
+%
+Based on these matrices, we could reduce to a single view
+%
+\begin{eqnarray*}
+Pair_3 =
+\widetilde{\mathcal{C}_{X3X1}}(\widetilde{\mathcal{C}_{X1X2}}^\trans)^{-1}\widetilde{\mathcal{C}_{X3X2}}
+=
+\frac{1}{m}\Upsilon\mathcal{K}_{nk}(\mathcal{L}_{nk}^\trans\mathcal{K}_{nk})^{-1}\mathcal{L}_{nk}^\trans\Upsilon^\trans = \frac{1}{m}\Upsilon\mathcal{H}\Upsilon^\trans
+\end{eqnarray*}
+
+Assume the leading $k$ eigenvectors $\nu_k$ lie in the span of the column of $\Phi$, i.e., $\nu_k = \Upsilon \beta_k$ where $\beta_k\in \mathbb{R}^{m\times 1}$
+%
+\begin{eqnarray*}
+Pair_3\nu = \lambda \nu \Rightarrow (Pair_3)^\trans Pair_3\nu = \lambda^2 \nu \Rightarrow
+\frac{1}{m^2} \Upsilon\mathcal{H}^\trans\Upsilon^\trans\Upsilon\mathcal{H}\Upsilon^\trans\nu
+= \lambda^2\nu \\\Rightarrow
+\frac{1}{m^2}\Upsilon\mathcal{H^\trans GHG}\bm{\beta} =
+\lambda^2 \Upsilon\bm{\beta} \Rightarrow \frac{1}{m^2}\mathcal{GH^\trans GHG}\beta
+= \lambda^2\mathcal{G}\beta
+\end{eqnarray*}
+%
+where $\mathcal{H} = \mathcal{K}_{nk}(\mathcal{L}_{nk}^\trans\mathcal{K}_{nk})^{-1}\mathcal{L}_{nk}^\trans$.
+
+Then, we symmetrize and whiten the third-order embedding
+%
+\begin{eqnarray}
+Triple_3 = \frac{1}{m}\widetilde{\mathcal{C}_{X1X2X3}} \times_1
+[\widetilde{\mathcal{C}_{X3X2}}\widetilde{\mathcal{C}_{X1X2}}^{-1}]
+\times_2
+[\widetilde{\mathcal{C}_{X3X1}}\widetilde{\mathcal{C}_{X2X1}}^{-1}]
+\end{eqnarray}
+%
+Plug
+$\widetilde{\mathcal{C}_{X3X2}}\widetilde{\mathcal{C}_{X1X2}}^{-1} =
+\Upsilon\mathcal{L}_{nk}(\mathcal{K}_{nk}^\trans\mathcal{L}_{nk})^{-1}$
+and
+$\widetilde{\mathcal{C}_{X3X1}}\widetilde{\mathcal{C}_{X2X1}}^{-1} =
+\Upsilon\mathcal{K}_{nk}(\mathcal{L}_{nk}^\trans\mathcal{K}_{nk})^{-1}$,
+we have
+
+\begin{eqnarray}
+Triple_3  = \frac{1}{m}\bm{I}_n \times_1
+\Upsilon\mathcal{L}_{nk}(\mathcal{K}_{nk}^\trans
+\mathcal{L}_{nk})^{-1}\mathcal{K}_{kn} \times_2
+\Upsilon\mathcal{K}_{nk}(\mathcal{L}_{nk}^\trans
+\mathcal{K}_{nk})^{-1}\mathcal{L}_{kn} \times_3 \Upsilon
+\end{eqnarray}
+
+We multiply each mode with $\Upsilon \beta S^{-\frac{1}{2}}$ to
+whitening the data and apply power method to decompose it
+%
+\begin{eqnarray*}
+\hat{\mathcal{T}} &=& Triple_3 \times_1 S^{-\frac{1}{2}}\beta^\trans\Upsilon^\trans \times_2
+S^{-\frac{1}{2}}\beta^\trans\Upsilon^\trans \times_3 S^{-\frac{1}{2}}\beta^\trans\Upsilon^\trans\\
+&=& \frac{1}{m}\bm{I}_n \times_1
+S^{-\frac{1}{2}}\beta^\trans\mathcal{G}\mathcal{L}_{nk}(\mathcal{K}_{nk}^\trans
+\mathcal{L}_{nk})^{-1}\mathcal{K}_{kn} \times_2
+S^{-\frac{1}{2}}\beta^\trans\mathcal{G}\mathcal{K}_{nk}(\mathcal{L}_{nk}^\trans
+\mathcal{K}_{nk})^{-1}\mathcal{L}_{nk}^\trans \times_3
+S^{-\frac{1}{2}}\beta^\trans\mathcal{G}
+\end{eqnarray*}
+%
+\begin{thm}
+\begin{eqnarray*}
+Pair_3 = O_3 diag(\sigma^2_1,\ldots,\sigma^2_k) O_3^\trans\\
+Triple_3 = [diag(\mu_1,\ldots,\mu_k); O_3, O_3, O_3]
+\end{eqnarray*}
+\end{thm}
+\begin{proof}
+Assume $O_i$ are canonical form, following~\cite{Anima12}, $\widetilde{\mathcal{C}_{X1X2}}= \Phi_k^\trans O_1 O_2^\trans \Psi_k$. $\Phi_k^\trans O_1$ and $O_2^\trans \Psi_k$ invertible. We have
+\begin{eqnarray*}
+Pair_3 = \widetilde{\mathcal{C}_{X3X1}}\widetilde{\mathcal{C}_{X1X2}}^{-\trans}\widetilde{\mathcal{C}_{X2X3}} = O_3O_1\Phi(O_1\Phi)^{-1}(\Psi^\trans O_2)^{-1}\Psi^\trans O_2O_3^\trans = O_3O_3^\trans
+\end{eqnarray*}
+For the third-order embedding, the proof is similar.
+\end{proof}
+
+
+
+\section{Single View Moment estimation}
+\textcolor{red}{\textbf{Remark: }\texttt{This method doesn't work.}}
+
+My point is the third order embedding obtained in this way is almost similar to the single view moment estimation. The only different is that the 2/3 mode is projected to a k-dimension subspace. Actually, if replace $\Phi_k$ and $\Psi_k$ by $\Phi, \Psi$, the third order embedding will become
+\begin{eqnarray*}
+\hat{\mathcal{T}}= \frac{1}{m}\bm{I}_n \times_1
+S^{-\frac{1}{2}}\beta^\trans\mathcal{G} \times_2
+S^{-\frac{1}{2}}\beta^\trans \mathcal{G}\times_3
+S^{-\frac{1}{2}}\beta^\trans\mathcal{G}
+\end{eqnarray*}
+since the $\mathcal{K,L}$ are both invertible.
+
+In the multiview setting, although the conditional distributions are not the same, each of the single view may could be learning separately. The only constraint is that the $p(h)$ are the same in each view. 
+
+Instead of choosing $\Phi_k$ and $\Psi_k$ to project the $\widetilde{\mathcal{C}_{X_1X_2}}$ in the $k$-dimension subspace, we select all of the observation $\Phi$ and $\Psi$ in symmetricalizing the estimation.
+
+% In the $i$-th view, we have
+% %
+% \begin{eqnarray*}
+% \hat{\mathcal{C}}_{X_iX_i} = E[\phi(X_i)\otimes \phi(X_i)]\\
+% \hat{\mathcal{C}}_{X_iX_iX_i} = E[\phi(X_i)\otimes \phi(X_i)\otimes \phi(X_i)]
+% \end{eqnarray*}
+% %
+So, we have
+%
+\begin{eqnarray*}
+\widetilde{\mathcal{C}_{X_1X_2}} = \frac{1}{m}\Phi^\trans\Phi\Psi^\trans \Psi = \frac{1}{m}\mathcal{K L}\\
+\widetilde{\mathcal{C}_{X_3X_1}} = \frac{1}{m}\Upsilon\Phi^\trans \Phi = \frac{1}{m}\Upsilon\mathcal{K}\\
+\widetilde{\mathcal{C}_{X_3X_2}} = \frac{1}{m}\Upsilon\Psi^\trans \Psi = \frac{1}{m}\Upsilon\mathcal{L}\\
+\widetilde{\mathcal{C}}_{X_1X_2X_3} = \hat{\mathcal{C}_{X_1X_2X_3}}\times_1 \Phi^\trans \times_2 \Psi^\trans = \frac{1}{m}\bm{I}_n \times_1 \mathcal{K} \times_2 \mathcal{L} \times_3
+\Upsilon
+\end{eqnarray*}
+%
+Thus,
+%
+\begin{eqnarray*}
+Pair_3 =
+\widetilde{\mathcal{C}_{X3X1}}(\widetilde{\mathcal{C}_{X1X2}}^\trans)^{-1}\widetilde{\mathcal{C}_{X3X2}}
+=
+\frac{1}{m}\Upsilon\mathcal{K}(\mathcal{L}\mathcal{K})^{-1}\mathcal{L}\Upsilon^\trans = \frac{1}{m}\Upsilon\Upsilon^\trans
+\end{eqnarray*}
+%
+The third equality because we assume that $\mathcal{K, L}$ are invertable. 
+
+Use the same trick before, i.e., $\nu_k = \Upsilon \beta_k$.
+%
+\begin{eqnarray*}
+Pair_3\nu = \lambda\nu \Rightarrow \frac{1}{m}\Upsilon\Upsilon^\trans\nu = \lambda \nu \Rightarrow \frac{1}{m}\Upsilon\mathcal{G}\beta = \lambda \Upsilon\beta \Rightarrow \frac{1}{m}\mathcal{G}\beta = \lambda\beta
+\end{eqnarray*}
+%
+And the symmetrized third order estimation is 
+%
+\begin{eqnarray*}
+Triple_3 = \frac{1}{m}\bm{I}_n \times_1 \Upsilon \times_2 \Upsilon \times_3 \Upsilon
+\end{eqnarray*}
+%
+Next step, we whiten it,
+%
+\begin{eqnarray*}
+\hat{\mathcal{T}} = \frac{1}{m}\bm{I}_n \times_1 S^{-\frac{1}{2}}\beta^\trans \mathcal{G}\times_2 S^{-\frac{1}{2}}\beta^\trans \mathcal{G}\times_3 S^{-\frac{1}{2}}\beta^\trans \mathcal{G}
+\end{eqnarray*}
+%
+
+\section{Inference}
+After we obtain the conditional distributions and prior $p(h)$, we could apply Bayes rule to find the posterior. In our setting, the conditional distributions are in the corresponding \emph{RKHS}, and thus given $h$, the observation $\{x_1,x_2,x_3\}$ has probability $p(x_1|h) = \langle\phi(x_1), \Phi \rangle A, p(x_2|h) = \langle\psi(x_1), \Psi \rangle B, p(x_1|h) = \langle\upsilon(x_1), \Upsilon \rangle C$\footnote{We denote $\Phi A, \Psi B, \Upsilon C$ as the conditional operators obtained in previous step.}
+
+So, the normalizer could be computed as $Z = [p(h)\circ p(x_1|h)\circ p(x_2|h)\circ p(x_3|h)]^\trans\bm{1}$ where $\circ$ denotes element-wise product. And we have the posterior is
+%
+\begin{eqnarray*}
+p(h|x_1, x_2, x_3) = \frac{p(h)\circ p(x_1|h)\circ p(x_2|h)\circ p(x_3|h)}{Z}
+\end{eqnarray*}
+%
+
+\bibliography{mlv_kernel}
+\bibliographystyle{icml2013}
+
+\end{document}
