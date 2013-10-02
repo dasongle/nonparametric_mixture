@@ -77,7 +77,7 @@
 
 \begin{abstract}
 		Spectral methods have greatly advanced the estimation of latent variable models, generating a sequence of novel and efficient algorithms with strong theoretical guarantees. However, current spectral algorithms are largely restricted to mixture of discrete or Gaussian distributions. In this paper, we propose a kernel method for estimating the parameters of multi-view latent variable models, allowing each mixture component to be nonparametric.
-		The key idea of the method is to embed joint distribution of multi-view latent variable into the reproducing kernel Hilbert space, and then the latent parameters are recovered using a robust tensor power method. Furthermore, we provide theoretical guarantee for the proposed method and show that it compares favorably to EM algorithm and other existing spectral algorithms in our experiments.
+		The key idea of the method is to embed the joint distribution of a multi-view latent variable into a reproducing kernel Hilbert space, and then the latent parameters are recovered using a robust tensor power method. Furthermore, we provide theoretical guarantee for the proposed method and show that it compares favorably to EM algorithm and other existing spectral algorithms in our experiments.
 \end{abstract}
 
 \section{Introduction} \label{sec:intro}
@@ -93,16 +93,16 @@
 
 Latent variable models have been used to address various machine learning
 problems, ranging from modeling temporal dynamics, to text document analysis and to social network analysis~\citep{RabJua86,Clark90,HofRafHan02,BleNgJor03}.
-Recently, there is a surge of interest in designing spectral algorithms for estimating the parameters of latent variable models~\citep{HsuKakZha09,ParSonXin11,SonParXin11,FosRodUng12,more}. Compared to Expectation-Maximization (EM) algorithms \citep{DemLaiRub77} traditionally used for the same task, spectral algorithms are better in terms of their computational efficiency and provable guarantees.
+Recently, there is a surge of interest in designing spectral algorithms for estimating the parameters of latent variable models~\citep{HsuKakZha09,ParSonXin11,SonParXin11,FosRodUng12,more on parameter estimation}. Compared to the Expectation-Maximization (EM) algorithm \citep{DemLaiRub77} traditionally used for the same task, spectral algorithms are better in terms of their computational efficiency and provable guarantees.
 
 However, current spectral algorithms are largely restricted to mixture
 of discrete or Gaussian distributions. When the mixture components are distributions other than these standard distributions, the theoretical guarantees for these algorithms no longer applies, and the performance of these algorithms can be very poor in experiments. A nonparametric estimation of the parameters of latent variables with provable guarantee is still missing from the literature.
 
-In this paper, we propose a kernel method for estimating the parameters of multi-view latent variables where the mixture component can be nonparametric.
+In this paper, we propose a kernel method for estimating the parameters of multi-view latent variable models where the mixture components can be nonparametric. The key idea of the method is to embed the joint distribution of such a model into a reproducing kernel Hilbert space, and make use of the low rank structure of the embedded distribution (or covariance operators) to design the algorithm. The key computation of the algorithm involves a kernel singular value decomposition of the two-view covariance operator, followed by a tensor power method on the three-view covariance operator. These standard linear algebra operations makes the algorithm very efficient and easy to code.
 
-We will kernel embedding of distributions, covariance operators and tensor power methods.
+The kernel algorithm proposed in this paper is more general than previous spectral algorithms which work only for distributions with very specific assumption. When we use delta kernel, our algorithm recovers the spectral algorithm for discrete mixture components. When we use universal kernels, such as Gaussian RBF kernel, our algorithm can recover Gaussian mixture components as well as mixture components with other distributions. In a sense, our work also provides a unifying framework for previous spectral algorithms. We will provide theoretical guarantees for our general kernel algorithm, and these guarantees will automatically carry over to those special cases.
 
-We provide both theoretical guarantee for our method and empirical evidence of the method.
+Last we will experimentally compare our kernel algorithm to EM algorithm and previous spectral algorithms. We show that when the model assumptions are correct for EM and previous spectral algorithms, our algorithm converges in terms of estimation error to these competitors. In the opposite cases when the model assumptions are incorrect, our algorithm is able to adaptive to the nonparametric mixture components and beating alternatives by a very large margin.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Notation}
