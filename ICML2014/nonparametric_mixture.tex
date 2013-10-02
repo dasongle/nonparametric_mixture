@@ -54,13 +54,13 @@
 \begin{document}
 
 \twocolumn[
-\icmltitle{Nonparametric Estimation of Multi-view Latent Variable Models}
+\icmltitle{Kernel Estimates of Multi-view Latent Variable Models}
 
 % It is OKAY to include author information, even for blind
 % submissions: the style file will automatically remove it for you
 % unless you've provided the [accepted] option to the icml2014
 % package.
-\icmlauthor{Le Song, Anima, B. Xie and B. Dai}{email@yourdomain.edu}
+\icmlauthor{Le Song, Anima, B. Dai and B. Xie}{email@yourdomain.edu}
 \icmladdress{Your Fantastic Institute,
             314159 Pi St., Palo Alto, CA 94306 USA}
 \icmlauthor{Your CoAuthor's Name}{email@coauthordomain.edu}
@@ -227,107 +227,6 @@ By virtue of the kernel trick, most of the computation required for statistical 
 
 \noindent {\bf Relation between kernel embedding and the density function.} Basically kernel embeddings maps the density to a function in the RKHS. See Steinwardt and Vert (need to say more).
 
-\section{Kernel Embeddings of Conditional Distributions}
-\label{sec:conditionalembedding}
-
-The kernel embedding of a conditional distribution $\PP(X|h)$ is defined as~\cite{SonHuaSmoFuk09}
-\begin{align}
-    \label{eq:conditionalembedding}
-    \mu_{X|h}\, :=\, \EE_{X|h}[\phi(X)]\, =\, \int_{\Xcal} \phi(x) \, \PP(dx|h).
-\end{align}
-Given this embedding, the conditional expectation of a function $f\in \Fcal$  can be computed as
-$
-    \label{eq:conditionalexpectation}
-    \EE_{X|h}[f(X)] = \inner{f}{\mu_{X|h}}_{\Fcal}.
-$
-This may be compared with the property of the mean embedding in the last section,
-where the {\em unconditional} expectation of a function may be written as an inner product with the embedding.
-Unlike the embeddings discussed in the previous section, an embedding of conditional distribution is not a single element in the RKHS, but will instead sweep out a family of
-points in the RKHS, each indexed by a fixed value $h$ of the conditioning variable $H$. It is only
-by fixing $H$ to a particular value $h$, that we will be able to obtain a single RKHS element, $\mu_{X|h}\in\Fcal$. In other words, we need to define an operator, denoted by $\Ccal_{X|H}$, which can take as input an $h$ and output an embedding. More specifically, we will
-want it to satisfy
-\begin{align}
-    \label{eq:conditionalembeddingrequirement}
-    \mu_{X|h} = \Ccal_{X|H} \psi(h).
-\end{align}
-
-Based on the relation between conditional expectation and covariance operators, Song et al. \, \cite{SonHuaSmoFuk09} show that, under the assumption $\EE_{X|\cdot} \sbr{f(X)}\in\Gcal$,
-\begin{align}
-    \label{eq:conditionalembeddingoperator}
-    \Ccal_{X|H}:=\Ccal_{XH}\Ccal_{HH}^{-1},
-\end{align}
-satisfy the requirement in~\eq{eq:conditionalembeddingrequirement}, and
-hence $\mu_{X|h} = \Ccal_{XH} \Ccal_{HH}^{-1} \psi(h)$.
-We remark that the assumption $\EE_{X|\cdot} \sbr{f(X)}\in\Gcal$ always holds for finite domains with characteristic kernels, but it is not necessarily true for continuous domains~\cite{FukBacJor04}.
-% In the cases where the assumption does not hold,
-% we will use the expression $\Ccal_{XH}\Ccal_{HH}^{-1} \psi(h)$ as an approximation of the conditional mean $\mu_{X|h}$.
-In practice, the inversion of the operator can be replaced by the regularized inverse $(\Ccal_{HH}+\lambda I)^{-1}$.
-
-{\bf Example 2.} The definition of the conditional embedding operator in~\eq{eq:conditionalembeddingoperator} is very general, and the conditional probability for discrete variables becomes a special case. We again use a Kronecker delta kernel for both $x\in [n]$ and $h\in [k]$, and a feature space construction similar to~\eq{eq:jointprobabilitytable}. We obtain
-\begin{align}
-    \underbrace{\rbr{
-        \begin{array}{c}
-            \cr
-            \PP(x=s|h=t) \cr
-            \cr
-        \end{array}
-    }_{s\in[n],t\in[k]}}_{\Ccal_{X|H}}
-    =
-    \underbrace{
-    \rbr{
-        \begin{array}{c}
-            \cr
-            \PP(x=s, h=t) \cr
-            \cr
-        \end{array}
-    }_{s\in[n],t\in[k]}}_{\Ccal_{XH}}
-    \underbrace{
-    \rbr{
-        \begin{array}{ccc}
-            \PP(h=1) & \ldots & 0 \cr
-            \vdots &  \ddots & \vdots \cr
-            0 & \ldots & \PP(h=k)
-        \end{array}
-    }^{\Large -1}}_{\Ccal_{HH}^{-1}}. \label{eq:conditionalprobabilitytable}
-\end{align}
-
-{\bf Example 3.} As another example, let $X$ from a general domain $\Xcal$ while $H\in[k]$ being discrete. Then, there are $k$ different conditional distributions, $\PP(X|h=t),\,t\in[k]$, one for each value of the discrete conditioning variable $H$. Using Kronecker delta kernel for $H$, the conditional embedding operator is simply a column concatenation of the embeddings for each $\PP(X|h)$,~\ie,
-\begin{align}
-  \Ccal_{X|H} = \rbr{\mu_{X|h=1},\ \mu_{X|h=2},\ \ldots,\ \mu_{X|h=k}},~\text{and}~\mu_{X|h} = \Ccal_{X|H} e_h.
-\end{align}
-
-{\bf $k$-restricted conditional embedding operator.} Let $\cbr{u_i}_{i=1}^{\infty}$ and $\cbr{v_i}_{i=1}^{\infty}$ be orthonormal bases of $\Fcal$ and $\Gcal$ respectively, such that the conditional embedding operator $\Ccal_{X|H}$ have the following singular value decomposition
-\begin{align}
- \Ccal_{X|H} = \sum_{i=1}^{\infty} \sigma_i \cdot u_i \otimes v_i,
-\end{align}
-where the singular values are ordered in non-increasing manner. Let $\cbr{\tilde v_i}_{i\in [k]}$ be a set of $k$ orthonormal vectors in $\Gcal$, we may approximate the conditional embedding operator by
-\begin{align}
- \Ccal_{X|H} \approx \Ccal_{X|H} \, \Vcal \Vcal^\top
-\end{align}
-where $\Vcal:=\sum_{i\in [k]} \tilde v_i \otimes e_i$ is an operator mapping from $\RR^k$ to $\Fcal$, and $\Vcal^\top$ is its ajoint. The composition of $\Vcal$ and $\Vcal^\ast$ form a projection operator which essentially reduces a vector in the potentially infinite dimensional RKHS $\Gcal$ to one in $k$ dimensional space, and them bring it back to $\Gcal$. We will define
-\begin{align}
- \widetilde \Ccal_{X|H} := \Ccal_{X|H}\, \Vcal
-\end{align}
-as $k$-restricted conditional embedding operator which maps from a $k$-dimensional subspace of $\Gcal$ to $\Fcal$.
-
-{\bf Finite sample estimate.} Given a dataset $\Dcal_{XH}=\cbr{(x^i,h^i)}_{i\in[m]}$ of size $m$ drawn~\iid~from $\PP(X,H)$, we can estimate the conditional embedding operator as
-\begin{align}
-    & \widehat{\Ccal}_{X|H} := \Phi (L + \lambda I)^{-1} \Upsilon^\top  \label{eq:embeddingoperatorestimator}
-\end{align}
-where $\Phi:=(\phi(x^1),\ldots,\phi(x^m))$ and $\Upsilon:=(\phi(h^1),\ldots,\phi(h^m))$ are implicitly formed feature matrix, and $L=\Upsilon^\top \Upsilon$ is the Gram matrix for samples from variable $H$. Furthermore, we need the additional regularization parameter $\lambda$ to avoid overfitting. Then $\hmu_{X|h}=\widehat{\Ccal}_{X|H}\phi(h)$ becomes a weighted sum of feature mapped data points from $X$,
-\begin{align}
-    & \hmu_{X|h} = \sum_{i=1}^m \beta^i(h) \phi(x^i) = \Phi\, \beta(h) \quad \text{where} \,  \label{eq:conditionalembeddingestimator}\\
-    & \beta(h) := \rbr{\beta^1(h), \ldots, \beta^m(h)}^\top = (L + \lambda I)^{-1} L_{: h}, \nonumber
-\end{align}
-and $L_{: h}=(l(h,h^1),\ldots,l(h,h^m))^\top$.
-The empirical estimator of the conditional embedding
-is similar to the estimator of the ordinary embedding from
-equation~\eq{eq:embedding}. The difference
-is that, instead of applying uniform weights $\frac{1}{m}$,
-the former applies {\em non-uniform} weights, $\beta^i(h)$, on
-observations which are, in turn, determined by the value $h$ of the conditioning
-variable. These non-uniform weights reflect the effects of
-conditioning on the embeddings. It can also be shown that this empirical estimate converges to its population counterpart in RKHS norm, $\nbr{\hmu_{X|h} - \mu_{X|h}}_{\Fcal}$, with rate of $O_p(m^{-\frac{1}{4}})$ if one decreases the regularization $\lambda$ with rate $O(m^{-\frac{1}{2}})$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Multiview Latent Variable Models}
