@@ -164,7 +164,7 @@ By analogy, we can also define $\Ccal_{X_1X_2X_3} := \EE_{X_1X_2X_3}[\phi(X_1)\o
 Kernel embedding of distributions has rich representational power. The mapping is injective for characteristic kernels~\cite{SriGreFukLanetal08}. That is, if two distributions, $\PP(X)$ and $\QQ(X)$, are different, they will be mapped to two distinct points in the RKHS. For domain $\RR^d$, many commonly used kernels are characteristic, such as the Gaussian RBF kernel and Laplace kernel.
 This injective property of kernel embeddings has been exploited to design  state-of-the-art two-sample tests~\cite{GreBorRasSchetal12} and  independence tests~\cite{GreFukTeoSonetal08}.
 
-{\bf Example 1.} The probability vector of a discrete variable $X \in [n]$, and the joint probability table of two discrete variables $X_1 \in [n]$ and $X_2 \in [n]$, are both kernel embeddings. To see this, let the kernel be the Kronecker delta kernel $k(x,x') = \delta(x,x')$ whose feature map $\phi(x)$ is the standard basis of $e_{x}$ in $\RR^n$. Then
+{\bf Example 1.} The probability vector of a discrete variable $X \in [n]$, and the joint probability table of two discrete variables $X_1 \in [n]$ and $X_2 \in [n]$, are both kernel embeddings. To see this, let the kernel be the Kronecker delta kernel $k(x,x') = \delta(x,x')$ whose feature map $\phi(x)$ is the standard basis of $e_{x}$ in $\RR^n$. The $x$-th dimension of $e_{x}$ is 1 and 0 otherwise. Then
 \begin{align}
     \mu_X
 		& = \rbr{
@@ -263,7 +263,7 @@ The conditional independent structure of a multi-view latent variable model is i
 \subfigure[Na\"ive Bayes model]{\label{fig:exchangeable}
 \begin{tikzpicture}
  [
-   scale=1.0,
+   scale=0.85,
    observed/.style={circle,minimum size=0.7cm,inner sep=0mm,draw=black,fill=black!20},
    hidden/.style={circle,minimum size=0.7cm,inner sep=0mm,draw=black},
  ]
@@ -279,7 +279,7 @@ The conditional independent structure of a multi-view latent variable model is i
 \hfil\subfigure[Hidden Markov model]{\label{fig:hmm}
 \begin{tikzpicture}
  [
-   scale=1.0,
+   scale=0.85,
    observed/.style={circle,minimum size=0.7cm,inner sep=0mm,draw=black,fill=black!20},
    hidden/.style={circle,minimum size=0.7cm,inner sep=0mm,draw=black},
  ]
@@ -305,132 +305,77 @@ The conditional independent structure of a multi-view latent variable model is i
 \vspace{-3mm}
 \end{figure}
 
+\subsection{Conditional Embedding Operator}
+
+For simplicity of exposition, we will focus on a simple model with three observed variables, \ie, $\ell=3$, and furthermore the conditional distributions, $\PP(X_t|H)$, are the same (or {\em exchangeable}) for $t \in [3]$. Our analysis can be easily extended to the general multi-view setting using a symmetrization techniques (see section~X for details).
+
+Suppose $H\in[k]$, then we can embed each conditional distribution $\PP(X_t|h)$ corresponding to a particular value of $H=h$ into the RKHS as
+\begin{align}
+  \mu_{X_t|h} = \int_{\Xcal} \phi(x_t)\, \PP(dx_t | h).
+\end{align}
+If we vary the value of $H$, we will obtain the kernel embedding for different $\PP(X_t|h)$. Conceptually, we can collect these embeddings into a matrix (with potentially infinite number of rows)
+\begin{align}
+  \Ccal_{X_t|H} = \rbr{\mu_{X_t|h=1},\mu_{X_t|h=2},\ldots,\mu_{X_t|h=k}},
+\end{align}
+which is called the conditional embedding operator. If we use the standard basis $e_h$ in $\RR^k$ to represent each value of $h$, we can retrieve each $\mu_{X_t|h}$ from $\Ccal_{X_t|H}$ by
+\begin{align}
+  \mu_{X_t|h} = \Ccal_{X_t|H} e_h
+\end{align}
+
 \subsection{Factorized Kernel Embedding}
 
-For simplicity of exposition, we will focus on a simple model with three observed variables, \ie, $\ell=3$, and furthermore the conditional distributions, $\PP(X_t|H)$, are the same (or {\em exchangeable}) for $t \in [3]$. Our analysis can be easily extended to the general multi-view setting using a symmetrization techniques (see section~X for details). Then the distributions, $\PP(X_1,X_2)$ and $\PP(X_1,X_2,X_3)$, can be factorized respectively as
+Then the distributions, $\PP(X_1,X_2)$ and $\PP(X_1,X_2,X_3)$, can be factorized respectively
 \begin{align*}
- \PP(dx_1, dx_2) &= \int_{\Hcal}\, \PP(dx_1 | h )\, \PP(d x_2 | h)\, \PP(dh) \\
-  \PP(dx_1, dx_2, dx_3) &= \int_{\Hcal}\, \PP(dx_1 | h )\, \PP(dx_2 | h)\, \PP(dx_3 | h)\, \PP(dh).
+	\PP(dx_1, dx_2) &= \int_{\Hcal}\, \PP(dx_1 | h )\, \PP(d x_2 | h)\, \PP(dh),~\text{and}\\
+	\PP(dx_1, dx_2, dx_3) &= \int_{\Hcal}\, \PP(dx_1 | h )\, \PP(dx_2 | h)\, \PP(dx_3 | h)\, \PP(dh).
 \end{align*}
-Then the corresponding kernel embeddings can be factorized respectively as
-\begin{align}
-  \Ccal_{X_1X_2}
-  &= \int_{\Xcal\times \Xcal \times \Hcal}\, \phi(x_1) \otimes \phi(x_2)\, \PP(dx_1 | h )\, \PP(dx_2 | h)\, \PP(dh) \\
-  &= \int_{\Hcal} \rbr{\int_\Xcal \phi(x_1)\, \PP(dx_1|h)} \otimes \rbr{\int_\Xcal \phi(x_2)\, \PP(dx_2 |h)} \PP(dh) \\
-  &= \int_{\Hcal} \rbr{\Ccal_{X|H} \psi(h)} \otimes \rbr{\Ccal_{X|H} \psi(h)}\, \PP(dh) \\
-  &= \Ccal_{X|H}\, \rbr{\int_{\Hcal} \psi(h) \otimes \psi(h)\, \PP(dh)}\, \Ccal_{X|H}^\top\\
-  &= \Ccal_{X|H}\, \Ccal_{HH}\, \Ccal_{X|H}^\top \\
-%   &= \Ccal_{HH} \times_1 \Ccal_{X|H} \times_2 \Ccal_{X|H} \\
-  \Ccal_{X_1 X_2 X_3}
-  &= \int_{\Xcal\times \Xcal \times \Xcal \times \Hcal}\, \phi(x_1) \otimes \phi(x_2) \otimes \phi(x_3) \, \PP(dx_1 | h )\, \PP(dx_2 | h)\, \PP(dx_3 | h)\,  \PP(dh) \\
-  &= \Ccal_{HHH} \times_1 \Ccal_{X|H} \times_2 \Ccal_{X|H} \times_3 \Ccal_{X|H}
-\end{align}
-
-{\bf $k$-restricted factorization.} If we use $k$-restricted conditional embedding operator to form approximations of the above operators, then we have
-\begin{align}
-  \widetilde \Ccal_{X_1X_2} &:= \widetilde \Ccal_{X|H}\, (\Vcal^\top \Ccal_{HH} \Vcal)\, \widetilde \Ccal_{X|H}^\top \\
-  \widetilde \Ccal_{X_1X_2X_3} &:= \rbr{\Ccal_{HHH} \times_1 \Vcal^\top \times_2 \Vcal^\top \times_3 \Vcal^\top} \times_1 \widetilde \Ccal_{X|H} \times_2 \widetilde \Ccal_{X|H} \times_3 \widetilde \Ccal_{X|H}
-\end{align}
-Let the singular value decomposition of $\Ccal_{HH}$ be $\sum_{i=1}^{\infty} \sigma_i \cdot v_i \otimes v_i$, and we construct $\Vcal$ using the leading $k$ singular vectors. Then $\Vcal^\top \Ccal_{HH} \Vcal$ is a diagonal matrix with entries
-\begin{align}
- \Vcal^\top \Ccal_{HH} \Vcal = \rbr{
-  \begin{array}{cccc}
-    \sigma_1 & 0 & \ldots & 0 \cr
-    0 & \sigma_2 & \ldots & 0 \cr
-    \vdots & \vdots & \ddots & \vdots \cr
-    0 & 0 & \ldots & \sigma_k
-  \end{array}
- }
-\end{align}
-where we used $\int_{\Hcal} v_i(h)\, v_{i'}(h)\, \PP(dh) = 0$ for $i\neq i'$.
-But the 3rd order tensor
-\begin{align}
- \Ccal_{HHH} \times_1 \Vcal^\top \times_2 \Vcal^\top \times_3 \Vcal^\top
-	& = \EE_{H} \sbr{ (\Vcal^\top \psi(h)) \otimes (\Vcal^\top \psi(h)) \otimes (\Vcal^\top \psi(h))}  \\
-	& = \rbr{
-	\begin{array}{c}
-	  \cr
-	  \int_{\Hcal} v_i(h)\, v_{i'}(h)\, v_{i''}(h)\, \PP(dh) \cr
-	  \cr
-	\end{array}
-	}_{i,i',i'' \in [k]}
-\end{align}
-is not a diagonal tensor in general. However, there are important special cases where both the 2nd and 3rd order tensors are simultaneously diagonalizable.
-% We can assume that $\Ccal_{HHH}$ is approximately diagonalizable by $\Vcal$, that is
-% \begin{align}
-%  	a := \sum_{i,i',i''~\text{not all equal}} \rbr{\int_{\Hcal} v_i(h)\, v_{i'}(h)\, v_{i''}(h)\, \PP(dh)}^2
-% \end{align}
-% is negligible in size.
-
-{\bf Discrete latent variable.} When the hidden variable $H \in [k']$ is discrete, and we use Kronecker delta kernel $\delta(h,h')$ on $\Hcal$, then both
-\begin{align}
- \Ccal_{HH} = \rbr{
+Since we assume the hidden variable $H \in [k]$ is discrete,
+we let $\pi_h:=\PP(h)$. Furthermore, if we apply Kronecker delta kernel $\delta(h,h')$ with feature map $e_h$, then the embeddings for $\PP(H)$
+\begin{align*}
+ \Ccal_{HH} &= \EE_H[e_H \otimes e_H] = \rbr{
   \begin{array}{ccc}
-    \PP(h=1) & \ldots & 0 \cr
+    \pi_1 & \ldots & 0 \cr
     \vdots & \ddots & \vdots \cr
-    0 & \ldots & \PP(h=k')
+    0 & \ldots & \pi_k
   \end{array}
  },
- ~\text{and}~
- \Ccal_{HHH} = \rbr{
+ ~\text{and}~\\
+ \Ccal_{HHH} &= \EE_H[e_H \otimes e_H \otimes e_H]  \\
+	&= \rbr{
   \begin{array}{c}
     \cr
-    \PP(h=i) \delta(i,i') \delta(i',i'') \cr
+    \pi_h\ \delta(h,h')\ \delta(h',h'') \cr
     \cr
   \end{array}
- }_{i,i',i''\in[k']}
-\end{align}
-are diagonal tensors. The operator $\Vcal$ used for constructing $k$-restricted conditional embedding operator can be contructed from the standard basis. That is $\Vcal = \sum_{i \in [k]} e_i \otimes \tilde e_i$, where $e_i$ and $\tilde e_i$ are the $i$-th standard basis vector in $\RR^{k'}$ and $\RR^k$ respectively.
+ }_{h,h',h''\in[k]}
+\end{align*}
+are diagonal tensors. Making use of $\Ccal_{HH}$ and $\Ccal_{HHH}$, and the factorization of the distributions $\PP(X_1,X_2)$ and $\PP(X_1,X_2,X_3)$, we obtain the factorization of their embeddings
+respectively
+\begin{align*}
+  &\Ccal_{X_1X_2} \\
+%   &= \int_{\Omega}\, \phi(x_1) \otimes \phi(x_2)\, \PP(dx_1 | h )\, \PP(dx_2 | h)\, \PP(dh) \\
+  &= \int_{\Hcal} \rbr{\int_\Xcal \phi(x_1)\, \PP(dx_1|h)} \otimes \rbr{\int_\Xcal \phi(x_2)\, \PP(dx_2 |h)} \PP(dh) \\
+  &= \int_{\Hcal} \rbr{\Ccal_{X|H} e_h} \otimes \rbr{\Ccal_{X|H} e_h}\, \PP(dh) \\
+  &= \Ccal_{X|H}\, \rbr{\int_{\Hcal} e_h \otimes e_h\, \PP(dh)}\, \Ccal_{X|H}^\top\\
+  &= \Ccal_{X|H}\, \Ccal_{HH}\, \Ccal_{X|H}^\top, \\
+%   &= \Ccal_{HH} \times_1 \Ccal_{X|H} \times_2 \Ccal_{X|H} \\
+  &\Ccal_{X_1 X_2 X_3}
+%   &= \int_{\Xcal\times \Xcal \times \Xcal \times \Hcal}\, \phi(x_1) \otimes \phi(x_2) \otimes \phi(x_3) \, \PP(dx_1 | h )\, \PP(dx_2 | h)\, \PP(dx_3 | h)\,  \PP(dh) \\
+  = \Ccal_{HHH} \times_1 \Ccal_{X|H} \times_2 \Ccal_{X|H} \times_3 \Ccal_{X|H}.
+\end{align*}
 
-% and taking value in $[k]$, let
-% \[
-%  P_j(X_t) \ :=\ P(X_t\, |\, H = j),\quad j \in [k],\ t \in \{1,2,3\}
-% \]
-% We first note that the distribution factorizes as follows
-% \begin{align}
-% P( X_t, X_{t'} )
-% \ & =\ \sum_{j=1}^k \pi_j \cdot P_j(X_t) \cdot P_j(X_{t'}),
-% \quad \{t,t'\} \subset \{1,2,3\} ,\ t \neq t' \label{eq:joint2} \\
-% P(X_1, X_2, X_3)
-% \ & =\ \sum_{j=1}^k \pi_j \cdot P_j(X_1) \cdot P_j(X_2) \cdot P_j(X_3). \label{eq:joint3}
-% \end{align}
+\subsection{Identifiability of the Parameters}
 
-Furthermore, in this case, $\widetilde \Ccal_{X|H} = \rbr{\mu_{X|h=1},\ \mu_{X|h=2},\ \ldots,\ \mu_{X|h=k}}$, and the approximate kernel embeddings for $\PP(X_1,X_2)$ and $\PP(X_1,X_2,X_3)$ are
+We note that $\Ccal_{X|H} = \rbr{\mu_{X|h=1},\ \mu_{X|h=2},\ \ldots,\ \mu_{X|h=k}}$, and the kernel embeddings for $\Ccal_{X_1 X_2}$ and $\Ccal_{X_1 X_2 X_3}$ can be alternatively written as
 \begin{align}
-  \widetilde \Ccal_{X_1 X_2}
+	\Ccal_{X_1 X_2}
   & = \sum_{h \in [k]} \pi_h \cdot \mu_{X|h} \otimes \mu_{X|h}, \label{eq:joint2} \\
-  \widetilde \Ccal_{X_1 X_2 X_3}
+  \Ccal_{X_1 X_2 X_3}
   &= \sum_{h \in [k]} \pi_h \cdot \mu_{X|h} \otimes \mu_{X|h} \otimes \mu_{X|h} \label{eq:joint3}
 \end{align}
-where $\pi_h:=\PP(h)$.
-
-
-% Then we can embedding into RKHS the second and third order marginal distribution of the observed variables in the multi-view latent variable models in \, \eq{eq:joint2} and \, \eq{eq:joint3}. These kernel embeddings will also factorize according the conditional independence structure of the underlying model. More specifically,
-% \begin{align}
-%   \Ccal_{X_1,X_2,X_3}
-%   = \EE_{X_1,X_2,X_3}[\phi(X_1)\otimes \phi(X_2) \otimes \phi(X_3)]
-% \end{align}
-% Making use of the distribution factorization of the model, we have that
-% \begin{align}
-%   \Ccal_{X_1,X_2,X_3} =
-%   \sum_{j=1}^k \pi_j \cdot \EE_{X_1| H=j}[\phi(X_1)]\otimes \EE_{X_2|H=j} [\phi(X_2)] \otimes \EE_{X_3|H=j}[\phi(X_3)]
-% \end{align}
-% where $\mu_{X_t|j}:=\EE_{X_t| H=j}[\phi(X_t)] = \int_{\Xcal} \phi(X_t)\, d P(X_t|H=j)$ is the
-% the conditional embedding of the observed variable $X_t$ given latent variable $H=j$.
-% Then we can express the embedding $\Ccal_{X_1,X_2,X_3}$ as a sum of outer product of conditional embeddings, \, \ie,
-% \begin{align}
-%   \Ccal_{X_1,X_2,X_3}
-%   = \sum_{j=1}^k \pi_j \cdot \mu_{X_1|j} \otimes \mu_{X_2|j} \otimes \mu_{X_3|j}
-% \end{align}
-% Similarly, for the joint distribution of the two observed variable in \, \eq{eq:joint2}, we have
-% \begin{align}
-%   \Ccal_{X_t,X_{t'}}
-%   = \sum_{j=1}^k \pi_j \cdot \mu_{X_t|j} \otimes \mu_{X_{t'}|j},\quad \{t,t'\} \subset \{1,2,3\},\ t\neq t'
-% \end{align}
-
-{\bf Identifiability.} Allman et al. showed that, under mild conditions, a finite mixture of nonparametric product distributions is identifiable. The multi-view latent variable model in~\eq{eq:joint3} has the same form as a finite mixture of nonparametric product distribution, and therefore we can adapt Allman's results to the current setting.
+Allman et al.~\cite{x} showed that, under mild conditions, a finite mixture of nonparametric product distributions is identifiable. The multi-view latent variable model in~\eq{eq:joint3} has the same form as a finite mixture of nonparametric product distribution, and therefore we can adapt Allman's results to the current setting.
 \begin{theorem}
-  Let $\PP(X_1,X_2,X_3)$ be a multi-view latent variable model of the form~\eq{eq:joint3}, such that the conditional distributions $\cbr{\PP(X|h)}_{h \in [k]}$ are linearly independent. Then, the set of parameters $\cbr{\pi_h, \mu_{X|h}}_{h \in [k]}$ are identifiable from $\Ccal_{X_1 X_2 X_3}$, up to label swapping of the hidden variable $H$.
+  Let $\PP(X_1,X_2,X_3)$ be a multi-view latent variable model, such that the conditional distributions $\cbr{\PP(X|h)}_{h \in [k]}$ are linearly independent. Then, the set of parameters $\cbr{\pi_h, \mu_{X|h}}_{h \in [k]}$ are identifiable from $\Ccal_{X_1 X_2 X_3}$, up to label swapping of the hidden variable $H$.
 \end{theorem}
 
 % \section{Whitening with Three Different Views}
@@ -443,21 +388,34 @@ where $\pi_h:=\PP(h)$.
 
 \section{Kernel Algorithm}
 
-We will deal with the discrete latent variable case.
-The parameters $\cbr{\pi_h, \mu_{X|h}}_{h \in [k]}$, of the multi-view latent variable model can be recovered from $\Ccal_{X_1 X_2}$ and $\Ccal_{X_1 X_2 X_3}$ using the following simple algorithm.
-\begin{enumerate}
-  \item Eigen-value decomposition for $\Ccal_{X_1 X_2}$,
+Next we will design a kernel algorithm to recover the parameters, $\cbr{\pi_h, \mu_{X|h}}_{h \in [k]}$, of the multi-view latent variable model based on $\Ccal_{X_1 X_2}$ and $\Ccal_{X_1 X_2 X_3}$.
+
+\Note{say something about how direct the replacement is.}
+
+\subsection{Population Case}
+
+First, we will derive the algorithm for the population case as if we could access the true operator $\Ccal_{X_1 X_2}$ and $\Ccal_{X_1 X_2 X_3}$. Its finite sample counterpart will be presented in the next section. With concepts from kernel embedding of distributions, the algorithm is a kernel generalization of the one proposed in~\cite{anima}.
+\begin{enumerate}[noitemsep,nolistsep]
+  \item Perform eigen-decomposition for $\Ccal_{X_1 X_2}$,
     $$\Ccal_{X_1 X_2} = \sum_{i=1}^{\infty} \sigma_i \cdot u_i \otimes u_i$$
-    where the eigen-values are ordered in non-decreasing manner. Let the leading $k$ eigenvectors corresponding to the largest $k$ eigen-value be  $\Ucal_k:=(u_1,u_2,\ldots,u_k)$, and the eigen-value matrix of $S_k:=\diag(\sigma_1,\sigma_2,\ldots,\sigma_k)$.
-  \item Whiten the 3rd order kernel embedding $\Ccal_{X_1 X_2 X_3}$ using whitening matrix $\Wcal:= \Ucal_k S_k^{-1/2}$.
-    $$\Tcal := \Ccal_{X_1 X_2 X_3} \times_1 (\Wcal^\top) \times_2 (\Wcal^\top) \times_3 (\Wcal^\top)$$
-    where $\times_i$ denotes mode-$i$ tensor-matrix multiplication.
+    where the eigen-values are ordered in non-decreasing manner. Let the leading eigenvectors corresponding to the largest $k$ eigen-value be  $\Ucal_k:=(u_1,u_2,\ldots,u_k)$, and the eigen-value matrix of $S_k:=\diag(\sigma_1,\sigma_2,\ldots,\sigma_k)$.
+  \item Whiten the 3rd order kernel embedding $\Ccal_{X_1 X_2 X_3}$ using operator $\Wcal:= \Ucal_k S_k^{-1/2}$,
+    $$\Tcal := \Ccal_{X_1 X_2 X_3} \times_1 (\Wcal^\top) \times_2 (\Wcal^\top) \times_3 (\Wcal^\top).$$
   \item Find the leading $k$ tensor eigenvectors $V_k$ for $\Tcal$ using tensor power method.
   \item Recover the conditional embedding operator by
-    $$ \Ccal_{X|H} = (\mu_{X|h=1},\mu_{X|h=1},\ldots,\mu_{X|h=k}) = (\Wcal)^\dagger V_k $$
+    $$ \Ccal_{X|H} = (\mu_{X|h=1},\mu_{X|h=1},\ldots,\mu_{X|h=k}) = (\Wcal)^\dagger V_k.$$
 \end{enumerate}
 
-{\bf Finite sample estimate.} Given $m$ observation $\Dcal_{X_1 X_2 X_3}=\{(x_1^i,x_2^i,x_3^i)\}_{i \in [m]}$ drawn~\iid~from a multi-view latent variable model $\PP(X_1,X_2,X_3)$, we now design a kernel algorithm to estimate the latent parameters from data. Although the empirical kernel embeddings has infinite dimensions, we can carry out the decomposition using just the kernel matrices.
+\subsection{Finite Sample Case}
+
+Given $m$ observation $\Dcal_{X_1 X_2 X_3}=\{(x_1^i,x_2^i,x_3^i)\}_{i \in [m]}$ drawn~\iid~from a multi-view latent variable model $\PP(X_1,X_2,X_3)$, we now design a kernel algorithm to estimate the latent parameters from data. Although the empirical kernel embeddings has infinite dimensions, we can carry out the decomposition using just the kernel matrices.
+
+Denote the implicitly formed feature matrix by
+\begin{align}
+  \Phi &:= (\phi(x_1^1), \ldots, \phi(x_1^m), \phi(x_2^1),  \ldots, \phi(x_2^m))  \\
+  \Psi &:= (\phi(x_2^1), \ldots, \phi(x_2^m), \phi(x_1^1),  \ldots, \phi(x_1^m))
+\end{align}
+
 
 \begin{enumerate}
 
@@ -465,11 +423,6 @@ The parameters $\cbr{\pi_h, \mu_{X|h}}_{h \in [k]}$, of the multi-view latent va
 $$
   \widehat \Ccal_{X_1 X_2}:= \frac{1}{2m} \sum_{i=1}^{m} \rbr{\phi(x_1^i) \otimes \phi(x_2^i) + \phi(x_2^i) \otimes \phi(x_1^i)}.
 $$
-Denote the implicitly formed feature matrix by
-\begin{align}
-  \Phi &:= (\phi(x_1^1),  \phi(x_1^2), \ldots, \phi(x_1^m), \phi(x_2^1),  \phi(x_2^2), \ldots, \phi(x_2^m))  \\
-  \Psi &:= (\phi(x_2^1), \phi(x_2^2), \ldots, \phi(x_2^m), \phi(x_1^1),  \phi(x_1^2), \ldots, \phi(x_1^m))
-\end{align}
 respectively, and the corresponding kernel matrix be $K = \Phi^\top \Phi$ and $L = \Psi^\top \Psi$. Using the feature matrix, $\Ccal_{X_1 X_2}$ can be expressed as
 $$
 	\Ccal_{X_1 X_2} = \frac{1}{2m} \Phi \Psi^\top.
