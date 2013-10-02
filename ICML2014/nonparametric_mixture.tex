@@ -54,7 +54,7 @@
 \begin{document}
 
 \twocolumn[
-\icmltitle{Kernel Estimates of Multi-view Latent Variable Models}
+\icmltitle{Nonparametric Estimation of Multi-View Latent Variable Models}
 
 % It is OKAY to include author information, even for blind
 % submissions: the style file will automatically remove it for you
@@ -76,30 +76,33 @@
 ]
 
 \begin{abstract}
-    In this paper, we propose a nonparametric kernel method for estimating the parameters of the multi-view latent variable models. 
+		Spectral methods have greatly advanced the estimation of latent variable models, generating a sequence of novel and efficient algorithms with strong theoretical guarantees. However, current spectral algorithms are largely restricted to mixture of discrete or Gaussian distributions. In this paper, we propose a kernel method for estimating the parameters of multi-view latent variable models, allowing each mixture component to be nonparametric.
+		The key idea of the method is to embed joint distribution of multi-view latent variable into the reproducing kernel Hilbert space, and then the latent parameters are recovered using a robust tensor power method. Furthermore, we provide theoretical guarantee for the proposed method and show that it compares favorably to EM algorithm and other existing spectral algorithms in our experiments.
 \end{abstract}
 
 \section{Introduction} \label{sec:intro}
 
-%
-%\setlength{\abovedisplayskip}{4pt}
-%\setlength{\abovedisplayshortskip}{1pt}
-%\setlength{\belowdisplayskip}{4pt}
-%\setlength{\belowdisplayshortskip}{1pt}
-%\setlength{\jot}{3pt}
+\setlength{\abovedisplayskip}{4pt}
+\setlength{\abovedisplayshortskip}{1pt}
+\setlength{\belowdisplayskip}{4pt}
+\setlength{\belowdisplayshortskip}{1pt}
+\setlength{\jot}{3pt}
 
 %\setlength{\floatsep}{1ex}
 \setlength{\textfloatsep}{3ex}
 
-Recent interest in spectral algorithms for latent variable model: fast and provable guarantee
+Latent variable models have been used to address various machine learning
+problems, ranging from modeling temporal dynamics, to text document analysis and to social network analysis~\citep{RabJua86,Clark90,HofRafHan02,BleNgJor03}.
+Recently, there is a surge of interest in designing spectral algorithms for estimating the parameters of latent variable models~\citep{HsuKakZha09,ParSonXin11,SonParXin11,FosRodUng12,more}. Compared to Expectation-Maximization (EM) algorithms \citep{DemLaiRub77} traditionally used for the same task, spectral algorithms are better in terms of their computational efficiency and provable guarantees.
 
-However, most methods only work for discrete and Gaussian algorithm. 
+However, current spectral algorithms are largely restricted to mixture
+of discrete or Gaussian distributions. When the mixture components are distributions other than these standard distributions, the theoretical guarantees for these algorithms no longer applies, and the performance of these algorithms can be very poor in experiments. A nonparametric estimation of the parameters of latent variables with provable guarantee is still missing from the literature.
 
-We propose an algorithm to estimate multi-view latent variables where the conditional density can be nonparametric. 
+In this paper, we propose a kernel method for estimating the parameters of multi-view latent variables where the mixture component can be nonparametric.
 
-We will kernel embedding of distributions, covariance operators and tensor power methods. 
+We will kernel embedding of distributions, covariance operators and tensor power methods.
 
-We provide both theoretical guarantee for our method and empirical evidence of the method. 
+We provide both theoretical guarantee for our method and empirical evidence of the method.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Notation}
@@ -143,7 +146,7 @@ $
 
 Kernel embeddings can be readily generalized to joint distributions of two or more variables using tensor product feature maps. For instance, we can embed a joint distribution of two variables $X_1$ and $X_2$ into a tensor product feature space $\Fcal\times \Fcal$ by
 \begin{align}
-    \Ccal_{X_1X_2} \, &:= \, \EE_{X_1X_2}[\phi(X_1)\otimes \phi(X_2)] \\ 
+    \Ccal_{X_1X_2} \, &:= \, \EE_{X_1X_2}[\phi(X_1)\otimes \phi(X_2)] \\
     \, &= \, \int_{\Xcal \times \Xcal} \phi(x_1) \otimes \phi(x_2) \, \PP(dx_1 \times dx_2)
 \end{align}
 where the reproducing kernel for the tensor product features satisfies
@@ -282,8 +285,8 @@ But the 3rd order tensor
 	  \cr
 	  \int_{\Hcal} v_i(h)\, v_{i'}(h)\, v_{i''}(h)\, \PP(dh) \cr
 	  \cr
-	\end{array}	
-	}_{i,i',i'' \in [k]}	
+	\end{array}
+	}_{i,i',i'' \in [k]}
 \end{align}
 is not a diagonal tensor in general. However, there are important special cases where both the 2nd and 3rd order tensors are simultaneously diagonalizable.
 % We can assume that $\Ccal_{HHH}$ is approximately diagonalizable by $\Vcal$, that is
@@ -512,4 +515,4 @@ For interpretable results, we can project the nonparametric representation to pa
 \bibliographystyle{icml2014}
 \bibliography{../nonparametric_mixture,../bibfile}
 
-\end{document} 
+\end{document}
