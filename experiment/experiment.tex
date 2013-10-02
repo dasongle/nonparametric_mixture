@@ -1,0 +1,260 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% ICML 2013 EXAMPLE LATEX SUBMISSION FILE %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Use the following line _only_ if you're still using LaTeX 2.09.
+%\documentstyle[icml2013,epsf,natbib]{article}
+% If you rely on Latex2e packages, like most moden people use this:
+\documentclass[11pt]{article}
+
+% For figures
+\usepackage{graphicx} % more modern
+%\usepackage{epsfig} % less modern
+\usepackage{subfigure}
+
+
+% For math symbol
+\usepackage{amsmath,amsfonts,amssymb}
+
+% For theorem
+\usepackage{amsthm}
+
+% For citations
+\usepackage{natbib}
+
+% For algorithms
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+% For appendix
+% \usepackage[title,titletoc,toc]{appendix}
+
+% For graphical model
+% \usepackage{tikz}
+% \usetikzlibrary{fit,positioning}
+% \usetikzlibrary{arrows,shapes}
+% As of 2011, we use the hyperref package to produce hyperlinks in the
+% resulting PDF.  If this breaks your system, please commend out the
+% following usepackage line and replace \usepackage{icml2013} with
+% \usepackage[nohyperref]{icml2013} above.
+\usepackage{hyperref}
+
+% Packages hyperref and algorithmic misbehave sometimes.  We can fix
+% this with the following command.
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+\newcommand{\trans}{\top}
+\newcommand{\bm}{\mathbf}
+
+\newcommand{\comment}[1]{}
+
+% theorem macro
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+
+% Employ the following version of the ``usepackage'' statement for
+% submitting the draft version of the paper for review.  This will set
+% the note in the first column to ``Under review.  Do not distribute.''
+% \usepackage{icml2013}
+% \usepackage[accepted]{icml2013}
+% Employ this version of the ``usepackage'' statement after the paper has
+% been accepted, when creating the final version.  This will set the
+% note in the first column to ``Proceedings of the...''
+% \usepackage[accepted]{icml2013}
+
+\usepackage{fullpage}
+\usepackage{xcolor}
+% The \icmltitle you define below is probably too long as a header.
+% Therefore, a short form for the running title is supplied here:
+% \icmltitlerunning{Submission and Formatting Instructions for ICML 2013}
+
+
+\title{Experiments}
+
+\begin{document}
+\maketitle
+
+%\twocolumn[
+%\icmltitle{}
+
+% It is OKAY to include author information, even for blind
+% submissions: the style file will automatically remove it for you
+% unless you've provided the [accepted] option to the icml2013
+% package.
+
+% \icmlauthor{Your Name}{email@yourdomain.edu}
+% \icmladdress{Your Fantastic Institute,
+%            314159 Pi St., Palo Alto, CA 94306 USA}
+%\icmlauthor{Your CoAuthor's Name}{email@coauthordomain.edu}
+%\icmladdress{Their Fantastic Institute,
+%            27182 Exp St., Toronto, ON M6H 2T1 CANADA}
+
+% You may provide any keywords that you
+% find helpful for describing your paper; these are used to populate
+% the "keywords" metadata in the PDF but will not be shown in the document
+
+%\icmlkeywords{exponential family harmonium, markov random fields, Deep Boltzmann Machine, Gaussian Integral trick}
+
+%\vskip 0.3in
+%]
+
+%\section{Multiview Latent Variable Models}
+
+\section{Synthetic Dataset}
+
+\texttt{More mathematical formula}
+
+To verify the proposed algorithm, we compared with EM for mixture of Gaussians and spectral algorithm for mixture of spherical Gaussians~\citep{Hsu13}. We also compared with the spectral algorithms based on histgram in~\citep{Hiroyuki10}. However, their performance is not comparable to others, so that we didn't plot it in the figures. \texttt{Add details of the results.}
+
+We generated synthetic data from the mixture models in four different settings, i.e., each view with different/same Gaussian/Gamma and Gaussian conditional distributions. In the Gamma/Gaussian mixture, we chose parameters to make the Gamma distribution more skew. For all the setting, we set the covariance of Gaussians be diagonal and the parameters are predefined to make sure they are not covered together in the sense of the ratio of the variance between the classes to the variance within the classes~\footnote{This is because of the identifiable assumption in~\citep{Hsu13}}. We also varied the number of observations $n$, from $50$ to $100, 000$,  and components $k$ in range $[2,3,4,8]$ in experiments to illustrate the convergence property of our algorithm. The mixture proportions are not balanced.. For each $n,k$ in each setting, we randomly sampled 10 sets of instances from the model for training. \texttt{Add details of the mixture proportion.}
+
+
+For EM algorithm, since it is not guaranteed to get the global solutions each trial, we repeated it $10$ times with random initialization and added regularization term to make sure the covariance parameters is valid. We selected the best kernel bandwidth for each view by evaluated on separated generated datasets. We measured the performance of algorithms by the $l2$-norm to the ground-truth marginal distribution of each view. The results are plotted in Fig.~\ref{fig:syn_res}
+
+
+\begin{figure}
+	\subfigure[View 1]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_2_view_1.pdf}
+	}
+	\subfigure[View 2]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_2_view_2.pdf}
+	}
+	\subfigure[View 3]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_2_view_3.pdf}
+	}
+\caption{The empirical results on synthetic dataset with different 2 Gaussian components in each view measured by the $l2$-norm between marginal distribution and ground-truth for each view.}
+\end{figure}
+
+
+\begin{figure}
+	\subfigure[View 1]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_3_view_1.pdf}
+	}
+	\subfigure[View 2]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_3_view_2.pdf}
+	}
+	\subfigure[View 3]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_3_view_3.pdf}
+	}
+\caption{The empirical results on synthetic dataset with different 3 Gaussian components in each view measured by the $l2$-norm between marginal distribution and ground-truth for each view.}
+\end{figure}
+
+\begin{figure}
+	\subfigure[View 1]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_4_view_1.pdf}
+	}
+	\subfigure[View 2]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_4_view_2.pdf}
+	}
+	\subfigure[View 3]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_4_view_3.pdf}
+	}
+\caption{The empirical results on synthetic dataset with different 4 Gaussian components in each view measured by the $l2$-norm between marginal distribution and ground-truth for each view.}
+\end{figure}
+
+\begin{figure}
+	\subfigure[View 1]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_8_view_1.pdf}
+	}
+	\subfigure[View 2]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_8_view_2.pdf}
+	}
+	\subfigure[View 3]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_8_view_3.pdf}
+	}
+\caption{The empirical results on synthetic dataset with different 8 Gaussian components in eavh view measured by the $l2$-norm between marginal distribution and ground-truth for each view.}
+\end{figure}
+
+
+\begin{figure}
+	\subfigure[2 components]{
+		\includegraphics[width=0.23\textwidth]{figure/sym_gauss_k_2.pdf}
+	}
+	\subfigure[3 components]{
+		\includegraphics[width=0.23\textwidth]{figure/sym_gauss_k_3.pdf}
+	}
+	\subfigure[4 components]{
+		\includegraphics[width=0.23\textwidth]{figure/sym_gauss_k_4.pdf}
+	}
+	\subfigure[8 components]{
+		\includegraphics[width=0.23\textwidth]{figure/sym_gauss_k_8.pdf}
+	}
+\caption{The empirical results on synthetic dataset with same Gaussian components in eavh view measured by the $l2$-norm between marginal distribution and ground-truth.}
+\end{figure}
+
+
+\begin{figure}
+	\subfigure[View 1]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_2_view_1.pdf}
+	}
+	\subfigure[View 2]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_2_view_2.pdf}
+	}
+	\subfigure[View 3]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_2_view_3.pdf}
+	}
+\caption{The empirical results on synthetic dataset with different 2 Gaussian/Gamma components in eavh view measured by the $l2$-norm between marginal distribution and ground-truth for each view.}
+\end{figure}
+
+
+\begin{figure}
+	\subfigure[View 1]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_3_view_1.pdf}
+	}
+	\subfigure[View 2]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_3_view_2.pdf}
+	}
+	\subfigure[View 3]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_3_view_3.pdf}
+	}
+\caption{The empirical results on synthetic dataset with different 3 Gaussian/Gamma components in eavh view measured by the $l2$-norm between marginal distribution and ground-truth for each view.}
+\end{figure}
+
+\begin{figure}
+	\subfigure[View 1]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_4_view_1.pdf}
+	}
+	\subfigure[View 2]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_4_view_2.pdf}
+	}
+	\subfigure[View 3]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_4_view_3.pdf}
+	}
+\caption{The empirical results on synthetic dataset with different 4 Gaussian/Gamma components in eavh view measured by the $l2$-norm between marginal distribution and ground-truth for each view.}
+\end{figure}
+
+\begin{figure}
+	\subfigure[View 1]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_8_view_1.pdf}
+	}
+	\subfigure[View 2]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_8_view_2.pdf}
+	}
+	\subfigure[View 3]{
+		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_8_view_3.pdf}
+	}
+\caption{The empirical results on synthetic dataset with different 8 Gaussian/Gamma components in eavh view measured by the $l2$-norm between marginal distribution and ground-truth for each view.}
+\end{figure}
+
+
+\begin{figure}
+	\subfigure[2 components]{
+		\includegraphics[width=0.23\textwidth]{figure/sym_heter_k_2.pdf}
+	}
+	\subfigure[3 components]{
+		\includegraphics[width=0.23\textwidth]{figure/sym_heter_k_3.pdf}
+	}
+	\subfigure[4 components]{
+		\includegraphics[width=0.23\textwidth]{figure/sym_heter_k_4.pdf}
+	}
+	\subfigure[8 components]{
+		\includegraphics[width=0.23\textwidth]{figure/sym_heter_k_8.pdf}
+	}
+\caption{The empirical results on synthetic dataset with same Gaussian/Gamma components in eavh view measured by the $l2$-norm between marginal distribution and ground-truth.}
+\end{figure}
+
+\texttt{Some explanation for the results}
+
+\bibliography{mlv_kernel}
+\bibliographystyle{icml2013}
+
+\end{document}
