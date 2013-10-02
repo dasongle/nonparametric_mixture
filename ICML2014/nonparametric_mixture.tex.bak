@@ -1,0 +1,624 @@
+% Use the following line _only_ if you're still using LaTeX 2.09.
+%\documentstyle[icml2014,epsf,natbib]{article}
+% If you rely on Latex2e packages, like most moden people use this:
+\documentclass{article}
+
+% use Times
+\usepackage{times}
+% For figures
+\usepackage{graphicx} % more modern
+%\usepackage{epsfig} % less modern
+\usepackage{subfigure}
+
+% For citations
+\usepackage{natbib}
+
+% For algorithms
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+% As of 2011, we use the hyperref package to produce hyperlinks in the
+% resulting PDF.  If this breaks your system, please commend out the
+% following usepackage line and replace \usepackage{icml2014} with
+% \usepackage[nohyperref]{icml2014} above.
+\usepackage{hyperref}
+
+% Packages hyperref and algorithmic misbehave sometimes.  We can fix
+% this with the following command.
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+
+% Employ the following version of the ``usepackage'' statement for
+% submitting the draft version of the paper for review.  This will set
+% the note in the first column to ``Under review.  Do not distribute.''
+\usepackage{icml2014}
+% Employ this version of the ``usepackage'' statement after the paper has
+% been accepted, when creating the final version.  This will set the
+% note in the first column to ``Proceedings of the...''
+%\usepackage[accepted]{icml2014}
+
+
+% other packages
+\usepackage{Definitions}
+\usepackage{pdfsync}
+\usepackage{color}
+
+\newcommand{\Note}[1]{{\color{red}{\bf\sf [note: #1]}}}
+
+\newtheorem{claim}{Claim}
+
+\newcommand{\littleheader}[1]{\noindent \textbf{#1} }
+%\newenvironment{proofsketch}{\par\noindent{\bfseries\upshape Proof Sketch:}}{\hfill \qed}
+
+\newcommand{\R}{\mathbb{R}}
+
+% graph notations
+\newcommand{\Graph}{\Gcal}
+\newcommand{\Node}{\Vcal}
+\newcommand{\nNode}{n}
+\newcommand{\Edge}{\Ecal}
+\newcommand{\nEdge}{m}
+\newcommand{\Post}{\Lcal}
+\newcommand{\nPost}{\ell}
+\newcommand{\Ground}{\Zcal}
+\newcommand{\nGround}{N}
+\newcommand{\Ind}{\Ical}
+
+% constraints
+\newcommand{\budget}{k}
+\newcommand{\attention}{w}
+
+% solution
+\newcommand{\Greedy}{G}
+\newcommand{\g}{g}
+\newcommand{\Optimal}{O}
+\newcommand{\OPT}{\mathrm{OPT}}
+
+\newcommand{\spn}{\mathrm{sp}}
+\newcommand{\continmax}{\textsc{ConTinEst}~}
+
+% The \icmltitle you define below is probably too long as a header.
+% Therefore, a short form for the running title is supplied here:
+\icmltitlerunning{Budgeted Influence Maximization for Multiple Items}
+
+\begin{document}
+
+\twocolumn[
+\icmltitle{Budgeted Continuous-Time Influence Maximization for Multiple Items}
+
+% It is OKAY to include author information, even for blind
+% submissions: the style file will automatically remove it for you
+% unless you've provided the [accepted] option to the icml2014
+% package.
+\icmlauthor{Your Name}{email@yourdomain.edu}
+\icmladdress{Your Fantastic Institute,
+            314159 Pi St., Palo Alto, CA 94306 USA}
+\icmlauthor{Your CoAuthor's Name}{email@coauthordomain.edu}
+\icmladdress{Their Fantastic Institute,
+            27182 Exp St., Toronto, ON M6H 2T1 CANADA}
+
+% You may provide any keywords that you
+% find helpful for describing your paper; these are used to populate
+% the "keywords" metadata in the PDF but will not be shown in the document
+\icmlkeywords{social networks, influence maximization}
+
+\vskip 0.3in
+]
+
+\begin{abstract}
+    In this paper, we propose an efficient algorithm for budgeted influence maximization problem for multiple items. We formulate the problem as a submodular optimization problem with two matroid constraints. And we propose an efficient adaptive threshold algorithm for maximize the influence. Experiments on both synthetic and real world datasets show that our method is significantly better than competitors. \Note{need improvement}
+\end{abstract}
+
+\section{Introduction} \label{sec:intro}
+% influence maximization problem
+
+%
+%\setlength{\abovedisplayskip}{4pt}
+%\setlength{\abovedisplayshortskip}{1pt}
+%\setlength{\belowdisplayskip}{4pt}
+%\setlength{\belowdisplayshortskip}{1pt}
+%\setlength{\jot}{3pt}
+
+%\setlength{\floatsep}{1ex}
+\setlength{\textfloatsep}{3ex}
+
+Online social networks play an important role in the spread of news, the diffusion of technological innovations, and the promotion of products via online advertisements.
+In these contexts, the influence maximization problem (or viral marketing problem) typically has the following flavor: select a set of source nodes to initiate the information diffusion process for a particular item such that the expected number of follow-ups is maximized. This problem has been studied extensively in the literature from modeling point of view as well as algorithm point of view, including great examples such as~\citet{kleinberg_kdd03,Chen:2010:SIM:1835804.1835934,borgs2012influence,influmax,nan2013scalable}.
+
+% limited attention and budget constraints
+However, previous studies have largely ignored two important practical aspects of the influence maximization problem. First, multiple items, each of which can potentially have a different diffusion channel, may be spreading simultaneously across the same set of social entities. Second, social entities, each of which can be a potential source, have limited attention, and can be selected as sources for only a small number of times. See Figure~\ref{fig:problemstatement} for an illustration.
+
+For instance, in Facebook, the system can recommend a small number of items (typically less than 5) in the side-bar to each user; and then the user can follow these recommendations and influence its followers. Due to this limited slots, the system can not concentrate all items to a few highly influential users, and it needs to consider detailed balance between limited user slots (budgets) and the heterogenous diffusion networks for different items. \Note{the example needs to be refined with more details.}. Thus, the goal of this paper is to incorporate these two additional considerations and design algorithm to maximize the overall influence of multiple items given limited capacity of each user.
+
+\begin{figure}[!t]
+    \centering
+    \includegraphics[width=1.0\columnwidth]{figure/problem-crop}
+    \vspace{-5mm}
+    \caption{In the multiple item budgeted influence maximization problem, each user is constrained to at most $k$ slots and each item is allowed to be assigned for at most $N$ times. The goal is to maximize the overall spread of the $n$ items given these constraints.} \label{fig:problemstatement}
+    \vspace{-3mm}
+\end{figure}
+
+Furthermore, previous influence maximization are most based on discrete-time information diffusion models which can be unnatural for observed cascade data. Each follow-up event in cascade data is associated with a time-stamp and very often occurs asynchronously. Artificially discretizing the time axis into bins introduces additional tuning parameters, like the bin size, which are not easy to choose optimally. A sequence of recent work argued that modeling cascade data and information diffusion using \emph{continuous-time} models can provide significantly improved performance than their discrete-time counterparts in recovering hidden diffusion networks and predicting the timing of events~\cite{nan_nips2012, nan_aistats2013, DBLP:netrate, infopath, ZhoZhaSon13, ZhoZhaSon13b, manuel2013icml}. Thus, we will also use continuous-time diffusion models in our budgeted influence maximization algorithm.
+
+% our contribution:
+% \Note{contribution: modeling (continuous time), formulation (2 matroid), algorithm (adpative threshold), guarantee, experimental results.}
+
+More specifically, we formulate the constrained maximization problem over the continuous-time diffusion networks as a submodular maximization over the intersection of matroids, and design an efficient decreasing threshold greedy algorithm to obtain an approximate solution with provable guarantees.
+More specifically, our proposed algorithm is guaranteed to find a solution with an influence of at least
+$\frac{1-2\epsilon}{3}$ of the optimal value in time $\tilde{O}(x)$ where the network has $|\Node|$ nodes and $|\Edge|$ edges. Finally, we validate our algorithm over large synthetic and real world datasets.
+In terms of maximizing the total influence of the set of items,
+our algorithm achieves much better performance than other scalable state-of-the-art methods. \Note{can be written better.}
+
+\section{Related Work} \label{sec:related}
+
+% influence maximization
+While social influence maximization has been extensively studied in viral marketing~\cite{domingos2001mining,kleinberg_kdd03,kempe2005influential,Chen:2010:SIM:1835804.1835934,jung2012irie,borgs2012influence}, our modeling using continuous-time diffusion networks, formulation using submodular maximization under matroid constraints, greedy algorithm with decreasing thresholds, and formal guarantee of the algorithm are new.
+Most previous work focused on maximizing the influence of one type of item,
+i.e.\ how to allocate $k$ copies of the item to $k$ selected nodes.
+They did not consider the competition among multiple type of items imposed by the limited capacity of the user. None of the previous work consider budgeted influence maximization for multiple items in continuous-time models.
+
+% continuous time influence model
+\littleheader{Diffusion Model.} Two common models for social influence are the Independent Cascade and Linear Threshold models~\cite{kleinberg_kdd03,ChenWY09,borgs2012influence}.
+Most previous work focused on the discrete time versions of these models. Only recently researchers start to realize the advantage of continuous-time diffusion networks~\cite{DBLP:netrate,manuel2013icml,nan_nips2012,nan_aistats2013}. However, the usage of these models are largely restricted to the problem of selecting nodes for one type of item.
+
+% submodular maximization
+\littleheader{Submodular Maximization.} As shown in~\citet{kleinberg_kdd03}, the influence in several common diffusion network models
+is submodular, and thus submodular maximization has been extensively used in influence maximization.
+\citet{krause2012submodular} provided a nice survey on this topic.
+For submodular maximization over subsets of size at most $k$, there exists a greedy algorithm
+that achieves $(1-\frac{1}{e})$-approximation~\cite{nemhauser1978analysis}.
+For submodular maximization over intersection of $P$ matroids, the greedy algorithm
+achieves a $\frac{1}{P+1}$-approximation ratio.
+
+\littleheader{Maximization with User Capacity.} Two recent papers~\cite{DBLP:conf/icdm/IencoBC10,sun2011participation} studied how to select $k$ memes/threads for each user
+so that the overall activity in the network is maximized.
+They addressed the limited attention effect but disregarded the budget constraint for the memes/threads.
+They also resorted to simple heuristic methods since na\"{\i}ve sampling method to estimate the influence does not scale well with the size of the network.
+
+In the reminder of the paper, we will first introduce continuous-time diffusion models, and explain our formulation of the problem as submodular maximization under matroid constraints. In section xxx, we will present our decreasing threshold greedy algorithm, and in section xx, the formal approximation guarantee for our algorithm. Last, experimental results on both synthetic and real world data are presented in section xxx.
+
+\section{Continuous-Time Diffusion Networks}
+\label{sec:diffusionmodel}
+
+A continuous-time diffusion model associates each edge $j\rightarrow i$ in a diffusion network with a transmission
+function, $f_{ji}(\tau_{ji})$, a density over time, in contrast to previous discrete-time models which associate each edge with a fixed infection probability~\cite{kleinberg_kdd03}. Moreover, it also differs from discrete-time
+models in the sense that events in a cascade are not generated iteratively in rounds, but event timings are sampled directly from the transmission function in the continuous-time model. This difference in the generative process for the information diffusion also makes subsequent influence estimation in continuous-time models different from that of discrete models. We will use an efficient randomized algorithm, \continmax, to estimate the influence. \Note{say something about multiple diffusion networks here.} 
+
+\subsection{Continuous-Time Independent Cascade Model}
+%
+Given a \emph{directed} contact network, $\Gcal = (\Vcal,\Ecal)$, the process begins with a
+set of infected source nodes, $\Acal$, initially adopting certain \emph{contagion} (idea, meme or product) at time zero. The contagion is transmitted from the sources along their out-going edges to their
+direct neighbors. Each transmission through an edge entails a \emph{random} transmission time, $\tau$, drawn independently from a density over time, $f_{ji}(\tau)$. Then, the infected neighbors transmit the contagion to their respective neighbors, and the process continues.
+%
+Furthermore, an infected node remains infected for the entire diffusion process. Thus, if a node $i$ is infected by multiple neighbors, only the neighbor that first infects node $i$ will be the \emph{true
+parent}. As a result, although the contact network can be an arbitrary directed network, each cascade (a list of event timing information from the spread of a contagion) induces a Directed Acyclic Graph (DAG).
+
+The independent cascade model has a useful property we will use later: given a sample of transmission times of all edges, the time $t_i$ taken to infect a node $i$ is the length of the
+shortest path in $\Gcal$ from the sources to node $i$, where the edge weights correspond to the associated transmission times.
+
+\subsection{Graphical Model Perspective}
+%
+The continuous-time independent cascade model is essentially a directed graphical model for a set of \emph{dependent} random variables, the infection times $t_i$ of the nodes, where the conditional independence
+structure is supported on the contact network $\Gcal$. %(see Appendix~\ref{app:graphicalmodel} for more details).
+More formally, the joint density of $\{t_i\}_{i \in \Vcal}$ can be expressed as
+%
+\begin{align}
+	p\rbr{\{t_i\}_{i\in\Vcal}} = \prod\nolimits_{i \in \Vcal} p\rbr{t_i | \{t_j\}_{j \in \pi_i}},
+	\label{eq:dag_factorization}
+\end{align}
+%
+where $\pi_i$ denotes the set of parents of node $i$ in a cascade-induced DAG, and $p(t_i | \{t_j\}_{j \in \pi_i})$ is the conditional density of infection $t_i$ at node $i$ given the infection times of its parents.
+
+Instead of directly modeling the infection times $t_i$, one can alternatively focus on the set of mutually \emph{independent} random transmission times $\tau_{ji} = t_i - t_j$. Interestingly, by switching from
+a node-centric view to an edge-centric view, one obtains a fully factorized joint density of the set of transmission times
+\begin{align}
+  p\rbr{\{\tau_{ji}\}_{(j,i)\in \Ecal}} = \prod\nolimits_{(j,i)\in\Ecal} f_{ji}(\tau_{ji}),
+\end{align}
+The two graphical model views are dual to each other: each variable $t_i$ can be viewed as a transformation from the collection of variables $\{\tau_{ji}\}_{(j,i)\in \Ecal}$.
+More specifically, $t_i$ is the length of the shortest path, $g_i\{\{\tau_{ji}\}_{(j,i)\in \Ecal}\}$, between a source node and node $i$ in network with edge weights ${\tau_{ji}}_{(j,i)\in\Ecal}$. This relation was exploited to design efficient influence estimation algorithm by~\citet{nan2013scalable}. 
+
+\subsection{Efficient Influence Estimation}
+
+Intuitively, given a time window, the wider the spread of infection, the more influential the set of sources. We adopt the definition of influence as the average number of infected nodes
+given a set of source nodes and a time window, as in previous work~\cite{influmax}. More formally, consider a set of $C$ source nodes $\Acal \subseteq \Vcal$ which gets infected at time zero, then, given a time window $T$, a node $i$ is infected
+in the time window if $t_i\leq T$. The expected number of infected nodes (or the influence) given the set of transmission functions $\cbr{f_{ji}}_{(j,i)\in\Ecal}$ can be computed as
+\begin{align}
+  \sigma(\Acal,T)
+    = \EE\left[\sum\nolimits_{i\in \Vcal}\II\cbr{t_i\leq T}\right],
+  \label{eq:influence}
+\end{align}
+%
+where $\II\cbr{\cdot}$ is the indicator function 
+and the expectation is taken over the the set of \emph{dependent}
+variables $\{t_i\}_{i\in\Vcal}$. Essentially, the influence estimation problem is an inference problem for graphical models, where the probability of event $t_i \leq T$ given sources in $\Acal$ can be obtained by summing out the possible configuration of other variables $\{t_j\}_{j\neq i}$. This is, in general, a very challenging problem. 
+
+\citet{nan2013scalable} proposed an efficient randomized algorithm, \continmax (\textbf{Con}tinous-\textbf{T}ime \textbf{In}fluence \textbf{Est}imation), to estimate the influence of an arbitrary set of source nodes.
+The key idea of \continmax is to transform the influence estimation problem into a problem with \emph{independent} variables using the dual graphical model view of the continuous-time diffusion model. That is 
+\begin{align}
+ \label{eq:key1}
+  \sigma(\Acal,T) = \EE \sbr{\sum\nolimits_{i\in \Vcal} \II\cbr{g_i\rbr{\{\tau_{ji}\}_{(j,i)\in\Ecal}}\leq T}},
+\end{align}
+where the expectation is with respect to the set of independent variables $\{\tau_{ji}\}_{(j,i)\in\Ecal}$. The second key idea of \continmax is that for each sample $\{\tau_{ji}\}_{(j,i)\in\Ecal}$, the summation $\sum_{i\in\Vcal} \II\cbr{\cdot}$ in
+Eq.~\eq{eq:key1} can be transformed to a neighborhood size estimation problem in weighted graph. Thus, the randomized algorithm by Cohen~\cite{cohen1997size} is adapted to solve the influence estimation problem in a very efficient way. In summary, \continmax can estimate the influence of every node in a network with $|\Vcal|$ nodes and $|\Ecal|$ edges to an accuracy of $\epsilon$ using  $n=O(1/\epsilon^2)$ randomizations and up to logarithmic factors $O(n|\Ecal|+n|\Vcal|)$ computations. 
+
+\section{Submodular Maximization under Matroid Constraints} \label{sec:formulation}
+\newcommand{\egItem}{advertisement}
+\newcommand{\egItems}{advertisements}
+
+Suppose we have a set of different \egItems,
+whose influence propagation over the social network
+may obey different temporal dynamics.
+If we assign an \egItem\ to a set of initial individuals in the network,
+then its influence will propagate over the network,
+producing a Directed-Acyclic-Graph structure rooted with the initial source nodes
+where each edge is associated with the temporal dynamic of diffusion specified by the influence model.
+The set of initial individuals should be selected to maximize the influence of the \egItem,
+which is the number of individuals it can reach before a given time.
+However, there is usually a limited budget for assigning the \egItem, i.e.\ it can be assigned to at most $k$ individuals;
+otherwise we can simply assign it to all individuals.
+When assigning different \egItems, the limited attention of the individuals in the network should also be taken into account:
+at most $w$ \egItems\ can be displayed to an initial individual since otherwise he or she will get annoyed.
+Our goal is then to find a set of initial individuals for each \egItem, subject to the limited budget and attention constraints,
+so that the total influence of all the \egItems\ is maximized.
+
+
+Formally, the social network on which the influence propagates is formalized as a directed contact graph $\Graph=(\Node,\Edge)$.
+Let $\Post$ denote a set of $\nPost$ types of items.
+For each $i\in \Post$, we define the utility function $f_i^T(R_{i})$ of item $i$ as the expected number of nodes
+that it can reach before a given time $T$ by initially assigning it to the set of source nodes $R_{i}$ (i.e.\ allocate one copy to each source node).
+%The utility function $f_i^T(R_{i})$ is a monotonic submodular function that measures the viralability (potential popularity) of the item $i$,
+%and its value by the time $T$ can be efficiently estimated based on the continuous-time independent cascade model.  let the respective utility function be $f_i^T : 2^{\Node}\rightarrow \R_+$.
+Our goal is to select for each $i \in \Post$ a set of nodes $R_i \subseteq \Node$ such that $\sum_{i\in P}f_i^T(R_i)$ is maximized.
+The assignment is subjected to the following constraints:
+(1) limited budget: each $i\in \Post$ can be assigned to at most $\budget$ nodes;
+(2) limited attention: at most $\attention$ types of items can be assigned to each node $j \in \Node$.
+To illustrate the two constraints, define the assignment matrix $A_{\Post \times \Node}$ as follows:
+$A_{ij} = 1$ if $j \in R_i$ and $A_{ij} = 0$ otherwise.
+Then the limited budget constraint requires that $\sum_j A_{ij} \leq \budget$ for each $i \in \Post$,
+and the limited attention constraint requires that $\sum_i A_{ij} \leq \attention$ for each $ j \in \Node$.
+See Figure~\ref{fig:assignmentMatrix} for illustration.
+
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=.3\textwidth]{assignmentMatrix}
+\caption{Illustration of the assignment matrix and the partition matroids.
+Here each item $i$ is assigned to at most $2$ nodes, and at most $2$ items can be assigned to one node.
+To construct a matroid for the budget constraint, define the ground set to be the entries of the matrix,
+and regard an assignment as the non-zero entries in the matrix.
+An assignment is feasible iff it has at most $k$ non-zero entries in each row,
+i.e.\ iff it is an independent set in the matroid defined based on the partition of rows with parameter $k$.
+Similarly, a partition matroid can be defined for the attention constraint.
+See text for more details.} \label{fig:assignmentMatrix}
+\end{figure}
+
+
+\littleheader{Influence Maximization over Intersection of Matroids.}
+In the following, we show that the two constraints correspond to the intersection of two partition matroids.
+Matroids are combinatorial structures that generalize the notion of linear independence in matrices. Formally,
+
+\begin{definition}
+A matroid is a pair $\Mcal=(\Ground, \Ind)$ where $\Ground$ is a finite set (called the ground set)
+and $\Ind$ is a non-empty family of subsets of $\Ground$ with the following properties:
+\begin{enumerate}
+\item If $X\subseteq Y$ and $Y \in \Ind$, then $X \in \Ind$,
+\item If $X \in \Ind, Y \in \Ind$ and $|Y| > |X|$, then there exists $z \in Y\setminus X$ such that $X \cup \{z\} \in \Ind$.
+\end{enumerate}
+\end{definition}
+
+An important type of matroids are the partition matroids in which the ground set is partitioned into disjoint sets $\Ground_1, \Ground_2,\dots,\Ground_\ell$
+and $$\Ind=\{X\subseteq \Ground: |X \cap \Ground_i|\leq k_i \text{ for all } i=1,\dots,\ell \}$$
+for some given parameters $k_1,\dots, k_\ell$.
+
+In the language of matroids, our influence maximization problem can be stated as follows.
+Based on the sets of items $\Post$ and nodes $\Node$, we define a new ground set $\Ground=\Post \times \Node$,
+which corresponds to the entries of the assignment matrix $A_{\Post \times \Node}$.
+For the budget constraint, partition the ground set into $\Ground_{i *}=\cbr{i}\times \Node$ that correspond to the rows of  $A_{\Post \times \Node}$.
+Define a partition matroid $\Mcal_1=\cbr{\Ground, \Ical_1}$ where $\Ical_1 = \cbr{S\subseteq \Ground : |S\cap \Ground_{i*} |\leqslant \budget, \forall i}$.
+Similarly, for the limited attention constraint, partition the ground set into $\Ground_{* j}=\Post \times\cbr{j}$ that correspond to the columns of  $A_{\Post \times \Node}$,
+and then define a second partition matroid $\Mcal_2=\cbr{\Ground, \Ical_2}$ where $\Ical_2 = \cbr{S\subseteq \Ground :|S\cap \Ground_{* j}|\leqslant \attention,\forall j}$.
+We then have the following maximization problem:
+\begin{align}
+& \text{max}_{S\subseteq \Ground}\quad f(S) = \sum_{i\in \Post}f_i^T(R_i) \label{pro:infMax}\\
+& \text{subject to}\quad S\in \Fcal = \bigcap_{p=1}^P \Ical_p\nonumber,
+\end{align}
+where $P=2$ and $R_i = S\cap(\cbr{i}\times \Node)$ for each $i\in \Post$.
+
+
+\littleheader{Note 1} Our model is can capture even more complicated constraints than the budget and attention constraints.
+For example, for each advertisement $i$, the advertisement client can cluster the individuals in the network into different groups $\Ground_{i1},\Ground_{i2},\dots,\Ground_{i t_i}$
+based on the marketing strategy, and have a different budget $\budget_{i t}$ for each group $\Ground_{i t}$.
+This can be formalized as a partition matroid $\Mcal=(\Ground, \Ind)$ where $\Ical = \cbr{S\subseteq \Ground: |S\cap \Ground_{it}|\leqslant \budget_{it},\forall i, t}$.
+Similarly, the individuals have different interests in different categories of advertisements, so that for each individual $j$,
+we can cluster the advertisements into different groups $\Ground_{1j},\Ground_{2j},\dots,\Ground_{s_j j}$ and display at most $\attention_{s j}$ advertisements from $\Ground_{s j}$.
+This can be formalized as a partition matroid $\Mcal=(\Ground, \Ind)$ where $\Ical = \cbr{S\subseteq \Ground: |S\cap \Ground_{sj}|\leqslant \attention_{sj},\forall i, t}$.
+
+Our model can even capture constraints considering simultaneously the preferences of the advertisements and the individuals.
+For example, suppose on a group of individuals $\Node_1$, the advertisement $i$ has budget $\budget_i$ and another advertisement $i'$ has budget $\budget_{i'}$.
+Furthermore,  to avoid too much competition, at most $\budget < \budget_i + \budget_{i'}$ copies of $i$ or $i'$ can be displayed to this group.
+This can be formalized as a laminar matroid as follows.
+Let $X_1 = \cbr{i} \times \Node_1$ and $\budget(X_1)=\budget_i$, $X_2 = \cbr{i'} \times \Node_1$ and $\budget(X_2) = \budget_{i'}$, and $X_3=X_i \cup X_{i'}$
+and $\budget(X_3) = \budget$.
+Define a laminar matroid $\Mcal=(\Ground, \Ind)$ where $\Ical = \cbr{S\subseteq \Ground: |S\cap X_i|\leqslant \budget(X_\ell),\forall \ell}$.
+Then any assignment in $\Mcal$ satisfies the requirement described.
+
+\littleheader{Note 2} Our model also capture different influence models.
+In this paper, we focus on the continuous-time diffusion networks,
+which has been shown to have significantly better accuracy than discrete time models~\cite{manuel2013icml,nan_aistats2013}.
+In the following sections, we provide a review on this model, and then describe an efficient approach for estimating influence in this model.
+
+\section{Decreasing Threshold Greedy Algorithm} \label{sec:greedy}
+
+When the influence obey the dynamics specified by the continuous-time diffusion model,
+the utility function in Problem~\eqref{pro:infMax} satisfy the submodularity property.
+
+\begin{lemma}\label{lem:sub}
+In the continuous-time diffusion model specified in Section~\ref{sec:diffusionmodel},
+$f(S)$ in Problem~\eqref{pro:infMax} is a normalized monotone submodular function.
+\end{lemma}
+
+The proof is provided in the supplementary material.
+It is a well known fact that a greedy algorithm
+can achieve $\frac{1}{1+P}$-approximation for maximizing a normalized monotone submodular function
+subject to $P$ matroid constraints,
+and the dependence on $P$ is optimal~\cite{nemhauser1978analysis} .
+Note that a straightforward implementation of the greedy algorithm needs $O(K\nGround)$ submodular function evaluations,
+where $K$ is the size of the greedy solution, and $\nGround = \nPost \times \nNode$ is the size of the ground set.
+Inspired by the lazy greedy heuristic, \cite{Ashwinkumar_soda14} proposed a decreasing-threshold approach
+to eliminate the dependence of the running time on size of the greedy solution,
+which is suitable for influence maximization since the solution could be of large size.
+However, their analysis is only for the case when the submodular function evaluation is exact,
+while the evaluation in influence maximization is necessarily approximate.
+
+Since it is essential to bound the accumulation of the error
+when the submodular function evaluation is only approximate,
+here we analyze a variant of the decreasing-threshold greedy algorithm (Algorithm~\ref{alg:dtgreedy}).
+For simplicity, for $i\in \Ground$ and $S \subseteq \Ground$, let $f(i| S) = f(S\cup\cbr{i}) - f(S)$ denote the marginal gain of $i$ with respect to $S$.
+Since the evaluation of the function value is approximate, we denote by $\hat f(i| S)$ the approximation of $f(i| S)$.
+
+\begin{algorithm}[!t]
+\caption{Decreasing threshold greedy algorithm for submodular maximization}
+\label{alg:dtgreedy}
+\begin{algorithmic}[1]
+\STATE{Let $\Greedy= \emptyset$. Set $d = \max_{i \in \Ground} f(\cbr{i})$.}
+\STATE{Set $w_i = \frac{d}{(1+\epsilon)^i}$, $i = 0,\dots, L= \argmin_i \bigl[w_i \leq \frac{\epsilon d}{\nGround}\bigr]$.}
+\STATE{Set $ w_{L+1} = 0$.}
+\FOR{$i=0,1,\dots,L,L+1$}
+\FOR{each $j \in \Ground$}
+\IF{$\hat f(j|\Greedy) \geq w_i$ and $\Greedy \cup \cbr{j} \in \Fcal$\label{step:constraint}}
+\STATE{Set $\Greedy \leftarrow \Greedy \cup \cbr{j}$.}
+\ENDIF
+\ENDFOR
+\ENDFOR
+\STATE{Output $G$.}
+\end{algorithmic}
+\end{algorithm}
+
+%\begin{algorithm}[H]
+%\caption{Decreasing threshold greedy algorithm for submodular maximization}
+%\label{alg:dtgreedy}
+%\SetAlgoLined
+%\DontPrintSemicolon
+%\SetKwInOut{Input}{Input}
+%\SetKwInOut{Output}{Output}
+%\Input{$\Ground$ and $\Fcal$, $\hat f$, parameter $\epsilon>0$}
+%\Output{$G \subseteq \Ground$}
+%\BlankLine
+%Set $d = \max_{i \in \Ground} f(\cbr{i})$\;
+%Set $w_i = \frac{d}{(1+\epsilon)^i}$, $i = 0,\dots, L= \argmin_i \bigl[w_i \leq \frac{\epsilon d}{\nGround}\bigr]$\;
+%Set $ w_{L+1} = 0$\;
+%Set $\Greedy= \emptyset$\;
+%\For{$i=0,1,\dots,L,L+1$}{
+%    \For{each $j \in \Ground$}{
+%        \If{$\hat f(j|\Greedy) \geq w_i$ and $\Greedy \cup \cbr{j} \in \Fcal$\label{step:constraint}}{
+%            Set $\Greedy \leftarrow \Greedy \cup \cbr{j}$\;
+%        }
+%    }
+%}
+%\end{algorithm}
+
+
+\begin{theorem}
+Suppose $|\hat f(i|S) - f(i|S)| \leq \epsilon_f$ for any $i \in \Ground$ and $S \subseteq \Ground$.
+Let $\Optimal$ denote the optimal solution.
+Then Algorithm~\ref{alg:dtgreedy} uses $O(\frac{\nGround}{\epsilon}\log\frac{\nGround}{\epsilon})$ evaluations of the submodular function,
+and $$f(\Greedy) \geq \frac{1}{(1+\epsilon)(P+1)} f(\Optimal) - \frac{(2+\epsilon) P |\Greedy|}{(1+\epsilon)(P+1)}\epsilon_f.$$
+\end{theorem}
+
+\begin{proof}
+The number of evaluations follows from the fact that there are $O(\frac{1}{\epsilon}\log \frac{\nGround}{\epsilon})$ thresholds,
+and there are $O(\nGround)$ evaluations at each threshold.
+
+For the approximation guarantee, first note that
+$$f(\Optimal) - f(\Greedy) \leq f(\Optimal \cup \Greedy) - f(\Greedy) \leq \sum_{j \in \Optimal \setminus \Greedy} f(j| G),$$
+so it suffices to show that $\sum_{j \in \Optimal \setminus \Greedy} f(j| G)$ is not so large compared to $f(\Greedy)$.
+To do so, we divide $\Optimal \setminus \Greedy$ into $\cbr{B_t}_{t=1}^{|\Greedy|}$ where each $B_t$ is associated with an element $g_t \in \Greedy$.
+We compare the marginal gains of $g_t$ and $j\in B_t$ and bound the sizes of $B_t$, which then leads to the bound.
+
+More precisely, consider the elements of the greedy solution $\Greedy$ in the order they are added by the algorithm:
+for $t=1,\dots, K=|\Greedy|$, let $\Greedy^t=\{\g_1,\dots, \g_t\}$.
+Define $B_t$ to be the elements in $\Optimal\setminus \Greedy$ will violate the
+constraint if added to $\Greedy^{t}$ but will not if added to $\Greedy^{t-1}$:
+$$B_t = \{j\in \Optimal\setminus \Greedy: \Greedy^{t-1} \cup \cbr{j} \in \Fcal, \Greedy^{t} \cup \cbr{j} \not\in \Fcal\}.$$
+See Figure~\ref{fig:dtgreedyNoationsB} for illustration.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=.45\textwidth]{dtgreedyNotationsB}
+\caption{Notations for analyzing the decreasing threshold greedy algorithm. The items in the greedy solution $\Greedy$ is arranged on the line according to the order of being selected in Step 3 in Algorithm~\ref{alg:dtgreedy}. The items in $\Optimal\setminus \Greedy$ are red dots on the line,
+arranged as follows: if $j \in \Optimal\setminus \Greedy$ can be added to $\Greedy^{t-1}$ without violating the constraint but cannot be added to $\Greedy^t$,
+then it is arranged between $\g_{t-1}$ and $g_t$. Then $B_t$ are those in $\Optimal\setminus \Greedy$ that lie between $\g_{t-1}$ and $\g_t$.} \label{fig:dtgreedyNoationsB}
+\end{figure}
+
+First, for each $j \in B_t$, $f(j|\Greedy)$ is approximately bounded by $f(g_t|\Greedy^{t-1})$.
+If $\g_t$ is added at a non-zero threshold $\tau_t$, we clearly have $\hat f( \g_t | \Greedy^{t-1}) \geq \tau_t$.
+For each $j \in B_t$, if $j$ were considered at a stage earlier,
+than it would have been added to $\Greedy$ since adding it to $\Greedy^{t-1}$ will not violate the constraint.
+However, $j \not\in \Greedy$, so $\hat f( j| \Greedy^{t-1}) \leq (1+\epsilon) \tau_t$.
+Then $f(j|\Greedy) \leq f(j|\Greedy^{t-1}) \leq (1+\epsilon) f(\g_t | \Greedy^{t-1}) + (2+\epsilon)\epsilon_f \leq (1+\epsilon) \tau_t + (2+\epsilon)\epsilon_f$.
+If $\g_t$ is added at the threshold $w_{L+1} = 0$, then $\hat f(j|\Greedy^{t-1}) < \frac{\epsilon }{\nGround} d$.
+In fact, the first element $\g_1$ is of value $d=\tau_1$, so $f(j|\Greedy) \leq f(j|\Greedy^{t-1}) < \frac{\epsilon }{\nGround} \tau_1 + \epsilon_f$.
+
+Second, by the properties of the intersection of matroids, we have that the sizes of $B_t$ is not large. More precisely,
+we have $\sum_{i=1}^t |B_i| \leq P t$, for $t =1, \dots, K$.
+Then $\sum_{j \in \Optimal \setminus \Greedy} f(j| G)$ is maximized when $|B_t| = P$ for any $t$.
+Combined with the bounds on $f(j|\Greedy)$ for each $j \in B_t$, this leads to the final approximation guarantee.
+\end{proof}
+
+Note that when $\epsilon$ is small enough,
+Algorithm~\ref{alg:dtgreedy} is equivalent to the greedy algorithm that repeatedly selects the item $j$
+with maximum marginal gain $f(j|G)$. Formally,
+
+\begin{corollary}
+Suppose $\epsilon$ is sufficiently small so that
+\begin{align}
+(1+\epsilon) < \min\cbr{\frac{\hat f(j_1|S_1)}{\hat f(j_2|S_2)}: \hat f(j_1|S_1) > \hat f(j_2|S_2)}\nonumber
+\end{align}
+and $\frac{\epsilon d}{N}  < \min\cbr{\hat f(j|S) \neq 0}$.
+Then Algorithm~\ref{alg:dtgreedy} can be implemented to run in time $O(|G| N)$,
+and $$f(\Greedy) \geq \frac{1}{P+1} f(\Optimal) - \frac{2 P |\Greedy|}{P+1}\epsilon_f.$$
+\end{corollary}
+
+For our influence maximization problem~\eqref{pro:infMax}, we have $|\Greedy| \leq f(\Greedy) \leq f(\Optimal)$.
+Noting that the number of matroids is $P=2$ for modeling the limited budget and attention,
+we can choose $\epsilon_f = \epsilon/12$ so that:
+\begin{corollary}
+Suppose $|\hat f(i|S) - f(i|S)| \leq \epsilon/12$ for any $i \in \Ground$ and $S \subseteq \Ground$.
+Then Algorithm~\ref{alg:dtgreedy} outputs a solution $G$ with
+$f(\Greedy) \geq \frac{1-\epsilon}{3} \OPT.$
+\end{corollary}
+
+\section{Theoretical Guarantees} 
+
+\Note{let's move all guarantee in this section.}
+
+
+\section{Experiments} \label{sec:exp}
+
+We compare our method with two other proposed heuristics. First, we follow the high-degree heuristic in classic social network analysis by choosing the nodes in the order of decreasing out-degree. Given a chosen node $j\in Q$ and one of its direct children $k\in Q$, $\alphab_{jk}$ represents the topic preference of the diffusion channel from node $j$ to $k$. For a post $i\in P$, $\mb_i$ denotes the respective topic distribution. As a result, the inner product $\alphab_{jk}\cdot\mb_i$ determines the mode of the diffusion pattern from node $j$ to $k$. In other words, the larger $\alphab_{jk}\cdot\mb_i$ is, the faster the post $i$ can diffuse. Let $w(i,j) = \frac{1}{|C_j|}\sum_{k\in C_j}\alphab_{jk}\cdot\mb_i$ be the average diffusion speed by assigning post $i\in P$ to user $j\in Q$ where $C_j$ is the set of direct neighbors. Therefore, for each user $j$ in the decreasing order of out-degree, we choose at most $W$ posts $i\in Q$ in the decreasing order of $w(i,j)$ to assign to $j$. We go through every pair of user and post to form the final feasible solution $S$. This heuristic is referred to as hard-assignment. Second, we can randomize the assignment decision by distributing post $i$ to user $j$ proportionally with the probability $\frac{w(i,j)}{\sum_{h\in Q}w(h,j)}$, which is referred to as preferential-assignment.
+
+\subsection{Simulation}
+\subsection{Real Data}
+The MemeTracker dataset we will use contains 300 million blog posts and articles collected for the top 5,000 most active media sites from four million websites between March 2011 and February 2012. The flow of information can be traced using quotes, which are short textual phrases traveling through the web. Because all documents published from the media sites containing a particular quote $m$ are time-stamped, a cascade $c_m$ induced by the quote $m$ is a collection of times when the media site first mentioned it. The set of all quote cascades are further divided into 179 groups, each of which consists of cascades built from quotes that were mentioned in posts containing a particular keyword and covers most of the top 5,000 media sites. Since a given quote $m$ is often associated with a few websites within its particular cascade $c_m$, it will be hard to evaluate its influence if it is assigned to a media site that is not included in $c_m$. As a result, we further preprocess the cascade data as follows :
+\begin{itemize}
+\item run LDA over the set of all quotes to obtain the topic vector for each quote;
+\item within each one of the 179 groups, calculate the mean topic vector for all quotes in that group;
+\item treat the mean topic vector for each group as our new `post';
+\item divide all the cascades of the new `posts' into train and test data
+\item infer the diffusion network structure from the cascades of all these new `post' on the train data;
+\item test the real influence of the solution given by our algorithm on the testing data;
+\end{itemize}
+
+
+
+\bibliography{ScalableInfluenceMaximization}
+\bibliographystyle{icml2014}
+
+\newpage
+\appendix
+
+\section{Proof for Decreasing-Threshold Greedy Algorithm}
+
+\begin{theorem}
+Suppose $|\hat f(i|S) - f(i|S)| \leq \epsilon_f$ for any $i \in \Ground$ and $S \subseteq \Ground$.
+Let $\Optimal$ denote the optimal solution.
+Then Algorithm~\ref{alg:dtgreedy} uses $O(\frac{\nGround}{\epsilon}\log\frac{\nGround}{\epsilon})$ evaluations of the submodular function, and $$f(\Greedy) \geq \frac{1}{(1+\epsilon)(P+1)} f(\Optimal) - \frac{(2+\epsilon) P |\Greedy|}{(1+\epsilon)(P+1)}\epsilon_f.$$
+\end{theorem}
+\begin{proof}
+The number of evaluations follows from the fact that there are $O(\frac{1}{\epsilon}\log \frac{\nGround}{\epsilon})$ thresholds,
+and there are $O(\nGround)$ evaluations at each threshold.
+
+To prove the approximation guarantee, consider the elements of the greedy solution $\Greedy$ in the order they are added by the algorithm:
+for $t=1,\dots, K=|\Greedy|$, let $\Greedy^t=\{\g_1,\dots, \g_t\}$.
+We define $A_t$ to be the elements in $\Optimal\setminus \Greedy$ that will not violate the
+constraint if added to $\Greedy^{t-1}$:
+$$A_t = \{j\in \Optimal\setminus \Greedy: \Greedy^{t-1} \cup \cbr{j} \in \Fcal\}, \textrm{for } t=1,\dots, K+1.$$
+Note that $A_1 = \Optimal \setminus \Greedy$, and by the down-monotonicity of $\Fcal$, $A_1 \supseteq A_2 \supseteq \dots \supseteq A_{K+1}$.
+Let $B_t = A_t \setminus A_{t+1}$.
+See Figure~\ref{fig:dtgreedyNoations} for illustration.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=.45\textwidth]{dtgreedyNotations}
+\caption{Notations for analyzing the decreasing threshold greedy algorithm. The items in the greedy solution $\Greedy$ is arranged on the line according to the order of being selected in Step 3 in Algorithm~\ref{alg:dtgreedy}. The items in $\Optimal\setminus \Greedy$ are red dots on the line,
+arranged as follows: if $j \in \Optimal\setminus \Greedy$ can be added to $\Greedy^{t-1}$ without violating the constraint but cannot be added to $\Greedy^t$,
+then it is arranged between $\g_{t-1}$ and $g_t$. Then $A_t$ are all those items in $\Optimal\setminus \Greedy$ beyond $g_{t-1}$,
+and $B_t$ are those in $\Optimal\setminus \Greedy$ that lie between $\g_{t-1}$ and $\g_t$.} \label{fig:dtgreedyNoations}
+\end{figure}
+
+
+In the following, we will prove two claims and then use them to prove the theorem.
+\begin{claim}
+For $1\leq t\leq K$, let $\tau_t$ be the value of the threshold $w$ when $\g_t$ was included in $\Greedy$.
+\begin{eqnarray*}
+\sum_{j \in \Optimal \setminus \Greedy} f(j|\Greedy) \leq (1+\epsilon) \sum_{i=1}^K |B_i|\tau_i + \epsilon\tau_1 + (2+\epsilon)\epsilon_f |A_1|.
+\end{eqnarray*}
+\end{claim}
+\begin{proof}
+First consider $\g_t$ added at non-zero thresholds, i.e.\
+suppose $\Greedy=\cbr{\g_1, \dots, \g_{K_0}}$ right before the threshold $w_{L+1}=0$.
+For any $t \leq K_0$, we clearly have $\hat f( \g_t | \Greedy^{t-1}) \geq \tau_t$.
+For each $j \in A_t$, if $j$ were considered at a stage earlier,
+than it would have been added to $\Greedy$ since adding it to $\Greedy^{t-1}$ will not violate the constraint.
+However, $j \not\in \Greedy$, so $\hat f( j| \Greedy^{t-1}) \leq (1+\epsilon) \tau_t$.
+Then $f(j|\Greedy^{t-1}) \leq (1+\epsilon) f(\g_t | \Greedy^{t-1}) + (2+\epsilon)\epsilon_f \leq (1+\epsilon) \tau_t + (2+\epsilon)\epsilon_f$.
+
+For each $j \in A_{K_0+1}$, we have $\hat f(j|\Greedy) < \frac{\epsilon }{\nGround} d$.
+In fact, the first element $\g_1$ is of value $d=\tau_1$, so $f(j|\Greedy) < \frac{\epsilon }{\nGround} \tau_1 + \epsilon_f$. Then
+\begin{eqnarray*}
+\sum_{j \in \Optimal \setminus \Greedy} f(j|\Greedy) & =  & \sum_{i=1}^{K_0} \sum_{j \in B_i} f(j|\Greedy) + \sum_{j \in A_{K_0+1}} f(j|\Greedy)\\
+& \leq & (1+\epsilon) \sum_{i=1}^{K_0} |B_i|\tau_i + |A_{K_0+1}| \frac{\epsilon}{\nGround}\tau_1 \\
+&&  + (2+\epsilon)\epsilon_f \sum_{i=1}^{K_0} |B_i|  + \epsilon_f |A_{K_0+1}|\\
+& \leq & (1+\epsilon) \sum_{i=1}^K |B_i|\tau_i + \epsilon\tau_1 \\
+&& + (2+\epsilon)\epsilon_f |A_1|.
+\end{eqnarray*}
+\end{proof}
+\begin{claim}
+$\sum_{i=1}^t |B_i| \leq P t$, for $t =1, \dots, K$.
+\end{claim}
+\begin{proof}
+To bound this, we need to introduce some notations about matroids.
+Define $r_p(S)$, called the rank of $S$ in matroid $\Mcal_p$, to be the cardinality of a largest independent set contained in $S$
+in matroid $\Mcal_p$. Define $\spn^p(S)$, called the span of $S$ in matroid $\Mcal_p$, to be
+$$\spn^p(S)=\cbr{j\in \Ground: r_p(S\cup\cbr{j}) = r_p(S)}.$$
+
+When $t\in \{1,2,\dots,|\Greedy|\}$, for each $j \in A_1 \setminus A_{t+1}$, we know that $j$ failed the independence test at Step 4,
+which implies that there exists $p$ and $s < t$ such that $j \in \spn^p(\Greedy^s) \subseteq \spn^p(\Greedy^t)$.
+Then $A_1 \setminus A_{t+1} \subseteq \cup_{p=1}^P \spn^p(\Greedy^t)$.
+Since $A_1 \setminus A_{t+1}$ is independent and $ \spn^p(\Greedy^t)$ has rank $t$,
+so $\sum_{i=1}^t |B_i| = |A_1 \setminus A_{t+1}| \leq \sum_{p=1}^P |(A_1 \setminus A_{t+1} ) \cap \spn^p(\Greedy^t)| \leq Pt$.
+\end{proof}
+
+By the two claims and Lemma~\ref{lem:seqsum}, we have
+\begin{eqnarray*}
+f(\Optimal) - f(\Greedy) & \leq & \sum_{j \in \Optimal \setminus \Greedy} f(j|\Greedy) \\
+& \leq & (1+\epsilon) P \sum_{i=1}^K \tau_i + \epsilon\tau_1 + (2+\epsilon)\epsilon_f P|\Greedy|
+\end{eqnarray*}
+which leads to the theorem since $f(\Greedy) \geq \sum_{i=1}^K \tau_i$.
+\end{proof}
+
+\begin{lemma}\label{lem:seqsum}
+If $\sum_{i=1}^t \sigma_{i-1} \leq t$ for $t=1,\dots, K$ and $\rho_{i-1} \geq \rho_i$ for $i=1,\dots,K-1$ with $\rho_i, \sigma_i\geq 0$,
+then $\sum_{i=1}^K \rho_i\sigma_i \leq \sum_{i=1}^K \rho_{i-1}$.
+\end{lemma}
+\begin{proof}
+Consider the linear program
+\begin{eqnarray*}
+V&=&\max_{\sigma} \sum_{i=1}^K \rho_i\sigma_i\\
+s.t.\ && \sum_{i=1}^t \sigma_{i-1} \leq t, \ \ t=1,\dots,K,\\
+&& \sigma_i\geq 0, \ \ i=1,\dots,K-1
+\end{eqnarray*}
+with dual
+\begin{eqnarray*}
+W&=&\min_{u} \sum_{i=1}^K t u_{t-1}\\
+s.t.\ && \sum_{t=i}^{K-1} u_t \geq \rho_i, \ \ i=0,\dots,K-1,\\
+&& u_t\geq 0, \ \ t=0,\dots,K-1.
+\end{eqnarray*}
+As $\rho_i \geq \rho_{i+1}$, the solution $u_i = \rho_i - \rho_{i+1},i=0,\dots,K-1$ (where $\rho_K=0$)
+is dual feasible with value $\sum_{t=1}^K t (\rho_{t-1}-\rho_t) = \sum_{i=1}^{K} \rho_{i-1}$.
+By weak linear programming duality,  $\sum_{i=1}^K \rho_i\sigma_i \leq V \leq W \leq \sum_{i=1}^K \rho_{i-1}$.
+\end{proof}
+
+
+\section{Submodularity of the Influence}
+
+\end{document} 
