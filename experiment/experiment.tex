@@ -103,7 +103,7 @@
 
 \texttt{More mathematical formula}
 
-To verify the proposed algorithm, we compared with EM for mixture of Gaussians and spectral algorithm for mixture of spherical Gaussians~\citep{Hsu13}. We also compared with the spectral algorithms based on histgram in~\citep{Hiroyuki10}. However, their performance is not comparable to others, so that we didn't plot it in the figures. \texttt{Add details of the results.}
+To verify the proposed algorithm, we compared with EM for mixture of Gaussians and spectral algorithm for mixture of spherical Gaussians~\citep{Hsu13}. The assumption in~\citep{Hsu13} is very restricted, the means of the each Gaussian component should span a $k$-dimension subpsace, where $k$ is number of components. Meanwhile, each component should be a spherical Gaussian. We also compared with another \emph{nonparametric} spectral algorithms propsed by~\citep{Hiroyuki10} which uses histgram to approximate the conditional distribution. It could be thought as a special case of our method using delta kernel. It is predictable that their performance is not comparable to others because of the inferior histgram, the error is about $10$ times to EM method. So that, we didn't plot it in the figures.
 
 We generated synthetic data from the mixture models in four different settings, i.e., each view with different/same Gaussian/Gamma and Gaussian conditional distributions. In the Gamma/Gaussian mixture, we chose parameters to make the Gamma distribution more skew. For all the setting, we set the covariance of Gaussians be diagonal and the parameters are predefined to make sure they are not covered together in the sense of the ratio of the variance between the classes to the variance within the classes~\footnote{This is because of the identifiable assumption in~\citep{Hsu13}}. We also varied the number of observations $n$, from $50$ to $100, 000$,  and components $k$ in range $[2,3,4,8]$ in experiments to illustrate the convergence property of our algorithm. The mixture proportions are not balanced.. For each $n,k$ in each setting, we randomly sampled 10 sets of instances from the model for training. \texttt{Add details of the mixture proportion.}
 
@@ -113,13 +113,13 @@ For EM algorithm, since it is not guaranteed to get the global solutions each tr
 
 \begin{figure}
 	\subfigure[View 1]{
-		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_2_view_1.pdf}
+		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_2_view_3.pdf}
 	}
 	\subfigure[View 2]{
 		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_2_view_2.pdf}
 	}
 	\subfigure[View 3]{
-		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_2_view_3.pdf}
+		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_2_view_1.pdf}
 	}
 \caption{The empirical results on synthetic dataset with different 2 Gaussian components in each view measured by the $l2$-norm between marginal distribution and ground-truth for each view.}
 \end{figure}
@@ -127,39 +127,39 @@ For EM algorithm, since it is not guaranteed to get the global solutions each tr
 
 \begin{figure}
 	\subfigure[View 1]{
-		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_3_view_1.pdf}
+		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_3_view_3.pdf}
 	}
 	\subfigure[View 2]{
 		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_3_view_2.pdf}
 	}
 	\subfigure[View 3]{
-		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_3_view_3.pdf}
+		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_3_view_1.pdf}
 	}
 \caption{The empirical results on synthetic dataset with different 3 Gaussian components in each view measured by the $l2$-norm between marginal distribution and ground-truth for each view.}
 \end{figure}
 
 \begin{figure}
 	\subfigure[View 1]{
-		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_4_view_1.pdf}
+		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_4_view_3.pdf}
 	}
 	\subfigure[View 2]{
 		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_4_view_2.pdf}
 	}
 	\subfigure[View 3]{
-		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_4_view_3.pdf}
+		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_4_view_1.pdf}
 	}
 \caption{The empirical results on synthetic dataset with different 4 Gaussian components in each view measured by the $l2$-norm between marginal distribution and ground-truth for each view.}
 \end{figure}
 
 \begin{figure}
 	\subfigure[View 1]{
-		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_8_view_1.pdf}
+		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_8_view_3.pdf}
 	}
 	\subfigure[View 2]{
 		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_8_view_2.pdf}
 	}
 	\subfigure[View 3]{
-		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_8_view_3.pdf}
+		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_8_view_1.pdf}
 	}
 \caption{The empirical results on synthetic dataset with different 8 Gaussian components in eavh view measured by the $l2$-norm between marginal distribution and ground-truth for each view.}
 \end{figure}
@@ -184,13 +184,13 @@ For EM algorithm, since it is not guaranteed to get the global solutions each tr
 
 \begin{figure}
 	\subfigure[View 1]{
-		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_2_view_1.pdf}
+		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_2_view_3.pdf}
 	}
 	\subfigure[View 2]{
 		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_2_view_2.pdf}
 	}
 	\subfigure[View 3]{
-		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_2_view_3.pdf}
+		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_2_view_1.pdf}
 	}
 \caption{The empirical results on synthetic dataset with different 2 Gaussian/Gamma components in eavh view measured by the $l2$-norm between marginal distribution and ground-truth for each view.}
 \end{figure}
@@ -198,39 +198,39 @@ For EM algorithm, since it is not guaranteed to get the global solutions each tr
 
 \begin{figure}
 	\subfigure[View 1]{
-		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_3_view_1.pdf}
+		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_3_view_3.pdf}
 	}
 	\subfigure[View 2]{
 		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_3_view_2.pdf}
 	}
 	\subfigure[View 3]{
-		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_3_view_3.pdf}
+		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_3_view_1.pdf}
 	}
 \caption{The empirical results on synthetic dataset with different 3 Gaussian/Gamma components in eavh view measured by the $l2$-norm between marginal distribution and ground-truth for each view.}
 \end{figure}
 
 \begin{figure}
 	\subfigure[View 1]{
-		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_4_view_1.pdf}
+		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_4_view_3.pdf}
 	}
 	\subfigure[View 2]{
 		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_4_view_2.pdf}
 	}
 	\subfigure[View 3]{
-		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_4_view_3.pdf}
+		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_4_view_1.pdf}
 	}
 \caption{The empirical results on synthetic dataset with different 4 Gaussian/Gamma components in eavh view measured by the $l2$-norm between marginal distribution and ground-truth for each view.}
 \end{figure}
 
 \begin{figure}
 	\subfigure[View 1]{
-		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_8_view_1.pdf}
+		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_8_view_3.pdf}
 	}
 	\subfigure[View 2]{
 		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_8_view_2.pdf}
 	}
 	\subfigure[View 3]{
-		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_8_view_3.pdf}
+		\includegraphics[width=0.32\textwidth]{figure/diff_heter_k_8_view_1.pdf}
 	}
 \caption{The empirical results on synthetic dataset with different 8 Gaussian/Gamma components in eavh view measured by the $l2$-norm between marginal distribution and ground-truth for each view.}
 \end{figure}
