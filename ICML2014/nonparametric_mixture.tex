@@ -386,18 +386,23 @@ Allman et al.~\cite{x} showed that, under mild conditions, a finite mixture of n
 
 {\bf Example 2.} Suppose we have a infinite mixture of three dimensional multivariate spherical Gaussian distributions. The Gaussian components have identical covariance matrix $\Sigma = \diag(\sigma^2,\sigma^2,\sigma^2)$. Furthermore, the components are placed regularly along the diagonal line of the coordinate system. That is the center of the $j$-th component is $\mu^j=(j\delta,j\delta,j\delta)$ with spacing parameter $\delta$:
 \begin{align*}
-  p_j(x_1,x_2) &= (2\pi)^{-1} \sigma^{-2} \exp\rbr{-\frac{1}{2\sigma^2} \sum_{i=1}^2 (x_i - j\delta)^2} \\
-  p_j(x_1,x_2,x_3) &= (2\pi)^{-3/2} \sigma^{-3} \exp\rbr{-\frac{1}{2\sigma^2} \sum_{i=1}^3 (x_i - j\delta)^2}
+  p_j(x_1,x_2) &= \frac{1}{2\pi \sigma^2} \exp\rbr{-\frac{1}{2\sigma^2} \sum_{i=1}^2 (x_i - j\delta)^2} \\
+  p_j(x_1,x_2,x_3) &= \frac{1}{(2\pi)^{3/2} \sigma^3}   \exp\rbr{-\frac{1}{2\sigma^2} \sum_{i=1}^3 (x_i - j\delta)^2}
 \end{align*}
 The the density of this mixture model is $p(x_1,x_2) = \sum_{j=1}^{\infty} \pi_j\, p_j(x_1,x_2)$ and
 $p(x_1,x_2,x_3) = \sum_{j=1}^{\infty} \pi_j\, p_j(x_1,x_2,x_3)$ respectively.
 We will embed the density $p(x_1,x_2)$ using Gaussian RBF kernel $k((x_1,x_2),(x_1',x_2')) = (2\pi)^{-1} \gamma^{-2} \exp(-\frac{1}{2\gamma^2}\sum_{i=1}^2 (x_i - x_i')^2)$, which results in
 \begin{align*}
-	f(x_1,x_2)
-	&=\inner{\phi(x_1)}{\Ccal_{X_1X_2} \phi(x_2)}	\\
+	&f(x_1,x_2)
+	=\inner{\phi(x_1)}{\Ccal_{X_1X_2} \phi(x_2)}	\\
 	&= \int_{\RR^2} k((x_1,x_2),(x_1',x_2'))\, p(x_1',x_2')\, dx_1'\, dx_2' \\
-	&=
+	&= \sum_{j=1}^{\infty} \frac{\pi_j}{2\pi (\sigma^2 + \gamma^2)} \exp\rbr{-\frac{1}{2(\sigma^2+\gamma^2)} \sum_{i=1}^2 (x_i - j\delta)^2}
 \end{align*}
+The Fourier transformation of $f(x_1,x_2)$ is
+\begin{align*}
+  \sum_{j=1}^{\infty} \pi_j\, \exp(-)
+\end{align*}
+
 
 \section{Kernel Algorithm}
 
