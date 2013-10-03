@@ -384,6 +384,21 @@ Allman et al.~\cite{x} showed that, under mild conditions, a finite mixture of n
 % 	\item $\widetilde{\Tcal} = \Ccal_{123} \times_1 (\widetilde{\Ucal}_1 \widetilde{\Scal}_1^{-1/2})^\top  \times_2 (\widetilde{\Ucal}_2 \widetilde{\Scal}_2^{-1/2})^\top \times_3 (\widetilde{\Ucal}_3 \widetilde{\Scal}_3^{-1/2})^\top$
 % \end{itemize}
 
+{\bf Example 2.} Suppose we have a infinite mixture of three dimensional multivariate spherical Gaussian distributions. The Gaussian components have identical covariance matrix $\Sigma = \diag(\sigma^2,\sigma^2,\sigma^2)$. Furthermore, the components are placed regularly along the diagonal line of the coordinate system. That is the center of the $j$-th component is $\mu^j=(j\delta,j\delta,j\delta)$ with spacing parameter $\delta$:
+\begin{align*}
+  p_j(x_1,x_2) &= (2\pi)^{-1} \sigma^{-2} \exp\rbr{-\frac{1}{2\sigma^2} \sum_{i=1}^2 (x_i - j\delta)^2} \\
+  p_j(x_1,x_2,x_3) &= (2\pi)^{-3/2} \sigma^{-3} \exp\rbr{-\frac{1}{2\sigma^2} \sum_{i=1}^3 (x_i - j\delta)^2}
+\end{align*}
+The the density of this mixture model is $p(x_1,x_2) = \sum_{j=1}^{\infty} \pi_j\, p_j(x_1,x_2)$ and
+$p(x_1,x_2,x_3) = \sum_{j=1}^{\infty} \pi_j\, p_j(x_1,x_2,x_3)$ respectively.
+We will embed the density $p(x_1,x_2)$ using Gaussian RBF kernel $k((x_1,x_2),(x_1',x_2')) = (2\pi)^{-1} \gamma^{-2} \exp(-\frac{1}{2\gamma^2}\sum_{i=1}^2 (x_i - x_i')^2)$, which results in
+\begin{align*}
+	f(x_1,x_2)
+	&=\inner{\phi(x_1)}{\Ccal_{X_1X_2} \phi(x_2)}	\\
+	&= \int_{\RR^2} k((x_1,x_2),(x_1',x_2'))\, p(x_1',x_2')\, dx_1'\, dx_2' \\
+	&=
+\end{align*}
+
 \section{Kernel Algorithm}
 
 Next we will design a kernel algorithm to recover the parameters, $\cbr{\pi_h, \mu_{X|h}}_{h \in [k]}$, of the multi-view latent variable model based on $\Ccal_{X_1 X_2}$ and $\Ccal_{X_1 X_2 X_3}$.
@@ -392,32 +407,32 @@ Next we will design a kernel algorithm to recover the parameters, $\cbr{\pi_h, \
 
 \subsection{Population Case}
 
-We will first derive the algorithm for the population case as if we could access the true operator $\Ccal_{X_1 X_2}$ and $\Ccal_{X_1 X_2 X_3}$. Its finite sample counterpart will be presented in the next section. The algorithm can be thought of as a kernel generalization of the algorithm in~\cite{AnandkumarEtal:community12} using embedding representations. 
+We will first derive the algorithm for the population case as if we could access the true operator $\Ccal_{X_1 X_2}$ and $\Ccal_{X_1 X_2 X_3}$. Its finite sample counterpart will be presented in the next section. The algorithm can be thought of as a kernel generalization of the algorithm in~\cite{AnandkumarEtal:community12} using embedding representations.
 
-{\bf Step 1.} We perform eigen-decomposition of $\Ccal_{X_1 X_2}$, 
+{\bf Step 1.} We perform eigen-decomposition of $\Ccal_{X_1 X_2}$,
 $$\Ccal_{X_1 X_2} = \sum_{i=1}^{\infty} \sigma_i \cdot u_i \otimes u_i$$
-where the eigen-values are ordered in non-decreasing manner. 
-According to the factorization in Eq.~\eq{eq:pair_factorization}, $\Ccal_{X_1 X_2}$ has rank $k$. 
-Let the leading eigenvectors corresponding to the largest $k$ eigen-value be  $\Ucal_k:=(u_1,u_2,\ldots,u_k)$, and the eigen-value matrix be $S_k:=\diag(\sigma_1,\sigma_2,\ldots,\sigma_k)$. We define the whitening operator $\Wcal:= \Ucal_k S_k^{-1/2}$ which satisfies 
+where the eigen-values are ordered in non-decreasing manner.
+According to the factorization in Eq.~\eq{eq:pair_factorization}, $\Ccal_{X_1 X_2}$ has rank $k$.
+Let the leading eigenvectors corresponding to the largest $k$ eigen-value be  $\Ucal_k:=(u_1,u_2,\ldots,u_k)$, and the eigen-value matrix be $S_k:=\diag(\sigma_1,\sigma_2,\ldots,\sigma_k)$. We define the whitening operator $\Wcal:= \Ucal_k S_k^{-1/2}$ which satisfies
 \begin{align*}
-  \Wcal^\top \Ccal_{X_1X_2} \Wcal = (\Wcal^\top \Ccal_{X|H} \Ccal_{HH}^{1/2}) (\Ccal_{HH}^{1/2} \Ccal_{X|H}^\top \Wcal) = I, 
+  \Wcal^\top \Ccal_{X_1X_2} \Wcal = (\Wcal^\top \Ccal_{X|H} \Ccal_{HH}^{1/2}) (\Ccal_{HH}^{1/2} \Ccal_{X|H}^\top \Wcal) = I,
 \end{align*}
-and $M:=\Wcal^\top \Ccal_{X|H} \Ccal_{HH}^{1/2}$ is an orthogonal matrix. 
-    
+and $M:=\Wcal^\top \Ccal_{X|H} \Ccal_{HH}^{1/2}$ is an orthogonal matrix.
+
 {\bf Step 2.} We apply the whiten operator to the 3rd order kernel embedding $\Ccal_{X_1 X_2 X_3}$
 $$
-  \Tcal := \Ccal_{X_1 X_2 X_3} \times_1 (\Wcal^\top) \times_2 (\Wcal^\top) \times_3 (\Wcal^\top). 
+  \Tcal := \Ccal_{X_1 X_2 X_3} \times_1 (\Wcal^\top) \times_2 (\Wcal^\top) \times_3 (\Wcal^\top).
 $$
-According to the factorization in Eq.~\eq{eq:triple_factorization}, 
+According to the factorization in Eq.~\eq{eq:triple_factorization},
 $$
-  \Tcal = \Ccal_{HHH}^{-1/2} \times_1 M \times_2 M \times_3 M, 
+  \Tcal = \Ccal_{HHH}^{-1/2} \times_1 M \times_2 M \times_3 M,
 $$
-which is a tensor with orthogonal factors. Essentially, each column $v_i$ of $M$ is an eigenvector of the tensor $\Tcal$. 
+which is a tensor with orthogonal factors. Essentially, each column $v_i$ of $M$ is an eigenvector of the tensor $\Tcal$.
 
 {\bf Step 3.} We find the tensor eigenvectors $M$ for $\Tcal$ using tensor power method~\cite{AnandkumarEtal:community12}.
 
 {\bf Step 4.} We recover the conditional embedding operator by undoing the whitening step
-$$ 
+$$
   \Ccal_{X|H} = (\mu_{X|h=1},\mu_{X|h=1},\ldots,\mu_{X|h=k}) = (\Wcal)^\dagger M.
 $$
 
@@ -427,16 +442,16 @@ Given $m$ observation $\Dcal_{X_1 X_2 X_3}=\{(x_1^i,x_2^i,x_3^i)\}_{i \in [m]}$ 
 We will denote the implicitly feature matrix by
 \begin{align*}
   \Phi &:= (\phi(x_1^1), \ldots, \phi(x_1^m), \phi(x_2^1),  \ldots, \phi(x_2^m)),  \\
-  \Psi &:= (\phi(x_2^1), \ldots, \phi(x_2^m), \phi(x_1^1),  \ldots, \phi(x_1^m)),  
+  \Psi &:= (\phi(x_2^1), \ldots, \phi(x_2^m), \phi(x_1^1),  \ldots, \phi(x_1^m)),
 \end{align*}
-and the corresponding kernel matrix by $K = \Phi^\top \Phi$ and $L = \Psi^\top \Psi$ respectively. 
-Then the steps in the population case can be mapped one-by-one into kernel operations.   
+and the corresponding kernel matrix by $K = \Phi^\top \Phi$ and $L = \Psi^\top \Psi$ respectively.
+Then the steps in the population case can be mapped one-by-one into kernel operations.
 
 {\bf Step 1.} We will perform a kernel eigenvalue decomposition of the empirical 2nd order embedding
 $$
   \widehat \Ccal_{X_1 X_2}:= \frac{1}{2m} \sum_{i=1}^{m} \rbr{\phi(x_1^i) \otimes \phi(x_2^i) + \phi(x_2^i) \otimes \phi(x_1^i)},
 $$
-which can be expressed succinctly as $\widehat \Ccal_{X_1 X_2} = \frac{1}{2m} \Phi \Psi^\top$. 
+which can be expressed succinctly as $\widehat \Ccal_{X_1 X_2} = \frac{1}{2m} \Phi \Psi^\top$.
 Its leading $k$ eigenvectors $\widehat \Ucal_k = (\widehat u_1,\ldots,\widehat u_k)$ will lie in the span of the column of  $\Phi$,~\ie,~$\widehat \Ucal_k = \Phi (\beta_1,\ldots,\beta_k)$ with $\beta \in \RR^{2m}$. Then we can transform the eigen-value decomposition problem for an infinite dimensional matrix to a problem involving finite dimensional kernel matrices,
 \begin{align*}
 	\widehat \Ccal_{X_1 X_2}\, \widehat \Ccal_{X_1 X_2}^\top\, u = \widehat \sigma^2 \;u
@@ -460,7 +475,7 @@ This step is summarized in Algorithm~\ref{alg:svd}.
     \STATE Cholesky decomposition:\ $K=R^\top R$
     \STATE Eigen-decomposition:\ $\frac{1}{4m^2} R L R^\top \widetilde{\beta} = \widehat \sigma^2\,\widetilde{\beta}$
     \STATE Use $k$ leading eigenvalues:\ $\widehat S_k = \diag(\widehat \sigma_1,\ldots,\widehat \sigma_k)$
-    \STATE Use $k$ leading eigenvectors:\ $(\widetilde{\beta}_1,\ldots,\widetilde{\beta}_k)$ to 
+    \STATE Use $k$ leading eigenvectors:\ $(\widetilde{\beta}_1,\ldots,\widetilde{\beta}_k)$ to
     compute:\ $(\beta_1,\ldots,\beta_k) = R^\dagger (\widetilde{\beta}_1,\ldots,\widetilde{\beta}_k)$
   \end{algorithmic}
   \label{alg:svd}
@@ -471,7 +486,7 @@ This step is summarized in Algorithm~\ref{alg:svd}.
   &\widehat \Ccal_{X_1 X_2 X_3}:= \frac{1}{3m}\sum_{i=1}^{m} (\phi(x_1^i) \otimes \phi(x_2^i) \otimes \phi(x_3^i) \\
   &+ \phi(x_3^i) \otimes \phi(x_1^i) \otimes \phi(x_2^i) + \phi(x_2^i) \otimes \phi(x_3^i) \otimes \phi(x_1^i))
 \end{align*}
-using $\widehat \Wcal:= \widehat \Ucal_k \widehat S_k^{-1/2}$, and obtain 
+using $\widehat \Wcal:= \widehat \Ucal_k \widehat S_k^{-1/2}$, and obtain
 \begin{align*}
   &\widehat \Tcal := \frac{1}{3m}\sum_{i=1}^m (\xi(x_1^i) \otimes \xi(x_2^i) \otimes \xi(x_3^i) \\
   &+ \xi(x_3^i) \otimes \xi(x_1^i) \otimes \xi(x_2^i) + \xi(x_2^i) \otimes \xi(x_3^i) \otimes \xi(x_1^i)),
@@ -496,7 +511,7 @@ Let $\kappa:=\sup_{x \in \Omega} k(x,x)$,   $\| \cdot\|_{}$ be the Hilbert-Schmi
 
 \begin{theorem}[Sample Bounds]\label{thm:samplebound}
 Pick  any $\delta\in (0,1)$. When the number of samples $m$ satisfies
-\beq m >\frac{\rho\kappa^2  \log\frac{\delta}{2}}{\sigma_k(\Ccal_{X_1, X_2})}, 
+\beq m >\frac{\rho\kappa^2  \log\frac{\delta}{2}}{\sigma_k(\Ccal_{X_1, X_2})},
 \quad \rho:= \max\left(\frac{512  }{\sigma^3_k(\Ccal_{X_1, X_2})}, \frac{C' k^2 }{\sigma_k^{3}(\Ccal_{X_1, X_2})},\frac{C^{''} k^{\frac{2}{3}} }{\pi_{\min}^{\frac{1}{3}} }\right),\eeq for some constants $C', C^{''}>0$, and the number of iterations $N$  and  the number of random initialization vectors $L$  (drawn uniformly on the sphere $\mathcal{S}^{k-1}$)  satisfy
 \begin{align*}
 N \geq ...
@@ -523,7 +538,7 @@ and
 T - \sum_{j=1}^k \hat\lambda_j \hat{\phi}_j^{\otimes 3}
 \biggr\| \leq 55\eps_T,
 \] where $\eps_T$ is the tensor perturbation bound
-\[ \eps_T := \|\h{\Tcal} - \Tcal\| \leq 
+\[ \eps_T := \|\h{\Tcal} - \Tcal\| \leq
 \frac{12 \kappa \sqrt{\log\frac{\delta}{2}}}{\sqrt{m} \, \sigma_k^{1.5}(\Ccal_{X_1, X_2})} + \frac{512 \sqrt{2} \kappa^3 \left(\log\frac{\delta}{2}\right)^{1.5}}{m^{1.5} \,\sigma_k^{3}(\Ccal_{X_1, X_2}) \sqrt{\pi}_{\min}}\]
 
 \end{theorem}
@@ -535,39 +550,39 @@ The proof is in Appendix~\ref{app:samplebound}.
 
 {\bf Methods.} We compared our kernel nonparametric algorithm with three alternatives
 \begin{enumerate}[noitemsep,nolistsep]
-  \item The EM algorithm for mixture of Gaussians. The EM algorithm is not guaranteed to find the global solutions each trial. Thus we randomly initialize it $10$ times.  
-  \item The spectral algorithm for mixture of spherical Gaussians~\citep{Hsu13}. The assumption in~\citet{Hsu13} is very restricted: the collection of spherical Gaussian centers need to span a $k$-dimension subpsace. 
-  \item A discretization based spectral algorithm~\citep{Hiroyuki10}. This algorithm used histogram to approximate the joint distribution of the observed variables and then applied spectral algorithms to recover the discretized conditional density. It is well-known that density estimation using histogram is poor even for 3 dimensional data. The error of this algorithm is typically $10$ times larger than alternatives. To make the curves for other methods clearer, we did not plot the performance of \citet{Hiroyuki10} algorithm in the figures. 
+  \item The EM algorithm for mixture of Gaussians. The EM algorithm is not guaranteed to find the global solutions each trial. Thus we randomly initialize it $10$ times.
+  \item The spectral algorithm for mixture of spherical Gaussians~\citep{Hsu13}. The assumption in~\citet{Hsu13} is very restricted: the collection of spherical Gaussian centers need to span a $k$-dimension subpsace.
+  \item A discretization based spectral algorithm~\citep{Hiroyuki10}. This algorithm used histogram to approximate the joint distribution of the observed variables and then applied spectral algorithms to recover the discretized conditional density. It is well-known that density estimation using histogram is poor even for 3 dimensional data. The error of this algorithm is typically $10$ times larger than alternatives. To make the curves for other methods clearer, we did not plot the performance of \citet{Hiroyuki10} algorithm in the figures.
 \end{enumerate}
-% It could be thought as a special case of our method using delta kernel. 
-% It is predictable that their performance is not comparable to others because of the inferior histgram comparing to smooth kernel, 
-Our method has a hyper-parameter, kernel bandwidth, which we selected for each view separately using held-out likelihoods. 
+% It could be thought as a special case of our method using delta kernel.
+% It is predictable that their performance is not comparable to others because of the inferior histgram comparing to smooth kernel,
+Our method has a hyper-parameter, kernel bandwidth, which we selected for each view separately using held-out likelihoods.
 
 {\bf Data.} We generated three-dimensional synthetic data from various mixture models. The variables corresponding to the dimensions are independent given the latent component indicator. More specifically, we explore four settings
 \begin{enumerate}[noitemsep,nolistsep]
-  \item Single-view model with Gaussian conditional density
-  \item Single-view model with Gamma conditional density
-  \item Multi-view model with various Gaussian conditional densities
-  \item Multi-view model with a mix of Gaussian and Gamma conditional densities
+  \item Identical-view with Gaussian conditional densities
+  \item Identical-view with Gamma conditional densities
+  \item Multi-view with different Gaussian conditional densities
+  \item Multi-view with a mix of Gaussian and Gamma conditional densities
 \end{enumerate}
-We chose the skewness parameter of the Gamma distribution to reasonably large. Furthermore, we chose the mean and variance parameters of the Gaussian/Gamma density such that component pair-wise overlap is relatively small according to the fisher ratio $\frac{(\mu_1 - \mu_2)^2}{\sigma_1^2+\sigma_2^2}$.  
+We chose the skewness parameter of the Gamma distribution to reasonably large. Furthermore, we chose the mean and variance parameters of the Gaussian/Gamma density such that component pair-wise overlap is relatively small according to the fisher ratio $\frac{(\mu_1 - \mu_2)^2}{\sigma_1^2+\sigma_2^2}$.
 
-We also varied the number of samples $m$ for observed variables, from $50$ to $10,000$, and 
-experimented with $k=2,3,4$ or $8$ mixture components. The mixture proportion for the $h$-th component is set to be $\pi_h = \frac{2i}{k(k+1)},~\forall h\in[k]$ (unbalanced). It is worth noting that as $k$ becomes larger, it is more difficult to recover parameters. This is because only a small number of data will be generated for the first several clusters. For each $n,k$ with each setting, we randomly generate 10 sets of samples and report the average results. 
+We also varied the number of samples $m$ for observed variables, from $50$ to $10,000$, and
+experimented with $k=2,3,4$ or $8$ mixture components. The mixture proportion for the $h$-th component is set to be $\pi_h = \frac{2i}{k(k+1)},~\forall h\in[k]$ (unbalanced). It is worth noting that as $k$ becomes larger, it is more difficult to recover parameters. This is because only a small number of data will be generated for the first several clusters. For each $n,k$ with each setting, we randomly generate 10 sets of samples and report the average results.
 
-{\bf Error measure.} We measured the performance of algorithms by the 
+{\bf Error measure.} We measured the performance of algorithms by the
 following weighted $\ell_2$ norm difference
 \begin{align*}
   Err:=\sum_{h=1}^{k} \pi_h \, \sqrt{\sum_{i=1}^{m'} (p(x^i|h) - \widehat{p}(x^i|h))^2 }
 \end{align*}
 
-{\bf Result.} The results are plotted in Figure~\ref{}. It is clear that both the nonparametric method and EM converge rapidly with the data increment in all experiments setting. 
+{\bf Result.} The results are plotted in Figure~\ref{}. It is clear that both the nonparametric method and EM converge rapidly with the data increment in all experiments setting.
 
 In mixture of Gaussian setting, the EM algorithm is best because the setting is fully satisfied to its assumption. While the spectral learning algorithm for sphereical Gaussian didn't perform well since the assumption for the method is too restrict. It is reasonable that our nonparametric is a little bit worse than EM algorithm because of the complexity nonparametric form of probability distribution.
 
-In the mixture of Gaussian/Gamma setting, the EM algorithm is good when data is less. However, our nonparametric spectral algorithm provided the best results when sample size is large enough. This phenomena demonstrated the trade-off between model complexity and sample size. 
+In the mixture of Gaussian/Gamma setting, the EM algorithm is good when data is less. However, our nonparametric spectral algorithm provided the best results when sample size is large enough. This phenomena demonstrated the trade-off between model complexity and sample size.
 
-\Note{result description needs refinement. report results case of the 4 experimental setting. Enumerate item by item.} 
+\Note{result description needs refinement. report results case of the 4 experimental setting. Enumerate item by item.}
 
 \bibliographystyle{icml2014}
 \bibliography{../nonparametric_mixture,../bibfile,../experiment/mlv_kernel}
