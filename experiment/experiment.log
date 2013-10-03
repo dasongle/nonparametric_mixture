@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.11)  2 OCT 2013 20:30
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.11)  3 OCT 2013 11:27
 entering extended mode
 **C:/Users/Double/Desktop/nonparametric_mixture/experiment/experiment.tex
 (C:/Users/Double/Desktop/nonparametric_mixture/experiment/experiment.tex
@@ -670,8 +670,120 @@ File: figure/sym_heter_k_8.pdf Graphic file (type pdf)
 Package pdftex.def Info: figure/sym_heter_k_8.pdf used on input line 255.
 (pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
 
+<figure/sp_diff_heter_k_2_view_3.pdf, id=68, 433.62pt x 361.35pt>
+File: figure/sp_diff_heter_k_2_view_3.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_heter_k_2_view_3.pdf>
+Package pdftex.def Info: figure/sp_diff_heter_k_2_view_3.pdf used on input line
+ 266.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+<figure/sp_diff_heter_k_2_view_2.pdf, id=69, 433.62pt x 361.35pt>
+File: figure/sp_diff_heter_k_2_view_2.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_heter_k_2_view_2.pdf>
+Package pdftex.def Info: figure/sp_diff_heter_k_2_view_2.pdf used on input line
+ 269.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+<figure/sp_diff_heter_k_2_view_1.pdf, id=70, 433.62pt x 361.35pt>
+File: figure/sp_diff_heter_k_2_view_1.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_heter_k_2_view_1.pdf>
+Package pdftex.def Info: figure/sp_diff_heter_k_2_view_1.pdf used on input line
+ 272.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+Overfull \hbox (7.98674pt too wide) in paragraph at lines 266--273
+[][] [][] [][] 
+ []
+
+<figure/sp_diff_heter_k_3_view_3.pdf, id=71, 433.62pt x 361.35pt>
+File: figure/sp_diff_heter_k_3_view_3.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_heter_k_3_view_3.pdf>
+Package pdftex.def Info: figure/sp_diff_heter_k_3_view_3.pdf used on input line
+ 280.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+<figure/sp_diff_heter_k_3_view_2.pdf, id=72, 433.62pt x 361.35pt>
+File: figure/sp_diff_heter_k_3_view_2.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_heter_k_3_view_2.pdf>
+Package pdftex.def Info: figure/sp_diff_heter_k_3_view_2.pdf used on input line
+ 283.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+<figure/sp_diff_heter_k_3_view_1.pdf, id=73, 433.62pt x 361.35pt>
+File: figure/sp_diff_heter_k_3_view_1.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_heter_k_3_view_1.pdf>
+Package pdftex.def Info: figure/sp_diff_heter_k_3_view_1.pdf used on input line
+ 286.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+Overfull \hbox (7.98674pt too wide) in paragraph at lines 280--287
+[][] [][] [][] 
+ []
+
+<figure/sp_diff_heter_k_4_view_3.pdf, id=74, 433.62pt x 361.35pt>
+File: figure/sp_diff_heter_k_4_view_3.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_heter_k_4_view_3.pdf>
+Package pdftex.def Info: figure/sp_diff_heter_k_4_view_3.pdf used on input line
+ 293.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+<figure/sp_diff_heter_k_4_view_2.pdf, id=75, 433.62pt x 361.35pt>
+File: figure/sp_diff_heter_k_4_view_2.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_heter_k_4_view_2.pdf>
+Package pdftex.def Info: figure/sp_diff_heter_k_4_view_2.pdf used on input line
+ 296.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+<figure/sp_diff_heter_k_4_view_1.pdf, id=76, 433.62pt x 361.35pt>
+File: figure/sp_diff_heter_k_4_view_1.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_heter_k_4_view_1.pdf>
+Package pdftex.def Info: figure/sp_diff_heter_k_4_view_1.pdf used on input line
+ 299.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+Overfull \hbox (7.98674pt too wide) in paragraph at lines 293--300
+[][] [][] [][] 
+ []
+
+<figure/sp_diff_heter_k_8_view_3.pdf, id=77, 433.62pt x 361.35pt>
+File: figure/sp_diff_heter_k_8_view_3.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_heter_k_8_view_3.pdf>
+Package pdftex.def Info: figure/sp_diff_heter_k_8_view_3.pdf used on input line
+ 306.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+<figure/sp_diff_heter_k_8_view_2.pdf, id=78, 433.62pt x 361.35pt>
+File: figure/sp_diff_heter_k_8_view_2.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_heter_k_8_view_2.pdf>
+Package pdftex.def Info: figure/sp_diff_heter_k_8_view_2.pdf used on input line
+ 309.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+<figure/sp_diff_heter_k_8_view_1.pdf, id=79, 433.62pt x 361.35pt>
+File: figure/sp_diff_heter_k_8_view_1.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_heter_k_8_view_1.pdf>
+Package pdftex.def Info: figure/sp_diff_heter_k_8_view_1.pdf used on input line
+ 312.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+Overfull \hbox (7.98674pt too wide) in paragraph at lines 306--313
+[][] [][] [][] 
+ []
+
 (C:\Users\Double\Desktop\nonparametric_mixture\experiment\experiment.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 263.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 320.
 
 [2 <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/diff_gauss_
 k_2_view_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figur
@@ -709,20 +821,35 @@ ure/diff_heter_k_8_view_1.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/e
 xperiment/figure/sym_heter_k_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixt
 ure/experiment/figure/sym_heter_k_3.pdf> <C:/Users/Double/Desktop/nonparametric
 _mixture/experiment/figure/sym_heter_k_4.pdf> <C:/Users/Double/Desktop/nonparam
-etric_mixture/experiment/figure/sym_heter_k_8.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 263.
+etric_mixture/experiment/figure/sym_heter_k_8.pdf> <C:/Users/Double/Desktop/non
+parametric_mixture/experiment/figure/sp_diff_heter_k_2_view_3.pdf> <C:/Users/Do
+uble/Desktop/nonparametric_mixture/experiment/figure/sp_diff_heter_k_2_view_2.p
+df> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/sp_diff_he
+ter_k_2_view_1.pdf>] [6 <C:/Users/Double/Desktop/nonparametric_mixture/experime
+nt/figure/sp_diff_heter_k_3_view_3.pdf> <C:/Users/Double/Desktop/nonparametric_
+mixture/experiment/figure/sp_diff_heter_k_3_view_2.pdf> <C:/Users/Double/Deskto
+p/nonparametric_mixture/experiment/figure/sp_diff_heter_k_3_view_1.pdf> <C:/Use
+rs/Double/Desktop/nonparametric_mixture/experiment/figure/sp_diff_heter_k_4_vie
+w_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/sp_di
+ff_heter_k_4_view_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experim
+ent/figure/sp_diff_heter_k_4_view_1.pdf> <C:/Users/Double/Desktop/nonparametric
+_mixture/experiment/figure/sp_diff_heter_k_8_view_3.pdf> <C:/Users/Double/Deskt
+op/nonparametric_mixture/experiment/figure/sp_diff_heter_k_8_view_2.pdf> <C:/Us
+ers/Double/Desktop/nonparametric_mixture/experiment/figure/sp_diff_heter_k_8_vi
+ew_1.pdf>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 320.
 
 (C:\Users\Double\Desktop\nonparametric_mixture\experiment\experiment.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 263.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 263.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 320.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 320.
 Package rerunfilecheck Info: File `experiment.out' has not changed.
 (rerunfilecheck)             Checksum: 12BDFB184E02A667E7297379F4D91B05;53.
  ) 
 Here is how much of TeX's memory you used:
- 7164 strings out of 495354
- 103096 string characters out of 3182739
- 192594 words of memory out of 3000000
- 10168 multiletter control sequences out of 15000+200000
+ 7241 strings out of 495354
+ 105550 string characters out of 3182739
+ 196642 words of memory out of 3000000
+ 10216 multiletter control sequences out of 15000+200000
  11550 words of font info for 44 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  29i,7n,35p,1611b,327s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -742,9 +869,9 @@ les (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files
 (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x
 86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x8
 6)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on experiment.pdf (5 pages, 260112 bytes).
+Output written on experiment.pdf (6 pages, 291972 bytes).
 PDF statistics:
- 287 PDF objects out of 1000 (max. 8388607)
- 52 named destinations out of 1000 (max. 500000)
- 169 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 358 PDF objects out of 1000 (max. 8388607)
+ 69 named destinations out of 1000 (max. 500000)
+ 229 words of extra memory for PDF output out of 10000 (max. 10000000)
 
