@@ -115,6 +115,10 @@ In mixture of Gaussian setting, the EM algorithm is best because the setting is 
 
 In the mixture of Gaussian/Gamma setting, the EM algorithm is good when data is less. However, our nonparametric spectral algorithm provided the best results when sample size is large enough. This phenomena demonstrated the trade-off between model complexity and sample size. 
 
+
+%--------------------------------------------------------------------------------------
+
+
 \begin{figure}
 	\subfigure[View 1]{
 		\includegraphics[width=0.32\textwidth]{figure/diff_gauss_k_2_view_3.pdf}
@@ -184,6 +188,87 @@ In the mixture of Gaussian/Gamma setting, the EM algorithm is good when data is 
 	}
 \caption{The empirical results on synthetic dataset with same Gaussian components in eavh view measured by the $l2$-norm between marginal distribution and ground-truth.}
 \end{figure}
+
+
+%-------------------------------------------------------------------------------------
+
+
+
+\begin{figure}
+	\subfigure[View 1]{
+		\includegraphics[width=0.32\textwidth]{figure/sp_diff_gauss_k_2_view_3.pdf}
+	}
+	\subfigure[View 2]{
+		\includegraphics[width=0.32\textwidth]{figure/sp_diff_gauss_k_2_view_2.pdf}
+	}
+	\subfigure[View 3]{
+		\includegraphics[width=0.32\textwidth]{figure/sp_diff_gauss_k_2_view_1.pdf}
+	}
+\caption{The empirical results on synthetic dataset with different 2 Gaussian components in eavh view measured by the weighted sum of $l2$-norm between the component distribution and ground-truth for each view.}
+\end{figure}
+
+
+\begin{figure}
+	\subfigure[View 1]{
+		\includegraphics[width=0.32\textwidth]{figure/sp_diff_gauss_k_3_view_3.pdf}
+	}
+	\subfigure[View 2]{
+		\includegraphics[width=0.32\textwidth]{figure/sp_diff_gauss_k_3_view_2.pdf}
+	}
+	\subfigure[View 3]{
+		\includegraphics[width=0.32\textwidth]{figure/sp_diff_gauss_k_3_view_1.pdf}
+	}
+\caption{The empirical results on synthetic dataset with different 3 Gaussian components in eavh view measured by the $l2$-norm between marginal distribution and ground-truth for each view.}
+\end{figure}
+
+
+\begin{figure}
+	\subfigure[View 1]{
+		\includegraphics[width=0.32\textwidth]{figure/sp_diff_gauss_k_4_view_3.pdf}
+	}
+	\subfigure[View 2]{
+		\includegraphics[width=0.32\textwidth]{figure/sp_diff_gauss_k_4_view_2.pdf}
+	}
+	\subfigure[View 3]{
+		\includegraphics[width=0.32\textwidth]{figure/sp_diff_gauss_k_4_view_1.pdf}
+	}
+\caption{The empirical results on synthetic dataset with different 4 Gaussian components in eavh view measured by the weighted sum of $l2$-norm between the component distribution and ground-truth for each view.}
+\end{figure}
+
+
+\begin{figure}
+	\subfigure[View 1]{
+		\includegraphics[width=0.32\textwidth]{figure/sp_diff_gauss_k_8_view_3.pdf}
+	}
+	\subfigure[View 2]{
+		\includegraphics[width=0.32\textwidth]{figure/sp_diff_gauss_k_8_view_2.pdf}
+	}
+	\subfigure[View 3]{
+		\includegraphics[width=0.32\textwidth]{figure/sp_diff_gauss_k_8_view_1.pdf}
+	}
+\caption{The empirical results on synthetic dataset with different 8 Gaussian components in eavh view measured by the weighted sum of $l2$-norm between the component distribution and ground-truth for each view.}
+\end{figure}
+
+
+
+\begin{figure}
+	\subfigure[2 components]{
+		\includegraphics[width=0.23\textwidth]{figure/sp_sym_gauss_k_2.pdf}
+	}
+	\subfigure[3 components]{
+		\includegraphics[width=0.23\textwidth]{figure/sp_sym_gauss_k_3.pdf}
+	}
+	\subfigure[4 components]{
+		\includegraphics[width=0.23\textwidth]{figure/sp_sym_gauss_k_4.pdf}
+	}
+	\subfigure[8 components]{
+		\includegraphics[width=0.23\textwidth]{figure/sp_sym_gauss_k_8.pdf}
+	}
+\caption{The empirical results on synthetic dataset with same Gaussian components in eavh view measured by the weighted sum of $l2$-norm between the component distribution and ground-truth.}
+\end{figure}
+
+
+%----------------------------------------------------------------------------------
 
 
 \begin{figure}
@@ -258,7 +343,7 @@ In the mixture of Gaussian/Gamma setting, the EM algorithm is good when data is 
 
 
 
-
+%-------------------------------------------------------------------------------------
 
 \begin{figure}
 	\subfigure[View 1]{
@@ -284,7 +369,7 @@ In the mixture of Gaussian/Gamma setting, the EM algorithm is good when data is 
 	\subfigure[View 3]{
 		\includegraphics[width=0.32\textwidth]{figure/sp_diff_heter_k_3_view_1.pdf}
 	}
-\caption{The empirical results on synthetic dataset with different 3 Gaussian/Gamma components in eavh view measured by the $l2$-norm between marginal distribution and ground-truth for each view.}
+\caption{The empirical results on synthetic dataset with different 3 Gaussian/Gamma components in eavh view measured by the weighted sum of $l2$-norm between the component distributionand ground-truth for each view.}
 \end{figure}
 
 \begin{figure}
@@ -300,6 +385,7 @@ In the mixture of Gaussian/Gamma setting, the EM algorithm is good when data is 
 \caption{The empirical results on synthetic dataset with different 4 Gaussian/Gamma components in eavh view measured by the weighted sum of $l2$-norm between the component distribution and ground-truth for each view.}
 \end{figure}
 
+
 \begin{figure}
 	\subfigure[View 1]{
 		\includegraphics[width=0.32\textwidth]{figure/sp_diff_heter_k_8_view_3.pdf}
@@ -311,6 +397,23 @@ In the mixture of Gaussian/Gamma setting, the EM algorithm is good when data is 
 		\includegraphics[width=0.32\textwidth]{figure/sp_diff_heter_k_8_view_1.pdf}
 	}
 \caption{The empirical results on synthetic dataset with different 8 Gaussian/Gamma components in eavh view measured by the weighted sum of $l2$-norm between the component distribution and ground-truth for each view.}
+\end{figure}
+
+
+\begin{figure}
+	subfigure[2 components]{
+		\includegraphics[width=0.23\textwidth]{figure/sp_sym_heter_k_2.pdf}
+	}
+	\subfigure[3 components]{
+		\includegraphics[width=0.23\textwidth]{figure/sp_sym_heter_k_3.pdf}
+	}
+	\subfigure[4 components]{
+		\includegraphics[width=0.23\textwidth]{figure/sp_sym_heter_k_4.pdf}
+	}
+	\subfigure[8 components]{
+		\includegraphics[width=0.23\textwidth]{figure/sp_sym_heter_k_8.pdf}
+	}
+\caption{The empirical results on synthetic dataset with same Gaussian/Gamma components in eavh view measured by the $l2$-norm between marginal distribution and ground-truth.}
 \end{figure}
 
 
