@@ -1,13 +1,13 @@
-\clearpage
-\newpage
+% \clearpage
+% \newpage
 
-\onecolumn
+% \onecolumn
 
-\begin{center}
-{\Large Appendix}
-\end{center}
+% \begin{center}
+% {\Large Appendix}
+% \end{center}
 
-\subsection{Robust Tensor Power Method}
+\section{Robust Tensor Power Method}
 We recap the robust tensor power method for finding the tensor eigen-pairs in Algorithm~\ref{alg:robustpower}, analyzed in detail in~\cite{AnandkumarEtal:community12} and~\cite{AnandkumarEtal:tensor12}.
 The method computes the eigenvectors of a   tensor through deflation, using a set of initialization vectors. Here, we employ random initialization vectors. This can be replaced with better initialization vectors, in certain settings, e.g. in the community model, the neighborhood vectors provide better initialization and lead to stronger guarantees~\cite{AnandkumarEtal:community12}.
 Given the initialization vector, the method then runs a tensor power update, and runs for $N$ iterations to obtain an eigenvector. The successive eigenvectors are obtained via deflation.
