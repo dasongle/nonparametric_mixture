@@ -42,6 +42,7 @@
 \newcommand{\hmu}{\widehat{\mu}}
 \newcommand{\hCcal}{\widehat{\Ccal}}
 \newcommand\tl{\tilde}
+% \newcommand{\bm}{\mathbf}
 \input{../tensor-macros}
 \usepackage{tikz}
 \usetikzlibrary{calc}
@@ -588,6 +589,110 @@ In mixture of Gaussian setting, the EM algorithm is best because the setting is 
 In the mixture of Gaussian/Gamma setting, the EM algorithm is good when data is less. However, our nonparametric spectral algorithm provided the best results when sample size is large enough. This phenomena demonstrated the trade-off between model complexity and sample size.
 
 \Note{result description needs refinement. report results case of the 4 experimental setting. Enumerate item by item.}
+
+%-----------------------------------------------------------------------------------------------------------------------------------------------
+\section{Symmetrization}
+We presented the kernel algorithm to identify the multiview latent variable model under the assume that the conditional distributin for different view should be the same. In this section, we will extend our method to a more generalized setting without such restrication. Without loss of generality, we consider recover the operator $\mu_{X_3|h}$ for conditional distribution $\PP{X_3|h}$. The same strategy could be used for the other two. As we known,
+%
+\begin{eqnarray*}
+\Ccal_{X_1 X_2} &=& \sum_{h \in [k]} \pi_h \mu_{X_1|h}\otimes \mu_{X_2|h}\\
+\Ccal_{X_2 X_3} &=& \sum_{h \in [k]} \pi_h \mu_{X_2|h}\otimes \mu_{X_3|h}\\
+\Ccal_{X_3 X_1} &=& \sum_{h \in [k]} \pi_h \mu_{X_3|h}\otimes \mu_{X_1|h}\\
+\Ccal_{X_1 X_2 X_3} &=& \sum_{h \in [k]} \pi_h \mu_{X_1|h}\otimes \mu_{X_2|h} \otimes \mu_{X_3|h}\\
+\end{eqnarray*}
+%
+
+Assume the conditional distribution for $\{X_1, X_2, X_3\}$ are in the \textit{RKHS} with kernels $\{\mathcal{K, L, G}\}$ respectively, with the feature mapping $\{\phi,\psi, \upsilon\}$.
+
+Given the observations $\mathcal{D}_{X_1X_2X_3}=\{(x_1^i, x_2^i, x_3^i)\}_{i\in[m]}$ drawn \emph{i.i.d.} from the multiview latent variable mode $\mathbb{P}(X_1, X_2, X_3)$, we have the empirical estimation of the second/third-order embedding as
+%
+\begin{eqnarray*}
+\hat\Ccal_{X_1 X_2} = \frac{1}{m} \sum_{i=1}^m \phi(x_1^i)\otimes \psi(x_2^i) = \frac{1}{m}\Phi \Psi^\top\\
+\hat\Ccal_{X_3 X_1} = \frac{1}{m} \sum_{i=1}^m \upsilon(x_1^i)\otimes \phi(x_2^i) = \frac{1}{m}\Upsilon \Phi^\top\\
+\hat\Ccal_{X_2 X_3} = \frac{1}{m} \sum_{i=1}^m \psi(x_1^i)\otimes \upsilon(x_2^i) = \frac{1}{m}\Psi \Upsilon^\top\\
+\hat\Ccal_{X_1 X_2 X_3}= [\bm{I}_n; \Phi, \Psi, \Upsilon] =
+\frac{1}{m}\bm{I}_n \times_1 \Phi \times_2 \Psi \times_3 \Upsilon
+\end{eqnarray*}
+%
+
+Find two arbitrary matrices $\bm{A,B}\in \mathbb{R}^{k \times \infty}$, so that $\bm{A}\hat{\mathcal{C}}_{X_1X_2}\bm{B}^\top$ is invertible. Theoretically, we could randomly select $k$ columns from $\Phi$ and $\Psi$ and set $\bm{A} = \Phi_k^\top, \bm{B} = \Psi_k^\top$. In practial, the first $k$ leading eigenvector directions of respect \emph{RKHS} works better. 
+
+ Then, we have
+%
+\begin{eqnarray*}
+\tilde{\mathcal{C}}_{X_1 X_2} &=& \frac{1}{m}\Phi_k^\top\Phi\Psi^\top\Psi_k = \frac{1}{m}{K}_{nk}^\top{L}_{nk}\\
+\tilde{\mathcal{C}}_{X_3 X_1} &=& \hat{\mathcal{C}}_{X_3X_1}\Phi_k = \frac{1}{m}\Upsilon{K}_{nk}\\
+\tilde{\mathcal{C}}_{X_3 X_2} &=& \hat{\mathcal{C}}_{X_3X_2}\Psi_k = \frac{1}{m}\Upsilon{L}_{nk}\\
+\tilde{\mathcal{C}}_{X_1 X_2 X_3} &=&
+\hat{\mathcal{C}}_{X_1 X_2 X_3}\times_1\Phi_k^\top
+\times_2\Psi_k^\top = \frac{1}{m} \bm{I}_n \times_1
+{K}_{nk}^\top \times_2 {L}_{nk}^\top \times_3
+\Upsilon
+\end{eqnarray*}
+%
+
+Based on these matrices, we could reduce to a single view
+%
+\begin{eqnarray*}
+Pair_3 &=&
+\tilde{\mathcal{C}}_{X_3X_1}(\tilde{\mathcal{C}}_{X_1X_2}^\top)^{-1}\tilde{\mathcal{C}}_{X_3X_2}\\
+&=&\frac{1}{m}\Upsilon{K}_{nk}({L}_{nk}^\top{K}_{nk})^{-1}{L}_{nk}^\top\Upsilon^\top = \frac{1}{m}\Upsilon{H}\Upsilon^\top
+\end{eqnarray*}
+where ${H} = {K}_{nk}(\mathcal{L}_{nk}^\top{K}_{nk})^{-1}{L}_{nk}^\top$.
+
+Assume the leading $k$ eigenvectors $\nu_k$ lie in the span of the column of $\Phi$, i.e., $\nu_k = \Upsilon \beta_k$ where $\beta_k\in \mathbb{R}^{m\times 1}$
+%
+\begin{eqnarray*}
+Pair_3\nu = \lambda \nu &\Rightarrow& (Pair_3)^\top Pair_3\nu = \lambda^2 \nu \\
+&\Rightarrow&
+\frac{1}{m^2} \Upsilon{H}^\top\Upsilon^\top\Upsilon{H}\Upsilon^\top\nu
+= \lambda^2\nu \\
+&\Rightarrow&
+\frac{1}{m^2}\Upsilon{H^\top GHG}\bm{\beta} =
+\lambda^2 \Upsilon\bm{\beta} \\
+&\Rightarrow& \frac{1}{m^2}{GH^\top GHG}\beta
+= \lambda^2{G}\beta
+\end{eqnarray*}
+%
+Then, we symmetrize and whiten the third-order embedding
+%
+\begin{eqnarray}
+Triple_3 = \frac{1}{m}\tilde{\mathcal{C}}_{X_1X_2X_3} \times_1
+[\tilde{\mathcal{C}}_{X_3X_2}\tilde{\mathcal{C}}_{X_1X_2}^{-1}]
+\times_2
+[\tilde{\mathcal{C}}_{X_3X_1}\tilde{\mathcal{C}}_{X_2X_1}^{-1}]
+\end{eqnarray}
+%
+Plug
+$\tilde{\mathcal{C}}_{X_3X_2}\tilde{\mathcal{C}}_{X_1X_2}^{-1} =
+\Upsilon{L}_{nk}({K}_{nk}^\top{L}_{nk})^{-1}$
+and
+$\tilde{\mathcal{C}}_{X_3X_1}\tilde{\mathcal{C}}_{X_2X_1}^{-1} =
+\Upsilon{K}_{nk}({L}_{nk}^\top{K}_{nk})^{-1}$,
+we have
+
+\begin{eqnarray*}
+Triple_3  = \frac{1}{m}\bm{I}_n \times_1
+\Upsilon{L}_{nk}({K}_{nk}^\top
+{L}_{nk})^{-1}{K}_{nk}^\top\\ \times_2
+\Upsilon{K}_{nk}({L}_{nk}^\top
+{K}_{nk})^{-1}{L}_{nk}^\top \times_3 \Upsilon
+\end{eqnarray*}
+
+We multiply each mode with $\Upsilon \beta \hat{S}_k^{-\frac{1}{2}}$ to
+whitening the data and apply power method to decompose it
+%
+\begin{eqnarray*}
+\hat{\mathcal{T}} &=& Triple_3 \times_1 \hat{S}_k^{-\frac{1}{2}}\beta^\top\Upsilon^\top \times_2
+\hat{S}_k^{-\frac{1}{2}}\beta^\top\Upsilon^\top \times_3 \hat{S}_k^{-\frac{1}{2}}\beta^\top\Upsilon^\top\\
+&=& \frac{1}{m}\bm{I}_n \times_1
+\hat{S}_k^{-\frac{1}{2}}\beta^\top{G}\mathcal{L}_{nk}({K}_{nk}^\top
+{L}_{nk})^{-1}{K}_{nk}^\top \times_2\\
+&&\hat{S}_k^{-\frac{1}{2}}\beta^\top{G}{K}_{nk}({L}_{nk}^\top
+{K}_{nk})^{-1}{L}_{nk}^\top \times_3
+\hat{S}_k^{-\frac{1}{2}}\beta^\top{G}
+\end{eqnarray*}
+%
 
 \bibliographystyle{icml2014}
 \bibliography{../nonparametric_mixture,../bibfile,../experiment/mlv_kernel}
