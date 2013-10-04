@@ -1,13 +1,4 @@
-\clearpage
-\newpage
-
-\onecolumn
-
-\begin{center}
-{\Large Appendix}
-\end{center}
-
-\subsection{Robust Tensor Power Method}
+\section{Robust Tensor Power Method}
 We recap the robust tensor power method for finding the tensor eigen-pairs in Algorithm~\ref{alg:robustpower}, analyzed in detail in~\cite{AnandkumarEtal:community12} and~\cite{AnandkumarEtal:tensor12}.
 The method computes the eigenvectors of a   tensor through deflation, using a set of initialization vectors. Here, we employ random initialization vectors. This can be replaced with better initialization vectors, in certain settings, e.g. in the community model, the neighborhood vectors provide better initialization and lead to stronger guarantees~\cite{AnandkumarEtal:community12}.
 Given the initialization vector, the method then runs a tensor power update, and runs for $N$ iterations to obtain an eigenvector. The successive eigenvectors are obtained via deflation.
@@ -207,13 +198,13 @@ first note that
 We obtain a condition on the above perturbation $\epsilon_T$ in \eqref{eqn:epsilonT} by applying Theorem~\ref{thm:robustpower} as
 $ \epsilon_T\leq C_1\lambda_{\min} R_0^2$. Here, we have $\lambda_{i} = 1/\sqrt{\pi_{i}}\geq 1$. For random initialization, we have that $R_0 \sim 1/\sqrt{k}$, with probability $1-\delta$ using $\poly(k) \poly(1/\delta)$ trials, see Thm. 5.1 in~\cite{AnandkumarEtal:tensor12}. Thus, we require that $ \epsilon_T  \leq \frac{C_1}{k}$. Summarizing, we require for the following conditions to hold
 \beq\epsilon_{pairs}\leq 0.5 \sigma_k(\Ccal_{X_1 X_2}), \quad \epsilon_T  \leq \frac{C_1}{k}.\eeq
-We now substitute for $\epsilon_{pairs}$ and $\epsilon_{triples}$ in \eqref{eqn:epsilonT} using Lemma~\ref{lemma:pairs} and Lemma~\ref{lemma:triples}. 
+We now substitute for $\epsilon_{pairs}$ and $\epsilon_{triples}$ in \eqref{eqn:epsilonT} using Lemma~\ref{lemma:pairs} and Lemma~\ref{lemma:triples}.
 
 %First consider the case when   $H$ is exactly a $k$-way categorical variable.
 
-%\paragraph{Case of $k$-component mixture: }Here, $E_{X_1, X_2}=0$ and $E_{X_1,X_2,X_3}=0$ in \eqref{eqn:pairsexpression} and \eqref{eqn:triplesexpression}. 
+%\paragraph{Case of $k$-component mixture: }Here, $E_{X_1, X_2}=0$ and $E_{X_1,X_2,X_3}=0$ in \eqref{eqn:pairsexpression} and \eqref{eqn:triplesexpression}.
 
-From Lemma~\ref{lemma:pairs}, we have that 
+From Lemma~\ref{lemma:pairs}, we have that
 \[ \epsilon_{pairs}  \leqslant \frac{2\sqrt{2}\rho \sqrt{\log\frac{\delta}{2}}}{\sqrt{m}}, \]with probability $1-\delta$. It is required that $\epsilon_{pairs} < 0.5 \sigma_k(\Ccal_{X_1, X_2})$, which yields that \beq\label{eqn:cond1} m > \frac{32 \rho^2 \log\frac{\delta}{2}}{\sigma^2_k(\Ccal_{X_1, X_2})}.\eeq
 Further we require that $\epsilon_T \leq C_1/k$, which implies that each of the terms in \eqref{eqn:epsilonT} is less than $C/k$, for some constant $C$. Thus, we have
 \[ \frac{2\sqrt{2} \epsilon_{triples}}{\sigma_k^{1.5}(\Ccal_{X_1, X_2})} < \frac{C}{k}\quad\Rightarrow\quad m > \frac{C_3 k^2 \rho^2 \log \frac{\delta}{2}}{\sigma_k^{3}(\Ccal_{X_1, X_2})},\]
@@ -222,12 +213,12 @@ for some constant $C_3$ with probability $1-\delta$ from Lemma~\ref{lemma:triple
 \[  m > \frac{C_4 k^{\frac{2}{3}} \rho^2 \log\frac{\delta}{2}\iffalse (1+\sigma_{k+1}(\Ccal_{X_1, X_2}))^2\fi}{\pi_{\min}^{\frac{1}{3}} \sigma^2_k(\Ccal_{X_1, X_2})}, \]for some other constant $C_4$ with probability $1-\delta$. \iffalse Additionally, we also require
 \[ (1+\sigma_{k+1}(\Ccal_{X_1, X_2}))\sigma_{k+1}(\Ccal_{X_1, X_2})\leq \frac{C_5 \pi_{\min}^{1/6} \sigma_k(\Ccal_{X_1, X_2})}{k^{1/3}}.\]\fi
  Thus, we have the result in Theorem~\ref{thm:samplebound}.
- 
+
 
 \eprfof
 
 \subsubsection{Concentration bounds for Empirical Operators}
- 
+
 Concentration results for the singular value decomposition of empirical operators.
 
 \begin{lemma}[Concentration bounds for pairs]\label{lemma:pairs} Let $\rho:=\sup_{x \in \Omega} k(x,x)$, and $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, we have for \beq \epsilon_{pairs}:=\nbr{\Ccal_{X_1 X_2} - \widehat \Ccal_{X_1 X_2}}_{},\label{eqn:deltapairs} \eeq
