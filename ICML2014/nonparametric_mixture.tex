@@ -81,8 +81,8 @@
 ]
 
 \begin{abstract}
-		Spectral methods have greatly advanced the estimation of latent variable models, generating a sequence of novel and efficient algorithms with strong theoretical guarantees. However, current spectral algorithms are largely restricted to mixture of discrete or Gaussian distributions. In this paper, we propose a kernel method for estimating the parameters of multi-view latent variable models, allowing each mixture component to be nonparametric.
-		The key idea of the method is to embed the joint distribution of a multi-view latent variable into a reproducing kernel Hilbert space, and then the latent parameters are recovered using a robust tensor power method. Furthermore, we provide  sample complexity guarantees for the proposed method and it is a low order polynomial in the number of latent components. Thus, we propose a computational and a sample efficient non-parametric estimation method for latent variable models. Moreover, the tensor power method compares favorably to EM algorithm and other existing spectral algorithms in our experiments.
+		Spectral methods have greatly advanced the estimation of latent variable models, generating a sequence of novel and efficient algorithms with strong theoretical guarantees. However, current spectral algorithms are largely restricted to mixtures of discrete or Gaussian distributions. In this paper, we propose a kernel method for learning multi-view latent variable models, allowing each mixture component to be nonparametric.
+		The key idea of the method is to embed the joint distribution of a multi-view latent variable into a reproducing kernel Hilbert space, and then the latent parameters are recovered using a robust tensor power method. We establish that the  sample complexity for the proposed method  is quadratic in the number of latent components and is a low order polynomial in the other relevant parameters. Thus,  our non-parametric tensor approach to learning latent variable models enjoys good sample and computational efficiencies. Moreover, the non-parametric tensor power method compares favorably to EM algorithm and other existing spectral algorithms in our experiments.
 \end{abstract}
 
 \section{Introduction} \label{sec:intro}
@@ -99,28 +99,24 @@
 Latent variable models have been used to address various machine learning
 problems, ranging from modeling temporal dynamics, to text document analysis and to social network analysis~\citep{RabJua86,Clark90,HofRafHan02,BleNgJor03}.
 Recently, there is a surge of interest in designing spectral algorithms for estimating the parameters of latent variable models~\citep{HsuKakZha09,ParSonXin11,SonParXin11,FosRodUng12,more on parameter estimation}. Compared to the Expectation-Maximization (EM) algorithm \citep{DemLaiRub77} traditionally used for this task, spectral algorithms are better in terms of their computational efficiency and provable guarantees.
+Current spectral algorithms are largely restricted to mixture
+of discrete or Gaussian distributions, e.g.~\citep{AnandkumarEtal:tensor12,Hsu13}. When the mixture components are distributions other than these standard distributions, the theoretical guarantees for these algorithms are no longer applicable, and the performance of these algorithms can be very poor in experiments.
 
-However, current spectral algorithms are largely restricted to mixture
-of discrete or Gaussian distributions. When the mixture components are distributions other than these standard distributions, the theoretical guarantees for these algorithms no longer applies, and the performance of these algorithms can be very poor in experiments. However, a general framework for nonparametric estimation of latent variable models does not currently exist.
+In this paper, we propose a kernel method for estimating the parameters of multi-view latent variable models where the mixture components can be nonparametric. The key idea  is to embed the joint distribution of such a model into a reproducing kernel Hilbert space, and exploit the low rank structure of the embedded distribution (or covariance operators). The key computation   involves a kernel singular value decomposition of the two-view covariance operator, followed by a robust tensor power method on the three-view covariance operator. These standard linear algebra operations makes the algorithm very efficient and easy to deploy.
 
-In this paper, we propose a kernel method for estimating the parameters of multi-view latent variable models where the mixture components can be nonparametric. The key idea of the method is to embed the joint distribution of such a model into a reproducing kernel Hilbert space, and make use of the low rank structure of the embedded distribution (or covariance operators) to design the algorithm. The key computation of the algorithm involves a kernel singular value decomposition of the two-view covariance operator, followed by a tensor power method on the three-view covariance operator. These standard linear algebra operations makes the algorithm very efficient and easy to code.
+The kernel algorithm proposed in this paper is more general than the previous spectral algorithms which work only for distributions with parametric assumptions~\citep{AnandkumarEtal:tensor12,Hsu13}. When we use delta kernel, our algorithm reduces to the spectral algorithm for discrete mixture components analyzed in~\citep{AnandkumarEtal:tensor12}. When we use universal kernels, such as Gaussian RBF kernel, our algorithm can recover Gaussian mixture components as well as mixture components with other distributions. In this sense, our work  also provides a unifying framework for previous spectral algorithms. We prove sample complexity bounds for the non-parametric tensor power method and establish  that the sample complexity is quadratic in  the number of latent components, and is a low order polynomial in the other relevant parameters such as the lower bound on mixing weights. Thus, we propose a computational and a sample efficient non-parametric approach to learning latent variable models.
 
-The kernel algorithm proposed in this paper is more general than previous spectral algorithms which work only for distributions with very specific assumption. When we use delta kernel, our algorithm recovers the spectral algorithm for discrete mixture components. When we use universal kernels, such as Gaussian RBF kernel, our algorithm can recover Gaussian mixture components as well as mixture components with other distributions. In a sense, our work also provides a unifying framework for previous spectral algorithms. We prove sample complexity bounds for the non-parametric tensor power method and establish  that the sample complexity is a low order polynomial in  the number of latent components. Thus, we propose a computational and a sample efficient non-parametric approach to learning latent variable models.
+ Kernel methods have  been previously applied to learning latent variable models. However, none of the previous works explicitly recovers the actual parameters of the models~\cite{xxx}. Most of them estimate an (unknown) invertible  transformation of the latent parameters, and it is not clear how one can recover the actual parameters based on these estimates. Furthermore, these works focused on predictive task: recover the marginal distribution of the observed variables by making use of the low rank structure of the latent variable models. It is significantly more challenging to design kernel algorithms for actual parameter recovery and analyze theoretical properties of these algorithms.
 
-\aacomment{we should mention that previous methods also use simultaneous diagonalization techniques which is unstable}
-Previously, kernel methods have also been applied to learning latent variable models. However, none of the previous work explicitly recovers the actual parameters of the models~\cite{xxx}. Most of them estimate an (unknown) invertible  transformation of the latent parameters, and it is not clear how one can recover the actual parameters based on these estimates. Furthermore, these works focused on predictive task: recover the marginal distribution of the observed variables by making use of the low rank structure of the latent variable models. It is significantly more challenging to design kernel algorithms for actual parameter recovery and analyze theoretical properties of these algorithms.
-
-Last we will experimentally compare our kernel algorithm to the EM algorithm and previous spectral algorithms. We show that when the model assumptions are correct for the EM algorithm and previous spectral algorithms, our algorithm converges in terms of estimation error to these competitors. In the opposite cases when the model assumptions are incorrect, our algorithm is able to adapt to the nonparametric mixture components and beating alternatives by a very large margin.
-
-\aacomment{where is the related work? At some place we should mention that UAI paper and other works}
-
+We  experimentally compare our kernel algorithm to the EM algorithm and previous spectral algorithms. We show that when the model assumptions are correct for the EM algorithm and previous spectral algorithms, our algorithm converges in terms of estimation error to these competitors. In the opposite cases when the model assumptions are incorrect, our algorithm is able to adapt to the nonparametric mixture components and beating alternatives by a very large margin.
+ 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Notation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We will denote by $X$ a random variable with domain $\Xcal$,
+We  denote by $X$ a random variable with domain $\Xcal$,
 and refer to instantiations of $X$ by the lower case character, $x$.
-We endow $\Xcal$ with some $\sigma$-algebra $\Ascr$ and denote a distributions (with respect to $\Ascr$) on $\Xcal$ by $\PP(X)$. We will also deal with multiple random variables, $X_1, X_2, \ldots, X_{\ell}$, with joint distribution $\PP(X_1,X_2,\ldots,X_{\ell})$. For simplicity of notation, we assume that the domains of all $X_t, t \in [\ell]$ are the same, but the methodology applies to the cases where they have different domains. Furthermore, we denote by $H$ a hidden variables with domain $\Hcal$ and distribution $\PP(H)$.
+We endow $\Xcal$ with some $\sigma$-algebra $\Ascr$ and denote a distributions (with respect to $\Ascr$) on $\Xcal$ by $\PP(X)$. We  also deal with multiple random variables, $X_1, X_2, \ldots, X_{\ell}$, with joint distribution $\PP(X_1,X_2,\ldots,X_{\ell})$. For simplicity of notation, we assume that the domains of all $X_t, t \in [\ell]$ are the same, but the methodology applies to the cases where they have different domains. Furthermore, we denote by $H$ a hidden variables with domain $\Hcal$ and distribution $\PP(H)$.
 
 A \emph{reproducing kernel Hilbert space (RKHS)} $\Fcal$ on $\Xcal$ with a kernel $k(x,x')$ is a Hilbert space of
 functions $f(\cdot):\Xcal \mapsto \RR$ with inner product $\inner{\cdot}{\cdot}_{\Fcal}$. Its element $k(x,\cdot)$ satisfies the reproducing property:
@@ -136,7 +132,7 @@ objects \, \cite{SchTsuVer04}. Thus the methodology presented below can readily 
 % j) = r_j$ for all $j \in [k]$.
 %
 % We denote by $X$ a random variable with domain $\Xcal$ and distribution $P(X)$, and refer to instantiations of $X$ by the lower case character, $x$.
-% We will focus on continuous domains, and denote the corresponding density by $p(X)$. We will also deal with multiple random variables, $X_1, X_2, \ldots, X_{\ell}$, with joint distribution $P(X_1,X_2,\ldots,X_{\ell})$. For simplicity of notation, we assume that the domain of all $X_t, t \in [\ell]$ also be $\Xcal$, but the methodology applies to the cases where they have different domains. Furthermore, we let $H \in [k]$ be a discrete random variable with $P(H =
+% We  focus on continuous domains, and denote the corresponding density by $p(X)$. We  also deal with multiple random variables, $X_1, X_2, \ldots, X_{\ell}$, with joint distribution $P(X_1,X_2,\ldots,X_{\ell})$. For simplicity of notation, we assume that the domain of all $X_t, t \in [\ell]$ also be $\Xcal$, but the methodology applies to the cases where they have different domains. Furthermore, we let $H \in [k]$ be a discrete random variable with $P(H =
 % j) = r_j$ for all $j \in [k]$.
 
 
@@ -165,7 +161,7 @@ $
 $
 By analogy, we can also define $\Ccal_{X_1X_2X_3} := \EE_{X_1X_2X_3}[\phi(X_1)\otimes\phi(X_2)\otimes \phi(X_3)]$.
 
-Kernel embedding of distributions has rich representational power. The mapping is injective for characteristic kernels~\cite{SriGreFukLanetal08}. That is, if two distributions, $\PP(X)$ and $\QQ(X)$, are different, they will be mapped to two distinct points in the RKHS. For domain $\RR^d$, many commonly used kernels are characteristic, such as the Gaussian RBF kernel and Laplace kernel.
+Kernel embedding of distributions has rich representational power. The mapping is injective for characteristic kernels~\cite{SriGreFukLanetal08}. That is, if two distributions, $\PP(X)$ and $\QQ(X)$, are different, they are be mapped to two distinct points in the RKHS. For domain $\RR^d$, many commonly used kernels are characteristic, such as the Gaussian RBF kernel and Laplace kernel.
 This injective property of kernel embeddings has been exploited to design  state-of-the-art two-sample tests~\cite{GreBorRasSchetal12} and  independence tests~\cite{GreFukTeoSonetal08}.
 
 \subsection{Kernel Embedding as Multi-Linear Operator}
@@ -289,13 +285,13 @@ The conditional independent structure of a multi-view latent variable model is i
 
 \subsection{Conditional Embedding Operator}
 
-For simplicity of exposition, we will focus on a simple model with three observed variables, \ie, $\ell=3$, and furthermore the conditional distributions, $\PP(X_t|H)$, are the same (or {\em exchangeable}) for $t \in [3]$. Our analysis can be easily extended to the general multi-view setting using a symmetrization techniques (see section~X for details).
+For simplicity of exposition, we  focus on a simple model with three observed variables, \ie, $\ell=3$, and furthermore the conditional distributions, $\PP(X_t|H)$, are the same (or {\em exchangeable}) for $t \in [3]$. Our analysis can be easily extended to the general multi-view setting using a symmetrization techniques (see section~X for details).
 
 Suppose $H\in[k]$, then we can embed each conditional distribution $\PP(X_t|h)$ corresponding to a particular value of $H=h$ into the RKHS as
 \begin{align}
   \mu_{X_t|h} = \int_{\Xcal} \phi(x_t)\, \PP(dx_t | h).
 \end{align}
-If we vary the value of $H$, we will obtain the kernel embedding for different $\PP(X_t|h)$. Conceptually, we can collect these embeddings into a matrix (with potentially infinite number of rows)
+If we vary the value of $H$, we  obtain the kernel embedding for different $\PP(X_t|h)$. Conceptually, we can collect these embeddings into a matrix (with potentially infinite number of rows)
 \begin{align}
   \Ccal_{X_t|H} = \rbr{\mu_{X_t|h=1},\mu_{X_t|h=2},\ldots,\mu_{X_t|h=k}},
 \end{align}
@@ -391,7 +387,7 @@ Allman et al.~\cite{x} showed that, under mild conditions, a finite mixture of n
 We require that the conditional probability table $\{P(X|h)\}_{h\in [k]}$ to  have full column rank for identifiability in this case.
 
 
-{\bf Example 2.} Suppose we have a $k$-component mixture of one dimensional  spherical Gaussian distributions. The Gaussian components have identical covariance  $\sigma^2$, but their mean values are distinct. Note that this model is not identifiable under the framework of~\cite{hsu2013learning} since the mean values are just scalars and therefore, rank deficient. However, if we embed the density functions using universal kernels such as Gaussian RBF kernel, it can be shown that the mixture model becomes identifiable. Thus, the non-parametric framework allows us to incorporate a wider range of latent variable  models.
+{\bf Example 2.} Suppose we have a $k$-component mixture of one dimensional  spherical Gaussian distributions. The Gaussian components have identical covariance  $\sigma^2$, but their mean values are distinct. Note that this model is not identifiable under the framework of~\cite{Hsu13} since the mean values are just scalars and therefore, rank deficient. However, if we embed the density functions using universal kernels such as Gaussian RBF kernel, it can be shown that the mixture model becomes identifiable. Thus, the non-parametric framework allows us to incorporate a wider range of latent variable  models.
  
 
 
@@ -403,20 +399,16 @@ We require that the conditional probability table $\{P(X|h)\}_{h\in [k]}$ to  ha
 %\end{align*}
 %The mixture model is $p(x_1,x_2) = \sum_{j=1}^{\infty} r_j\, p_j(x_1,x_2)$ and
 %$p(x_1,x_2,x_3) = \sum_{j=1}^{\infty} r_j\, p_j(x_1,x_2,x_3)$ respectively, with $\sum_{j=1}^{\infty} r_j = 1$. Note that the above Gaussian mixture 
-%We will embed the density $p(x_1,x_2)$ using Gaussian RBF kernel $k(x_1,x_1')k(x_2,x_2') = \prod_{i=1}^2 \frac{1}{\sqrt{2\pi}\gamma}\exp(-\frac{1}{2\gamma^2}(x_i - x_i')^2)$.
-%\aacomment{need to mention how this is identifiable.We can limit to finite mixture}
-
-Finally, we remark that the identifiability result in Proposition~\ref{prop:identifiability} can be extended to cases where the conditional distributions do not satisfy linear independence, i.e. they are overcomplete, e.g.~\cite{Kruskal:77,DeLathauwerEtal:FOOBI,AnandkumarEtal:overcomplete13}. However, in general, it is not not tractable to learn such overcomplete models and we do not consider them here.
+%We  embed the density $p(x_1,x_2)$ using Gaussian RBF kernel $k(x_1,x_1')k(x_2,x_2') = \prod_{i=1}^2 \frac{1}{\sqrt{2\pi}\gamma}\exp(-\frac{1}{2\gamma^2}(x_i - x_i')^2)$.
+ 
+Finally, we remark that the identifiability result in Proposition~\ref{prop:identifiability} can be extended to cases where the conditional distributions do not satisfy linear independence, i.e. they are overcomplete, e.g.~\cite{Kruskal:77,DeLathauwerEtal:FOOBI,AnandkumarEtal:overcomplete13}. However, in general, it is not tractable to learn such overcomplete models and we do not consider them here.
 
 \section{Kernel Algorithm}
 
-Next we will design a kernel algorithm to recover the parameters, $\cbr{\pi_h, \mu_{X|h}}_{h \in [k]}$, of the multi-view latent variable model based on $\Ccal_{X_1 X_2}$ and $\Ccal_{X_1 X_2 X_3}$.
-
-\Note{say something about how direct the replacement is.}
-
+We first design a kernel algorithm to recover the parameters, $\cbr{\pi_h, \mu_{X|h}}_{h \in [k]}$, of the multi-view latent variable model based on $\Ccal_{X_1 X_2}$ and $\Ccal_{X_1 X_2 X_3}$. This can be easily extended to the sample versions and this is discussed in Section~\ref{sec:sample}.
 \subsection{Population Case}
 
-We will first derive the algorithm for the population case as if we could access the true operator $\Ccal_{X_1 X_2}$ and $\Ccal_{X_1 X_2 X_3}$. Its finite sample counterpart will be presented in the next section. The algorithm can be thought of as a kernel generalization of the algorithm in~\cite{AnandkumarEtal:community12} using embedding representations.
+We  first derive the algorithm for the population case as if we could access the true operator $\Ccal_{X_1 X_2}$ and $\Ccal_{X_1 X_2 X_3}$. Its finite sample counterpart  will be presented in the next section. The algorithm can be thought of as a kernel generalization of the algorithm in~\cite{AnandkumarEtal:community12} using embedding representations.
 
 {\bf Step 1.} We perform eigen-decomposition of $\Ccal_{X_1 X_2}$,
 $$\Ccal_{X_1 X_2} = \sum_{i=1}^{\infty} \sigma_i \cdot u_i \otimes u_i$$
@@ -445,10 +437,10 @@ $$
   \Ccal_{X|H} = (\mu_{X|h=1},\mu_{X|h=1},\ldots,\mu_{X|h=k}) = (\Wcal)^\dagger M.
 $$
 
-\subsection{Finite Sample Case}
+\subsection{Finite Sample Case}\label{sec:sample}
 
 Given $m$ observation $\Dcal_{X_1 X_2 X_3}=\{(x_1^i,x_2^i,x_3^i)\}_{i \in [m]}$ drawn~\iid~from a multi-view latent variable model $\PP(X_1,X_2,X_3)$, we now design a kernel algorithm to estimate the latent parameters from data. Although the empirical kernel embeddings can be infinite dimensional, we can carry out the decomposition using just the kernel matrices.
-We will denote the implicitly feature matrix by
+We  denote the implicitly feature matrix by
 \begin{align*}
   \Phi &:= (\phi(x_1^1), \ldots, \phi(x_1^m), \phi(x_2^1),  \ldots, \phi(x_2^m)),  \\
   \Psi &:= (\phi(x_2^1), \ldots, \phi(x_2^m), \phi(x_1^1),  \ldots, \phi(x_1^m)),
@@ -456,12 +448,12 @@ We will denote the implicitly feature matrix by
 and the corresponding kernel matrix by $K = \Phi^\top \Phi$ and $L = \Psi^\top \Psi$ respectively.
 Then the steps in the population case can be mapped one-by-one into kernel operations.
 
-{\bf Step 1.} We will perform a kernel eigenvalue decomposition of the empirical 2nd order embedding
+{\bf Step 1.} We  perform a kernel eigenvalue decomposition of the empirical 2nd order embedding
 $$
   \widehat \Ccal_{X_1 X_2}:= \frac{1}{2m} \sum_{i=1}^{m} \rbr{\phi(x_1^i) \otimes \phi(x_2^i) + \phi(x_2^i) \otimes \phi(x_1^i)},
 $$
 which can be expressed succinctly as $\widehat \Ccal_{X_1 X_2} = \frac{1}{2m} \Phi \Psi^\top$.
-Its leading $k$ eigenvectors $\widehat \Ucal_k = (\widehat u_1,\ldots,\widehat u_k)$ will lie in the span of the column of  $\Phi$,~\ie,~$\widehat \Ucal_k = \Phi (\beta_1,\ldots,\beta_k)$ with $\beta \in \RR^{2m}$. Then we can transform the eigen-value decomposition problem for an infinite dimensional matrix to a problem involving finite dimensional kernel matrices,
+Its leading $k$ eigenvectors $\widehat \Ucal_k = (\widehat u_1,\ldots,\widehat u_k)$  lie in the span of the column of  $\Phi$,~\ie,~$\widehat \Ucal_k = \Phi (\beta_1,\ldots,\beta_k)$ with $\beta \in \RR^{2m}$. Then we can transform the eigen-value decomposition problem for an infinite dimensional matrix to a problem involving finite dimensional kernel matrices,
 \begin{align*}
 	\widehat \Ccal_{X_1 X_2}\, \widehat \Ccal_{X_1 X_2}^\top\, u = \widehat \sigma^2 \;u
 	&~\Rightarrow~
@@ -554,7 +546,7 @@ T - \sum_{j=1}^k \hat\lambda_j \hat{\phi}_j^{\otimes 3}
 Thus, the above result provides bounds on the estimated eigen-pairs using the robust tensor power method.
 The proof is in Appendix~\ref{app:samplebound}.
 
-\paragraph{Remarks: }We note that the sample complexity is  $\poly(k, \rho, 1/\pi_{\min}, 1/\sigma_k(\Ccal_{X_1, X_2}))$ of a low order. For the special case of discrete measurements, where the kernel $k(x,x')=\delta(x,x')$, we have $\rho=1$. Note that the sample complexity depends here only on the number of components $k$ and not on the dimensionality of the observed state space.  Similarly in many other cases, the parameter $\rho$ is bounded. \aacomment{will this hold for example 2 as well?} Thus, the robust tensor method has efficient sample and computational complexity for non-parametric latent variable estimation.
+\paragraph{Remarks: }We note that the sample complexity is  $\poly(k, \rho, 1/\pi_{\min}, 1/\sigma_k(\Ccal_{X_1, X_2}))$ of a low order, and in particular,  it is $O(k^2)$, when the other parameters are fixed. For the special case of discrete measurements, where the kernel $k(x,x')=\delta(x,x')$, we have $\rho=1$. Note that the sample complexity depends in this case only on the number of components $k$ and not on the dimensionality of the observed state space.   Thus, the robust tensor method has efficient sample and computational complexities for non-parametric latent variable estimation.
 
 \section{Experiments}
 
@@ -640,7 +632,7 @@ We also plotted the actual recovered conditional density in Figure~\ref{fig:shap
 
 %%-----------------------------------------------------------------------------------------------------------------------------------------------
 %\section{Symmetrization}
-%We presented the kernel algorithm to identify the multiview latent variable model under the assume that the conditional distributin for different view should be the same. In this section, we will extend our method to a more generalized setting without such restrication. Without loss of generality, we consider recover the operator $\mu_{X_3|h}$ for conditional distribution $\PP{X_3|h}$. The same strategy could be used for the other two. As we known,
+%We presented the kernel algorithm to identify the multiview latent variable model under the assume that the conditional distributin for different view should be the same. In this section, we extend our method to a more generalized setting without such restrication. Without loss of generality, we consider recover the operator $\mu_{X_3|h}$ for conditional distribution $\PP{X_3|h}$. The same strategy could be used for the other two. As we known,
 %%
 %\begin{eqnarray*}
 %\Ccal_{X_1 X_2} &=& \sum_{h \in [k]} \pi_h \mu_{X_1|h}\otimes \mu_{X_2|h}\\

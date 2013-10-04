@@ -156,7 +156,7 @@ We now establish the following perturbation bound on the whitening procedure. Re
 
 \paragraph{Remark: }Note that $\sigma_{k}(\Ccal_{X_1 X_2}) = \sigma_{k}^2(M)$.
 
-\bprf The proof is along the lines of~\cite[Lemma 16]{AnandkumarEtal:community12}, but adapted to whitening using the covariance operator here.
+\bprf The proof is along the lines of Lemma 16 of~\cite{AnandkumarEtal:community12}, but adapted to whitening using the covariance operator here.
  \begin{align*}\|\Diag(\pi)^{1/2} M^\top(\h{\Wcal}-\Wcal)\|&=
 \|\Diag(\pi)^{1/2} M^\top W(A D^{1/2} A^\top -I)\|\\ &\leq\|\Diag(\pi)^{1/2} M^\top \Wcal\| \|D^{1/2}-I\|. \end{align*} Since $\Wcal$ whitens $\Ccal_{X_1 X_2}=M \Diag(\pi) M^\top\iffalse+E\fi$, we have that $\|\Diag(\pi)^{1/2} M^\top \Wcal\| =1$\iffalse\leq \|I-E\|^{1/2}\leq 1+ \sigma_{k+1}(\Ccal_{X_1 X_2})\fi. Now we control $\|D^{1/2}-I\|$.  Let $\tl{E}:= \Ccal_{X_1,X_{2}} -B_k$, where recall that $B=0.5( \widehat \Ccal_{X_1,X_{2}}+ \h{\Ccal}_{X_1 X_2}^\top)$ and $B_k$ is its restriction to top-$k$ singular values. Thus, we have $\|\tl{E}\|_{HS} \leq \epsilon_{pairs} + \sigma_{k+1}(B)\leq 2\epsilon_{pairs}\iffalse+\sigma_{k+1}(\Ccal_{X_1 X_2})\fi$.
  We now have
@@ -205,7 +205,7 @@ first note that
 
 \bprfof{Theorem~\ref{thm:samplebound}}
 We obtain a condition on the above perturbation $\epsilon_T$ in \eqref{eqn:epsilonT} by applying Theorem~\ref{thm:robustpower} as
-$ \epsilon_T\leq C_1\lambda_{\min} R_0^2$. Here, we have $\lambda_{i} = 1/\sqrt{\pi_{i}}\geq 1$. For random initialization, we have that $R_0 \sim 1/\sqrt{k}$, with probability $1-\delta$ using $\poly(k) \poly(1/\delta)$ trials~\cite[Thm. 5.1]{AnandkumarEtal:tensor12}. Thus, we require that $ \epsilon_T  \leq \frac{C_1}{k}$. Summarizing, we require for the following conditions to hold
+$ \epsilon_T\leq C_1\lambda_{\min} R_0^2$. Here, we have $\lambda_{i} = 1/\sqrt{\pi_{i}}\geq 1$. For random initialization, we have that $R_0 \sim 1/\sqrt{k}$, with probability $1-\delta$ using $\poly(k) \poly(1/\delta)$ trials, see Thm. 5.1 in~\cite{AnandkumarEtal:tensor12}. Thus, we require that $ \epsilon_T  \leq \frac{C_1}{k}$. Summarizing, we require for the following conditions to hold
 \beq\epsilon_{pairs}\leq 0.5 \sigma_k(\Ccal_{X_1 X_2}), \quad \epsilon_T  \leq \frac{C_1}{k}.\eeq
 We now substitute for $\epsilon_{pairs}$ and $\epsilon_{triples}$ in \eqref{eqn:epsilonT} using Lemma~\ref{lemma:pairs} and Lemma~\ref{lemma:triples}. 
 
