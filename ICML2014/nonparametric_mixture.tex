@@ -579,7 +579,7 @@ We generated three-dimensional synthetic data from various mixture models. The v
 
 The Gamma distribution has density
 $$p(x)=\frac{x^{(d-1)}e^{-x/\theta}}{\theta^d \Gamma(d)},$$
-where we chose the shape parameter $d=1$ such that density is very skewed. Furthermore, we chose the mean and variance parameters of the Gaussian/Gamma density such that component pair-wise overlap is relatively small according to the fisher ratio $\frac{(\mu_1 - \mu_2)^2}{\sigma_1^2+\sigma_2^2}$. \dbcomment{In experiment, we choose $d<1$.}
+where we chose the shape parameter $d=1$ such that density is very skewed. Furthermore, we chose the mean and variance parameters of the Gaussian/Gamma density such that component pair-wise overlap is relatively small according to the fisher ratio $\frac{(\mu_1 - \mu_2)^2}{\sigma_1^2+\sigma_2^2}$. \dbcomment{In experiment, we choose $d\le 1$.}
 
 \begin{figure*}[!t]
 %   \centering
