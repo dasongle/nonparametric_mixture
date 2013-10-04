@@ -580,6 +580,42 @@ In the mixture of Gaussian/Gamma setting, the EM algorithm is good when data is 
 
 \Note{result description needs refinement. report results case of the 4 experimental setting. Enumerate item by item.}
 
+\begin{figure*}[t]
+%   \centering
+  \hspace{-7mm}
+  \renewcommand{\tabcolsep}{1pt}
+  \begin{tabular}{cccc}
+    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_gauss_k_2_view_1-crop} &      
+    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_gauss_k_3_view_1-crop} &      
+    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_gauss_k_4_view_1-crop} &    
+    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_gauss_k_8_view_1-crop} \\    
+    (a) Gaussian $k=2$ & (b) Gaussian $k=3$ & (c) Gaussian $k=4$ & (d) Gaussian $k=8$ \\ 
+    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_heter_k_2_view_3-crop} &      
+    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_heter_k_3_view_3-crop} &      
+    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_heter_k_4_view_3-crop} &    
+    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_heter_k_8_view_3-crop} \\    
+    (e) Gaussian/Gamma $k=2$ & (f) Gaussian/Gamma $k=3$ & (g) Gaussian/Gamma $k=4$ & (h) Gaussian/Gamma $k=8$ \\
+  \end{tabular}
+  \vspace{-3mm}
+  \caption{(a)-(d) Mixture of Gaussian distributions with $k=2,3,4,8$ components. (e)-(h) Mixture of Gaussian/Gamma distribution with $k=2,3,4,8$. For the former case, the performance of kernel spectral algorithm converge to those of EM algorithm for mixture of Gaussian model. For the latter case, the performance of kernel spectral algorithm are consistently much better than EM algorithm for mixture of Gaussian model.}
+  \vspace{-3mm}
+\end{figure*}
+
+
+\begin{figure}[t]
+  \centering
+  \renewcommand{\tabcolsep}{5pt}
+  \begin{tabular}{c}
+  \includegraphics[width=0.70\columnwidth]{../experiment/visualization/em_visual_k_2_view_1-crop} \\
+  (a) Mixture of Gaussians with EM\\
+  \includegraphics[width=0.70\columnwidth]{../experiment/visualization/visual_k_2_view_1-crop} \\ 
+  (b) Kernel Spectral
+  \end{tabular}
+  \vspace{-3mm}
+  \caption{Kernel spectral algorithm is able to adapt to the shape of the mixture components, while EM algorithm for mixture of Gaussians misfit the Gamma distribution.}\label{fig:shape}
+  \vspace{-3mm}
+\end{figure}
+
 %-----------------------------------------------------------------------------------------------------------------------------------------------
 \section{Symmetrization}
 We presented the kernel algorithm to identify the multiview latent variable model under the assume that the conditional distributin for different view should be the same. In this section, we will extend our method to a more generalized setting without such restrication. Without loss of generality, we consider recover the operator $\mu_{X_3|h}$ for conditional distribution $\PP{X_3|h}$. The same strategy could be used for the other two. As we known,
