@@ -566,35 +566,20 @@ The proof is in Appendix~\ref{app:samplebound}.
 \end{enumerate}
 % It could be thought as a special case of our method using delta kernel.
 % It is predictable that their performance is not comparable to others because of the inferior histgram comparing to smooth kernel,
-Our method has a hyper-parameter, kernel bandwidth, which we selected for each view separately using held-out likelihoods.
+Our method has a hyper-parameter, kernel bandwidth, which we selected for each view separately using cross-validation.
 
-{\bf Data.} We generated three-dimensional synthetic data from various mixture models. The variables corresponding to the dimensions are independent given the latent component indicator. More specifically, we explore four settings
+\subsection{Synthetic Data} 
+
+We generated three-dimensional synthetic data from various mixture models. The variables corresponding to the dimensions are independent given the latent component indicator. More specifically, we explore two settings
 \begin{enumerate}[noitemsep,nolistsep]
-  \item Identical-view with Gaussian conditional densities
-  \item Identical-view with Gamma conditional densities
-  \item Multi-view with different Gaussian conditional densities
-  \item Multi-view with a mix of Gaussian and Gamma conditional densities
+  \item Gaussian conditional densities with different variances;
+  \item Mixture of Gaussian and Gamma conditional densities.
 \end{enumerate}
-We chose the skewness parameter of the Gamma distribution to reasonably large. Furthermore, we chose the mean and variance parameters of the Gaussian/Gamma density such that component pair-wise overlap is relatively small according to the fisher ratio $\frac{(\mu_1 - \mu_2)^2}{\sigma_1^2+\sigma_2^2}$.
+The Gamma distribution has density 
+$$p(x)=\frac{x^{(d-1)}e^{-x/\theta}}{\theta^d \Gamma(d)},$$ 
+where we chose the shape parameter $d=1$ such that density is very skewed. Furthermore, we chose the mean and variance parameters of the Gaussian/Gamma density such that component pair-wise overlap is relatively small according to the fisher ratio $\frac{(\mu_1 - \mu_2)^2}{\sigma_1^2+\sigma_2^2}$.
 
-We also varied the number of samples $m$ for observed variables, from $50$ to $10,000$, and
-experimented with $k=2,3,4$ or $8$ mixture components. The mixture proportion for the $h$-th component is set to be $\pi_h= \frac{2i}{k(k+1)},~\forall h\in[k]$ (unbalanced). It is worth noting that as $k$ becomes larger, it is more difficult to recover parameters. This is because only a small number of data will be generated for the first several clusters. For each $n,k$ with each setting, we randomly generate 10 sets of samples and report the average results.
-
-{\bf Error measure.} We measured the performance of algorithms by the
-following weighted $\ell_2$ norm difference
-\begin{align*}
-  Err:=\sum_{h=1}^{k} \pi_h\, \sqrt{\sum_{i=1}^{m'} (p(x^i|h) - \widehat{p}(x^i|h))^2 }
-\end{align*}
-
-{\bf Result.} The results are plotted in Figure~\ref{}. It is clear that both the nonparametric method and EM converge rapidly with the data increment in all experiments setting.
-
-In mixture of Gaussian setting, the EM algorithm is best because the setting is fully satisfied to its assumption. While the spectral learning algorithm for sphereical Gaussian didn't perform well since the assumption for the method is too restrict. It is reasonable that our nonparametric is a little bit worse than EM algorithm because of the complexity nonparametric form of probability distribution.
-
-In the mixture of Gaussian/Gamma setting, the EM algorithm is good when data is less. However, our nonparametric spectral algorithm provided the best results when sample size is large enough. This phenomena demonstrated the trade-off between model complexity and sample size.
-
-\Note{result description needs refinement. report results case of the 4 experimental setting. Enumerate item by item.}
-
-\begin{figure*}[t]
+\begin{figure*}[!t]
 %   \centering
   \hspace{-7mm}
   \renewcommand{\tabcolsep}{1pt}
@@ -611,10 +596,27 @@ In the mixture of Gaussian/Gamma setting, the EM algorithm is good when data is 
     (e) Gaussian/Gamma $k=2$ & (f) Gaussian/Gamma $k=3$ & (g) Gaussian/Gamma $k=4$ & (h) Gaussian/Gamma $k=8$ \\
   \end{tabular}
   \vspace{-3mm}
-  \caption{(a)-(d) Mixture of Gaussian distributions with $k=2,3,4,8$ components. (e)-(h) Mixture of Gaussian/Gamma distribution with $k=2,3,4,8$. For the former case, the performance of kernel spectral algorithm converge to those of EM algorithm for mixture of Gaussian model. For the latter case, the performance of kernel spectral algorithm are consistently much better than EM algorithm for mixture of Gaussian model.}
+  \caption{(a)-(d) Mixture of Gaussian distributions with $k=2,3,4,8$ components. (e)-(h) Mixture of Gaussian/Gamma distribution with $k=2,3,4,8$. For the former case, the performance of kernel spectral algorithm converge to those of EM algorithm for mixture of Gaussian model. For the latter case, the performance of kernel spectral algorithm are consistently much better than EM algorithm for mixture of Gaussian model. Spherical Gaussian spectral algorithm does not work for $k=4,8$, and hence not plotted.}\label{fig:synthetic}
   \vspace{-3mm}
 \end{figure*}
 
+We also varied the number of samples $m$ for observed variables, from $50$ to $10,000$, and
+experimented with $k=2,3,4$ or $8$ mixture components. The mixture proportion for the $h$-th component is set to be $\pi_h= \frac{2i}{k(k+1)},~\forall h\in[k]$ (unbalanced). It is worth noting that as $k$ becomes larger, it is more difficult to recover parameters. This is because only a small number of data will be generated for the first several clusters. For each $n,k$ with each setting, we randomly generate 10 sets of samples and report the average results.
+
+{\bf Error measure.} We measured the performance of algorithms by the
+following weighted $\ell_2$ norm difference
+\begin{align*}
+  MSE:=\sum_{h=1}^{k} \pi_h\, \sqrt{\sum_{j=1}^{m'} (p(x^j|h) - \widehat{p}(x^j|h))^2 }
+\end{align*}
+where $\{x^j\}_{j\in[m]}$ is a set of uniformly-spaced test points. 
+
+{\bf Results.} The results are plotted in Figure~\ref{fig:synthetic}. It is clear that the kernel spectral method converge rapidly with the data increment in all experiments setting.
+
+In mixture of Gaussian setting, the EM algorithm is best since the model is correctly specified in this case.The spectral learning algorithm for spherical Gaussians did not perform well since the assumption for the method is too restricted. The performance our kernel method converge to that of EM algorithm.
+
+In the mixture of Gaussian and Gamma setting, our kernel spectral algorithm perform clearly much better than other algorithms. These results show that our algorithm is able to automatically adapt to the shape of the density. 
+
+We also plotted the actual recovered conditional density in Figure~\ref{fig:shape}. It can be seen that kernel spectral algorithm recover pretty nicely both the Gaussian and Gamma components, while EM algorithm is able to fit only one component. 
 
 \begin{figure}[t]
   \centering
@@ -629,6 +631,9 @@ In the mixture of Gaussian/Gamma setting, the EM algorithm is good when data is 
   \caption{Kernel spectral algorithm is able to adapt to the shape of the mixture components, while EM algorithm for mixture of Gaussians misfit the Gamma distribution.}\label{fig:shape}
   \vspace{-3mm}
 \end{figure}
+
+\subsection{Flowcytometry Data} 
+
 
 %-----------------------------------------------------------------------------------------------------------------------------------------------
 \section{Symmetrization}
