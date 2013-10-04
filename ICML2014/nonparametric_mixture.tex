@@ -556,9 +556,9 @@ The proof is in Appendix~\ref{app:samplebound}.
 
 {\bf Methods.} We compared our kernel nonparametric algorithm with three alternatives
 \begin{enumerate}[noitemsep,nolistsep]
-  \item The EM algorithm for mixture of Gaussians. The EM algorithm is not guaranteed to find the global solutions each trial. Thus we randomly initialize it $10$ times.
+  \item The EM algorithm for mixture of Gaussians. The EM algorithm is not guaranteed to find the global solution in each trial. Thus we randomly initialize it $10$ times.
   \item The spectral algorithm for mixture of spherical Gaussians~\citep{Hsu13}. The assumption in~\citet{Hsu13} is very restrictive: the collection of spherical Gaussian centers need to span a $k$-dimension subpsace.
-  \item A discretization based spectral algorithm~\citep{Hiroyuki10}. This algorithm used histogram to approximate the joint distribution of the observed variables and then applied spectral algorithms to recover the discretized conditional density. It is well-known that density estimation using histogram is poor even for 3 dimensional data. The error of this algorithm is typically $10$ times larger than alternatives. To make the curves for other methods clearer, we did not plot the performance of \citet{Hiroyuki10} algorithm in the figures.
+  \item A discretization based spectral algorithm~\citep{Hiroyuki10}. This algorithm approximates the joint distribution of the observed variables with histogram and then applies the spectral algorithm to recover the discretized conditional density. It is well-known that density estimation using histogram suffers from poor performance even for $3$-dimension data. The error of this algorithm is typically $10$ times larger than alternatives. To make the curves for other methods clearer, we did not plot the performance of \citet{Hiroyuki10} algorithm in the figures.
 \end{enumerate}
 % It could be thought as a special case of our method using delta kernel.
 % It is predictable that their performance is not comparable to others because of the inferior histgram comparing to smooth kernel,
@@ -716,7 +716,7 @@ Pair_3 &=&
 \end{eqnarray*}
 where ${H} = {K}_{nk}(\mathcal{L}_{nk}^\top{K}_{nk})^{-1}{L}_{nk}^\top$.
 
-Assume the leading $k$ eigenvectors $\nu_k$ lie in the span of the column of $\Phi$, i.e., $\nu_k = \Upsilon \beta_k$ where $\beta_k\in \mathbb{R}^{m\times 1}$
+Assume the leading $k$ eigenvectors $\nu_k$ lie in the span of the column of $\Upsilon$, i.e., $\nu_k = \Upsilon \beta_k$ where $\beta_k\in \mathbb{R}^{m\times 1}$
 %
 \begin{eqnarray*}
 Pair_3\nu = \lambda \nu &\Rightarrow& (Pair_3)^\top Pair_3\nu = \lambda^2 \nu \\
