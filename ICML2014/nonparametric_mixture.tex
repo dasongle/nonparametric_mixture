@@ -82,7 +82,7 @@
 
 \begin{abstract}
 		Spectral methods have greatly advanced the estimation of latent variable models, generating a sequence of novel and efficient algorithms with strong theoretical guarantees. However, current spectral algorithms are largely restricted to mixture of discrete or Gaussian distributions. In this paper, we propose a kernel method for estimating the parameters of multi-view latent variable models, allowing each mixture component to be nonparametric.
-		The key idea of the method is to embed the joint distribution of a multi-view latent variable into a reproducing kernel Hilbert space, and then the latent parameters are recovered using a robust tensor power method. Furthermore, we provide  sample complexity guarantees for the proposed method and show that it compares favorably to EM algorithm and other existing spectral algorithms in our experiments.
+		The key idea of the method is to embed the joint distribution of a multi-view latent variable into a reproducing kernel Hilbert space, and then the latent parameters are recovered using a robust tensor power method. Furthermore, we provide  sample complexity guarantees for the proposed method and it is a low order polynomial in the number of latent components. Thus, we propose a computational and a sample efficient non-parametric estimation method for latent variable models. Moreover, the tensor power method compares favorably to EM algorithm and other existing spectral algorithms in our experiments.
 \end{abstract}
 
 \section{Introduction} \label{sec:intro}
@@ -109,8 +109,7 @@ of discrete or Gaussian distributions. When the mixture components are distribut
 
 In this paper, we propose a kernel method for estimating the parameters of multi-view latent variable models where the mixture components can be nonparametric. The key idea of the method is to embed the joint distribution of such a model into a reproducing kernel Hilbert space, and make use of the low rank structure of the embedded distribution (or covariance operators) to design the algorithm. The key computation of the algorithm involves a kernel singular value decomposition of the two-view covariance operator, followed by a tensor power method on the three-view covariance operator. These standard linear algebra operations makes the algorithm very efficient and easy to code.
 
-The kernel algorithm proposed in this paper is more general than previous spectral algorithms which work only for distributions with very specific assumption. When we use delta kernel, our algorithm recovers the spectral algorithm for discrete mixture components. When we use universal kernels, such as Gaussian RBF kernel, our algorithm can recover Gaussian mixture components as well as mixture components with other distributions. In a sense, our work also provides a unifying framework for previous spectral algorithms. We will provide theoretical guarantees for our general kernel algorithm, and these guarantees will automatically carry over to those special cases.
-
+The kernel algorithm proposed in this paper is more general than previous spectral algorithms which work only for distributions with very specific assumption. When we use delta kernel, our algorithm recovers the spectral algorithm for discrete mixture components. When we use universal kernels, such as Gaussian RBF kernel, our algorithm can recover Gaussian mixture components as well as mixture components with other distributions. In a sense, our work also provides a unifying framework for previous spectral algorithms. We prove sample complexity bounds for the non-parametric tensor power method and establish  that the sample complexity is a low order polynomial in  the number of latent components. Thus, we propose a computational and a sample efficient non-parametric approach to learning latent variable models. 
 
 \aacomment{we should mention that previous methods also use simultaneous diagonalization techniques which is unstable}
 Previously, kernel methods have also been applied to learning latent variable models. However, none of the previous work explicitly recovers the actual parameters of the models~\cite{xxx}. Most of them estimate an (unknown) invertible  transformation of the latent parameters, and it is not clear how one can recover the actual parameters based on these estimates. Furthermore, these works focused on predictive task: recover the marginal distribution of the observed variables by making use of the low rank structure of the latent variable models. It is significantly more challenging to design kernel algorithms for actual parameter recovery and analyze theoretical properties of these algorithms.
@@ -392,8 +391,8 @@ Allman et al.~\cite{x} showed that, under mild conditions, a finite mixture of n
         \end{array}
     }_{s,t \in [n]}. \nonumber
 % 	\label{eq:jointprobabilitytable}
-We require that the conditional probability table (CPT) above have full column rank for identifiability.
 \end{align}
+We require that the conditional probability table (CPT) above have full column rank for identifiability.
 
 
 {\bf Example 2.} Suppose we have a infinite mixture of three dimensional multivariate spherical Gaussian distributions. The Gaussian components have identical covariance matrix $\Sigma = \diag(\sigma^2,\sigma^2,\sigma^2)$. Furthermore, the components are placed regularly along the diagonal line of the coordinate system. That is the center of the $j$-th component is $\mu^j=(j\delta,j\delta,j\delta)$ with spacing parameter $\delta$:
@@ -406,7 +405,7 @@ $p(x_1,x_2,x_3) = \sum_{j=1}^{\infty} r_j\, p_j(x_1,x_2,x_3)$ respectively, with
 We will embed the density $p(x_1,x_2)$ using Gaussian RBF kernel $k(x_1,x_1')k(x_2,x_2') = \prod_{i=1}^2 \frac{1}{\sqrt{2\pi}\gamma}\exp(-\frac{1}{2\gamma^2}(x_i - x_i')^2)$.
 \aacomment{need to mention how this is identifiable.We can limit to finite mixture}
 
-Finally, we remark that the identifiability result in Proposition~\ref{prop:identifiability} can be extended to cases where the conditional distributions do not satisfy linear independence, i.e. they are overcomplete, e.g.~\cite{Kruskal:77,DeLathauwerEtal:FOOBI,AnandkumarEtal:overcomplete13}. However, in general, it is not not tractable to learn such overcomplete models and we do not consider them here. 
+Finally, we remark that the identifiability result in Proposition~\ref{prop:identifiability} can be extended to cases where the conditional distributions do not satisfy linear independence, i.e. they are overcomplete, e.g.~\cite{Kruskal:77,DeLathauwerEtal:FOOBI,AnandkumarEtal:overcomplete13}. However, in general, it is not not tractable to learn such overcomplete models and we do not consider them here.
 
 \section{Kernel Algorithm}
 
@@ -514,10 +513,10 @@ $$
 
 \section{Sample Complexity}
 
-Let $\rho:=\sup_{x \in \Omega} k(x,x)$,   $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, $\pi_{\min}:=\min_{i\in [k]} \pi_i$ and $\sigma_k(\Ccal_{X_1, X_2})$ be the $k$-th singular value of $\Ccal_{X_1, X_2}$. 
+Let $\rho:=\sup_{x \in \Omega} k(x,x)$,   $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, $\pi_{\min}:=\min_{i\in [k]} \pi_i$ and $\sigma_k(\Ccal_{X_1, X_2})$ be the $k$-th singular value of $\Ccal_{X_1, X_2}$.
 
 %Assume that the mixing weights $\pi_1\geq \pi_2\ldots$ are in decreasing order.  Let $E_{X_1, X_2, X_3}$ be the residual tensor \beq\label{eqn:triplesexpression}\Ccal_{X_1 X_2 X_3}= \sum_{h\in [k]} \pi_h \cdot \mu_{X|h} \otimes \mu_{X|h} \otimes \mu_{X|h} + E_{X_1, X_2, X_3}\eeq
- 
+
 
 \begin{theorem}[Sample Bounds]\label{thm:samplebound}
 Pick  any $\delta\in (0,1)$. When the number of samples $m$ satisfies
@@ -554,7 +553,7 @@ T - \sum_{j=1}^k \hat\lambda_j \hat{\phi}_j^{\otimes 3}
 Thus, the above result provides bounds on the estimated eigen-pairs using the robust tensor power method.
 The proof is in Appendix~\ref{app:samplebound}.
 
-\aacomment{will add more remarks tomorrow. Does the theorem look sufficiently clean to you?}
+\paragraph{Remarks: }We note that the sample complexity is  $\poly(k, \rho, 1/\pi_{\min}, 1/\sigma_k(\Ccal_{X_1, X_2}))$ of a low order. For the special case of discrete measurements, where the kernel $k(x,x')=\delta(x,x')$, we have $\rho=1$. Note that the sample complexity depends here only on the number of components $k$ and not on the dimensionality of the observed state space.  Similarly in many other cases, the parameter $\rho$ is bounded. \aacomment{will this hold for example 2 as well?} Thus, the robust tensor method has efficient sample and computational complexity for non-parametric latent variable estimation. 
 
 \section{Experiments}
 
@@ -568,7 +567,7 @@ The proof is in Appendix~\ref{app:samplebound}.
 % It is predictable that their performance is not comparable to others because of the inferior histgram comparing to smooth kernel,
 Our method has a hyper-parameter, kernel bandwidth, which we selected for each view separately using cross-validation.
 
-\subsection{Synthetic Data} 
+\subsection{Synthetic Data}
 
 We generated three-dimensional synthetic data from various mixture models. The variables corresponding to the dimensions are independent given the latent component indicator. More specifically, we explore two settings
 \begin{enumerate}[noitemsep,nolistsep]
@@ -578,8 +577,8 @@ We generated three-dimensional synthetic data from various mixture models. The v
 
 \dbcomment{Actually, we have four setting. Different conditional distribution for each view or all the views have the same distribution.}
 
-The Gamma distribution has density 
-$$p(x)=\frac{x^{(d-1)}e^{-x/\theta}}{\theta^d \Gamma(d)},$$ 
+The Gamma distribution has density
+$$p(x)=\frac{x^{(d-1)}e^{-x/\theta}}{\theta^d \Gamma(d)},$$
 where we chose the shape parameter $d=1$ such that density is very skewed. Furthermore, we chose the mean and variance parameters of the Gaussian/Gamma density such that component pair-wise overlap is relatively small according to the fisher ratio $\frac{(\mu_1 - \mu_2)^2}{\sigma_1^2+\sigma_2^2}$. \dbcomment{In experiment, we choose $d<1$.}
 
 \begin{figure*}[!t]
@@ -587,15 +586,15 @@ where we chose the shape parameter $d=1$ such that density is very skewed. Furth
   \hspace{-7mm}
   \renewcommand{\tabcolsep}{1pt}
   \begin{tabular}{cccc}
-    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_gauss_k_2_view_1-crop} &      
-    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_gauss_k_3_view_1-crop} &      
-    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_gauss_k_4_view_1-crop} &    
-    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_gauss_k_8_view_1-crop} \\    
-    (a) Gaussian $k=2$ & (b) Gaussian $k=3$ & (c) Gaussian $k=4$ & (d) Gaussian $k=8$ \\ 
-    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_heter_k_2_view_3-crop} &      
-    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_heter_k_3_view_3-crop} &      
-    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_heter_k_4_view_1-crop} &    
-    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_heter_k_8_view_2-crop} \\    
+    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_gauss_k_2_view_1-crop} &
+    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_gauss_k_3_view_1-crop} &
+    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_gauss_k_4_view_1-crop} &
+    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_gauss_k_8_view_1-crop} \\
+    (a) Gaussian $k=2$ & (b) Gaussian $k=3$ & (c) Gaussian $k=4$ & (d) Gaussian $k=8$ \\
+    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_heter_k_2_view_3-crop} &
+    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_heter_k_3_view_3-crop} &
+    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_heter_k_4_view_1-crop} &
+    \includegraphics[width=0.26\textwidth]{../experiment/figure/sp_diff_heter_k_8_view_2-crop} \\
     (e) Gaussian/Gamma $k=2$ & (f) Gaussian/Gamma $k=3$ & (g) Gaussian/Gamma $k=4$ & (h) Gaussian/Gamma $k=8$ \\
   \end{tabular}
   \vspace{-3mm}
@@ -611,15 +610,15 @@ following weighted $\ell_2$ norm difference
 \begin{align*}
   MSE:=\sum_{h=1}^{k} \pi_h\, \sqrt{\sum_{j=1}^{m'} (p(x^j|h) - \widehat{p}(x^j|h))^2 }
 \end{align*}
-where $\{x^j\}_{j\in[m]}$ is a set of uniformly-spaced test points. 
+where $\{x^j\}_{j\in[m]}$ is a set of uniformly-spaced test points.
 
 {\bf Results.} The results are plotted in Figure~\ref{fig:synthetic}. It is clear that the kernel spectral method converge rapidly with the data increment in all experiments setting.
 
 In mixture of Gaussian setting, the EM algorithm is best since the model is correctly specified in this case.The spectral learning algorithm for spherical Gaussians did not perform well since the assumption for the method is too restricted. The performance our kernel method converge to that of EM algorithm.
 
-In the mixture of Gaussian and Gamma setting, our kernel spectral algorithm perform clearly much better than other algorithms. These results show that our algorithm is able to automatically adapt to the shape of the density. 
+In the mixture of Gaussian and Gamma setting, our kernel spectral algorithm perform clearly much better than other algorithms. These results show that our algorithm is able to automatically adapt to the shape of the density.
 
-We also plotted the actual recovered conditional density in Figure~\ref{fig:shape}. It can be seen that kernel spectral algorithm recover pretty nicely both the Gaussian and Gamma components, while EM algorithm is able to fit only one component. 
+We also plotted the actual recovered conditional density in Figure~\ref{fig:shape}. It can be seen that kernel spectral algorithm recover pretty nicely both the Gaussian and Gamma components, while EM algorithm is able to fit only one component.
 
 \begin{figure}[t]
   \centering
@@ -627,7 +626,7 @@ We also plotted the actual recovered conditional density in Figure~\ref{fig:shap
   \begin{tabular}{c}
   \includegraphics[width=0.70\columnwidth]{../experiment/visualization/em_visual_k_2_view_1-crop} \\
   (a) Mixture of Gaussians with EM\\
-  \includegraphics[width=0.70\columnwidth]{../experiment/visualization/visual_k_2_view_1-crop} \\ 
+  \includegraphics[width=0.70\columnwidth]{../experiment/visualization/visual_k_2_view_1-crop} \\
   (b) Kernel Spectral
   \end{tabular}
   \vspace{-3mm}
@@ -635,7 +634,7 @@ We also plotted the actual recovered conditional density in Figure~\ref{fig:shap
   \vspace{-3mm}
 \end{figure}
 
-\subsection{Flowcytometry Data} 
+\subsection{Flowcytometry Data}
 
 
 %-----------------------------------------------------------------------------------------------------------------------------------------------
