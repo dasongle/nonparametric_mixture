@@ -41,7 +41,7 @@
 \usepackage{../Definitions}
 \newcommand{\hmu}{\widehat{\mu}}
 \newcommand{\hCcal}{\widehat{\Ccal}}
-\newcommand\tl{\widetilde}
+\newcommand\tl{\tilde}
 % \newcommand{\bm}{\mathbf}
 \input{../tensor-macros}
 \usepackage{tikz}
@@ -95,21 +95,21 @@
 
 %\setlength{\floatsep}{1ex}
 \setlength{\textfloatsep}{3ex}
-
+  
 Latent variable models have been used to address various machine learning
 problems, ranging from modeling temporal dynamics, to text document analysis and to social network analysis~\citep{RabJua86,Clark90,HofRafHan02,BleNgJor03}.
 Recently, there is a surge of interest in designing spectral algorithms for estimating the parameters of latent variable models~\citep{HsuKakZha09,ParSonXin11,SonParXin11,FosRodUng12,AnandkumarEtal:tensor12, AnandkumarEtal:twosvd12, Franz13}. Compared to the Expectation-Maximization (EM) algorithm \citep{DemLaiRub77} traditionally used for this task, spectral algorithms are better in terms of their computational efficiency and provable guarantees.
 Current spectral algorithms are largely restricted to mixture
-of discrete or Gaussian distributions, e.g.~\citep{AnandkumarEtal:tensor12,Hsu13}. When the mixture components are distributions other than these standard distributions, the theoretical guarantees for these algorithms are no longer applicable, and their empirical performance can be very poor.
+of discrete or Gaussian distributions, e.g.~\citep{AnandkumarEtal:tensor12,Hsu13}. When the mixture components are distributions other than these standard distributions, the theoretical guarantees for these algorithms are no longer applicable, and the performance of these algorithms can be very poor in experiments.
 
-In this paper, we propose a kernel method for estimating the parameters of multi-view latent variable models where the mixture components can be nonparametric. The key idea  is to embed the joint distribution of such a model into a reproducing kernel Hilbert space, and exploit the low rank structure of the embedded distribution (or covariance operators). The key computation   involves a kernel singular value decomposition of the two-view covariance operator, followed by a robust tensor power method on the three-view covariance operator. These standard matrix operations makes the algorithm very efficient and easy to deploy.
+In this paper, we propose a kernel method for estimating the parameters of multi-view latent variable models where the mixture components can be nonparametric. The key idea  is to embed the joint distribution of such a model into a reproducing kernel Hilbert space, and exploit the low rank structure of the embedded distribution (or covariance operators). The key computation   involves a kernel singular value decomposition of the two-view covariance operator, followed by a robust tensor power method on the three-view covariance operator. These standard linear algebra operations makes the algorithm very efficient and easy to deploy.
 
 The kernel algorithm proposed in this paper is more general than the previous spectral algorithms which work only for distributions with parametric assumptions~\citep{AnandkumarEtal:tensor12,Hsu13}. When we use delta kernel, our algorithm reduces to the spectral algorithm for discrete mixture components analyzed in~\citep{AnandkumarEtal:tensor12}. When we use universal kernels, such as Gaussian RBF kernel, our algorithm can recover Gaussian mixture components as well as mixture components with other distributions. In this sense, our work also provides a unifying framework for previous spectral algorithms. We prove sample complexity bounds for the nonparametric tensor power method and establish  that the sample complexity is quadratic in the number of latent components, and is a low order polynomial in the other relevant parameters such as the lower bound on mixing weights. Thus, we propose a computational and sample efficient nonparametric approach to learning latent variable models.
 
  Kernel methods have  been previously applied to learning latent variable models. However, none of the previous works explicitly recovers the actual parameters of the models~\cite{SonParXin11, SonDai13, SgoJanPetSch13}. Most of them estimate an (unknown) invertible  transformation of the latent parameters, and it is not clear how one can recover the actual parameters based on these estimates. Furthermore, these works focused on predictive task: recover the marginal distribution of the observed variables by making use of the low rank structure of the latent variable models. It is significantly more challenging to design kernel algorithms for actual parameter recovery and analyze theoretical properties of these algorithms.
 
-We compare our kernel algorithm to the EM algorithm and previous spectral algorithms. We show that when the model assumptions are correct for the EM algorithm and previous spectral algorithms, our algorithm converges in terms of estimation error to these competitors. In the opposite cases when the model assumptions are incorrect, our algorithm is able to adapt to the nonparametric mixture components and beating alternatives by a very large margin.
-
+We  experimentally compare our kernel algorithm to the EM algorithm and previous spectral algorithms. We show that when the model assumptions are correct for the EM algorithm and previous spectral algorithms, our algorithm converges in terms of estimation error to these competitors. In the opposite cases when the model assumptions are incorrect, our algorithm is able to adapt to the nonparametric mixture components and beating alternatives by a very large margin.
+ 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Notation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -140,9 +140,7 @@ objects \, \cite{SchTsuVer04}. Thus the methodology presented below can be readi
 \section{Kernel Embedding of Distributions}
 \label{sec:embedding}
 
-We begin by providing an overview of kernel embeddings of distributions, which are \emph{implicit} mappings of distributions into potentially \emph{infinite} dimensional RKHS.
-% \footnote{By ``implicit'', we mean that we do not need to explicitly construct the feature spaces, and the actual computations boil down to kernel matrix operations.}
-The kernel embedding approach represents a distribution by an element in the RKHS associated with a kernel function \, \cite{SmoGreSonSch07,SriGreFukLanetal08},
+We begin by providing an overview of kernel embeddings of distributions, which are \emph{implicit} mappings of distributions into potentially \emph{infinite} dimensional RKHS.\footnote{By ``implicit'', we mean that we do not need to explicitly construct the feature spaces, and the actual computations boil down to kernel matrix operations.} The kernel embedding approach represents a distribution by an element in the RKHS associated with a kernel function \, \cite{SmoGreSonSch07,SriGreFukLanetal08},
 \begin{align}
   \mu_{X} \, := \, \EE_{X} \sbr{\phi(X)} \, = \, \int_{\Xcal} \phi(x) \, \PP(dx),  \label{eq:embedding}
 \end{align}
@@ -223,8 +221,11 @@ Similarly, given sample from distribution $\PP(X_1,X_2,X_3)$, one can estimate $
 
 By virtue of the kernel trick, most of the computation required for subsequent statistical inference using kernel embeddings can be reduced to the Gram matrix manipulation. The entries in the Gram matrix $K$ correspond to the kernel value between data points $x^i$ and $x^j$,~\ie,~$K_{ij} = k(x^i,x^j)$, and therefore its size is determined by the number of data points in the sample. The size of the Gram matrix is in general much smaller than the dimension of the feature spaces (which can be infinite). This enables efficient nonparametric methods using the kernel embedding representation. If the sample size is large, the computation in kernel embedding methods may be expensive. In this case, a popular solution is to use a low-rank approximation of the Gram matrix, such as incomplete Cholesky factorization~\cite{FinSch01}, which is known to work very effectively in reducing computational cost of kernel methods, while maintaining the approximation accuracy.
 
+\noindent {\bf Relation between kernel embedding and the density function.} Basically kernel embeddings maps the density to a function in the RKHS. See Steinwardt and Vert \textcolor{red}{(need to say more)}.
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Multi-View Latent Variable Models}
+\section{Multi-view Latent Variable Models}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Multi-view latent variable models studied in this paper are a
@@ -233,7 +234,7 @@ special class of Bayesian networks in which
   \item observed variables $X_1, X_2, \ldots, X_\ell$ are conditionally independent given a {\bf discrete} latent variable $H$, and
 	\item the conditional distributions, $\PP(X_t|H)$, of the $X_t, t \in [\ell]$ given the hidden variable $H$ can be different.
 \end{itemize}
-The conditional independent structure of a multi-view latent variable model is illustrated in Figure~\ref{fig:graphical-model}(a), and many complicated graphical models, such as the hidden Markov model in Figure~\ref{fig:graphical-model}(b), can be reduced to a multi-view latent variable model. {\bf For simplicity of exposition, we will explain our method using the model with symmetric view}. That is the conditional distribution are the same for each view,~\ie, $\PP(X|h) = \PP(X_1|h) =  \PP(X_2|h) =\PP(X_3|h)$. In Appendix~\ref{sec:symmetrization}, we will show that multi-view models with different views can be reduced to ones with symmetric view.
+The conditional independent structure of a multi-view latent variable model is illustrated in Figure~\ref{fig:graphical-model}(a), and many complicated graphical models, such as the hidden Markov model in Figure~\ref{fig:graphical-model}(b), can be reduced to a multi-view latent variable model.
 
 \begin{figure}[t]
 \begin{center}
@@ -284,19 +285,20 @@ The conditional independent structure of a multi-view latent variable model is i
 
 \subsection{Conditional Embedding Operator}
 
-For simplicity of exposition, we  focus on a simple model with three observed variables, \ie, $\ell=3$. Suppose $H\in[k]$, then we can embed each conditional distribution $\PP(X|h)$ corresponding to a particular value of $H=h$ into the RKHS as
+For simplicity of exposition, we  focus on a simple model with three observed variables, \ie, $\ell=3$, and furthermore the conditional distributions, $\PP(X_t|H)$, are the same (or {\em exchangeable}) for $t \in [3]$. Our analysis can be easily extended to the general multi-view setting using a symmetrization techniques (see section~X for details).
+
+Suppose $H\in[k]$, then we can embed each conditional distribution $\PP(X_t|h)$ corresponding to a particular value of $H=h$ into the RKHS as
 \begin{align}
-  \mu_{X|h} = \int_{\Xcal} \phi(x)\, \PP(dx | h).
+  \mu_{X_t|h} = \int_{\Xcal} \phi(x_t)\, \PP(dx_t | h).
 \end{align}
-If we vary the value of $H$, we  obtain the kernel embedding for different $\PP(X|h)$. Conceptually, we can collect these embeddings into a matrix (with potentially infinite number of rows)
+If we vary the value of $H$, we  obtain the kernel embedding for different $\PP(X_t|h)$. Conceptually, we can collect these embeddings into a matrix (with potentially infinite number of rows)
 \begin{align}
-  \Ccal_{X|H} = \rbr{\mu_{X|h=1},\mu_{X|h=2},\ldots,\mu_{X|h=k}},
+  \Ccal_{X_t|H} = \rbr{\mu_{X_t|h=1},\mu_{X_t|h=2},\ldots,\mu_{X_t|h=k}},
 \end{align}
-which is called the conditional embedding operator. If we use the standard basis $e_h$ in $\RR^k$ to represent each value of $h$, we can retrieve each $\mu_{X|h}$ from $\Ccal_{X|H}$ by
+which is called the conditional embedding operator. If we use the standard basis $e_h$ in $\RR^k$ to represent each value of $h$, we can retrieve each $\mu_{X_t|h}$ from $\Ccal_{X_t|H}$ by
 \begin{align}
-  \mu_{X|h} = \Ccal_{X|H} e_h
+  \mu_{X_t|h} = \Ccal_{X_t|H} e_h
 \end{align}
-Once we have the conditional embedding $\mu_{X|h}$, we can estimate the density $p(x|h)$ by performing an inner product $p(x|h) = \inner{\phi(x)}{\mu_{X|h}}$.
 
 \subsection{Factorized Kernel Embedding}
 
@@ -325,23 +327,20 @@ we let $\pi_h:=\PP(h)$. Furthermore, if we apply Kronecker delta kernel $\delta(
   \end{array}
  }_{h,h',h''\in[k]}
 \end{align*}
-are diagonal tensors. Making use of $\Ccal_{HH}$ and $\Ccal_{HHH}$, and the factorization of the distributions $\PP(X_1,X_2)$ and $\PP(X_1,X_2,X_3)$, we obtain the factorization of the embedding of
-$\PP(X_1,X_2)$ (second order embedding)
+are diagonal tensors. Making use of $\Ccal_{HH}$ and $\Ccal_{HHH}$, and the factorization of the distributions $\PP(X_1,X_2)$ and $\PP(X_1,X_2,X_3)$, we obtain the factorization of their embeddings
+respectively
 \begin{align}
   &\Ccal_{X_1X_2} \nonumber \\
 %   &= \int_{\Omega}\, \phi(x_1) \otimes \phi(x_2)\, \PP(dx_1 | h )\, \PP(dx_2 | h)\, \PP(dh) \\
   &= \int_{\Hcal} \rbr{\int_\Xcal \phi(x_1)\, \PP(dx_1|h)} \otimes \rbr{\int_\Xcal \phi(x_2)\, \PP(dx_2 |h)} \PP(dh) \nonumber \\
   &= \int_{\Hcal} \rbr{\Ccal_{X|H} e_h} \otimes \rbr{\Ccal_{X|H} e_h}\, \PP(dh) \nonumber \\
   &= \Ccal_{X|H}\, \rbr{\int_{\Hcal} e_h \otimes e_h\, \PP(dh)}\, \Ccal_{X|H}^\top \nonumber \\
-  &= \Ccal_{X|H}\, \Ccal_{HH}\, \Ccal_{X|H}^\top, \label{eq:pair_factorization}
-\end{align}
-and that of $\PP(X_1,X_2,X3)$ (third order embedding)
-\begin{align}
+  &= \Ccal_{X|H}\, \Ccal_{HH}\, \Ccal_{X|H}^\top, \label{eq:pair_factorization}\\
   &\Ccal_{X_1 X_2 X_3}
   = \Ccal_{HHH} \times_1 \Ccal_{X|H} \times_2 \Ccal_{X|H} \times_3 \Ccal_{X|H}. \label{eq:triple_factorization}
 \end{align}
 
-\subsection{Identifiability of Parameters}
+\subsection{Identifiability of the Parameters}
 
 We note that $\Ccal_{X|H} = \rbr{\mu_{X|h=1},\ \mu_{X|h=2},\ \ldots,\ \mu_{X|h=k}}$, and the kernel embeddings for $\Ccal_{X_1 X_2}$ and $\Ccal_{X_1 X_2 X_3}$ can be alternatively written as
 \begin{align}
@@ -350,11 +349,10 @@ We note that $\Ccal_{X|H} = \rbr{\mu_{X|h=1},\ \mu_{X|h=2},\ \ldots,\ \mu_{X|h=k
   \Ccal_{X_1 X_2 X_3}
   &= \sum_{h \in [k]} \pi_h\cdot \mu_{X|h} \otimes \mu_{X|h} \otimes \mu_{X|h} \label{eq:joint3}
 \end{align}
+\bxcomment{Should we use different $ \mu_{X_i|h}$ for each view above and in lines 370-380?}
 Allman et al.~\cite{Allman09} showed that, under mild conditions, a finite mixture of nonparametric product distributions is identifiable. The multi-view latent variable model in~\eq{eq:joint3} has the same form as a finite mixture of nonparametric product distribution, and therefore we can adapt Allman's results to the current setting.
 \begin{proposition}[Identifiability]\label{prop:identifiability}
-\vspace{-2mm}
   Let $\PP(X_1,X_2,X_3)$ be a multi-view latent variable model, such that the conditional distributions $\cbr{\PP(X|h)}_{h \in [k]}$ are linearly independent. Then, the set of parameters $\cbr{\pi_h, \mu_{X|h}}_{h \in [k]}$ are identifiable from $\Ccal_{X_1 X_2 X_3}$, up to label swapping of the hidden variable $H$.
-\vspace{-2mm}
 \end{proposition}
 
 % \section{Whitening with Three Different Views}
@@ -390,8 +388,8 @@ Allman et al.~\cite{Allman09} showed that, under mild conditions, a finite mixtu
 We require that the conditional probability table $\{P(X|h)\}_{h\in [k]}$ to  have full column rank for identifiability in this case.
 
 
-{\bf Example 2.} Suppose we have a $k$-component mixture of one dimensional  spherical Gaussian distributions. The Gaussian components have identical covariance  $\sigma^2$, but their mean values are distinct. Note that this model is not identifiable under the framework of~\cite{Hsu13} since the mean values are just scalars and therefore, rank deficient. However, if we embed the density functions using universal kernels such as Gaussian RBF kernel, it can be shown that the mixture model becomes identifiable. This is because we are working with the entire density function which are linear independent from each other in this case. Thus, the non-parametric framework allows us to incorporate a wider range of latent variable  models.
-
+{\bf Example 2.} Suppose we have a $k$-component mixture of one dimensional  spherical Gaussian distributions. The Gaussian components have identical covariance  $\sigma^2$, but their mean values are distinct. Note that this model is not identifiable under the framework of~\cite{Hsu13} since the mean values are just scalars and therefore, rank deficient. However, if we embed the density functions using universal kernels such as Gaussian RBF kernel, it can be shown that the mixture model becomes identifiable. Thus, the non-parametric framework allows us to incorporate a wider range of latent variable  models.
+ 
 
 
 %
@@ -401,18 +399,19 @@ We require that the conditional probability table $\{P(X|h)\}_{h\in [k]}$ to  ha
 %  p_j(x_1,x_2,x_3) &= \prod_{i=1}^3 \frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{1}{2\sigma^2}(x_i -j\delta)^2)
 %\end{align*}
 %The mixture model is $p(x_1,x_2) = \sum_{j=1}^{\infty} r_j\, p_j(x_1,x_2)$ and
-%$p(x_1,x_2,x_3) = \sum_{j=1}^{\infty} r_j\, p_j(x_1,x_2,x_3)$ respectively, with $\sum_{j=1}^{\infty} r_j = 1$. Note that the above Gaussian mixture
+%$p(x_1,x_2,x_3) = \sum_{j=1}^{\infty} r_j\, p_j(x_1,x_2,x_3)$ respectively, with $\sum_{j=1}^{\infty} r_j = 1$. Note that the above Gaussian mixture 
 %We  embed the density $p(x_1,x_2)$ using Gaussian RBF kernel $k(x_1,x_1')k(x_2,x_2') = \prod_{i=1}^2 \frac{1}{\sqrt{2\pi}\gamma}\exp(-\frac{1}{2\gamma^2}(x_i - x_i')^2)$.
-
-Finally, we remark that the identifiability result in Proposition~\ref{prop:identifiability} can be extended to cases where the conditional distributions do not satisfy linear independence,~\ie, they are overcomplete, e.g.~\cite{Kruskal:77,DeLathauwerEtal:FOOBI,AnandkumarEtal:overcomplete13}. However, in general, it is not tractable to learn such overcomplete models and we do not consider them here.
+ 
+Finally, we remark that the identifiability result in Proposition~\ref{prop:identifiability} can be extended to cases where the conditional distributions do not satisfy linear independence, i.e. they are overcomplete, e.g.~\cite{Kruskal:77,DeLathauwerEtal:FOOBI,AnandkumarEtal:overcomplete13}. However, in general, it is not tractable to learn such overcomplete models and we do not consider them here.
 
 \section{Kernel Algorithm}
 
-We first design a kernel algorithm to recover the parameters, $\cbr{\pi_h, \mu_{X|h}}_{h \in [k]}$, of the multi-view latent variable model based on $\Ccal_{X_1 X_2}$ and $\Ccal_{X_1 X_2 X_3}$. This can be easily extended to the sample versions and this is discussed in Section~\ref{sec:sample}. Again for simplicity of exposition, the algorithm is explained for symmetric view case. The more general version is presented in Appendix~\ref{sec:symmetrization}.
-
+We first design a kernel algorithm to recover the parameters, $\cbr{\pi_h, \mu_{X|h}}_{h \in [k]}$, of the multi-view latent variable model based on $\Ccal_{X_1 X_2}$ and $\Ccal_{X_1 X_2 X_3}$. This can be easily extended to the sample versions and this is discussed in Section~\ref{sec:sample}.
 \subsection{Population Case}
 
 We  first derive the algorithm for the population case as if we could access the true operator $\Ccal_{X_1 X_2}$ and $\Ccal_{X_1 X_2 X_3}$. Its finite sample counterpart  will be presented in the next section. The algorithm can be thought of as a kernel generalization of the algorithm in~\cite{AnandkumarEtal:community12} using embedding representations.
+
+\bxcomment{This is for symmetric case, not really multi-view case.}
 
 {\bf Step 1.} We perform eigen-decomposition of $\Ccal_{X_1 X_2}$,
 $$\Ccal_{X_1 X_2} = \sum_{i=1}^{\infty} \sigma_i \cdot u_i \otimes u_i$$
@@ -434,7 +433,7 @@ $$
 $$
 which is a tensor with orthogonal factors. Essentially, each column $v_i$ of $M$ is an eigenvector of the tensor $\Tcal$.
 
-{\bf Step 3.} We use tensor power method to find eigenvectors $M$ for $\Tcal$~\cite{AnandkumarEtal:community12}. We provide the method in the Appendix in Algorithm~\ref{alg:robustpower} for completeness.
+{\bf Step 3.} We find the tensor eigenvectors $M$ for $\Tcal$ using tensor power method~\cite{AnandkumarEtal:community12}. We provide the method in the Appendix in Algorithm~\ref{alg:robustpower} for completeness.
 
 {\bf Step 4.} We recover the conditional embedding operator by undoing the whitening step
 $$
@@ -573,8 +572,8 @@ We generated three-dimensional synthetic data from various mixture models. The v
 \end{enumerate}
 
 The shifted Gamma distribution has density
-$$p(x-\mu)=\frac{(x-\mu)^{(d-1)}e^{-x/\theta}}{\theta^d \Gamma(d)},~x\geq \mu$$
-where we chose the shape parameter $d\le 1$ such that density is very skewed. Furthermore, we chose the mean and variance parameters of the Gaussian/Gamma density such that component pair-wise overlap is relatively small according to the fisher ratio $\frac{(\mu_1 - \mu_2)^2}{\sigma_1^2+\sigma_2^2}$.
+$$p(x-\mu)=\frac{(x-\mu)^{(d-1)}e^{-x/\theta}}{\theta^d \Gamma(d)},$$
+where we chose the shape parameter $d\le 1$ such that density is very skewed. Furthermore, we chose the mean and variance parameters of the Gaussian/Gamma density such that component pair-wise overlap is relatively small according to the fisher ratio $\frac{(\mu_1 - \mu_2)^2}{\sigma_1^2+\sigma_2^2}$. 
 
 \begin{figure*}[!t]
 %   \centering
@@ -607,13 +606,13 @@ following weighted $\ell_2$ norm difference
 \end{align*}
 where $\{x^j\}_{j\in[m]}$ is a set of uniformly-spaced test points.
 
-{\bf Results.} The results are plotted in Figure~\ref{fig:synthetic}. It is clear that the kernel spectral method converges rapidly with the data increment in all experiments setting.
+{\bf Results.} The results are plotted in Figure~\ref{fig:synthetic}. It is clear that the kernel spectral method converge rapidly with the data increment in all experiments setting.
 
 In mixture of Gaussians setting, the EM algorithm is best since the model is correctly specified in this case. The spectral learning algorithm for spherical Gaussians did not perform well since the assumption for the method is too restricted. The performance our kernel method converges to that of EM algorithm.
 
 In the mixture of Gaussian and Gamma setting, our kernel spectral algorithm performs clearly much better than other algorithms. These results show that our algorithm is able to automatically adapt to the shape of the density.
 
-We also plotted the actual recovered conditional density in Figure~\ref{fig:shape}. It can be seen that kernel spectral algorithm recover pretty nicely both the Gaussian and Gamma components, while EM algorithm is able to fit only one component.
+We also plotted the actual recovered conditional density in Figure~\ref{fig:shape}. It can be seen that kernel spectral algorithm recover pretty nicely both the Gaussian and Gamma components, while EM algorithm is able to fit only the Gaussian component.
 
 \begin{figure}[t]
   \centering
@@ -632,124 +631,119 @@ We also plotted the actual recovered conditional density in Figure~\ref{fig:shap
 \subsection{Flowcytometry Data}
 \input{../experiment/real_data_experiment_short.tex}
 
+%%-----------------------------------------------------------------------------------------------------------------------------------------------
+%\section{Symmetrization}
+%We presented the kernel algorithm to identify the multiview latent variable model under the assume that the conditional distributin for different view should be the same. In this section, we extend our method to a more generalized setting without such restrication. Without loss of generality, we consider recover the operator $\mu_{X_3|h}$ for conditional distribution $\PP{X_3|h}$. The same strategy could be used for the other two. As we known,
+%%
+%\begin{eqnarray*}
+%\Ccal_{X_1 X_2} &=& \sum_{h \in [k]} \pi_h \mu_{X_1|h}\otimes \mu_{X_2|h}\\
+%\Ccal_{X_2 X_3} &=& \sum_{h \in [k]} \pi_h \mu_{X_2|h}\otimes \mu_{X_3|h}\\
+%\Ccal_{X_3 X_1} &=& \sum_{h \in [k]} \pi_h \mu_{X_3|h}\otimes \mu_{X_1|h}\\
+%\Ccal_{X_1 X_2 X_3} &=& \sum_{h \in [k]} \pi_h \mu_{X_1|h}\otimes \mu_{X_2|h} \otimes \mu_{X_3|h}\\
+%\end{eqnarray*}
+%%
+%
+%Assume the conditional distribution for $\{X_1, X_2, X_3\}$ are in the \textit{RKHS} with kernels $\{\mathcal{K, L, G}\}$ respectively, with the feature mapping $\{\phi,\psi, \upsilon\}$.
+%
+%Given the observations $\mathcal{D}_{X_1X_2X_3}=\{(x_1^i, x_2^i, x_3^i)\}_{i\in[m]}$ drawn \emph{i.i.d.} from the multiview latent variable mode $\mathbb{P}(X_1, X_2, X_3)$, we have the empirical estimation of the second/third-order embedding as
+%%
+%\begin{eqnarray*}
+%\hat\Ccal_{X_1 X_2} = \frac{1}{m} \sum_{i=1}^m \phi(x_1^i)\otimes \psi(x_2^i) = \frac{1}{m}\Phi \Psi^\top\\
+%\hat\Ccal_{X_3 X_1} = \frac{1}{m} \sum_{i=1}^m \upsilon(x_1^i)\otimes \phi(x_2^i) = \frac{1}{m}\Upsilon \Phi^\top\\
+%\hat\Ccal_{X_2 X_3} = \frac{1}{m} \sum_{i=1}^m \psi(x_1^i)\otimes \upsilon(x_2^i) = \frac{1}{m}\Psi \Upsilon^\top\\
+%\hat\Ccal_{X_1 X_2 X_3}= [\bm{I}_n; \Phi, \Psi, \Upsilon] =
+%\frac{1}{m}\bm{I}_n \times_1 \Phi \times_2 \Psi \times_3 \Upsilon
+%\end{eqnarray*}
+%%
+%
+%Find two arbitrary matrices $\bm{A,B}\in \mathbb{R}^{k \times \infty}$, so that $\bm{A}\hat{\mathcal{C}}_{X_1X_2}\bm{B}^\top$ is invertible. Theoretically, we could randomly select $k$ columns from $\Phi$ and $\Psi$ and set $\bm{A} = \Phi_k^\top, \bm{B} = \Psi_k^\top$. In practial, the first $k$ leading eigenvector directions of respect \emph{RKHS} works better.
+%\bxcomment{Should we mention using SVD is better because it improves the conditioning number of $\bm{A}\hat{\mathcal{C}}_{X_1X_2}\bm{B}^\top$?}
+%\dbcomment{this is what the first svd in the code doing.}
+%
+% Then, we have
+%%
+%\begin{eqnarray*}
+%\tilde{\mathcal{C}}_{X_1 X_2} &=& \frac{1}{m}\Phi_k^\top\Phi\Psi^\top\Psi_k = \frac{1}{m}{K}_{nk}^\top{L}_{nk}\\
+%\tilde{\mathcal{C}}_{X_3 X_1} &=& \hat{\mathcal{C}}_{X_3X_1}\Phi_k = \frac{1}{m}\Upsilon{K}_{nk}\\
+%\tilde{\mathcal{C}}_{X_3 X_2} &=& \hat{\mathcal{C}}_{X_3X_2}\Psi_k = \frac{1}{m}\Upsilon{L}_{nk}\\
+%\tilde{\mathcal{C}}_{X_1 X_2 X_3} &=&
+%\hat{\mathcal{C}}_{X_1 X_2 X_3}\times_1\Phi_k^\top
+%\times_2\Psi_k^\top = \frac{1}{m} \bm{I}_n \times_1
+%{K}_{nk}^\top \times_2 {L}_{nk}^\top \times_3
+%\Upsilon
+%\end{eqnarray*}
+%%
+%
+%Based on these matrices, we could reduce to a single view
+%%
+%\begin{eqnarray*}
+%Pair_3 &=&
+%\tilde{\mathcal{C}}_{X_3X_1}(\tilde{\mathcal{C}}_{X_1X_2}^\top)^{-1}\tilde{\mathcal{C}}_{X_3X_2}\\
+%&=&\frac{1}{m}\Upsilon{K}_{nk}({L}_{nk}^\top{K}_{nk})^{-1}{L}_{nk}^\top\Upsilon^\top = \frac{1}{m}\Upsilon{H}\Upsilon^\top
+%\end{eqnarray*}
+%where ${H} = {K}_{nk}(\mathcal{L}_{nk}^\top{K}_{nk})^{-1}{L}_{nk}^\top$.
+%
+%Assume the leading $k$ eigenvectors $\nu_k$ lie in the span of the column of $\Upsilon$, i.e., $\nu_k = \Upsilon \beta_k$ where $\beta_k\in \mathbb{R}^{m\times 1}
+%%
+%\begin{eqnarray*}
+%Pair_3\nu = \lambda \nu &\Rightarrow& (Pair_3)^\top Pair_3\nu = \lambda^2 \nu \\
+%&\Rightarrow&
+%\frac{1}{m^2} \Upsilon{H}^\top\Upsilon^\top\Upsilon{H}\Upsilon^\top\nu
+%= \lambda^2\nu \\
+%&\Rightarrow&
+%\frac{1}{m^2}\Upsilon{H^\top GHG}\bm{\beta} =
+%\lambda^2 \Upsilon\bm{\beta} \\
+%&\Rightarrow& \frac{1}{m^2}{GH^\top GHG}\beta
+%= \lambda^2{G}\beta
+%\end{eqnarray*}
+%\bxcomment{$Pair_3$ here is not symmetric. We are calculating the right singular vectors here, not the eigenvector. Maybe we should rephrase and remove $Pair_3\nu = \lambda \nu$ part}
+%\dbcomment{This is following the 2svd paper, please refer to it.}
+%
+%%
+%Then, we symmetrize and whiten the third-order embedding
+%%
+%\begin{eqnarray}
+%Triple_3 = \frac{1}{m}\tilde{\mathcal{C}}_{X_1X_2X_3} \times_1
+%[\tilde{\mathcal{C}}_{X_3X_2}\tilde{\mathcal{C}}_{X_1X_2}^{-1}]
+%\times_2
+%[\tilde{\mathcal{C}}_{X_3X_1}\tilde{\mathcal{C}}_{X_2X_1}^{-1}]
+%\end{eqnarray}
+%%
+%Plug
+%$\tilde{\mathcal{C}}_{X_3X_2}\tilde{\mathcal{C}}_{X_1X_2}^{-1} =
+%\Upsilon{L}_{nk}({K}_{nk}^\top{L}_{nk})^{-1}$
+%and
+%$\tilde{\mathcal{C}}_{X_3X_1}\tilde{\mathcal{C}}_{X_2X_1}^{-1} =
+%\Upsilon{K}_{nk}({L}_{nk}^\top{K}_{nk})^{-1}$,
+%we have
+%
+%\begin{eqnarray*}
+%Triple_3  = \frac{1}{m}\bm{I}_n \times_1
+%\Upsilon{L}_{nk}({K}_{nk}^\top
+%{L}_{nk})^{-1}{K}_{nk}^\top\\ \times_2
+%\Upsilon{K}_{nk}({L}_{nk}^\top
+%{K}_{nk})^{-1}{L}_{nk}^\top \times_3 \Upsilon
+%\end{eqnarray*}
+%
+%We multiply each mode with $\Upsilon \beta \hat{S}_k^{-\frac{1}{2}}$ to
+%whitening the data and apply power method to decompose it
+%%
+%\begin{eqnarray*}
+%\hat{\mathcal{T}} &=& Triple_3 \times_1 \hat{S}_k^{-\frac{1}{2}}\beta^\top\Upsilon^\top \times_2
+%\hat{S}_k^{-\frac{1}{2}}\beta^\top\Upsilon^\top \times_3 \hat{S}_k^{-\frac{1}{2}}\beta^\top\Upsilon^\top\\
+%&=& \frac{1}{m}\bm{I}_n \times_1
+%\hat{S}_k^{-\frac{1}{2}}\beta^\top{G}\mathcal{L}_{nk}({K}_{nk}^\top
+%{L}_{nk})^{-1}{K}_{nk}^\top \times_2\\
+%&&\hat{S}_k^{-\frac{1}{2}}\beta^\top{G}{K}_{nk}({L}_{nk}^\top
+%{K}_{nk})^{-1}{L}_{nk}^\top \times_3
+%\hat{S}_k^{-\frac{1}{2}}\beta^\top{G}
+%\end{eqnarray*}
+%%
+
+
 \bibliographystyle{icml2014}
 \bibliography{../nonparametric_mixture,../bibfile,../experiment/mlv_kernel}
 
-\clearpage
-\newpage
-
-\onecolumn
-
-\begin{center}
-{\Large Appendix}
-\end{center}
-
-%%-----------------------------------------------------------------------------------------------------------------------------------------------
-\section{Symmetrization}
-\label{sec:symmetrization}
-
-We presented the kernel algorithm for learning the multi-view latent variable model where the views has identical conditional distributions. In this section, we will extend it to the general case where the views are different. Without loss of generality, we will consider recover the operator $\mu_{X_3|h}$ for conditional distribution $\PP(X_3|h)$. The same strategy applies to other views. The idea is to reduce the multi-view case to the identical-view case based on a method by~\cite{AnandkumarEtal:twosvd12}.
-% %
-% \begin{eqnarray*}
-% \Ccal_{X_1 X_2} &=& \sum_{h \in [k]} \pi_h\, \mu_{X_1|h}\otimes \mu_{X_2|h}\\
-% \Ccal_{X_2 X_3} &=& \sum_{h \in [k]} \pi_h\, \mu_{X_2|h}\otimes \mu_{X_3|h}\\
-% \Ccal_{X_3 X_1} &=& \sum_{h \in [k]} \pi_h\, \mu_{X_3|h}\otimes \mu_{X_1|h}\\
-% \Ccal_{X_1 X_2 X_3} &=& \sum_{h \in [k]} \pi_h\, \mu_{X_1|h}\otimes \mu_{X_2|h} \otimes \mu_{X_3|h}\\
-% \end{eqnarray*}
-% %
-% Assume the conditional distribution for $\{X_1, X_2, X_3\}$ are in the \textit{RKHS} with kernels $\{\mathcal{K, L, G}\}$ respectively, with the feature mapping $\{\phi,\psi, \upsilon\}$.
-
-Given the observations $\mathcal{D}_{X_1X_2X_3}=\{(x_1^i, x_2^i, x_3^i)\}_{i\in[m]}$ drawn \emph{i.i.d.} from a multi-view latent variable model $\mathbb{P}(X_1, X_2, X_3)$, let the kernel matrix associated with $X_1$, $X_2$ and $X_3$ be $K$, $L$ and $G$ respectively and the corresponding feature map be $\phi$, $\psi$ and $\upsilon$ respectively. Furthermore, let the corresponding feature matrix be $\widetilde \Phi=(\phi(x_1^1),\ldots,\phi(x_1^m))$, $\widetilde\Psi=(\phi(x_2^1),\ldots,\phi(x_2^m))$ and $\widetilde \Upsilon=(\phi(x_3^1),\ldots,\phi(x_3^m))$. Then, we have the empirical estimation of the second/third-order embedding as
-%
-\begin{align*}
-&\widehat\Ccal_{X_1 X_2} = \frac{1}{m}\widetilde \Phi \widetilde \Psi^\top,~\widehat\Ccal_{X_3 X_1} = \frac{1}{m}\widetilde \Upsilon \widetilde \Phi^\top,~\widehat\Ccal_{X_2 X_3} = \frac{1}{m} \widetilde \Psi \widetilde \Upsilon^\top\\
-&\widehat\Ccal_{X_1 X_2 X_3}:=
-\frac{1}{m}\bm{I}_n \times_1 \widetilde \Phi \times_2 \widetilde \Psi \times_3 \widetilde \Upsilon
-\end{align*}
-%
-
-Find two arbitrary matrices $\bm{A,B}\in \mathbb{R}^{k \times \infty}$, so that $\bm{A}\widehat{\mathcal{C}}_{X_1X_2}\bm{B}^\top$ is invertible. Theoretically, we could randomly select $k$ columns from $\Phi$ and $\Psi$ and set $\bm{A} = \Phi_k^\top, \bm{B} = \Psi_k^\top$. In practial, the first $k$ leading eigenvector directions of respect \emph{RKHS} works better.
-% \bxcomment{Should we mention using SVD is better because it improves the conditioning number of $\bm{A}\widehat{\mathcal{C}}_{X_1X_2}\bm{B}^\top$?}
-% \dbcomment{this is what the first svd in the code doing.}
-%
-Then, we have
-%
-\begin{eqnarray*}
-\widetilde{\mathcal{C}}_{X_1 X_2} &=& \frac{1}{m}\widetilde \Phi_k^\top \widetilde\Phi\widetilde\Psi^\top\widetilde\Psi_k = \frac{1}{m}{K}_{nk}^\top{L}_{nk}\\
-\widetilde{\mathcal{C}}_{X_3 X_1} &=& \widehat{\mathcal{C}}_{X_3X_1}\widetilde\Phi_k = \frac{1}{m}\widetilde\Upsilon{K}_{nk}\\
-\widetilde{\mathcal{C}}_{X_3 X_2} &=& \widehat{\mathcal{C}}_{X_3X_2}\widetilde\Psi_k = \frac{1}{m}\widetilde\Upsilon{L}_{nk}\\
-\widetilde{\mathcal{C}}_{X_1 X_2 X_3} &=&
-\widehat{\mathcal{C}}_{X_1 X_2 X_3}\times_1\widetilde\Phi_k^\top
-\times_2\widetilde\Psi_k^\top = \frac{1}{m} \bm{I}_n \times_1
-{K}_{nk}^\top \times_2 {L}_{nk}^\top \times_3
-\widetilde\Upsilon
-\end{eqnarray*}
-%
-
-Based on these matrices, we could reduce to a single view
-%
-\begin{eqnarray*}
-Pair_3 &=&
-\widetilde{\mathcal{C}}_{X_3X_1}(\widetilde{\mathcal{C}}_{X_1X_2}^\top)^{-1}\widetilde{\mathcal{C}}_{X_3X_2}\\
-&=&\frac{1}{m}\widetilde\Upsilon{K}_{nk}({L}_{nk}^\top{K}_{nk})^{-1}{L}_{nk}^\top\widetilde\Upsilon^\top = \frac{1}{m}\widetilde\Upsilon{H}\widetilde\Upsilon^\top
-\end{eqnarray*}
-where ${H} = {K}_{nk}(\mathcal{L}_{nk}^\top{K}_{nk})^{-1}{L}_{nk}^\top$.
-
-Assume the leading $k$ eigenvectors $\nu_k$ lie in the span of the column of $\Phi$, i.e., $\nu_k = \Upsilon \beta_k$ where $\beta_k\in \mathbb{R}^{m\times 1}$
-%
-\begin{eqnarray*}
-Pair_3\nu = \lambda \nu &\Rightarrow& (Pair_3)^\top Pair_3\nu = \lambda^2 \nu \\
-&\Rightarrow&
-\frac{1}{m^2} \widetilde\Upsilon{H}^\top\widetilde\Upsilon^\top\widetilde\Upsilon{H}\widetilde\Upsilon^\top\nu
-= \lambda^2\nu \\
-&\Rightarrow&
-\frac{1}{m^2}\widetilde\Upsilon{H^\top GHG}\bm{\beta} =
-\lambda^2 \widetilde\Upsilon\bm{\beta} \\
-&\Rightarrow& \frac{1}{m^2}{GH^\top GHG}\beta
-= \lambda^2{G}\beta
-\end{eqnarray*}
-%
-Then, we symmetrize and whiten the third-order embedding
-%
-\begin{eqnarray}
-Triple_3 = \frac{1}{m}\widetilde{\mathcal{C}}_{X_1X_2X_3} \times_1
-[\widetilde{\mathcal{C}}_{X_3X_2}\widetilde{\mathcal{C}}_{X_1X_2}^{-1}]
-\times_2
-[\widetilde{\mathcal{C}}_{X_3X_1}\widetilde{\mathcal{C}}_{X_2X_1}^{-1}]
-\end{eqnarray}
-%
-Plug
-$\widetilde{\mathcal{C}}_{X_3X_2}\widetilde{\mathcal{C}}_{X_1X_2}^{-1} =
-\widetilde\Upsilon{L}_{nk}({K}_{nk}^\top{L}_{nk})^{-1}$
-and
-$\widetilde{\mathcal{C}}_{X_3X_1}\widetilde{\mathcal{C}}_{X_2X_1}^{-1} =
-\widetilde\Upsilon{K}_{nk}({L}_{nk}^\top{K}_{nk})^{-1}$,
-we have
-
-\begin{eqnarray*}
-Triple_3  = \frac{1}{m}\bm{I}_n \times_1
-\widetilde\Upsilon{L}_{nk}({K}_{nk}^\top
-{L}_{nk})^{-1}{K}_{nk}^\top\\ \times_2
-\widetilde\Upsilon{K}_{nk}({L}_{nk}^\top
-{K}_{nk})^{-1}{L}_{nk}^\top \times_3 \Upsilon
-\end{eqnarray*}
-
-We multiply each mode with $\Upsilon \beta \widehat{S}_k^{-\frac{1}{2}}$ to
-whitening the data and apply power method to decompose it
-%
-\begin{eqnarray*}
-\widehat{\mathcal{T}} &=& Triple_3 \times_1 \widehat{S}_k^{-\frac{1}{2}}\beta^\top\widetilde\Upsilon^\top \times_2
-\widehat{S}_k^{-\frac{1}{2}}\beta^\top\widetilde\Upsilon^\top \times_3 \widehat{S}_k^{-\frac{1}{2}}\beta^\top\widetilde\Upsilon^\top\\
-&=& \frac{1}{m}\bm{I}_n \times_1
-\widehat{S}_k^{-\frac{1}{2}}\beta^\top{G}\mathcal{L}_{nk}({K}_{nk}^\top
-{L}_{nk})^{-1}{K}_{nk}^\top \times_2\\
-&&\widehat{S}_k^{-\frac{1}{2}}\beta^\top{G}{K}_{nk}({L}_{nk}^\top
-{K}_{nk})^{-1}{L}_{nk}^\top \times_3
-\widehat{S}_k^{-\frac{1}{2}}\beta^\top{G}
-\end{eqnarray*}
-%
-
 \input{concentration-bounds.tex}
 \input{../experiment/single_cond_exp.tex}
-
 \end{document}
