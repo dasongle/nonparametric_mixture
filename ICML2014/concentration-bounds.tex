@@ -55,12 +55,12 @@ $(\lambda, \Phi)$.
 
 \section{Sample Complexity}
 
-Let $\kappa:=\sup_{x \in \Omega} k(x,x)$,   $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, $\pi_{\min}:=\min_{i\in [k]} \pi_i$ and $\sigma_k(\Ccal_{X_1, X_2})$ be the $k$-th singular value of $\Ccal_{X_1, X_2}$.
+Let $\kappa:=\sup_{x \in \Omega} k(x,x)$,   $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, $r_{\min}:=\min_{i\in [k]} \pi_i$ and $\sigma_k(\Ccal_{X_1, X_2})$ be the $k$-th singular value of $\Ccal_{X_1, X_2}$.
 
 \begin{theorem}[Sample Bounds]\label{thm:samplebound}
 Pick  any $\delta\in (0,1)$. When the number of samples $m$ satisfies
-\beq m >\frac{\rho\kappa^2  \log\frac{\delta}{2}}{\sigma_k(\Ccal_{X_1, X_2})}, 
-\quad \rho:= \max\left(\frac{512  }{\sigma^3_k(\Ccal_{X_1, X_2})}, \frac{C' k^2 }{\sigma_k^{3}(\Ccal_{X_1, X_2})},\frac{C^{''} k^{\frac{2}{3}} }{\pi_{\min}^{\frac{1}{3}} }\right),\eeq for some constants $C', C^{''}>0$, and the number of iterations $N$  and  the number of random initialization vectors $L$  (drawn uniformly on the sphere $\mathcal{S}^{k-1}$)  satisfy
+\beq m >\frac{\rho\kappa^2  \log\frac{\delta}{2}}{\sigma_k(\Ccal_{X_1, X_2})},
+\quad \rho:= \max\left(\frac{512  }{\sigma^3_k(\Ccal_{X_1, X_2})}, \frac{C' k^2 }{\sigma_k^{3}(\Ccal_{X_1, X_2})},\frac{C^{''} k^{\frac{2}{3}} }{r_{\min}^{\frac{1}{3}} }\right),\eeq for some constants $C', C^{''}>0$, and the number of iterations $N$  and  the number of random initialization vectors $L$  (drawn uniformly on the sphere $\mathcal{S}^{k-1}$)  satisfy
 \begin{align*}
 N \geq C_2 \cdot \biggl( \log(k) + \log\log\Bigl(
 \frac{1}{\sqrt{\pi}_{\min}\epsilon_T} \Bigr) \biggr),\\
@@ -85,7 +85,7 @@ and
 T - \sum_{j=1}^k \hat\lambda_j \hat{\phi}_j^{\otimes 3}
 \biggr\| \leq 55\eps_T,
 \] where $\eps_T$ is the tensor perturbation bound
-\[ \eps_T := \|\h{\Tcal} - \Tcal\| \leq 
+\[ \eps_T := \|\h{\Tcal} - \Tcal\| \leq
 \frac{12 \kappa \sqrt{\log\frac{\delta}{2}}}{\sqrt{m} \, \sigma_k^{1.5}(\Ccal_{X_1, X_2})} + \frac{512 \sqrt{2} \kappa^3 \left(\log\frac{\delta}{2}\right)^{1.5}}{m^{1.5} \,\sigma_k^{3}(\Ccal_{X_1, X_2}) \sqrt{\pi}_{\min}}\]
 
 \end{theorem}
@@ -172,13 +172,13 @@ $$\h{\Tcal} := \h{\Ccal}_{X_1 X_2 X_3} \times_1 (\h{\Wcal}^\top) \times_2 (\h{\W
 $$\Tcal := \Ccal_{X_1 X_2 X_3} \times_1 (\Wcal^\top ) \times_2 (\Wcal^\top ) \times_3 (\Wcal^\top ).$$ Further, we have
 \beq\label{eqn:triplesexpression}\Ccal_{X_1 X_2 X_3}= \sum_{h\in [k]} \pi_h \cdot \mu_{X|h} \otimes \mu_{X|h} \otimes \mu_{X|h} \tcr{+ E_{X_1, X_2, X_3}}\eeq
 
-Let $\epsilon_{triples}:= \|\h{\Ccal}_{X_1 X_2 X_3}-\Ccal_{X_1 X_2 X_3}\|_{}$. Let $\pi_{\min}:=\min_{h\in [k]}\pi_h$.
+Let $\epsilon_{triples}:= \|\h{\Ccal}_{X_1 X_2 X_3}-\Ccal_{X_1 X_2 X_3}\|_{}$. Let $r_{\min}:=\min_{h\in [k]}\pi_h$.
 
 \begin{lemma}[Tensor perturbation bound]
 Assuming that $\epsilon_{pairs} < 0.5 \sigma_k(\Ccal_{X_1 X_2})$, we have
 \beq\label{eqn:epsilonT} \epsilon_T:= \|\h{\Tcal} - \Tcal\|
-\leq \frac{2\sqrt{2}\epsilon_{triples}}{\sigma_k(\Ccal_{X_1 X_2})^{1.5} }+\frac{\epsilon_W^3}{\sqrt{\pi_{\min}}}
-\tcr{+ \|E_{X_1 X_2 X_3}\| \frac{\epsilon_W^3}{\pi_{\min}^{1.5} \sigma_k(M)^3} }.\eeq
+\leq \frac{2\sqrt{2}\epsilon_{triples}}{\sigma_k(\Ccal_{X_1 X_2})^{1.5} }+\frac{\epsilon_W^3}{\sqrt{r_{\min}}}
+\tcr{+ \|E_{X_1 X_2 X_3}\| \frac{\epsilon_W^3}{r_{\min}^{1.5} \sigma_k(M)^3} }.\eeq
 \end{lemma}
 
 
@@ -193,10 +193,10 @@ first note that
 \[ \Ccal_{X_1, X_2, X_3} = \sum_{h\in [k]} \pi_h \cdot M_h \otimes M_h \otimes M_h \tcr{+ E_{X_1, X_2, X_3}}, \]
  \tcr{ where $\|E_{X_1, X_2, X_3}\|$ is the residual and we need to bound this in non-parametric case.}
 \begin{align*} \|\h{\Tcal}-\Tcal\|&= \| \Ccal_{X_1 X_2 X_3}\times_1 (\h{\Wcal} -\Wcal)^\top \times_2 (\h{\Wcal} -\Wcal)^\top \times_3 (\h{\Wcal}-\Wcal)^\top\| \\
-&\leq \frac{ \| \Diag(\pi)^{1/2}M^\top(\h{\Wcal}-\Wcal)\|^3}{\sqrt{\pi_{\min}}}
+&\leq \frac{ \| \Diag(\pi)^{1/2}M^\top(\h{\Wcal}-\Wcal)\|^3}{\sqrt{r_{\min}}}
 \tcr{+ \|E_{X_1 X_2 X_3}\| \|\h{\Wcal}-\Wcal\|^3}\\
-&= \frac{\epsilon_W^3}{\sqrt{\pi_{\min}}}
-\tcr{+ \|E_{X_1 X_2 X_3}\| \frac{\epsilon_W^3}{\pi_{\min}^{1.5} \sigma_k(M)^3} }
+&= \frac{\epsilon_W^3}{\sqrt{r_{\min}}}
+\tcr{+ \|E_{X_1 X_2 X_3}\| \frac{\epsilon_W^3}{r_{\min}^{1.5} \sigma_k(M)^3} }
 \end{align*}
 \eprf\\
 
@@ -205,17 +205,17 @@ first note that
 \bprfof{Theorem~\ref{thm:samplebound}}
 
 We obtain a condition on the above perturbation $\epsilon_T$ in \eqref{eqn:epsilonT} by applying Theorem~\ref{thm:robustpower} as
-$ \epsilon_T\leq C_1\lambda_{\min} R_0^2$. Here, we have $\lambda_{i} = 1/\sqrt{\pi_{i}}\geq 1$. For random initialization, we have that $R_0 \sim 1/\sqrt{k}$, with probability $1-\delta$ using $\poly(k) \poly(1/\delta)$ trials~\cite[Thm. 5.1]{AnandkumarEtal:tensor12}. Thus, we require that $ \epsilon_T  \leq \frac{C_1}{k}$. Summarizing, we require for the following conditions to hold
+$ \epsilon_T\leq C_1\lambda_{\min} R_0^2$. Here, we have $\lambda_{i} = 1/\sqrt{r_{i}}\geq 1$. For random initialization, we have that $R_0 \sim 1/\sqrt{k}$, with probability $1-\delta$ using $\poly(k) \poly(1/\delta)$ trials~\cite[Thm. 5.1]{AnandkumarEtal:tensor12}. Thus, we require that $ \epsilon_T  \leq \frac{C_1}{k}$. Summarizing, we require for the following conditions to hold
 \beq\epsilon_{pairs}\leq 0.5 \sigma_k(\Ccal_{X_1 X_2}), \quad \epsilon_T  \leq \frac{C_1}{k}.\eeq
 We now substitute for $\epsilon_{pairs}$ and $\epsilon_{triples}$ in \eqref{eqn:epsilonT} using Lemma~\ref{lemma:pairs} and Lemma~\ref{lemma:triples}. First consider the case when   $H$ is exactly a $k$-way categorical variable.
 
 \paragraph{Case of $k$-component mixture: }Here, $E_{X_1, X_2}=0$ and $E_{X_1,X_2,X_3}=0$ in \eqref{eqn:pairsexpression} and \eqref{eqn:triplesexpression}. We have that
-\[ \epsilon_W \leq \frac{4\epsilon_{pairs}}{\sigma_k(\Ccal_{X_1, X_2})} 
+\[ \epsilon_W \leq \frac{4\epsilon_{pairs}}{\sigma_k(\Ccal_{X_1, X_2})}
 \leq \frac{8\sqrt{2}\kappa \sqrt{\log\frac{\delta}{2}}}{\sqrt{m} \,\sigma_k(\Ccal_{X_1, X_2})}, \]with probability $1-\delta$. It is required that $\epsilon_W < 0.5 \sigma_k(\Ccal_{X_1, X_2})$, which yields that \beq\label{eqn:cond1} m > \frac{512 \kappa^2 \log\frac{\delta}{2}}{\sigma^4_k(\Ccal_{X_1, X_2})}.\eeq
 Further we require that $\epsilon_T \leq C_1/k$, which implies that each of the terms in \eqref{eqn:epsilonT} is less than $C/k$, for some constant $C$. Thus, we have
 \[ \frac{2\sqrt{2} \epsilon_{triples}}{\sigma_k^{1.5}(\Ccal_{X_1, X_2})} < \frac{C}{k}\quad\Rightarrow\quad m > \frac{C' k^2 \kappa^2 \log \frac{\delta}{2}}{\sigma_k^{3}(\Ccal_{X_1, X_2})},\]
 for some constant $C'$ with probability $1-\delta$. Similarly for the second term in \eqref{eqn:epsilonT}, we have
-\[\frac{\epsilon_W^3}{\sqrt{\pi_{\min}}}< \frac{C}{k} \quad\Rightarrow\quad m > \frac{C^{''} k^{\frac{2}{3}} \kappa^2 \log\frac{\delta}{2}}{\pi_{\min}^{\frac{1}{3}} \sigma_k(\Ccal_{X_1, X_2})}, \]for some other constant $C^{''}$ with probability $1-\delta$. Thus, we have the result in Theorem~\ref{thm:samplebound}.
+\[\frac{\epsilon_W^3}{\sqrt{r_{\min}}}< \frac{C}{k} \quad\Rightarrow\quad m > \frac{C^{''} k^{\frac{2}{3}} \kappa^2 \log\frac{\delta}{2}}{r_{\min}^{\frac{1}{3}} \sigma_k(\Ccal_{X_1, X_2})}, \]for some other constant $C^{''}$ with probability $1-\delta$. Thus, we have the result in Theorem~\ref{thm:samplebound}.
 
 \aacomment{let me know if the extension beyond $k$-mixture is interesting and I will add it.}
 
