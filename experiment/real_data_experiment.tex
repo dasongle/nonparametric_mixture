@@ -100,9 +100,11 @@
 %\section{Multiview Latent Variable Models}
 
 \section{Flow Cytometry Dataset}
-We also tested our method on flow cytometry (FCM) data for clustering, and compared with state-of-the-art algorithms in the application. FCM data are multivariate measurements from flow cytometers that record light scatter and fluorescence emission properties of thousands of individual cells. It contains important information about cell structures and can help diagnose human disease \cite{cytometry_nature}. The task of interest is to cluster the individual cells into groups. This is challenging because the distribution of the data is non-Gaussian and heavily skewed.
+Flow cytometry (FCM) data are multivariate measurements from flow cytometers that record light scatter and fluorescence emission properties of hundreds of thousands of individual cells. They are important to studying the cell structures of normal and abnormal cells and diagnosing human disease \cite{cytometry_nature}. This is a challenging dataset for clustering because the distribution of the data is non-Gaussian and heavily skewed.
 
-The datasets are taken from the FlowCAP challenge \cite{cytometry_nature}, and it consists of GvHD, DLBCL and HSCT. Each dataset contains from 10 to 30 samples, and each sample is made up of 2 to 4 clusters of cells. The number of measurements for cells ranges from 5 to 6. Each sample is considered a separate clustering task, and the performance is evaluated by the weighted f-score used in \cite{cytometry_nature}. Then the average f-score is reported for each dataset and we also compute the confidence interval using bootstrap.
+We experimented on DLBCL dataset from the FlowCAP challenge \cite{cytometry_nature}. It contains 30 samples, and each sample consists of tens of thousands of cells measurements in 5 dimensions, with 2 to 4 clusters. Each sample is a separate clustering task, and the performance is evaluated by the weighted f-score used in \cite{cytometry_nature}. For each sample, we selected the best kernel bandwidth by log-likelihood with 5-fold cross validation. For comparison, we also evaluated the performance of EM algorithm for mixture of Gaussians with diagonal covariances, flowMeans, FLAME.
+
+
 
 \bibliography{mlv_kernel}
 \bibliographystyle{icml2013}
