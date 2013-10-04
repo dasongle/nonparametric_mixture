@@ -573,11 +573,14 @@ Our method has a hyper-parameter, kernel bandwidth, which we selected for each v
 We generated three-dimensional synthetic data from various mixture models. The variables corresponding to the dimensions are independent given the latent component indicator. More specifically, we explore two settings
 \begin{enumerate}[noitemsep,nolistsep]
   \item Gaussian conditional densities with different variances;
-  \item Mixture of Gaussian and Gamma conditional densities.
+  \item Mixture of Gaussian and \dbcomment{(shifted)} Gamma conditional densities.
 \end{enumerate}
+
+\dbcomment{Actually, we have four setting. Different conditional distribution for each view or all the views have the same distribution.}
+
 The Gamma distribution has density 
 $$p(x)=\frac{x^{(d-1)}e^{-x/\theta}}{\theta^d \Gamma(d)},$$ 
-where we chose the shape parameter $d=1$ such that density is very skewed. Furthermore, we chose the mean and variance parameters of the Gaussian/Gamma density such that component pair-wise overlap is relatively small according to the fisher ratio $\frac{(\mu_1 - \mu_2)^2}{\sigma_1^2+\sigma_2^2}$.
+where we chose the shape parameter $d=1$ such that density is very skewed. Furthermore, we chose the mean and variance parameters of the Gaussian/Gamma density such that component pair-wise overlap is relatively small according to the fisher ratio $\frac{(\mu_1 - \mu_2)^2}{\sigma_1^2+\sigma_2^2}$. \dbcomment{In experiment, we choose $d<1$.}
 
 \begin{figure*}[!t]
 %   \centering
@@ -662,6 +665,7 @@ Given the observations $\mathcal{D}_{X_1X_2X_3}=\{(x_1^i, x_2^i, x_3^i)\}_{i\in[
 
 Find two arbitrary matrices $\bm{A,B}\in \mathbb{R}^{k \times \infty}$, so that $\bm{A}\hat{\mathcal{C}}_{X_1X_2}\bm{B}^\top$ is invertible. Theoretically, we could randomly select $k$ columns from $\Phi$ and $\Psi$ and set $\bm{A} = \Phi_k^\top, \bm{B} = \Psi_k^\top$. In practial, the first $k$ leading eigenvector directions of respect \emph{RKHS} works better.
 \bxcomment{Should we mention using SVD is better because it improves the conditioning number of $\bm{A}\hat{\mathcal{C}}_{X_1X_2}\bm{B}^\top$?}
+\dbcomment{this is what the first svd in the code doing.}
 
  Then, we have
 %
@@ -700,6 +704,7 @@ Pair_3\nu = \lambda \nu &\Rightarrow& (Pair_3)^\top Pair_3\nu = \lambda^2 \nu \\
 = \lambda^2{G}\beta
 \end{eqnarray*}
 \bxcomment{$Pair_3$ here is not symmetric. We are calculating the right singular vectors here, not the eigenvector. Maybe we should rephrase and remove $Pair_3\nu = \lambda \nu$ part}
+\dbcomment{This is following the 2svd paper, please refer to it.}
 
 %
 Then, we symmetrize and whiten the third-order embedding
