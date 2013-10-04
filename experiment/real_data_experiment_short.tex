@@ -4,10 +4,10 @@ Flow cytometry (FCM) data are multivariate measurements from flow cytometers tha
 We experimented on DLBCL dataset from the FlowCAP challenge \cite{cytometry_nature}. It contains 30 samples, and each sample consists of tens of thousands of cells measurements in 5 dimensions, with 2 to 4 clusters. Each sample is a separate clustering task, and the performance is evaluated by the weighted f-score used in \cite{cytometry_nature}. For each sample, we selected the best kernel bandwidth by log-likelihood with 5-fold cross validation. For comparison, we also evaluated the performance of EM algorithm for mixture of Gaussians with diagonal covariances. Fig.~\ref{fig:real_data} presents the results sorted by sample size.
 
 
-\begin{figure}[h]
+\begin{figure*}
   \centering
-  \includegraphics[width=0.9\columnwidth]{../experiment/figure/paired_bar_chat} 
+  \includegraphics[width=0.85\textwidth]{../experiment/figure/paired_bar_chat} 
    \vspace{-3mm}
   \caption{Clustering results on DLBCL flow cytometry data. There are 30 samples, each group consists of f-scores from mixture of Gaussian with diagonal covariances and kernel spectral method. The samples are ordered by increasing sample size.}\label{fig:real_data}
   \vspace{-3mm}
-\end{figure}
+\end{figure*}
