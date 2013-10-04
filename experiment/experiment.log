@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.11)  3 OCT 2013 11:27
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.11)  3 OCT 2013 20:21
 entering extended mode
 **C:/Users/Double/Desktop/nonparametric_mixture/experiment/experiment.tex
 (C:/Users/Double/Desktop/nonparametric_mixture/experiment/experiment.tex
@@ -395,7 +395,7 @@ File: figure/diff_gauss_k_2_view_3.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_2_view_3.pdf>
 Package pdftex.def Info: figure/diff_gauss_k_2_view_3.pdf used on input line 12
-1.
+5.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
 <figure/diff_gauss_k_2_view_2.pdf, id=37, 433.62pt x 361.35pt>
@@ -403,18 +403,18 @@ File: figure/diff_gauss_k_2_view_2.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_2_view_2.pdf>
 Package pdftex.def Info: figure/diff_gauss_k_2_view_2.pdf used on input line 12
-4.
+8.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
 <figure/diff_gauss_k_2_view_1.pdf, id=38, 433.62pt x 361.35pt>
 File: figure/diff_gauss_k_2_view_1.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_2_view_1.pdf>
-Package pdftex.def Info: figure/diff_gauss_k_2_view_1.pdf used on input line 12
-7.
+Package pdftex.def Info: figure/diff_gauss_k_2_view_1.pdf used on input line 13
+1.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-Overfull \hbox (7.98674pt too wide) in paragraph at lines 121--128
+Overfull \hbox (7.98674pt too wide) in paragraph at lines 125--132
 [][] [][] [][] 
  []
 
@@ -423,15 +423,15 @@ File: figure/diff_gauss_k_3_view_3.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_3_view_3.pdf>
 Package pdftex.def Info: figure/diff_gauss_k_3_view_3.pdf used on input line 13
-5.
+9.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
 <figure/diff_gauss_k_3_view_2.pdf, id=40, 433.62pt x 361.35pt>
 File: figure/diff_gauss_k_3_view_2.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_3_view_2.pdf>
-Package pdftex.def Info: figure/diff_gauss_k_3_view_2.pdf used on input line 13
-8.
+Package pdftex.def Info: figure/diff_gauss_k_3_view_2.pdf used on input line 14
+2.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
 <figure/diff_gauss_k_3_view_1.pdf, id=41, 433.62pt x 361.35pt>
@@ -439,10 +439,10 @@ File: figure/diff_gauss_k_3_view_1.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_3_view_1.pdf>
 Package pdftex.def Info: figure/diff_gauss_k_3_view_1.pdf used on input line 14
-1.
+5.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-Overfull \hbox (7.98674pt too wide) in paragraph at lines 135--142
+Overfull \hbox (7.98674pt too wide) in paragraph at lines 139--146
 [][] [][] [][] 
  []
 
@@ -450,8 +450,8 @@ Overfull \hbox (7.98674pt too wide) in paragraph at lines 135--142
 File: figure/diff_gauss_k_4_view_3.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_4_view_3.pdf>
-Package pdftex.def Info: figure/diff_gauss_k_4_view_3.pdf used on input line 14
-8.
+Package pdftex.def Info: figure/diff_gauss_k_4_view_3.pdf used on input line 15
+2.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
 <figure/diff_gauss_k_4_view_2.pdf, id=43, 433.62pt x 361.35pt>
@@ -459,7 +459,7 @@ File: figure/diff_gauss_k_4_view_2.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_4_view_2.pdf>
 Package pdftex.def Info: figure/diff_gauss_k_4_view_2.pdf used on input line 15
-1.
+5.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
 <figure/diff_gauss_k_4_view_1.pdf, id=44, 433.62pt x 361.35pt>
@@ -467,10 +467,10 @@ File: figure/diff_gauss_k_4_view_1.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_4_view_1.pdf>
 Package pdftex.def Info: figure/diff_gauss_k_4_view_1.pdf used on input line 15
-4.
+8.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-Overfull \hbox (7.98674pt too wide) in paragraph at lines 148--155
+Overfull \hbox (7.98674pt too wide) in paragraph at lines 152--159
 [][] [][] [][] 
  []
 
@@ -479,7 +479,7 @@ File: figure/diff_gauss_k_8_view_3.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_8_view_3.pdf>
 Package pdftex.def Info: figure/diff_gauss_k_8_view_3.pdf used on input line 16
-1.
+5.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
 <figure/diff_gauss_k_8_view_2.pdf, id=46, 433.62pt x 361.35pt>
@@ -487,18 +487,18 @@ File: figure/diff_gauss_k_8_view_2.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_8_view_2.pdf>
 Package pdftex.def Info: figure/diff_gauss_k_8_view_2.pdf used on input line 16
-4.
+8.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
 <figure/diff_gauss_k_8_view_1.pdf, id=47, 433.62pt x 361.35pt>
 File: figure/diff_gauss_k_8_view_1.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_8_view_1.pdf>
-Package pdftex.def Info: figure/diff_gauss_k_8_view_1.pdf used on input line 16
-7.
+Package pdftex.def Info: figure/diff_gauss_k_8_view_1.pdf used on input line 17
+1.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-Overfull \hbox (7.98674pt too wide) in paragraph at lines 161--168
+Overfull \hbox (7.98674pt too wide) in paragraph at lines 165--172
 [][] [][] [][] 
  []
 
@@ -506,284 +506,396 @@ Overfull \hbox (7.98674pt too wide) in paragraph at lines 161--168
 File: figure/sym_gauss_k_2.pdf Graphic file (type pdf)
 
 <use figure/sym_gauss_k_2.pdf>
-Package pdftex.def Info: figure/sym_gauss_k_2.pdf used on input line 175.
+Package pdftex.def Info: figure/sym_gauss_k_2.pdf used on input line 179.
 (pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
 
 <figure/sym_gauss_k_3.pdf, id=49, 433.62pt x 361.35pt>
 File: figure/sym_gauss_k_3.pdf Graphic file (type pdf)
 
 <use figure/sym_gauss_k_3.pdf>
-Package pdftex.def Info: figure/sym_gauss_k_3.pdf used on input line 178.
+Package pdftex.def Info: figure/sym_gauss_k_3.pdf used on input line 182.
 (pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
 
 <figure/sym_gauss_k_4.pdf, id=50, 433.62pt x 361.35pt>
 File: figure/sym_gauss_k_4.pdf Graphic file (type pdf)
 
 <use figure/sym_gauss_k_4.pdf>
-Package pdftex.def Info: figure/sym_gauss_k_4.pdf used on input line 181.
+Package pdftex.def Info: figure/sym_gauss_k_4.pdf used on input line 185.
 (pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
 
 <figure/sym_gauss_k_8.pdf, id=51, 433.62pt x 361.35pt>
 File: figure/sym_gauss_k_8.pdf Graphic file (type pdf)
 
 <use figure/sym_gauss_k_8.pdf>
-Package pdftex.def Info: figure/sym_gauss_k_8.pdf used on input line 184.
+Package pdftex.def Info: figure/sym_gauss_k_8.pdf used on input line 188.
 (pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
 
-<figure/diff_heter_k_2_view_3.pdf, id=52, 433.62pt x 361.35pt>
+<figure/sp_diff_gauss_k_2_view_3.pdf, id=52, 433.62pt x 361.35pt>
+File: figure/sp_diff_gauss_k_2_view_3.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_gauss_k_2_view_3.pdf>
+Package pdftex.def Info: figure/sp_diff_gauss_k_2_view_3.pdf used on input line
+ 200.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+<figure/sp_diff_gauss_k_2_view_2.pdf, id=53, 433.62pt x 361.35pt>
+File: figure/sp_diff_gauss_k_2_view_2.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_gauss_k_2_view_2.pdf>
+Package pdftex.def Info: figure/sp_diff_gauss_k_2_view_2.pdf used on input line
+ 203.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+<figure/sp_diff_gauss_k_2_view_1.pdf, id=54, 433.62pt x 361.35pt>
+File: figure/sp_diff_gauss_k_2_view_1.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_gauss_k_2_view_1.pdf>
+Package pdftex.def Info: figure/sp_diff_gauss_k_2_view_1.pdf used on input line
+ 206.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+Overfull \hbox (7.98674pt too wide) in paragraph at lines 200--207
+[][] [][] [][] 
+ []
+
+<figure/sp_diff_gauss_k_3_view_3.pdf, id=55, 433.62pt x 361.35pt>
+File: figure/sp_diff_gauss_k_3_view_3.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_gauss_k_3_view_3.pdf>
+Package pdftex.def Info: figure/sp_diff_gauss_k_3_view_3.pdf used on input line
+ 214.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+<figure/sp_diff_gauss_k_3_view_2.pdf, id=56, 433.62pt x 361.35pt>
+File: figure/sp_diff_gauss_k_3_view_2.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_gauss_k_3_view_2.pdf>
+Package pdftex.def Info: figure/sp_diff_gauss_k_3_view_2.pdf used on input line
+ 217.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+<figure/sp_diff_gauss_k_3_view_1.pdf, id=57, 433.62pt x 361.35pt>
+File: figure/sp_diff_gauss_k_3_view_1.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_gauss_k_3_view_1.pdf>
+Package pdftex.def Info: figure/sp_diff_gauss_k_3_view_1.pdf used on input line
+ 220.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+Overfull \hbox (7.98674pt too wide) in paragraph at lines 214--221
+[][] [][] [][] 
+ []
+
+<figure/sp_diff_gauss_k_4_view_3.pdf, id=58, 433.62pt x 361.35pt>
+File: figure/sp_diff_gauss_k_4_view_3.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_gauss_k_4_view_3.pdf>
+Package pdftex.def Info: figure/sp_diff_gauss_k_4_view_3.pdf used on input line
+ 228.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+<figure/sp_diff_gauss_k_4_view_2.pdf, id=59, 433.62pt x 361.35pt>
+File: figure/sp_diff_gauss_k_4_view_2.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_gauss_k_4_view_2.pdf>
+Package pdftex.def Info: figure/sp_diff_gauss_k_4_view_2.pdf used on input line
+ 231.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+<figure/sp_diff_gauss_k_4_view_1.pdf, id=60, 433.62pt x 361.35pt>
+File: figure/sp_diff_gauss_k_4_view_1.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_gauss_k_4_view_1.pdf>
+Package pdftex.def Info: figure/sp_diff_gauss_k_4_view_1.pdf used on input line
+ 234.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+Overfull \hbox (7.98674pt too wide) in paragraph at lines 228--235
+[][] [][] [][] 
+ []
+
+<figure/sp_diff_gauss_k_8_view_3.pdf, id=61, 433.62pt x 361.35pt>
+File: figure/sp_diff_gauss_k_8_view_3.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_gauss_k_8_view_3.pdf>
+Package pdftex.def Info: figure/sp_diff_gauss_k_8_view_3.pdf used on input line
+ 242.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+<figure/sp_diff_gauss_k_8_view_2.pdf, id=62, 433.62pt x 361.35pt>
+File: figure/sp_diff_gauss_k_8_view_2.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_gauss_k_8_view_2.pdf>
+Package pdftex.def Info: figure/sp_diff_gauss_k_8_view_2.pdf used on input line
+ 245.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+<figure/sp_diff_gauss_k_8_view_1.pdf, id=63, 433.62pt x 361.35pt>
+File: figure/sp_diff_gauss_k_8_view_1.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_gauss_k_8_view_1.pdf>
+Package pdftex.def Info: figure/sp_diff_gauss_k_8_view_1.pdf used on input line
+ 248.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+Overfull \hbox (7.98674pt too wide) in paragraph at lines 242--249
+[][] [][] [][] 
+ []
+
+<figure/sp_sym_gauss_k_2.pdf, id=64, 433.62pt x 361.35pt>
+File: figure/sp_sym_gauss_k_2.pdf Graphic file (type pdf)
+
+<use figure/sp_sym_gauss_k_2.pdf>
+Package pdftex.def Info: figure/sp_sym_gauss_k_2.pdf used on input line 257.
+(pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
+
+<figure/sp_sym_gauss_k_3.pdf, id=65, 433.62pt x 361.35pt>
+File: figure/sp_sym_gauss_k_3.pdf Graphic file (type pdf)
+
+<use figure/sp_sym_gauss_k_3.pdf>
+Package pdftex.def Info: figure/sp_sym_gauss_k_3.pdf used on input line 260.
+(pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
+
+<figure/sp_sym_gauss_k_4.pdf, id=66, 433.62pt x 361.35pt>
+File: figure/sp_sym_gauss_k_4.pdf Graphic file (type pdf)
+
+<use figure/sp_sym_gauss_k_4.pdf>
+Package pdftex.def Info: figure/sp_sym_gauss_k_4.pdf used on input line 263.
+(pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
+
+<figure/sp_sym_gauss_k_8.pdf, id=67, 433.62pt x 361.35pt>
+File: figure/sp_sym_gauss_k_8.pdf Graphic file (type pdf)
+
+<use figure/sp_sym_gauss_k_8.pdf>
+Package pdftex.def Info: figure/sp_sym_gauss_k_8.pdf used on input line 266.
+(pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
+
+<figure/diff_heter_k_2_view_3.pdf, id=68, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_2_view_3.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_2_view_3.pdf>
-Package pdftex.def Info: figure/diff_heter_k_2_view_3.pdf used on input line 19
-2.
+Package pdftex.def Info: figure/diff_heter_k_2_view_3.pdf used on input line 27
+7.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_heter_k_2_view_2.pdf, id=53, 433.62pt x 361.35pt>
+<figure/diff_heter_k_2_view_2.pdf, id=69, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_2_view_2.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_2_view_2.pdf>
-Package pdftex.def Info: figure/diff_heter_k_2_view_2.pdf used on input line 19
-5.
+Package pdftex.def Info: figure/diff_heter_k_2_view_2.pdf used on input line 28
+0.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_heter_k_2_view_1.pdf, id=54, 433.62pt x 361.35pt>
+<figure/diff_heter_k_2_view_1.pdf, id=70, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_2_view_1.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_2_view_1.pdf>
-Package pdftex.def Info: figure/diff_heter_k_2_view_1.pdf used on input line 19
-8.
+Package pdftex.def Info: figure/diff_heter_k_2_view_1.pdf used on input line 28
+3.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-Overfull \hbox (7.98674pt too wide) in paragraph at lines 192--199
+Overfull \hbox (7.98674pt too wide) in paragraph at lines 277--284
 [][] [][] [][] 
  []
 
-<figure/diff_heter_k_3_view_3.pdf, id=55, 433.62pt x 361.35pt>
+<figure/diff_heter_k_3_view_3.pdf, id=71, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_3_view_3.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_3_view_3.pdf>
-Package pdftex.def Info: figure/diff_heter_k_3_view_3.pdf used on input line 20
-6.
+Package pdftex.def Info: figure/diff_heter_k_3_view_3.pdf used on input line 29
+1.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_heter_k_3_view_2.pdf, id=56, 433.62pt x 361.35pt>
+<figure/diff_heter_k_3_view_2.pdf, id=72, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_3_view_2.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_3_view_2.pdf>
-Package pdftex.def Info: figure/diff_heter_k_3_view_2.pdf used on input line 20
-9.
+Package pdftex.def Info: figure/diff_heter_k_3_view_2.pdf used on input line 29
+4.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_heter_k_3_view_1.pdf, id=57, 433.62pt x 361.35pt>
+<figure/diff_heter_k_3_view_1.pdf, id=73, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_3_view_1.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_3_view_1.pdf>
-Package pdftex.def Info: figure/diff_heter_k_3_view_1.pdf used on input line 21
-2.
+Package pdftex.def Info: figure/diff_heter_k_3_view_1.pdf used on input line 29
+7.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-Overfull \hbox (7.98674pt too wide) in paragraph at lines 206--213
+Overfull \hbox (7.98674pt too wide) in paragraph at lines 291--298
 [][] [][] [][] 
  []
 
-<figure/diff_heter_k_4_view_3.pdf, id=58, 433.62pt x 361.35pt>
+<figure/diff_heter_k_4_view_3.pdf, id=74, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_4_view_3.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_4_view_3.pdf>
-Package pdftex.def Info: figure/diff_heter_k_4_view_3.pdf used on input line 21
-9.
+Package pdftex.def Info: figure/diff_heter_k_4_view_3.pdf used on input line 30
+4.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_heter_k_4_view_2.pdf, id=59, 433.62pt x 361.35pt>
+<figure/diff_heter_k_4_view_2.pdf, id=75, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_4_view_2.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_4_view_2.pdf>
-Package pdftex.def Info: figure/diff_heter_k_4_view_2.pdf used on input line 22
-2.
+Package pdftex.def Info: figure/diff_heter_k_4_view_2.pdf used on input line 30
+7.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_heter_k_4_view_1.pdf, id=60, 433.62pt x 361.35pt>
+<figure/diff_heter_k_4_view_1.pdf, id=76, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_4_view_1.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_4_view_1.pdf>
-Package pdftex.def Info: figure/diff_heter_k_4_view_1.pdf used on input line 22
-5.
+Package pdftex.def Info: figure/diff_heter_k_4_view_1.pdf used on input line 31
+0.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-Overfull \hbox (7.98674pt too wide) in paragraph at lines 219--226
+Overfull \hbox (7.98674pt too wide) in paragraph at lines 304--311
 [][] [][] [][] 
  []
 
-<figure/diff_heter_k_8_view_3.pdf, id=61, 433.62pt x 361.35pt>
+<figure/diff_heter_k_8_view_3.pdf, id=77, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_8_view_3.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_8_view_3.pdf>
-Package pdftex.def Info: figure/diff_heter_k_8_view_3.pdf used on input line 23
-2.
+Package pdftex.def Info: figure/diff_heter_k_8_view_3.pdf used on input line 31
+7.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_heter_k_8_view_2.pdf, id=62, 433.62pt x 361.35pt>
+<figure/diff_heter_k_8_view_2.pdf, id=78, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_8_view_2.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_8_view_2.pdf>
-Package pdftex.def Info: figure/diff_heter_k_8_view_2.pdf used on input line 23
-5.
+Package pdftex.def Info: figure/diff_heter_k_8_view_2.pdf used on input line 32
+0.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_heter_k_8_view_1.pdf, id=63, 433.62pt x 361.35pt>
+<figure/diff_heter_k_8_view_1.pdf, id=79, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_8_view_1.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_8_view_1.pdf>
-Package pdftex.def Info: figure/diff_heter_k_8_view_1.pdf used on input line 23
-8.
+Package pdftex.def Info: figure/diff_heter_k_8_view_1.pdf used on input line 32
+3.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-Overfull \hbox (7.98674pt too wide) in paragraph at lines 232--239
+Overfull \hbox (7.98674pt too wide) in paragraph at lines 317--324
 [][] [][] [][] 
  []
 
-<figure/sym_heter_k_2.pdf, id=64, 433.62pt x 361.35pt>
+<figure/sym_heter_k_2.pdf, id=80, 433.62pt x 361.35pt>
 File: figure/sym_heter_k_2.pdf Graphic file (type pdf)
 
 <use figure/sym_heter_k_2.pdf>
-Package pdftex.def Info: figure/sym_heter_k_2.pdf used on input line 246.
+Package pdftex.def Info: figure/sym_heter_k_2.pdf used on input line 331.
 (pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
 
-<figure/sym_heter_k_3.pdf, id=65, 433.62pt x 361.35pt>
+<figure/sym_heter_k_3.pdf, id=81, 433.62pt x 361.35pt>
 File: figure/sym_heter_k_3.pdf Graphic file (type pdf)
 
 <use figure/sym_heter_k_3.pdf>
-Package pdftex.def Info: figure/sym_heter_k_3.pdf used on input line 249.
+Package pdftex.def Info: figure/sym_heter_k_3.pdf used on input line 334.
 (pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
 
-<figure/sym_heter_k_4.pdf, id=66, 433.62pt x 361.35pt>
+<figure/sym_heter_k_4.pdf, id=82, 433.62pt x 361.35pt>
 File: figure/sym_heter_k_4.pdf Graphic file (type pdf)
 
 <use figure/sym_heter_k_4.pdf>
-Package pdftex.def Info: figure/sym_heter_k_4.pdf used on input line 252.
+Package pdftex.def Info: figure/sym_heter_k_4.pdf used on input line 337.
 (pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
 
-<figure/sym_heter_k_8.pdf, id=67, 433.62pt x 361.35pt>
+<figure/sym_heter_k_8.pdf, id=83, 433.62pt x 361.35pt>
 File: figure/sym_heter_k_8.pdf Graphic file (type pdf)
 
 <use figure/sym_heter_k_8.pdf>
-Package pdftex.def Info: figure/sym_heter_k_8.pdf used on input line 255.
+Package pdftex.def Info: figure/sym_heter_k_8.pdf used on input line 340.
 (pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
 
-<figure/sp_diff_heter_k_2_view_3.pdf, id=68, 433.62pt x 361.35pt>
+<figure/sp_diff_heter_k_2_view_3.pdf, id=84, 433.62pt x 361.35pt>
 File: figure/sp_diff_heter_k_2_view_3.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_heter_k_2_view_3.pdf>
 Package pdftex.def Info: figure/sp_diff_heter_k_2_view_3.pdf used on input line
- 266.
+ 351.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/sp_diff_heter_k_2_view_2.pdf, id=69, 433.62pt x 361.35pt>
+<figure/sp_diff_heter_k_2_view_2.pdf, id=85, 433.62pt x 361.35pt>
 File: figure/sp_diff_heter_k_2_view_2.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_heter_k_2_view_2.pdf>
 Package pdftex.def Info: figure/sp_diff_heter_k_2_view_2.pdf used on input line
- 269.
+ 354.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/sp_diff_heter_k_2_view_1.pdf, id=70, 433.62pt x 361.35pt>
+<figure/sp_diff_heter_k_2_view_1.pdf, id=86, 433.62pt x 361.35pt>
 File: figure/sp_diff_heter_k_2_view_1.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_heter_k_2_view_1.pdf>
 Package pdftex.def Info: figure/sp_diff_heter_k_2_view_1.pdf used on input line
- 272.
+ 357.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-Overfull \hbox (7.98674pt too wide) in paragraph at lines 266--273
+Overfull \hbox (7.98674pt too wide) in paragraph at lines 351--358
 [][] [][] [][] 
  []
 
-<figure/sp_diff_heter_k_3_view_3.pdf, id=71, 433.62pt x 361.35pt>
+<figure/sp_diff_heter_k_3_view_3.pdf, id=87, 433.62pt x 361.35pt>
 File: figure/sp_diff_heter_k_3_view_3.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_heter_k_3_view_3.pdf>
 Package pdftex.def Info: figure/sp_diff_heter_k_3_view_3.pdf used on input line
- 280.
+ 365.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/sp_diff_heter_k_3_view_2.pdf, id=72, 433.62pt x 361.35pt>
+<figure/sp_diff_heter_k_3_view_2.pdf, id=88, 433.62pt x 361.35pt>
 File: figure/sp_diff_heter_k_3_view_2.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_heter_k_3_view_2.pdf>
 Package pdftex.def Info: figure/sp_diff_heter_k_3_view_2.pdf used on input line
- 283.
+ 368.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/sp_diff_heter_k_3_view_1.pdf, id=73, 433.62pt x 361.35pt>
+<figure/sp_diff_heter_k_3_view_1.pdf, id=89, 433.62pt x 361.35pt>
 File: figure/sp_diff_heter_k_3_view_1.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_heter_k_3_view_1.pdf>
 Package pdftex.def Info: figure/sp_diff_heter_k_3_view_1.pdf used on input line
- 286.
+ 371.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-Overfull \hbox (7.98674pt too wide) in paragraph at lines 280--287
+Overfull \hbox (7.98674pt too wide) in paragraph at lines 365--372
 [][] [][] [][] 
  []
 
-<figure/sp_diff_heter_k_4_view_3.pdf, id=74, 433.62pt x 361.35pt>
-File: figure/sp_diff_heter_k_4_view_3.pdf Graphic file (type pdf)
-
-<use figure/sp_diff_heter_k_4_view_3.pdf>
-Package pdftex.def Info: figure/sp_diff_heter_k_4_view_3.pdf used on input line
- 293.
-(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
-
-<figure/sp_diff_heter_k_4_view_2.pdf, id=75, 433.62pt x 361.35pt>
-File: figure/sp_diff_heter_k_4_view_2.pdf Graphic file (type pdf)
-
-<use figure/sp_diff_heter_k_4_view_2.pdf>
-Package pdftex.def Info: figure/sp_diff_heter_k_4_view_2.pdf used on input line
- 296.
-(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
-
-<figure/sp_diff_heter_k_4_view_1.pdf, id=76, 433.62pt x 361.35pt>
-File: figure/sp_diff_heter_k_4_view_1.pdf Graphic file (type pdf)
-
-<use figure/sp_diff_heter_k_4_view_1.pdf>
-Package pdftex.def Info: figure/sp_diff_heter_k_4_view_1.pdf used on input line
- 299.
-(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
-
-Overfull \hbox (7.98674pt too wide) in paragraph at lines 293--300
-[][] [][] [][] 
- []
-
-<figure/sp_diff_heter_k_8_view_3.pdf, id=77, 433.62pt x 361.35pt>
+<figure/sp_diff_heter_k_8_view_3.pdf, id=90, 433.62pt x 361.35pt>
 File: figure/sp_diff_heter_k_8_view_3.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_heter_k_8_view_3.pdf>
 Package pdftex.def Info: figure/sp_diff_heter_k_8_view_3.pdf used on input line
- 306.
+ 381.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/sp_diff_heter_k_8_view_2.pdf, id=78, 433.62pt x 361.35pt>
+<figure/sp_diff_heter_k_8_view_2.pdf, id=91, 433.62pt x 361.35pt>
 File: figure/sp_diff_heter_k_8_view_2.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_heter_k_8_view_2.pdf>
 Package pdftex.def Info: figure/sp_diff_heter_k_8_view_2.pdf used on input line
- 309.
+ 384.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/sp_diff_heter_k_8_view_1.pdf, id=79, 433.62pt x 361.35pt>
+<figure/sp_diff_heter_k_8_view_1.pdf, id=92, 433.62pt x 361.35pt>
 File: figure/sp_diff_heter_k_8_view_1.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_heter_k_8_view_1.pdf>
 Package pdftex.def Info: figure/sp_diff_heter_k_8_view_1.pdf used on input line
- 312.
+ 387.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-Overfull \hbox (7.98674pt too wide) in paragraph at lines 306--313
+Overfull \hbox (7.98674pt too wide) in paragraph at lines 381--388
 [][] [][] [][] 
  []
 
 (C:\Users\Double\Desktop\nonparametric_mixture\experiment\experiment.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 320.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 394.
 
 [2 <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/diff_gauss_
 k_2_view_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figur
@@ -804,52 +916,67 @@ _k_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/sym_
 gauss_k_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure
 /sym_gauss_k_4.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/f
 igure/sym_gauss_k_8.pdf>] [4 <C:/Users/Double/Desktop/nonparametric_mixture/exp
-eriment/figure/diff_heter_k_2_view_3.pdf> <C:/Users/Double/Desktop/nonparametri
-c_mixture/experiment/figure/diff_heter_k_2_view_2.pdf> <C:/Users/Double/Desktop
-/nonparametric_mixture/experiment/figure/diff_heter_k_2_view_1.pdf> <C:/Users/D
-ouble/Desktop/nonparametric_mixture/experiment/figure/diff_heter_k_3_view_3.pdf
-> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/diff_heter_k
-_3_view_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure
-/diff_heter_k_3_view_1.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/expe
-riment/figure/diff_heter_k_4_view_3.pdf> <C:/Users/Double/Desktop/nonparametric
-_mixture/experiment/figure/diff_heter_k_4_view_2.pdf> <C:/Users/Double/Desktop/
-nonparametric_mixture/experiment/figure/diff_heter_k_4_view_1.pdf>] [5 <C:/User
-s/Double/Desktop/nonparametric_mixture/experiment/figure/diff_heter_k_8_view_3.
-pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/diff_hete
-r_k_8_view_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/fig
-ure/diff_heter_k_8_view_1.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/e
-xperiment/figure/sym_heter_k_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixt
-ure/experiment/figure/sym_heter_k_3.pdf> <C:/Users/Double/Desktop/nonparametric
-_mixture/experiment/figure/sym_heter_k_4.pdf> <C:/Users/Double/Desktop/nonparam
-etric_mixture/experiment/figure/sym_heter_k_8.pdf> <C:/Users/Double/Desktop/non
-parametric_mixture/experiment/figure/sp_diff_heter_k_2_view_3.pdf> <C:/Users/Do
-uble/Desktop/nonparametric_mixture/experiment/figure/sp_diff_heter_k_2_view_2.p
+eriment/figure/sp_diff_gauss_k_2_view_3.pdf> <C:/Users/Double/Desktop/nonparame
+tric_mixture/experiment/figure/sp_diff_gauss_k_2_view_2.pdf> <C:/Users/Double/D
+esktop/nonparametric_mixture/experiment/figure/sp_diff_gauss_k_2_view_1.pdf> <C
+:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/sp_diff_gauss_k_
+3_view_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/
+sp_diff_gauss_k_3_view_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/ex
+periment/figure/sp_diff_gauss_k_3_view_1.pdf> <C:/Users/Double/Desktop/nonparam
+etric_mixture/experiment/figure/sp_diff_gauss_k_4_view_3.pdf> <C:/Users/Double/
+Desktop/nonparametric_mixture/experiment/figure/sp_diff_gauss_k_4_view_2.pdf> <
+C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/sp_diff_gauss_k
+_4_view_1.pdf>] [5 <C:/Users/Double/Desktop/nonparametric_mixture/experiment/fi
+gure/sp_diff_gauss_k_8_view_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixtu
+re/experiment/figure/sp_diff_gauss_k_8_view_2.pdf> <C:/Users/Double/Desktop/non
+parametric_mixture/experiment/figure/sp_diff_gauss_k_8_view_1.pdf> <C:/Users/Do
+uble/Desktop/nonparametric_mixture/experiment/figure/sp_sym_gauss_k_2.pdf> <C:/
+Users/Double/Desktop/nonparametric_mixture/experiment/figure/sp_sym_gauss_k_3.p
+df> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/sp_sym_gau
+ss_k_4.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/sp
+_sym_gauss_k_8.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/f
+igure/diff_heter_k_2_view_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixture
+/experiment/figure/diff_heter_k_2_view_2.pdf> <C:/Users/Double/Desktop/nonparam
+etric_mixture/experiment/figure/diff_heter_k_2_view_1.pdf>] [6 <C:/Users/Double
+/Desktop/nonparametric_mixture/experiment/figure/diff_heter_k_3_view_3.pdf> <C:
+/Users/Double/Desktop/nonparametric_mixture/experiment/figure/diff_heter_k_3_vi
+ew_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/diff
+_heter_k_3_view_1.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experimen
+t/figure/diff_heter_k_4_view_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixt
+ure/experiment/figure/diff_heter_k_4_view_2.pdf> <C:/Users/Double/Desktop/nonpa
+rametric_mixture/experiment/figure/diff_heter_k_4_view_1.pdf> <C:/Users/Double/
+Desktop/nonparametric_mixture/experiment/figure/diff_heter_k_8_view_3.pdf> <C:/
+Users/Double/Desktop/nonparametric_mixture/experiment/figure/diff_heter_k_8_vie
+w_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/diff_
+heter_k_8_view_1.pdf>] [7 <C:/Users/Double/Desktop/nonparametric_mixture/experi
+ment/figure/sym_heter_k_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/e
+xperiment/figure/sym_heter_k_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixt
+ure/experiment/figure/sym_heter_k_4.pdf> <C:/Users/Double/Desktop/nonparametric
+_mixture/experiment/figure/sym_heter_k_8.pdf> <C:/Users/Double/Desktop/nonparam
+etric_mixture/experiment/figure/sp_diff_heter_k_2_view_3.pdf> <C:/Users/Double/
+Desktop/nonparametric_mixture/experiment/figure/sp_diff_heter_k_2_view_2.pdf> <
+C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/sp_diff_heter_k
+_2_view_1.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure
+/sp_diff_heter_k_3_view_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/e
+xperiment/figure/sp_diff_heter_k_3_view_2.pdf> <C:/Users/Double/Desktop/nonpara
+metric_mixture/experiment/figure/sp_diff_heter_k_3_view_1.pdf>] [8 <C:/Users/Do
+uble/Desktop/nonparametric_mixture/experiment/figure/sp_diff_heter_k_8_view_3.p
 df> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/sp_diff_he
-ter_k_2_view_1.pdf>] [6 <C:/Users/Double/Desktop/nonparametric_mixture/experime
-nt/figure/sp_diff_heter_k_3_view_3.pdf> <C:/Users/Double/Desktop/nonparametric_
-mixture/experiment/figure/sp_diff_heter_k_3_view_2.pdf> <C:/Users/Double/Deskto
-p/nonparametric_mixture/experiment/figure/sp_diff_heter_k_3_view_1.pdf> <C:/Use
-rs/Double/Desktop/nonparametric_mixture/experiment/figure/sp_diff_heter_k_4_vie
-w_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/sp_di
-ff_heter_k_4_view_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experim
-ent/figure/sp_diff_heter_k_4_view_1.pdf> <C:/Users/Double/Desktop/nonparametric
-_mixture/experiment/figure/sp_diff_heter_k_8_view_3.pdf> <C:/Users/Double/Deskt
-op/nonparametric_mixture/experiment/figure/sp_diff_heter_k_8_view_2.pdf> <C:/Us
-ers/Double/Desktop/nonparametric_mixture/experiment/figure/sp_diff_heter_k_8_vi
-ew_1.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 320.
+ter_k_8_view_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/f
+igure/sp_diff_heter_k_8_view_1.pdf>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 394.
 
 (C:\Users\Double\Desktop\nonparametric_mixture\experiment\experiment.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 320.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 320.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 394.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 394.
 Package rerunfilecheck Info: File `experiment.out' has not changed.
 (rerunfilecheck)             Checksum: 12BDFB184E02A667E7297379F4D91B05;53.
  ) 
 Here is how much of TeX's memory you used:
- 7241 strings out of 495354
- 105550 string characters out of 3182739
- 196642 words of memory out of 3000000
- 10216 multiletter control sequences out of 15000+200000
+ 7325 strings out of 495354
+ 108051 string characters out of 3182739
+ 204605 words of memory out of 3000000
+ 10268 multiletter control sequences out of 15000+200000
  11550 words of font info for 44 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  29i,7n,35p,1611b,327s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -869,9 +996,9 @@ les (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files
 (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x
 86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x8
 6)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on experiment.pdf (6 pages, 291972 bytes).
+Output written on experiment.pdf (8 pages, 327755 bytes).
 PDF statistics:
- 358 PDF objects out of 1000 (max. 8388607)
- 69 named destinations out of 1000 (max. 500000)
- 229 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 441 PDF objects out of 1000 (max. 8388607)
+ 88 named destinations out of 1000 (max. 500000)
+ 294 words of extra memory for PDF output out of 10000 (max. 10000000)
 
