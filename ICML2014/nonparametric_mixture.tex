@@ -614,7 +614,7 @@ where $\{x^j\}_{j\in[m]}$ is a set of uniformly-spaced test points.
 
 {\bf Results.} The results are plotted in Figure~\ref{fig:synthetic}. It is clear that the kernel spectral method converge rapidly with the data increment in all experiments setting.
 
-In mixture of Gaussian setting, the EM algorithm is best since the model is correctly specified in this case.The spectral learning algorithm for spherical Gaussians did not perform well since the assumption for the method is too restricted. The performance our kernel method converge to that of EM algorithm.
+In mixture of Gaussian setting, the EM algorithm is best since the model is correctly specified in this case. The spectral learning algorithm for spherical Gaussians did not perform well since the assumption for the method is too restricted. The performance our kernel method converge to that of EM algorithm.
 
 In the mixture of Gaussian and Gamma setting, our kernel spectral algorithm perform clearly much better than other algorithms. These results show that our algorithm is able to automatically adapt to the shape of the density.
 
@@ -634,8 +634,13 @@ We also plotted the actual recovered conditional density in Figure~\ref{fig:shap
   \vspace{-3mm}
 \end{figure}
 
+<<<<<<< HEAD
 \subsection{Flowcytometry Data}
 
+=======
+\subsection{Flowcytometry Data} 
+\input{../experiment/real_data_experiment_short.tex}
+>>>>>>> f277a75bc63bce7b538040655aa1b6a773cf85a3
 
 %-----------------------------------------------------------------------------------------------------------------------------------------------
 \section{Symmetrization}
@@ -689,7 +694,7 @@ Pair_3 &=&
 \end{eqnarray*}
 where ${H} = {K}_{nk}(\mathcal{L}_{nk}^\top{K}_{nk})^{-1}{L}_{nk}^\top$.
 
-Assume the leading $k$ eigenvectors $\nu_k$ lie in the span of the column of $\Phi$, i.e., $\nu_k = \Upsilon \beta_k$ where $\beta_k\in \mathbb{R}^{m\times 1}$\bxcomment{in the span of the columns of $\Upsilon$?}
+Assume the leading $k$ eigenvectors $\nu_k$ lie in the span of the column of $\Upsilon$, i.e., $\nu_k = \Upsilon \beta_k$ where $\beta_k\in \mathbb{R}^{m\times 1}$\bxcomment{in the span of the columns of $\Upsilon$?}
 %
 \begin{eqnarray*}
 Pair_3\nu = \lambda \nu &\Rightarrow& (Pair_3)^\top Pair_3\nu = \lambda^2 \nu \\
@@ -751,5 +756,6 @@ whitening the data and apply power method to decompose it
 \bibliography{../nonparametric_mixture,../bibfile,../experiment/mlv_kernel}
 
 \input{concentration-bounds.tex}
+\input{../experiment/single_cond_exp.tex}
 
 \end{document}
