@@ -57,12 +57,12 @@ $(\lambda, \Phi)$.
 %
 %\section{Proof of Sample Complexity Guarantees}
 %
-%Let $\rho:=\sup_{x \in \Omega} k(x,x)$,   $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, $r_{\min}:=\min_{i\in [k]} \pi_i$ and $\sigma_k(\Ccal_{X_1, X_2})$ be the $k$-th singular value of $\Ccal_{X_1, X_2}$.
+%Let $\rho:=\sup_{x \in \Omega} k(x,x)$,   $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, $\rho_{\min}:=\min_{i\in [k]} \pi_i$ and $\sigma_k(\Ccal_{X_1, X_2})$ be the $k$-th singular value of $\Ccal_{X_1, X_2}$.
 %
 %\begin{theorem}[Sample Bounds]\label{thm:samplebound}
 %Pick  any $\delta\in (0,1)$. When the number of samples $m$ satisfies
 %\beq m >\frac{\rho\rho^2  \log\frac{\delta}{2}}{\sigma_k(\Ccal_{X_1, X_2})},
-%\quad \rho:= \max\left(\frac{512  }{\sigma^3_k(\Ccal_{X_1, X_2})}, \frac{C' k^2 }{\sigma_k^{3}(\Ccal_{X_1, X_2})},\frac{C^{''} k^{\frac{2}{3}} }{r_{\min}^{\frac{1}{3}} }\right),\eeq for some constants $C', C^{''}>0$, and the number of iterations $N$  and  the number of random initialization vectors $L$  (drawn uniformly on the sphere $\mathcal{S}^{k-1}$)  satisfy
+%\quad \rho:= \max\left(\frac{512  }{\sigma^3_k(\Ccal_{X_1, X_2})}, \frac{C' k^2 }{\sigma_k^{3}(\Ccal_{X_1, X_2})},\frac{C^{''} k^{\frac{2}{3}} }{\pi_{\min}^{\frac{1}{3}} }\right),\eeq for some constants $C', C^{''}>0$, and the number of iterations $N$  and  the number of random initialization vectors $L$  (drawn uniformly on the sphere $\mathcal{S}^{k-1}$)  satisfy
 %\begin{align*}
 %N \geq C_2 \cdot \biggl( \log(k) + \log\log\Bigl(
 %\frac{1}{\sqrt{\pi}_{\min}\epsilon_T} \Bigr) \biggr),\\
@@ -156,7 +156,7 @@ We now establish the following perturbation bound on the whitening procedure. Re
 
 \paragraph{Remark: }Note that $\sigma_{k}(\Ccal_{X_1 X_2}) = \sigma_{k}^2(M)$.
 
-\bprf The proof is along the lines of~\cite[Lemma 16]{AnandkumarEtal:community12}, but adapted to whitening using the covariance operator here.
+\bprf The proof is along the lines of Lemma 16 of~\cite{AnandkumarEtal:community12}, but adapted to whitening using the covariance operator here.
  \begin{align*}\|\Diag(\pi)^{1/2} M^\top(\h{\Wcal}-\Wcal)\|&=
 \|\Diag(\pi)^{1/2} M^\top W(A D^{1/2} A^\top -I)\|\\ &\leq\|\Diag(\pi)^{1/2} M^\top \Wcal\| \|D^{1/2}-I\|. \end{align*} Since $\Wcal$ whitens $\Ccal_{X_1 X_2}=M \Diag(\pi) M^\top\iffalse+E\fi$, we have that $\|\Diag(\pi)^{1/2} M^\top \Wcal\| =1$\iffalse\leq \|I-E\|^{1/2}\leq 1+ \sigma_{k+1}(\Ccal_{X_1 X_2})\fi. Now we control $\|D^{1/2}-I\|$.  Let $\tl{E}:= \Ccal_{X_1,X_{2}} -B_k$, where recall that $B=0.5( \widehat \Ccal_{X_1,X_{2}}+ \h{\Ccal}_{X_1 X_2}^\top)$ and $B_k$ is its restriction to top-$k$ singular values. Thus, we have $\|\tl{E}\|_{HS} \leq \epsilon_{pairs} + \sigma_{k+1}(B)\leq 2\epsilon_{pairs}\iffalse+\sigma_{k+1}(\Ccal_{X_1 X_2})\fi$.
  We now have
@@ -179,7 +179,7 @@ Let $\epsilon_{triples}:= \|\h{\Ccal}_{X_1 X_2 X_3}-\Ccal_{X_1 X_2 X_3}\|_{}$. L
 \begin{lemma}[Tensor perturbation bound]
 Assuming that $\epsilon_{pairs} < 0.5 \sigma_k(\Ccal_{X_1 X_2})$, we have
 \beq\label{eqn:epsilonT} \epsilon_T:= \|\h{\Tcal} - \Tcal\|
-\leq \frac{2\sqrt{2}\epsilon_{triples}}{\sigma_k(\Ccal_{X_1 X_2})^{1.5} }+\frac{\epsilon_W^3}{\sqrt{r_{\min}}}\iffalse+ \|E_{X_1 X_2 X_3}\| \frac{\epsilon_W^3}{r_{\min}^{1.5} \sigma_k(M)^3} \fi.\eeq
+\leq \frac{2\sqrt{2}\epsilon_{triples}}{\sigma_k(\Ccal_{X_1 X_2})^{1.5} }+\frac{\epsilon_W^3}{\sqrt{\pi_{\min}}}\iffalse+ \|E_{X_1 X_2 X_3}\| \frac{\epsilon_W^3}{\pi_{\min}^{1.5} \sigma_k(M)^3} \fi.\eeq
 \end{lemma}
 
 
@@ -197,7 +197,7 @@ first note that
 &\leq \frac{ \| \Diag(\pi)^{1/2}M^\top(\h{\Wcal}-\Wcal)\|^3}{\sqrt{\pi_{\min}}}
 \iffalse+ \|E_{X_1 X_2 X_3}\| \|\h{\Wcal}-\Wcal\|^3\fi\\
 &= \frac{\epsilon_W^3}{\sqrt{\pi_{\min}}}
-\iffalse+ \|E_{X_1 X_2 X_3}\| \frac{\epsilon_W^3}{r_{\min}^{1.5} \sigma_k(M)^3}\fi
+\iffalse+ \|E_{X_1 X_2 X_3}\| \frac{\epsilon_W^3}{\pi_{\min}^{1.5} \sigma_k(M)^3}\fi
 \end{align*}
 \eprf\\
 
@@ -205,7 +205,7 @@ first note that
 
 \bprfof{Theorem~\ref{thm:samplebound}}
 We obtain a condition on the above perturbation $\epsilon_T$ in \eqref{eqn:epsilonT} by applying Theorem~\ref{thm:robustpower} as
-$ \epsilon_T\leq C_1\lambda_{\min} R_0^2$. Here, we have $\lambda_{i} = 1/\sqrt{\pi_{i}}\geq 1$. For random initialization, we have that $R_0 \sim 1/\sqrt{k}$, with probability $1-\delta$ using $\poly(k) \poly(1/\delta)$ trials~\cite[Thm. 5.1]{AnandkumarEtal:tensor12}. Thus, we require that $ \epsilon_T  \leq \frac{C_1}{k}$. Summarizing, we require for the following conditions to hold
+$ \epsilon_T\leq C_1\lambda_{\min} R_0^2$. Here, we have $\lambda_{i} = 1/\sqrt{\pi_{i}}\geq 1$. For random initialization, we have that $R_0 \sim 1/\sqrt{k}$, with probability $1-\delta$ using $\poly(k) \poly(1/\delta)$ trials, see Thm. 5.1 in~\cite{AnandkumarEtal:tensor12}. Thus, we require that $ \epsilon_T  \leq \frac{C_1}{k}$. Summarizing, we require for the following conditions to hold
 \beq\epsilon_{pairs}\leq 0.5 \sigma_k(\Ccal_{X_1 X_2}), \quad \epsilon_T  \leq \frac{C_1}{k}.\eeq
 We now substitute for $\epsilon_{pairs}$ and $\epsilon_{triples}$ in \eqref{eqn:epsilonT} using Lemma~\ref{lemma:pairs} and Lemma~\ref{lemma:triples}. 
 
@@ -218,9 +218,9 @@ From Lemma~\ref{lemma:pairs}, we have that
 Further we require that $\epsilon_T \leq C_1/k$, which implies that each of the terms in \eqref{eqn:epsilonT} is less than $C/k$, for some constant $C$. Thus, we have
 \[ \frac{2\sqrt{2} \epsilon_{triples}}{\sigma_k^{1.5}(\Ccal_{X_1, X_2})} < \frac{C}{k}\quad\Rightarrow\quad m > \frac{C_3 k^2 \rho^2 \log \frac{\delta}{2}}{\sigma_k^{3}(\Ccal_{X_1, X_2})},\]
 for some constant $C_3$ with probability $1-\delta$ from Lemma~\ref{lemma:triples}. Similarly for the second term in \eqref{eqn:epsilonT}, we have
-\[\frac{\epsilon_W^3}{\sqrt{r_{\min}}}< \frac{C}{k},\]and from Lemma~\ref{lemma:whiten}, this implies that \[ \epsilon_{pairs} \leq \frac{C' r_{\min}^{1/6} \sigma_k(\Ccal_{X_1, X_2})}{k^{1/3}\iffalse(1+\sigma_{k+1}(\Ccal_{X_1, X_2}))\fi},\]Thus, we have
-\[  m > \frac{C_4 k^{\frac{2}{3}} \rho^2 \log\frac{\delta}{2}\iffalse (1+\sigma_{k+1}(\Ccal_{X_1, X_2}))^2\fi}{r_{\min}^{\frac{1}{3}} \sigma^2_k(\Ccal_{X_1, X_2})}, \]for some other constant $C_4$ with probability $1-\delta$. \iffalse Additionally, we also require
-\[ (1+\sigma_{k+1}(\Ccal_{X_1, X_2}))\sigma_{k+1}(\Ccal_{X_1, X_2})\leq \frac{C_5 r_{\min}^{1/6} \sigma_k(\Ccal_{X_1, X_2})}{k^{1/3}}.\]\fi
+\[\frac{\epsilon_W^3}{\sqrt{\pi_{\min}}}< \frac{C}{k},\]and from Lemma~\ref{lemma:whiten}, this implies that \[ \epsilon_{pairs} \leq \frac{C' \pi_{\min}^{1/6} \sigma_k(\Ccal_{X_1, X_2})}{k^{1/3}\iffalse(1+\sigma_{k+1}(\Ccal_{X_1, X_2}))\fi},\]Thus, we have
+\[  m > \frac{C_4 k^{\frac{2}{3}} \rho^2 \log\frac{\delta}{2}\iffalse (1+\sigma_{k+1}(\Ccal_{X_1, X_2}))^2\fi}{\pi_{\min}^{\frac{1}{3}} \sigma^2_k(\Ccal_{X_1, X_2})}, \]for some other constant $C_4$ with probability $1-\delta$. \iffalse Additionally, we also require
+\[ (1+\sigma_{k+1}(\Ccal_{X_1, X_2}))\sigma_{k+1}(\Ccal_{X_1, X_2})\leq \frac{C_5 \pi_{\min}^{1/6} \sigma_k(\Ccal_{X_1, X_2})}{k^{1/3}}.\]\fi
  Thus, we have the result in Theorem~\ref{thm:samplebound}.
  
 
