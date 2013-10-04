@@ -41,7 +41,7 @@
 \usepackage{../Definitions}
 \newcommand{\hmu}{\widehat{\mu}}
 \newcommand{\hCcal}{\widehat{\Ccal}}
-\newcommand\tl{\tilde}
+\newcommand\tl{\widetilde}
 % \newcommand{\bm}{\mathbf}
 \input{../tensor-macros}
 \usepackage{tikz}
@@ -631,9 +631,21 @@ We also plotted the actual recovered conditional density in Figure~\ref{fig:shap
 \subsection{Flowcytometry Data}
 \input{../experiment/real_data_experiment_short.tex}
 
+\bibliographystyle{icml2014}
+\bibliography{../nonparametric_mixture,../bibfile,../experiment/mlv_kernel}
+
+\clearpage
+\newpage
+
+\onecolumn
+
+\begin{center}
+{\Large Appendix}
+\end{center}
+
 %%-----------------------------------------------------------------------------------------------------------------------------------------------
 \section{Symmetrization}
-We presented the kernel algorithm for learning the multi-view latent variable model where the views has identical conditional distributions. In this section, we will extend it to the general case where the views are different. Without loss of generality, we will consider recover the operator $\mu_{X_3|h}$ for conditional distribution $\PP(X_3|h)$. The same strategy applies to other views. The idea is to reduce the multi-view case to the identical-view case based on a method by~\cite{anima_2svd}
+We presented the kernel algorithm for learning the multi-view latent variable model where the views has identical conditional distributions. In this section, we will extend it to the general case where the views are different. Without loss of generality, we will consider recover the operator $\mu_{X_3|h}$ for conditional distribution $\PP(X_3|h)$. The same strategy applies to other views. The idea is to reduce the multi-view case to the identical-view case based on a method by~\cite{AnandkumarEtal:twosvd12}.
 % %
 % \begin{eqnarray*}
 % \Ccal_{X_1 X_2} &=& \sum_{h \in [k]} \pi_h\, \mu_{X_1|h}\otimes \mu_{X_2|h}\\
@@ -646,28 +658,28 @@ We presented the kernel algorithm for learning the multi-view latent variable mo
 
 Given the observations $\mathcal{D}_{X_1X_2X_3}=\{(x_1^i, x_2^i, x_3^i)\}_{i\in[m]}$ drawn \emph{i.i.d.} from a multi-view latent variable model $\mathbb{P}(X_1, X_2, X_3)$, let the kernel matrix associated with $X_1$, $X_2$ and $X_3$ be $K$, $L$ and $G$ respectively and the corresponding feature map be $\phi$, $\psi$ and $\upsilon$ respectively. Furthermore, let the corresponding feature matrix be $\widetilde \Phi=(\phi(x_1^1),\ldots,\phi(x_1^m))$, $\widetilde\Psi=(\phi(x_2^1),\ldots,\phi(x_2^m))$ and $\widetilde \Upsilon=(\phi(x_3^1),\ldots,\phi(x_3^m))$. Then, we have the empirical estimation of the second/third-order embedding as
 %
-\begin{eqnarray*}
+\begin{align*}
 &\widehat\Ccal_{X_1 X_2} = \frac{1}{m}\widetilde \Phi \widetilde \Psi^\top,~\widehat\Ccal_{X_3 X_1} = \frac{1}{m}\widetilde \Upsilon \widetilde \Phi^\top,~\widehat\Ccal_{X_2 X_3} = \frac{1}{m} \widetilde \Psi \widetilde \Upsilon^\top\\
 &\widehat\Ccal_{X_1 X_2 X_3}:=
 \frac{1}{m}\bm{I}_n \times_1 \widetilde \Phi \times_2 \widetilde \Psi \times_3 \widetilde \Upsilon
-\end{eqnarray*}
+\end{align*}
 %
 
 Find two arbitrary matrices $\bm{A,B}\in \mathbb{R}^{k \times \infty}$, so that $\bm{A}\widehat{\mathcal{C}}_{X_1X_2}\bm{B}^\top$ is invertible. Theoretically, we could randomly select $k$ columns from $\Phi$ and $\Psi$ and set $\bm{A} = \Phi_k^\top, \bm{B} = \Psi_k^\top$. In practial, the first $k$ leading eigenvector directions of respect \emph{RKHS} works better.
-\bxcomment{Should we mention using SVD is better because it improves the conditioning number of $\bm{A}\widehat{\mathcal{C}}_{X_1X_2}\bm{B}^\top$?}
-\dbcomment{this is what the first svd in the code doing.}
-
- Then, we have
+% \bxcomment{Should we mention using SVD is better because it improves the conditioning number of $\bm{A}\widehat{\mathcal{C}}_{X_1X_2}\bm{B}^\top$?}
+% \dbcomment{this is what the first svd in the code doing.}
+%
+Then, we have
 %
 \begin{eqnarray*}
-\tilde{\mathcal{C}}_{X_1 X_2} &=& \frac{1}{m}\Phi_k^\top\Phi\Psi^\top\Psi_k = \frac{1}{m}{K}_{nk}^\top{L}_{nk}\\
-\tilde{\mathcal{C}}_{X_3 X_1} &=& \widehat{\mathcal{C}}_{X_3X_1}\Phi_k = \frac{1}{m}\Upsilon{K}_{nk}\\
-\tilde{\mathcal{C}}_{X_3 X_2} &=& \widehat{\mathcal{C}}_{X_3X_2}\Psi_k = \frac{1}{m}\Upsilon{L}_{nk}\\
-\tilde{\mathcal{C}}_{X_1 X_2 X_3} &=&
-\widehat{\mathcal{C}}_{X_1 X_2 X_3}\times_1\Phi_k^\top
-\times_2\Psi_k^\top = \frac{1}{m} \bm{I}_n \times_1
+\widetilde{\mathcal{C}}_{X_1 X_2} &=& \frac{1}{m}\widetilde \Phi_k^\top \widetilde\Phi\widetilde\Psi^\top\widetilde\Psi_k = \frac{1}{m}{K}_{nk}^\top{L}_{nk}\\
+\widetilde{\mathcal{C}}_{X_3 X_1} &=& \widehat{\mathcal{C}}_{X_3X_1}\widetilde\Phi_k = \frac{1}{m}\widetilde\Upsilon{K}_{nk}\\
+\widetilde{\mathcal{C}}_{X_3 X_2} &=& \widehat{\mathcal{C}}_{X_3X_2}\widetilde\Psi_k = \frac{1}{m}\widetilde\Upsilon{L}_{nk}\\
+\widetilde{\mathcal{C}}_{X_1 X_2 X_3} &=&
+\widehat{\mathcal{C}}_{X_1 X_2 X_3}\times_1\widetilde\Phi_k^\top
+\times_2\widetilde\Psi_k^\top = \frac{1}{m} \bm{I}_n \times_1
 {K}_{nk}^\top \times_2 {L}_{nk}^\top \times_3
-\Upsilon
+\widetilde\Upsilon
 \end{eqnarray*}
 %
 
@@ -675,50 +687,47 @@ Based on these matrices, we could reduce to a single view
 %
 \begin{eqnarray*}
 Pair_3 &=&
-\tilde{\mathcal{C}}_{X_3X_1}(\tilde{\mathcal{C}}_{X_1X_2}^\top)^{-1}\tilde{\mathcal{C}}_{X_3X_2}\\
-&=&\frac{1}{m}\Upsilon{K}_{nk}({L}_{nk}^\top{K}_{nk})^{-1}{L}_{nk}^\top\Upsilon^\top = \frac{1}{m}\Upsilon{H}\Upsilon^\top
+\widetilde{\mathcal{C}}_{X_3X_1}(\widetilde{\mathcal{C}}_{X_1X_2}^\top)^{-1}\widetilde{\mathcal{C}}_{X_3X_2}\\
+&=&\frac{1}{m}\widetilde\Upsilon{K}_{nk}({L}_{nk}^\top{K}_{nk})^{-1}{L}_{nk}^\top\widetilde\Upsilon^\top = \frac{1}{m}\widetilde\Upsilon{H}\widetilde\Upsilon^\top
 \end{eqnarray*}
 where ${H} = {K}_{nk}(\mathcal{L}_{nk}^\top{K}_{nk})^{-1}{L}_{nk}^\top$.
 
-Assume the leading $k$ eigenvectors $\nu_k$ lie in the span of the column of $\Phi$, i.e., $\nu_k = \Upsilon \beta_k$ where $\beta_k\in \mathbb{R}^{m\times 1}$\bxcomment{in the span of the columns of $\Upsilon$?}
+Assume the leading $k$ eigenvectors $\nu_k$ lie in the span of the column of $\Phi$, i.e., $\nu_k = \Upsilon \beta_k$ where $\beta_k\in \mathbb{R}^{m\times 1}$
 %
 \begin{eqnarray*}
 Pair_3\nu = \lambda \nu &\Rightarrow& (Pair_3)^\top Pair_3\nu = \lambda^2 \nu \\
 &\Rightarrow&
-\frac{1}{m^2} \Upsilon{H}^\top\Upsilon^\top\Upsilon{H}\Upsilon^\top\nu
+\frac{1}{m^2} \widetilde\Upsilon{H}^\top\widetilde\Upsilon^\top\widetilde\Upsilon{H}\widetilde\Upsilon^\top\nu
 = \lambda^2\nu \\
 &\Rightarrow&
-\frac{1}{m^2}\Upsilon{H^\top GHG}\bm{\beta} =
-\lambda^2 \Upsilon\bm{\beta} \\
+\frac{1}{m^2}\widetilde\Upsilon{H^\top GHG}\bm{\beta} =
+\lambda^2 \widetilde\Upsilon\bm{\beta} \\
 &\Rightarrow& \frac{1}{m^2}{GH^\top GHG}\beta
 = \lambda^2{G}\beta
 \end{eqnarray*}
-\bxcomment{$Pair_3$ here is not symmetric. We are calculating the right singular vectors here, not the eigenvector. Maybe we should rephrase and remove $Pair_3\nu = \lambda \nu$ part}
-\dbcomment{This is following the 2svd paper, please refer to it.}
-
 %
 Then, we symmetrize and whiten the third-order embedding
 %
 \begin{eqnarray}
-Triple_3 = \frac{1}{m}\tilde{\mathcal{C}}_{X_1X_2X_3} \times_1
-[\tilde{\mathcal{C}}_{X_3X_2}\tilde{\mathcal{C}}_{X_1X_2}^{-1}]
+Triple_3 = \frac{1}{m}\widetilde{\mathcal{C}}_{X_1X_2X_3} \times_1
+[\widetilde{\mathcal{C}}_{X_3X_2}\widetilde{\mathcal{C}}_{X_1X_2}^{-1}]
 \times_2
-[\tilde{\mathcal{C}}_{X_3X_1}\tilde{\mathcal{C}}_{X_2X_1}^{-1}]
+[\widetilde{\mathcal{C}}_{X_3X_1}\widetilde{\mathcal{C}}_{X_2X_1}^{-1}]
 \end{eqnarray}
 %
 Plug
-$\tilde{\mathcal{C}}_{X_3X_2}\tilde{\mathcal{C}}_{X_1X_2}^{-1} =
-\Upsilon{L}_{nk}({K}_{nk}^\top{L}_{nk})^{-1}$
+$\widetilde{\mathcal{C}}_{X_3X_2}\widetilde{\mathcal{C}}_{X_1X_2}^{-1} =
+\widetilde\Upsilon{L}_{nk}({K}_{nk}^\top{L}_{nk})^{-1}$
 and
-$\tilde{\mathcal{C}}_{X_3X_1}\tilde{\mathcal{C}}_{X_2X_1}^{-1} =
-\Upsilon{K}_{nk}({L}_{nk}^\top{K}_{nk})^{-1}$,
+$\widetilde{\mathcal{C}}_{X_3X_1}\widetilde{\mathcal{C}}_{X_2X_1}^{-1} =
+\widetilde\Upsilon{K}_{nk}({L}_{nk}^\top{K}_{nk})^{-1}$,
 we have
 
 \begin{eqnarray*}
 Triple_3  = \frac{1}{m}\bm{I}_n \times_1
-\Upsilon{L}_{nk}({K}_{nk}^\top
+\widetilde\Upsilon{L}_{nk}({K}_{nk}^\top
 {L}_{nk})^{-1}{K}_{nk}^\top\\ \times_2
-\Upsilon{K}_{nk}({L}_{nk}^\top
+\widetilde\Upsilon{K}_{nk}({L}_{nk}^\top
 {K}_{nk})^{-1}{L}_{nk}^\top \times_3 \Upsilon
 \end{eqnarray*}
 
@@ -726,8 +735,8 @@ We multiply each mode with $\Upsilon \beta \widehat{S}_k^{-\frac{1}{2}}$ to
 whitening the data and apply power method to decompose it
 %
 \begin{eqnarray*}
-\widehat{\mathcal{T}} &=& Triple_3 \times_1 \widehat{S}_k^{-\frac{1}{2}}\beta^\top\Upsilon^\top \times_2
-\widehat{S}_k^{-\frac{1}{2}}\beta^\top\Upsilon^\top \times_3 \widehat{S}_k^{-\frac{1}{2}}\beta^\top\Upsilon^\top\\
+\widehat{\mathcal{T}} &=& Triple_3 \times_1 \widehat{S}_k^{-\frac{1}{2}}\beta^\top\widetilde\Upsilon^\top \times_2
+\widehat{S}_k^{-\frac{1}{2}}\beta^\top\widetilde\Upsilon^\top \times_3 \widehat{S}_k^{-\frac{1}{2}}\beta^\top\widetilde\Upsilon^\top\\
 &=& \frac{1}{m}\bm{I}_n \times_1
 \widehat{S}_k^{-\frac{1}{2}}\beta^\top{G}\mathcal{L}_{nk}({K}_{nk}^\top
 {L}_{nk})^{-1}{K}_{nk}^\top \times_2\\
@@ -736,9 +745,6 @@ whitening the data and apply power method to decompose it
 \widehat{S}_k^{-\frac{1}{2}}\beta^\top{G}
 \end{eqnarray*}
 %
-
-\bibliographystyle{icml2014}
-\bibliography{../nonparametric_mixture,../bibfile,../experiment/mlv_kernel}
 
 \input{concentration-bounds.tex}
 \input{../experiment/single_cond_exp.tex}
