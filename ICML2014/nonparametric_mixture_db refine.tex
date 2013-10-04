@@ -565,7 +565,7 @@ Our method has a hyper-parameter, kernel bandwidth, which we selected for each v
 
 \subsection{Synthetic Data}
 
-We generated three-dimensional synthetic data from various mixture models. The variables corresponding to the dimensions are independent given the latent component indicator. More specifically, we explore two settings
+We generated three-dimensional synthetic data from various mixture models. The variables corresponding to the dimensions are independent given the latent component indicator. More specifically, we explored two settings
 \begin{enumerate}[noitemsep,nolistsep]
   \item Gaussian conditional densities with different variances;
   \item Mixture of Gaussian and shifted Gamma conditional densities.
@@ -597,7 +597,7 @@ where we chose the shape parameter $d\le 1$ such that density is very skewed. Fu
 \end{figure*}
 
 We also varied the number of samples $m$ for observed variables, from $50$ to $10,000$, and
-experimented with $k=2,3,4$ or $8$ mixture components. The mixture proportion for the $h$-th component is set to be $\pi_h= \frac{2i}{k(k+1)},~\forall h\in[k]$ (unbalanced). It is worth noting that as $k$ becomes larger, it is more difficult to recover parameters. This is because only a small number of data will be generated for the first several clusters. For each $n,k$ with each setting, we randomly generate 10 sets of samples and report the average results.
+experimented with $k=2,3,4$ or $8$ mixture components. The mixture proportion for the $h$-th component is set to be $\pi_h= \frac{2h}{k(k+1)},~\forall h\in[k]$ (unbalanced). It is worth noting that as $k$ becomes larger, it is more difficult to recover parameters. This is because only a small number of data will be generated for the first several clusters. For each $n,k$ with each setting, we randomly generated 10 sets of samples. The average results are reported.
 
 {\bf Error measure.} We measured the performance of algorithms by the
 following weighted $\ell_2$ norm difference
@@ -608,11 +608,11 @@ where $\{x^j\}_{j\in[m]}$ is a set of uniformly-spaced test points.
 
 {\bf Results.} The results are plotted in Figure~\ref{fig:synthetic}. It is clear that the kernel spectral method converge rapidly with the data increment in all experiments setting.
 
-In mixture of Gaussian setting, the EM algorithm is best since the model is correctly specified in this case. The spectral learning algorithm for spherical Gaussians did not perform well since the assumption for the method is too restricted. The performance our kernel method converge to that of EM algorithm.
+In mixture of Gaussians setting, the EM algorithm is best since the model is correctly specified in this case. The spectral learning algorithm for spherical Gaussians did not perform well since the assumption for the method is too restricted. The performance our kernel method converges to that of EM algorithm.
 
-In the mixture of Gaussian and Gamma setting, our kernel spectral algorithm perform clearly much better than other algorithms. These results show that our algorithm is able to automatically adapt to the shape of the density.
+In the mixture of Gaussian and Gamma setting, our kernel spectral algorithm performs clearly much better than other algorithms. These results show that our algorithm is able to automatically adapt to the shape of the density.
 
-We also plotted the actual recovered conditional density in Figure~\ref{fig:shape}. It can be seen that kernel spectral algorithm recover pretty nicely both the Gaussian and Gamma components, while EM algorithm is able to fit only one component.
+We also plotted the actual recovered conditional density in Figure~\ref{fig:shape}. It can be seen that kernel spectral algorithm recover pretty nicely both the Gaussian and Gamma components, while EM algorithm is able to fit only the Gaussian component.
 
 \begin{figure}[t]
   \centering
@@ -746,5 +746,4 @@ We also plotted the actual recovered conditional density in Figure~\ref{fig:shap
 
 \input{concentration-bounds.tex}
 \input{../experiment/single_cond_exp.tex}
-
 \end{document}
