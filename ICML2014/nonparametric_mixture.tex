@@ -116,7 +116,7 @@ We  experimentally compare our kernel algorithm to the EM algorithm and previous
 
 We  denote by $X$ a random variable with domain $\Xcal$,
 and refer to instantiations of $X$ by the lower case character, $x$.
-We endow $\Xcal$ with some $\sigma$-algebra $\Ascr$ and denote a distributions (with respect to $\Ascr$) on $\Xcal$ by $\PP(X)$. We  also deal with multiple random variables, $X_1, X_2, \ldots, X_{\ell}$, with joint distribution $\PP(X_1,X_2,\ldots,X_{\ell})$. For simplicity of notation, we assume that the domains of all $X_t, t \in [\ell]$ are the same, but the methodology applies to the cases where they have different domains. Furthermore, we denote by $H$ a hidden variables with domain $\Hcal$ and distribution $\PP(H)$.
+We endow $\Xcal$ with some $\sigma$-algebra $\Ascr$ and denote a distributions (with respect to $\Ascr$) on $\Xcal$ by $\PP(X)$. We  also deal with multiple random variables, $X_1, X_2, \ldots, X_{\ell}$, with joint distribution $\PP(X_1,X_2,\ldots,X_{\ell})$. For simplicity of notation, we assume that the domains of all $X_t, t \in [\ell]$ are the same, but the methodology applies to the cases where they have different domains. Furthermore, we denote by $H$ a hidden variable with domain $\Hcal$ and distribution $\PP(H)$.
 
 A \emph{reproducing kernel Hilbert space (RKHS)} $\Fcal$ on $\Xcal$ with a kernel $k(x,x')$ is a Hilbert space of
 functions $f(\cdot):\Xcal \mapsto \RR$ with inner product $\inner{\cdot}{\cdot}_{\Fcal}$. Its element $k(x,\cdot)$ satisfies the reproducing property:
@@ -125,7 +125,7 @@ meaning that we can view the evaluation of a function $f$ at any point $x\in\Xca
 Popular kernel functions on $\RR^n$ include the Gaussian RBF kernel $k(x,x') = \exp(-s
   \nbr{x-x'}^2)$ and the Laplace kernel $\exp(-s \|x - x'\|)$. Kernel functions have also been defined on
 graphs, time series, dynamical systems, images and other structured
-objects \, \cite{SchTsuVer04}. Thus the methodology presented below can readily be generalized to a diverse range of data types as long as kernel functions are defined.
+objects \, \cite{SchTsuVer04}. Thus the methodology presented below can be readily generalized to a diverse range of data types as long as kernel functions are defined.
 % Similarly, we denote by $\Gcal$ an RKHS on $\Hcal$ with kernel $l(h,h')$, and by $\psi(h)$ the corresponding feature map.
 
 % Furthermore, we let $h \in [k]$ be a discrete random variable with $P(h =
@@ -153,7 +153,7 @@ $
 Kernel embeddings can be readily generalized to joint distributions of two or more variables using tensor product feature maps. For instance, we can embed a joint distribution of two variables $X_1$ and $X_2$ into a tensor product feature space $\Fcal\times \Fcal$ by
 \begin{align}
     \Ccal_{X_1X_2} \, &:= \, \EE_{X_1X_2}[\phi(X_1)\otimes \phi(X_2)] \\
-    \, &= \, \int_{\Xcal \times \Xcal} \phi(x_1) \otimes \phi(x_2) \, \PP(dx_1 \times dx_2)
+    \, &= \, \int_{\Xcal \times \Xcal} \phi(x_1) \otimes \phi(x_2) \, \PP(dx_1 \times dx_2),
 \end{align}
 where the reproducing kernel for the tensor product features satisfies
 $
@@ -161,7 +161,7 @@ $
 $
 By analogy, we can also define $\Ccal_{X_1X_2X_3} := \EE_{X_1X_2X_3}[\phi(X_1)\otimes\phi(X_2)\otimes \phi(X_3)]$.
 
-Kernel embedding of distributions has rich representational power. The mapping is injective for characteristic kernels~\cite{SriGreFukLanetal08}. That is, if two distributions, $\PP(X)$ and $\QQ(X)$, are different, they are be mapped to two distinct points in the RKHS. For domain $\RR^d$, many commonly used kernels are characteristic, such as the Gaussian RBF kernel and Laplace kernel.
+Kernel embedding of distributions has rich representational power. The mapping is injective for characteristic kernels~\cite{SriGreFukLanetal08}. That is, if two distributions, $\PP(X)$ and $\QQ(X)$, are different, they are mapped to two distinct points in the RKHS. For domain $\RR^d$, many commonly used kernels are characteristic, such as the Gaussian RBF kernel and Laplace kernel.
 This injective property of kernel embeddings has been exploited to design  state-of-the-art two-sample tests~\cite{GreBorRasSchetal12} and  independence tests~\cite{GreFukTeoSonetal08}.
 
 \subsection{Kernel Embedding as Multi-Linear Operator}
@@ -196,9 +196,9 @@ using three collections of orthonormal bases $\cbr{u_{i_1}}_{i_1=1}^\infty$, $\c
 \end{align}
 % When $\Ccal_{X_{1:\ell}}$ has the form of $\EE_{X_{1:\ell}}\sbr{\phi(X_1)\otimes\ldots\otimes \phi(X_\ell)}$, the above inner product reduces to $\EE_{X_{1:\ell}}[\widetilde{\Ccal}_{X_{1:\ell}} \times_1 \phi(X_1) \times_2 \ldots \times_\ell \phi(X_\ell)]$.
 %
-The joint embedding, $\Ccal_{X_1 X_2}$, is a 2nd order tensor, and we can essentially use notation and operations for matrices. For instance, we can perform singular value decomposition
+The joint embedding, $\Ccal_{X_1 X_2}$, is a 2nd order tensor, and we can essentially use notations and operations for matrices. For instance, we can perform singular value decomposition
 \[
-    \Ccal_{X_1X_2} = \sum_{i=1}^{\infty} \sigma_i \cdot u_{i_1} \otimes u_{i_2}
+    \Ccal_{X_1X_2} = \sum_{i=1}^{\infty} \sigma_i \cdot u_{i_1} \otimes u_{i_2},
 \]
 where $\sigma_i \in \RR$ are singular values ordered in nonincreasing manner, and $\cbr{u_{i_1}}_{i_1=1}^{\infty} \subset \Fcal, \cbr{u_{i_2}}_{i_2=1}^{\infty} \subset \Fcal$ are singular vectors and orthonormal bases. The rank of $\Ccal_{X_1X_2}$ is the smallest $k$ such that $\sigma_i = 0$ for $i > k$.
 
@@ -349,7 +349,12 @@ We note that $\Ccal_{X|H} = \rbr{\mu_{X|h=1},\ \mu_{X|h=2},\ \ldots,\ \mu_{X|h=k
   \Ccal_{X_1 X_2 X_3}
   &= \sum_{h \in [k]} \pi_h\cdot \mu_{X|h} \otimes \mu_{X|h} \otimes \mu_{X|h} \label{eq:joint3}
 \end{align}
+<<<<<<< HEAD
 Allman et al.~\cite{Allman09} showed that, under mild conditions, a finite mixture of nonparametric product distributions is identifiable. The multi-view latent variable model in~\eq{eq:joint3} has the same form as a finite mixture of nonparametric product distribution, and therefore we can adapt Allman's results to the current setting.
+=======
+\bxcomment{Should we use different $ \mu_{X_i|h}$ for each view above and in lines 370-380?}
+Allman et al.~\cite{x} showed that, under mild conditions, a finite mixture of nonparametric product distributions is identifiable. The multi-view latent variable model in~\eq{eq:joint3} has the same form as a finite mixture of nonparametric product distribution, and therefore we can adapt Allman's results to the current setting.
+>>>>>>> 88490766a89f39912cdc578acee768e8bdbfefef
 \begin{proposition}[Identifiability]\label{prop:identifiability}
   Let $\PP(X_1,X_2,X_3)$ be a multi-view latent variable model, such that the conditional distributions $\cbr{\PP(X|h)}_{h \in [k]}$ are linearly independent. Then, the set of parameters $\cbr{\pi_h, \mu_{X|h}}_{h \in [k]}$ are identifiable from $\Ccal_{X_1 X_2 X_3}$, up to label swapping of the hidden variable $H$.
 \end{proposition}

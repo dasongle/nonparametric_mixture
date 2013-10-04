@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.11)  3 OCT 2013 20:21
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.11)  4 OCT 2013 12:16
 entering extended mode
 **C:/Users/Double/Desktop/nonparametric_mixture/experiment/experiment.tex
 (C:/Users/Double/Desktop/nonparametric_mixture/experiment/experiment.tex
@@ -371,11 +371,8 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 73.
 LaTeX Info: Redefining \pageref on input line 73.
 LaTeX Info: Redefining \nameref on input line 73.
-(C:\Users\Double\Desktop\nonparametric_mixture\experiment\experiment.out)
-(C:\Users\Double\Desktop\nonparametric_mixture\experiment\experiment.out)
 \@outlinefile=\write3
 LaTeX Font Info:    Try loading font information for U+msa on input line 75.
-
 ("C:\Program Files (x86)\CTEX\MiKTeX\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
@@ -390,7 +387,7 @@ LaTeX Warning: No \author given.
 [1
 
 {C:/Program Files (x86)/CTEX/UserData/pdftex/config/pdftex.map}]
-<figure/diff_gauss_k_2_view_3.pdf, id=36, 433.62pt x 361.35pt>
+<figure/diff_gauss_k_2_view_3.pdf, id=33, 433.62pt x 361.35pt>
 File: figure/diff_gauss_k_2_view_3.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_2_view_3.pdf>
@@ -398,7 +395,7 @@ Package pdftex.def Info: figure/diff_gauss_k_2_view_3.pdf used on input line 12
 5.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_gauss_k_2_view_2.pdf, id=37, 433.62pt x 361.35pt>
+<figure/diff_gauss_k_2_view_2.pdf, id=34, 433.62pt x 361.35pt>
 File: figure/diff_gauss_k_2_view_2.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_2_view_2.pdf>
@@ -406,7 +403,7 @@ Package pdftex.def Info: figure/diff_gauss_k_2_view_2.pdf used on input line 12
 8.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_gauss_k_2_view_1.pdf, id=38, 433.62pt x 361.35pt>
+<figure/diff_gauss_k_2_view_1.pdf, id=35, 433.62pt x 361.35pt>
 File: figure/diff_gauss_k_2_view_1.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_2_view_1.pdf>
@@ -418,7 +415,7 @@ Overfull \hbox (7.98674pt too wide) in paragraph at lines 125--132
 [][] [][] [][] 
  []
 
-<figure/diff_gauss_k_3_view_3.pdf, id=39, 433.62pt x 361.35pt>
+<figure/diff_gauss_k_3_view_3.pdf, id=36, 433.62pt x 361.35pt>
 File: figure/diff_gauss_k_3_view_3.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_3_view_3.pdf>
@@ -426,7 +423,7 @@ Package pdftex.def Info: figure/diff_gauss_k_3_view_3.pdf used on input line 13
 9.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_gauss_k_3_view_2.pdf, id=40, 433.62pt x 361.35pt>
+<figure/diff_gauss_k_3_view_2.pdf, id=37, 433.62pt x 361.35pt>
 File: figure/diff_gauss_k_3_view_2.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_3_view_2.pdf>
@@ -434,7 +431,7 @@ Package pdftex.def Info: figure/diff_gauss_k_3_view_2.pdf used on input line 14
 2.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_gauss_k_3_view_1.pdf, id=41, 433.62pt x 361.35pt>
+<figure/diff_gauss_k_3_view_1.pdf, id=38, 433.62pt x 361.35pt>
 File: figure/diff_gauss_k_3_view_1.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_3_view_1.pdf>
@@ -446,7 +443,7 @@ Overfull \hbox (7.98674pt too wide) in paragraph at lines 139--146
 [][] [][] [][] 
  []
 
-<figure/diff_gauss_k_4_view_3.pdf, id=42, 433.62pt x 361.35pt>
+<figure/diff_gauss_k_4_view_3.pdf, id=39, 433.62pt x 361.35pt>
 File: figure/diff_gauss_k_4_view_3.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_4_view_3.pdf>
@@ -454,7 +451,7 @@ Package pdftex.def Info: figure/diff_gauss_k_4_view_3.pdf used on input line 15
 2.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_gauss_k_4_view_2.pdf, id=43, 433.62pt x 361.35pt>
+<figure/diff_gauss_k_4_view_2.pdf, id=40, 433.62pt x 361.35pt>
 File: figure/diff_gauss_k_4_view_2.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_4_view_2.pdf>
@@ -462,7 +459,7 @@ Package pdftex.def Info: figure/diff_gauss_k_4_view_2.pdf used on input line 15
 5.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_gauss_k_4_view_1.pdf, id=44, 433.62pt x 361.35pt>
+<figure/diff_gauss_k_4_view_1.pdf, id=41, 433.62pt x 361.35pt>
 File: figure/diff_gauss_k_4_view_1.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_4_view_1.pdf>
@@ -474,7 +471,7 @@ Overfull \hbox (7.98674pt too wide) in paragraph at lines 152--159
 [][] [][] [][] 
  []
 
-<figure/diff_gauss_k_8_view_3.pdf, id=45, 433.62pt x 361.35pt>
+<figure/diff_gauss_k_8_view_3.pdf, id=42, 433.62pt x 361.35pt>
 File: figure/diff_gauss_k_8_view_3.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_8_view_3.pdf>
@@ -482,7 +479,7 @@ Package pdftex.def Info: figure/diff_gauss_k_8_view_3.pdf used on input line 16
 5.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_gauss_k_8_view_2.pdf, id=46, 433.62pt x 361.35pt>
+<figure/diff_gauss_k_8_view_2.pdf, id=43, 433.62pt x 361.35pt>
 File: figure/diff_gauss_k_8_view_2.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_8_view_2.pdf>
@@ -490,7 +487,7 @@ Package pdftex.def Info: figure/diff_gauss_k_8_view_2.pdf used on input line 16
 8.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_gauss_k_8_view_1.pdf, id=47, 433.62pt x 361.35pt>
+<figure/diff_gauss_k_8_view_1.pdf, id=44, 433.62pt x 361.35pt>
 File: figure/diff_gauss_k_8_view_1.pdf Graphic file (type pdf)
 
 <use figure/diff_gauss_k_8_view_1.pdf>
@@ -502,35 +499,35 @@ Overfull \hbox (7.98674pt too wide) in paragraph at lines 165--172
 [][] [][] [][] 
  []
 
-<figure/sym_gauss_k_2.pdf, id=48, 433.62pt x 361.35pt>
+<figure/sym_gauss_k_2.pdf, id=45, 433.62pt x 361.35pt>
 File: figure/sym_gauss_k_2.pdf Graphic file (type pdf)
 
 <use figure/sym_gauss_k_2.pdf>
 Package pdftex.def Info: figure/sym_gauss_k_2.pdf used on input line 179.
 (pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
 
-<figure/sym_gauss_k_3.pdf, id=49, 433.62pt x 361.35pt>
+<figure/sym_gauss_k_3.pdf, id=46, 433.62pt x 361.35pt>
 File: figure/sym_gauss_k_3.pdf Graphic file (type pdf)
 
 <use figure/sym_gauss_k_3.pdf>
 Package pdftex.def Info: figure/sym_gauss_k_3.pdf used on input line 182.
 (pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
 
-<figure/sym_gauss_k_4.pdf, id=50, 433.62pt x 361.35pt>
+<figure/sym_gauss_k_4.pdf, id=47, 433.62pt x 361.35pt>
 File: figure/sym_gauss_k_4.pdf Graphic file (type pdf)
 
 <use figure/sym_gauss_k_4.pdf>
 Package pdftex.def Info: figure/sym_gauss_k_4.pdf used on input line 185.
 (pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
 
-<figure/sym_gauss_k_8.pdf, id=51, 433.62pt x 361.35pt>
+<figure/sym_gauss_k_8.pdf, id=48, 433.62pt x 361.35pt>
 File: figure/sym_gauss_k_8.pdf Graphic file (type pdf)
 
 <use figure/sym_gauss_k_8.pdf>
 Package pdftex.def Info: figure/sym_gauss_k_8.pdf used on input line 188.
 (pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
 
-<figure/sp_diff_gauss_k_2_view_3.pdf, id=52, 433.62pt x 361.35pt>
+<figure/sp_diff_gauss_k_2_view_3.pdf, id=49, 433.62pt x 361.35pt>
 File: figure/sp_diff_gauss_k_2_view_3.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_gauss_k_2_view_3.pdf>
@@ -538,7 +535,7 @@ Package pdftex.def Info: figure/sp_diff_gauss_k_2_view_3.pdf used on input line
  200.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/sp_diff_gauss_k_2_view_2.pdf, id=53, 433.62pt x 361.35pt>
+<figure/sp_diff_gauss_k_2_view_2.pdf, id=50, 433.62pt x 361.35pt>
 File: figure/sp_diff_gauss_k_2_view_2.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_gauss_k_2_view_2.pdf>
@@ -546,7 +543,7 @@ Package pdftex.def Info: figure/sp_diff_gauss_k_2_view_2.pdf used on input line
  203.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/sp_diff_gauss_k_2_view_1.pdf, id=54, 433.62pt x 361.35pt>
+<figure/sp_diff_gauss_k_2_view_1.pdf, id=51, 433.62pt x 361.35pt>
 File: figure/sp_diff_gauss_k_2_view_1.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_gauss_k_2_view_1.pdf>
@@ -558,7 +555,7 @@ Overfull \hbox (7.98674pt too wide) in paragraph at lines 200--207
 [][] [][] [][] 
  []
 
-<figure/sp_diff_gauss_k_3_view_3.pdf, id=55, 433.62pt x 361.35pt>
+<figure/sp_diff_gauss_k_3_view_3.pdf, id=52, 433.62pt x 361.35pt>
 File: figure/sp_diff_gauss_k_3_view_3.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_gauss_k_3_view_3.pdf>
@@ -566,7 +563,7 @@ Package pdftex.def Info: figure/sp_diff_gauss_k_3_view_3.pdf used on input line
  214.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/sp_diff_gauss_k_3_view_2.pdf, id=56, 433.62pt x 361.35pt>
+<figure/sp_diff_gauss_k_3_view_2.pdf, id=53, 433.62pt x 361.35pt>
 File: figure/sp_diff_gauss_k_3_view_2.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_gauss_k_3_view_2.pdf>
@@ -574,7 +571,7 @@ Package pdftex.def Info: figure/sp_diff_gauss_k_3_view_2.pdf used on input line
  217.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/sp_diff_gauss_k_3_view_1.pdf, id=57, 433.62pt x 361.35pt>
+<figure/sp_diff_gauss_k_3_view_1.pdf, id=54, 433.62pt x 361.35pt>
 File: figure/sp_diff_gauss_k_3_view_1.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_gauss_k_3_view_1.pdf>
@@ -586,7 +583,7 @@ Overfull \hbox (7.98674pt too wide) in paragraph at lines 214--221
 [][] [][] [][] 
  []
 
-<figure/sp_diff_gauss_k_4_view_3.pdf, id=58, 433.62pt x 361.35pt>
+<figure/sp_diff_gauss_k_4_view_3.pdf, id=55, 433.62pt x 361.35pt>
 File: figure/sp_diff_gauss_k_4_view_3.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_gauss_k_4_view_3.pdf>
@@ -594,7 +591,7 @@ Package pdftex.def Info: figure/sp_diff_gauss_k_4_view_3.pdf used on input line
  228.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/sp_diff_gauss_k_4_view_2.pdf, id=59, 433.62pt x 361.35pt>
+<figure/sp_diff_gauss_k_4_view_2.pdf, id=56, 433.62pt x 361.35pt>
 File: figure/sp_diff_gauss_k_4_view_2.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_gauss_k_4_view_2.pdf>
@@ -602,7 +599,7 @@ Package pdftex.def Info: figure/sp_diff_gauss_k_4_view_2.pdf used on input line
  231.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/sp_diff_gauss_k_4_view_1.pdf, id=60, 433.62pt x 361.35pt>
+<figure/sp_diff_gauss_k_4_view_1.pdf, id=57, 433.62pt x 361.35pt>
 File: figure/sp_diff_gauss_k_4_view_1.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_gauss_k_4_view_1.pdf>
@@ -614,7 +611,7 @@ Overfull \hbox (7.98674pt too wide) in paragraph at lines 228--235
 [][] [][] [][] 
  []
 
-<figure/sp_diff_gauss_k_8_view_3.pdf, id=61, 433.62pt x 361.35pt>
+<figure/sp_diff_gauss_k_8_view_3.pdf, id=58, 433.62pt x 361.35pt>
 File: figure/sp_diff_gauss_k_8_view_3.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_gauss_k_8_view_3.pdf>
@@ -622,7 +619,7 @@ Package pdftex.def Info: figure/sp_diff_gauss_k_8_view_3.pdf used on input line
  242.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/sp_diff_gauss_k_8_view_2.pdf, id=62, 433.62pt x 361.35pt>
+<figure/sp_diff_gauss_k_8_view_2.pdf, id=59, 433.62pt x 361.35pt>
 File: figure/sp_diff_gauss_k_8_view_2.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_gauss_k_8_view_2.pdf>
@@ -630,7 +627,7 @@ Package pdftex.def Info: figure/sp_diff_gauss_k_8_view_2.pdf used on input line
  245.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/sp_diff_gauss_k_8_view_1.pdf, id=63, 433.62pt x 361.35pt>
+<figure/sp_diff_gauss_k_8_view_1.pdf, id=60, 433.62pt x 361.35pt>
 File: figure/sp_diff_gauss_k_8_view_1.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_gauss_k_8_view_1.pdf>
@@ -642,35 +639,35 @@ Overfull \hbox (7.98674pt too wide) in paragraph at lines 242--249
 [][] [][] [][] 
  []
 
-<figure/sp_sym_gauss_k_2.pdf, id=64, 433.62pt x 361.35pt>
+<figure/sp_sym_gauss_k_2.pdf, id=61, 433.62pt x 361.35pt>
 File: figure/sp_sym_gauss_k_2.pdf Graphic file (type pdf)
 
 <use figure/sp_sym_gauss_k_2.pdf>
 Package pdftex.def Info: figure/sp_sym_gauss_k_2.pdf used on input line 257.
 (pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
 
-<figure/sp_sym_gauss_k_3.pdf, id=65, 433.62pt x 361.35pt>
+<figure/sp_sym_gauss_k_3.pdf, id=62, 433.62pt x 361.35pt>
 File: figure/sp_sym_gauss_k_3.pdf Graphic file (type pdf)
 
 <use figure/sp_sym_gauss_k_3.pdf>
 Package pdftex.def Info: figure/sp_sym_gauss_k_3.pdf used on input line 260.
 (pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
 
-<figure/sp_sym_gauss_k_4.pdf, id=66, 433.62pt x 361.35pt>
+<figure/sp_sym_gauss_k_4.pdf, id=63, 433.62pt x 361.35pt>
 File: figure/sp_sym_gauss_k_4.pdf Graphic file (type pdf)
 
 <use figure/sp_sym_gauss_k_4.pdf>
 Package pdftex.def Info: figure/sp_sym_gauss_k_4.pdf used on input line 263.
 (pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
 
-<figure/sp_sym_gauss_k_8.pdf, id=67, 433.62pt x 361.35pt>
+<figure/sp_sym_gauss_k_8.pdf, id=64, 433.62pt x 361.35pt>
 File: figure/sp_sym_gauss_k_8.pdf Graphic file (type pdf)
 
 <use figure/sp_sym_gauss_k_8.pdf>
 Package pdftex.def Info: figure/sp_sym_gauss_k_8.pdf used on input line 266.
 (pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
 
-<figure/diff_heter_k_2_view_3.pdf, id=68, 433.62pt x 361.35pt>
+<figure/diff_heter_k_2_view_3.pdf, id=65, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_2_view_3.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_2_view_3.pdf>
@@ -678,7 +675,7 @@ Package pdftex.def Info: figure/diff_heter_k_2_view_3.pdf used on input line 27
 7.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_heter_k_2_view_2.pdf, id=69, 433.62pt x 361.35pt>
+<figure/diff_heter_k_2_view_2.pdf, id=66, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_2_view_2.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_2_view_2.pdf>
@@ -686,7 +683,7 @@ Package pdftex.def Info: figure/diff_heter_k_2_view_2.pdf used on input line 28
 0.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_heter_k_2_view_1.pdf, id=70, 433.62pt x 361.35pt>
+<figure/diff_heter_k_2_view_1.pdf, id=67, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_2_view_1.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_2_view_1.pdf>
@@ -698,7 +695,7 @@ Overfull \hbox (7.98674pt too wide) in paragraph at lines 277--284
 [][] [][] [][] 
  []
 
-<figure/diff_heter_k_3_view_3.pdf, id=71, 433.62pt x 361.35pt>
+<figure/diff_heter_k_3_view_3.pdf, id=68, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_3_view_3.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_3_view_3.pdf>
@@ -706,7 +703,7 @@ Package pdftex.def Info: figure/diff_heter_k_3_view_3.pdf used on input line 29
 1.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_heter_k_3_view_2.pdf, id=72, 433.62pt x 361.35pt>
+<figure/diff_heter_k_3_view_2.pdf, id=69, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_3_view_2.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_3_view_2.pdf>
@@ -714,7 +711,7 @@ Package pdftex.def Info: figure/diff_heter_k_3_view_2.pdf used on input line 29
 4.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_heter_k_3_view_1.pdf, id=73, 433.62pt x 361.35pt>
+<figure/diff_heter_k_3_view_1.pdf, id=70, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_3_view_1.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_3_view_1.pdf>
@@ -726,7 +723,7 @@ Overfull \hbox (7.98674pt too wide) in paragraph at lines 291--298
 [][] [][] [][] 
  []
 
-<figure/diff_heter_k_4_view_3.pdf, id=74, 433.62pt x 361.35pt>
+<figure/diff_heter_k_4_view_3.pdf, id=71, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_4_view_3.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_4_view_3.pdf>
@@ -734,7 +731,7 @@ Package pdftex.def Info: figure/diff_heter_k_4_view_3.pdf used on input line 30
 4.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_heter_k_4_view_2.pdf, id=75, 433.62pt x 361.35pt>
+<figure/diff_heter_k_4_view_2.pdf, id=72, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_4_view_2.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_4_view_2.pdf>
@@ -742,7 +739,7 @@ Package pdftex.def Info: figure/diff_heter_k_4_view_2.pdf used on input line 30
 7.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_heter_k_4_view_1.pdf, id=76, 433.62pt x 361.35pt>
+<figure/diff_heter_k_4_view_1.pdf, id=73, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_4_view_1.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_4_view_1.pdf>
@@ -754,7 +751,7 @@ Overfull \hbox (7.98674pt too wide) in paragraph at lines 304--311
 [][] [][] [][] 
  []
 
-<figure/diff_heter_k_8_view_3.pdf, id=77, 433.62pt x 361.35pt>
+<figure/diff_heter_k_8_view_3.pdf, id=74, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_8_view_3.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_8_view_3.pdf>
@@ -762,7 +759,7 @@ Package pdftex.def Info: figure/diff_heter_k_8_view_3.pdf used on input line 31
 7.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_heter_k_8_view_2.pdf, id=78, 433.62pt x 361.35pt>
+<figure/diff_heter_k_8_view_2.pdf, id=75, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_8_view_2.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_8_view_2.pdf>
@@ -770,7 +767,7 @@ Package pdftex.def Info: figure/diff_heter_k_8_view_2.pdf used on input line 32
 0.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/diff_heter_k_8_view_1.pdf, id=79, 433.62pt x 361.35pt>
+<figure/diff_heter_k_8_view_1.pdf, id=76, 433.62pt x 361.35pt>
 File: figure/diff_heter_k_8_view_1.pdf Graphic file (type pdf)
 
 <use figure/diff_heter_k_8_view_1.pdf>
@@ -782,35 +779,35 @@ Overfull \hbox (7.98674pt too wide) in paragraph at lines 317--324
 [][] [][] [][] 
  []
 
-<figure/sym_heter_k_2.pdf, id=80, 433.62pt x 361.35pt>
+<figure/sym_heter_k_2.pdf, id=77, 433.62pt x 361.35pt>
 File: figure/sym_heter_k_2.pdf Graphic file (type pdf)
 
 <use figure/sym_heter_k_2.pdf>
 Package pdftex.def Info: figure/sym_heter_k_2.pdf used on input line 331.
 (pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
 
-<figure/sym_heter_k_3.pdf, id=81, 433.62pt x 361.35pt>
+<figure/sym_heter_k_3.pdf, id=78, 433.62pt x 361.35pt>
 File: figure/sym_heter_k_3.pdf Graphic file (type pdf)
 
 <use figure/sym_heter_k_3.pdf>
 Package pdftex.def Info: figure/sym_heter_k_3.pdf used on input line 334.
 (pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
 
-<figure/sym_heter_k_4.pdf, id=82, 433.62pt x 361.35pt>
+<figure/sym_heter_k_4.pdf, id=79, 433.62pt x 361.35pt>
 File: figure/sym_heter_k_4.pdf Graphic file (type pdf)
 
 <use figure/sym_heter_k_4.pdf>
 Package pdftex.def Info: figure/sym_heter_k_4.pdf used on input line 337.
 (pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
 
-<figure/sym_heter_k_8.pdf, id=83, 433.62pt x 361.35pt>
+<figure/sym_heter_k_8.pdf, id=80, 433.62pt x 361.35pt>
 File: figure/sym_heter_k_8.pdf Graphic file (type pdf)
 
 <use figure/sym_heter_k_8.pdf>
 Package pdftex.def Info: figure/sym_heter_k_8.pdf used on input line 340.
 (pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
 
-<figure/sp_diff_heter_k_2_view_3.pdf, id=84, 433.62pt x 361.35pt>
+<figure/sp_diff_heter_k_2_view_3.pdf, id=81, 433.62pt x 361.35pt>
 File: figure/sp_diff_heter_k_2_view_3.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_heter_k_2_view_3.pdf>
@@ -818,7 +815,7 @@ Package pdftex.def Info: figure/sp_diff_heter_k_2_view_3.pdf used on input line
  351.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/sp_diff_heter_k_2_view_2.pdf, id=85, 433.62pt x 361.35pt>
+<figure/sp_diff_heter_k_2_view_2.pdf, id=82, 433.62pt x 361.35pt>
 File: figure/sp_diff_heter_k_2_view_2.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_heter_k_2_view_2.pdf>
@@ -826,7 +823,7 @@ Package pdftex.def Info: figure/sp_diff_heter_k_2_view_2.pdf used on input line
  354.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/sp_diff_heter_k_2_view_1.pdf, id=86, 433.62pt x 361.35pt>
+<figure/sp_diff_heter_k_2_view_1.pdf, id=83, 433.62pt x 361.35pt>
 File: figure/sp_diff_heter_k_2_view_1.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_heter_k_2_view_1.pdf>
@@ -838,7 +835,7 @@ Overfull \hbox (7.98674pt too wide) in paragraph at lines 351--358
 [][] [][] [][] 
  []
 
-<figure/sp_diff_heter_k_3_view_3.pdf, id=87, 433.62pt x 361.35pt>
+<figure/sp_diff_heter_k_3_view_3.pdf, id=84, 433.62pt x 361.35pt>
 File: figure/sp_diff_heter_k_3_view_3.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_heter_k_3_view_3.pdf>
@@ -846,7 +843,7 @@ Package pdftex.def Info: figure/sp_diff_heter_k_3_view_3.pdf used on input line
  365.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/sp_diff_heter_k_3_view_2.pdf, id=88, 433.62pt x 361.35pt>
+<figure/sp_diff_heter_k_3_view_2.pdf, id=85, 433.62pt x 361.35pt>
 File: figure/sp_diff_heter_k_3_view_2.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_heter_k_3_view_2.pdf>
@@ -854,7 +851,7 @@ Package pdftex.def Info: figure/sp_diff_heter_k_3_view_2.pdf used on input line
  368.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-<figure/sp_diff_heter_k_3_view_1.pdf, id=89, 433.62pt x 361.35pt>
+<figure/sp_diff_heter_k_3_view_1.pdf, id=86, 433.62pt x 361.35pt>
 File: figure/sp_diff_heter_k_3_view_1.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_heter_k_3_view_1.pdf>
@@ -866,12 +863,72 @@ Overfull \hbox (7.98674pt too wide) in paragraph at lines 365--372
 [][] [][] [][] 
  []
 
+<figure/sp_diff_heter_k_4_view_3.pdf, id=87, 433.62pt x 361.35pt>
+File: figure/sp_diff_heter_k_4_view_3.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_heter_k_4_view_3.pdf>
+Package pdftex.def Info: figure/sp_diff_heter_k_4_view_3.pdf used on input line
+ 380.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+<figure/sp_diff_heter_k_4_view_2.pdf, id=88, 433.62pt x 361.35pt>
+File: figure/sp_diff_heter_k_4_view_2.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_heter_k_4_view_2.pdf>
+Package pdftex.def Info: figure/sp_diff_heter_k_4_view_2.pdf used on input line
+ 383.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+<figure/sp_diff_heter_k_4_view_1.pdf, id=89, 433.62pt x 361.35pt>
+File: figure/sp_diff_heter_k_4_view_1.pdf Graphic file (type pdf)
+
+<use figure/sp_diff_heter_k_4_view_1.pdf>
+Package pdftex.def Info: figure/sp_diff_heter_k_4_view_1.pdf used on input line
+ 386.
+(pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
+
+Overfull \hbox (7.98674pt too wide) in paragraph at lines 380--387
+[][] [][] [][] 
+ []
+
+
+! LaTeX Error: Too many unprocessed floats.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.392 	\subfigure
+                 [View 1]{
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Undefined control sequence.
+\@float@Hx ...ltovf \fi \global \setbox \@currbox 
+                                                  \color@vbox \normalcolor \...
+l.392 	\subfigure
+                 [View 1]{
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \vbox 
+l.392 	\subfigure
+                 [View 1]{
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
 <figure/sp_diff_heter_k_8_view_3.pdf, id=90, 433.62pt x 361.35pt>
 File: figure/sp_diff_heter_k_8_view_3.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_heter_k_8_view_3.pdf>
 Package pdftex.def Info: figure/sp_diff_heter_k_8_view_3.pdf used on input line
- 381.
+ 394.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
 <figure/sp_diff_heter_k_8_view_2.pdf, id=91, 433.62pt x 361.35pt>
@@ -879,7 +936,7 @@ File: figure/sp_diff_heter_k_8_view_2.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_heter_k_8_view_2.pdf>
 Package pdftex.def Info: figure/sp_diff_heter_k_8_view_2.pdf used on input line
- 384.
+ 397.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
 <figure/sp_diff_heter_k_8_view_1.pdf, id=92, 433.62pt x 361.35pt>
@@ -887,15 +944,442 @@ File: figure/sp_diff_heter_k_8_view_1.pdf Graphic file (type pdf)
 
 <use figure/sp_diff_heter_k_8_view_1.pdf>
 Package pdftex.def Info: figure/sp_diff_heter_k_8_view_1.pdf used on input line
- 387.
+ 400.
 (pdftex.def)             Requested size: 150.32504pt x 125.2724pt.
 
-Overfull \hbox (7.98674pt too wide) in paragraph at lines 381--388
+Overfull \hbox (7.98674pt too wide) in paragraph at lines 394--401
 [][] [][] [][] 
  []
 
+! Undefined control sequence.
+\@largefloatcheck ->\ifdim \ht \@currbox 
+                                         >\textheight \@tempdima -\textheigh...
+l.402 \end{figure}
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   >
+l.402 \end{figure}
+                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Undefined control sequence.
+<argument> \@currbox 
+                     
+l.402 \end{figure}
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Argument of \@xnext has an extra }.
+<inserted text> 
+                \par 
+l.402 \end{figure}
+                  
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+\@currbox \@currlist \ifnum \count \@currbox >\z@ \advance \@pageht \@pagedp \E
+TC.
+! Paragraph ended before \@xnext was complete.
+<to be read again> 
+                   \par 
+l.402 \end{figure}
+                  
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+! Extra \else.
+\subfig@end@float ...penalty \@floatpenalty \else 
+                                                  \vadjust {\penalty -\@Miv ...
+l.402 \end{figure}
+                  
+I'm ignoring this; it doesn't match any \if.
+
+! You can't use `\vadjust' in vertical mode.
+\subfig@end@float ...@floatpenalty \else \vadjust 
+                                                  {\penalty -\@Miv \vbox {}\...
+l.402 \end{figure}
+                  
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Argument of \@xnext has an extra }.
+<inserted text> 
+                \par 
+l.402 \end{figure}
+                  
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+\@currbox \@currlist \ifnum \count \@currbox >\z@ \advance \@pageht \@pagedp \E
+TC.
+! Paragraph ended before \@xnext was complete.
+<to be read again> 
+                   \par 
+l.402 \end{figure}
+                  
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+
+! LaTeX Error: Too many unprocessed floats.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.407 	\subfigure
+                 [2 components]{
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Undefined control sequence.
+\@float@Hx ...ltovf \fi \global \setbox \@currbox 
+                                                  \color@vbox \normalcolor \...
+l.407 	\subfigure
+                 [2 components]{
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \vbox 
+l.407 	\subfigure
+                 [2 components]{
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+<figure/sp_sym_heter_k_2.pdf, id=93, 433.62pt x 361.35pt>
+File: figure/sp_sym_heter_k_2.pdf Graphic file (type pdf)
+
+<use figure/sp_sym_heter_k_2.pdf>
+Package pdftex.def Info: figure/sp_sym_heter_k_2.pdf used on input line 409.
+(pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
+
+<figure/sp_sym_heter_k_3.pdf, id=94, 433.62pt x 361.35pt>
+File: figure/sp_sym_heter_k_3.pdf Graphic file (type pdf)
+
+<use figure/sp_sym_heter_k_3.pdf>
+Package pdftex.def Info: figure/sp_sym_heter_k_3.pdf used on input line 412.
+(pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
+
+<figure/sp_sym_heter_k_4.pdf, id=95, 433.62pt x 361.35pt>
+File: figure/sp_sym_heter_k_4.pdf Graphic file (type pdf)
+
+<use figure/sp_sym_heter_k_4.pdf>
+Package pdftex.def Info: figure/sp_sym_heter_k_4.pdf used on input line 415.
+(pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
+
+<figure/sp_sym_heter_k_8.pdf, id=96, 433.62pt x 361.35pt>
+File: figure/sp_sym_heter_k_8.pdf Graphic file (type pdf)
+
+<use figure/sp_sym_heter_k_8.pdf>
+Package pdftex.def Info: figure/sp_sym_heter_k_8.pdf used on input line 418.
+(pdftex.def)             Requested size: 108.04164pt x 90.03401pt.
+
+! Undefined control sequence.
+\@largefloatcheck ->\ifdim \ht \@currbox 
+                                         >\textheight \@tempdima -\textheigh...
+l.420 \end{figure}
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   >
+l.420 \end{figure}
+                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Undefined control sequence.
+<argument> \@currbox 
+                     
+l.420 \end{figure}
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \@elt 
+l.420 \end{figure}
+                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Missing = inserted for \ifnum.
+<to be read again> 
+                   \@elt 
+l.420 \end{figure}
+                  
+I was expecting to see `<', `=', or `>'. Didn't.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \@elt 
+l.420 \end{figure}
+                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+
+! LaTeX Error: This may be a LaTeX bug.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.420 \end{figure}
+                  
+Call for help
+
+! Undefined control sequence.
+\@addmarginpar ...advance \@tempdima \ht \@marbox 
+                                                  \ifdim \@tempdima >\z@ \@l...
+l.420 \end{figure}
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Bad register code (-5177346).
+\@addmarginpar ...e \space moved}\else \@tempdima 
+                                                  \z@ \fi \global \@mparbott...
+l.420 \end{figure}
+                  
+A register number must be between 0 and 32767.
+I changed this one to zero.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \global 
+l.420 \end{figure}
+                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \global 
+l.420 \end{figure}
+                  
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+! Undefined control sequence.
+\@addmarginpar ...vance \@mparbottom \dp \@marbox 
+                                                  \global \advance \@mparbot...
+l.420 \end{figure}
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \global 
+l.420 \end{figure}
+                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Undefined control sequence.
+\@addmarginpar ...dvance \@tempdima -\ht \@marbox 
+                                                  \global \setbox \@marbox \...
+l.420 \end{figure}
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \global 
+l.420 \end{figure}
+                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Undefined control sequence.
+\@addmarginpar ...marbox \global \setbox \@marbox 
+                                                  \vbox {\vskip \@tempdima \...
+l.420 \end{figure}
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \vbox 
+l.420 \end{figure}
+                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Undefined control sequence.
+\@addmarginpar ...\vskip \@tempdima \box \@marbox 
+                                                  }\global \ht \@marbox \z@ ...
+l.420 \end{figure}
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   }
+l.420 \end{figure}
+                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Undefined control sequence.
+\@addmarginpar ... \@marbox }\global \ht \@marbox 
+                                                  \z@ \global \dp \@marbox \...
+l.420 \end{figure}
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \global 
+l.420 \end{figure}
+                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \global 
+l.420 \end{figure}
+                  
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+! Undefined control sequence.
+\@addmarginpar ...marbox \z@ \global \dp \@marbox 
+                                                  \z@ \kern -\@pagedp \noint...
+l.420 \end{figure}
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \kern 
+l.420 \end{figure}
+                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \kern 
+l.420 \end{figure}
+                  
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+! Undefined control sequence.
+\@addmarginpar ...arginparwidth \fi \box \@marbox 
+                                                  \hss }\nointerlineskip \hb...
+l.420 \end{figure}
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \hss 
+l.420 \end{figure}
+                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
 (C:\Users\Double\Desktop\nonparametric_mixture\experiment\experiment.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 394.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 426.
 
 [2 <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/diff_gauss_
 k_2_view_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figur
@@ -904,101 +1388,121 @@ eriment/figure/diff_gauss_k_2_view_1.pdf> <C:/Users/Double/Desktop/nonparametri
 c_mixture/experiment/figure/diff_gauss_k_3_view_3.pdf> <C:/Users/Double/Desktop
 /nonparametric_mixture/experiment/figure/diff_gauss_k_3_view_2.pdf> <C:/Users/D
 ouble/Desktop/nonparametric_mixture/experiment/figure/diff_gauss_k_3_view_1.pdf
->] [3 <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/diff_gau
-ss_k_4_view_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/fi
-gure/diff_gauss_k_4_view_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/
-experiment/figure/diff_gauss_k_4_view_1.pdf> <C:/Users/Double/Desktop/nonparame
-tric_mixture/experiment/figure/diff_gauss_k_8_view_3.pdf> <C:/Users/Double/Desk
-top/nonparametric_mixture/experiment/figure/diff_gauss_k_8_view_2.pdf> <C:/User
-s/Double/Desktop/nonparametric_mixture/experiment/figure/diff_gauss_k_8_view_1.
-pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/sym_gauss
-_k_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/sym_
-gauss_k_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure
-/sym_gauss_k_4.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/f
-igure/sym_gauss_k_8.pdf>] [4 <C:/Users/Double/Desktop/nonparametric_mixture/exp
-eriment/figure/sp_diff_gauss_k_2_view_3.pdf> <C:/Users/Double/Desktop/nonparame
-tric_mixture/experiment/figure/sp_diff_gauss_k_2_view_2.pdf> <C:/Users/Double/D
-esktop/nonparametric_mixture/experiment/figure/sp_diff_gauss_k_2_view_1.pdf> <C
+> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/sp_sym_heter
+_k_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/sp_s
+ym_heter_k_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/fig
+ure/sp_sym_heter_k_4.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experi
+ment/figure/sp_sym_heter_k_8.pdf>] [3 <C:/Users/Double/Desktop/nonparametric_mi
+xture/experiment/figure/diff_gauss_k_4_view_3.pdf> <C:/Users/Double/Desktop/non
+parametric_mixture/experiment/figure/diff_gauss_k_4_view_2.pdf> <C:/Users/Doubl
+e/Desktop/nonparametric_mixture/experiment/figure/diff_gauss_k_4_view_1.pdf> <C
+:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/diff_gauss_k_8_v
+iew_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/dif
+f_gauss_k_8_view_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experime
+nt/figure/diff_gauss_k_8_view_1.pdf> <C:/Users/Double/Desktop/nonparametric_mix
+ture/experiment/figure/sym_gauss_k_2.pdf> <C:/Users/Double/Desktop/nonparametri
+c_mixture/experiment/figure/sym_gauss_k_3.pdf> <C:/Users/Double/Desktop/nonpara
+metric_mixture/experiment/figure/sym_gauss_k_4.pdf> <C:/Users/Double/Desktop/no
+nparametric_mixture/experiment/figure/sym_gauss_k_8.pdf>] [4 <C:/Users/Double/D
+esktop/nonparametric_mixture/experiment/figure/sp_diff_gauss_k_2_view_3.pdf> <C
 :/Users/Double/Desktop/nonparametric_mixture/experiment/figure/sp_diff_gauss_k_
-3_view_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/
-sp_diff_gauss_k_3_view_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/ex
-periment/figure/sp_diff_gauss_k_3_view_1.pdf> <C:/Users/Double/Desktop/nonparam
-etric_mixture/experiment/figure/sp_diff_gauss_k_4_view_3.pdf> <C:/Users/Double/
-Desktop/nonparametric_mixture/experiment/figure/sp_diff_gauss_k_4_view_2.pdf> <
+2_view_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/
+sp_diff_gauss_k_2_view_1.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/ex
+periment/figure/sp_diff_gauss_k_3_view_3.pdf> <C:/Users/Double/Desktop/nonparam
+etric_mixture/experiment/figure/sp_diff_gauss_k_3_view_2.pdf> <C:/Users/Double/
+Desktop/nonparametric_mixture/experiment/figure/sp_diff_gauss_k_3_view_1.pdf> <
 C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/sp_diff_gauss_k
-_4_view_1.pdf>] [5 <C:/Users/Double/Desktop/nonparametric_mixture/experiment/fi
-gure/sp_diff_gauss_k_8_view_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixtu
-re/experiment/figure/sp_diff_gauss_k_8_view_2.pdf> <C:/Users/Double/Desktop/non
-parametric_mixture/experiment/figure/sp_diff_gauss_k_8_view_1.pdf> <C:/Users/Do
-uble/Desktop/nonparametric_mixture/experiment/figure/sp_sym_gauss_k_2.pdf> <C:/
-Users/Double/Desktop/nonparametric_mixture/experiment/figure/sp_sym_gauss_k_3.p
-df> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/sp_sym_gau
-ss_k_4.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/sp
-_sym_gauss_k_8.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/f
-igure/diff_heter_k_2_view_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixture
-/experiment/figure/diff_heter_k_2_view_2.pdf> <C:/Users/Double/Desktop/nonparam
-etric_mixture/experiment/figure/diff_heter_k_2_view_1.pdf>] [6 <C:/Users/Double
-/Desktop/nonparametric_mixture/experiment/figure/diff_heter_k_3_view_3.pdf> <C:
-/Users/Double/Desktop/nonparametric_mixture/experiment/figure/diff_heter_k_3_vi
-ew_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/diff
-_heter_k_3_view_1.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experimen
-t/figure/diff_heter_k_4_view_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixt
-ure/experiment/figure/diff_heter_k_4_view_2.pdf> <C:/Users/Double/Desktop/nonpa
-rametric_mixture/experiment/figure/diff_heter_k_4_view_1.pdf> <C:/Users/Double/
-Desktop/nonparametric_mixture/experiment/figure/diff_heter_k_8_view_3.pdf> <C:/
-Users/Double/Desktop/nonparametric_mixture/experiment/figure/diff_heter_k_8_vie
-w_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/diff_
-heter_k_8_view_1.pdf>] [7 <C:/Users/Double/Desktop/nonparametric_mixture/experi
-ment/figure/sym_heter_k_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/e
-xperiment/figure/sym_heter_k_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixt
-ure/experiment/figure/sym_heter_k_4.pdf> <C:/Users/Double/Desktop/nonparametric
-_mixture/experiment/figure/sym_heter_k_8.pdf> <C:/Users/Double/Desktop/nonparam
-etric_mixture/experiment/figure/sp_diff_heter_k_2_view_3.pdf> <C:/Users/Double/
-Desktop/nonparametric_mixture/experiment/figure/sp_diff_heter_k_2_view_2.pdf> <
+_4_view_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure
+/sp_diff_gauss_k_4_view_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/e
+xperiment/figure/sp_diff_gauss_k_4_view_1.pdf>] [5 <C:/Users/Double/Desktop/non
+parametric_mixture/experiment/figure/sp_diff_gauss_k_8_view_3.pdf> <C:/Users/Do
+uble/Desktop/nonparametric_mixture/experiment/figure/sp_diff_gauss_k_8_view_2.p
+df> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/sp_diff_ga
+uss_k_8_view_1.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/f
+igure/sp_sym_gauss_k_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/expe
+riment/figure/sp_sym_gauss_k_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixt
+ure/experiment/figure/sp_sym_gauss_k_4.pdf> <C:/Users/Double/Desktop/nonparamet
+ric_mixture/experiment/figure/sp_sym_gauss_k_8.pdf> <C:/Users/Double/Desktop/no
+nparametric_mixture/experiment/figure/diff_heter_k_2_view_3.pdf> <C:/Users/Doub
+le/Desktop/nonparametric_mixture/experiment/figure/diff_heter_k_2_view_2.pdf> <
+C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/diff_heter_k_2_
+view_1.pdf>] [6 <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figur
+e/diff_heter_k_3_view_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/exp
+eriment/figure/diff_heter_k_3_view_2.pdf> <C:/Users/Double/Desktop/nonparametri
+c_mixture/experiment/figure/diff_heter_k_3_view_1.pdf> <C:/Users/Double/Desktop
+/nonparametric_mixture/experiment/figure/diff_heter_k_4_view_3.pdf> <C:/Users/D
+ouble/Desktop/nonparametric_mixture/experiment/figure/diff_heter_k_4_view_2.pdf
+> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/diff_heter_k
+_4_view_1.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure
+/diff_heter_k_8_view_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/expe
+riment/figure/diff_heter_k_8_view_2.pdf> <C:/Users/Double/Desktop/nonparametric
+_mixture/experiment/figure/diff_heter_k_8_view_1.pdf>] [7 <C:/Users/Double/Desk
+top/nonparametric_mixture/experiment/figure/sym_heter_k_2.pdf> <C:/Users/Double
+/Desktop/nonparametric_mixture/experiment/figure/sym_heter_k_3.pdf> <C:/Users/D
+ouble/Desktop/nonparametric_mixture/experiment/figure/sym_heter_k_4.pdf> <C:/Us
+ers/Double/Desktop/nonparametric_mixture/experiment/figure/sym_heter_k_8.pdf> <
 C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/sp_diff_heter_k
-_2_view_1.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure
-/sp_diff_heter_k_3_view_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/e
-xperiment/figure/sp_diff_heter_k_3_view_2.pdf> <C:/Users/Double/Desktop/nonpara
-metric_mixture/experiment/figure/sp_diff_heter_k_3_view_1.pdf>] [8 <C:/Users/Do
-uble/Desktop/nonparametric_mixture/experiment/figure/sp_diff_heter_k_8_view_3.p
-df> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/sp_diff_he
-ter_k_8_view_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/f
-igure/sp_diff_heter_k_8_view_1.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 394.
+_2_view_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure
+/sp_diff_heter_k_2_view_2.pdf> <C:/Users/Double/Desktop/nonparametric_mixture/e
+xperiment/figure/sp_diff_heter_k_2_view_1.pdf> <C:/Users/Double/Desktop/nonpara
+metric_mixture/experiment/figure/sp_diff_heter_k_3_view_3.pdf> <C:/Users/Double
+/Desktop/nonparametric_mixture/experiment/figure/sp_diff_heter_k_3_view_2.pdf> 
+<C:/Users/Double/Desktop/nonparametric_mixture/experiment/figure/sp_diff_heter_
+k_3_view_1.pdf>] [8 <C:/Users/Double/Desktop/nonparametric_mixture/experiment/f
+igure/sp_diff_heter_k_4_view_3.pdf> <C:/Users/Double/Desktop/nonparametric_mixt
+ure/experiment/figure/sp_diff_heter_k_4_view_2.pdf> <C:/Users/Double/Desktop/no
+nparametric_mixture/experiment/figure/sp_diff_heter_k_4_view_1.pdf>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 426.
 
 (C:\Users\Double\Desktop\nonparametric_mixture\experiment\experiment.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 394.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 394.
-Package rerunfilecheck Info: File `experiment.out' has not changed.
-(rerunfilecheck)             Checksum: 12BDFB184E02A667E7297379F4D91B05;53.
- ) 
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 426.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 426.
+
+
+Package rerunfilecheck Warning: File `experiment.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `experiment.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  12BDFB184E02A667E7297379F4D91B05;53.
+ )
+(\end occurred when \ifnum on line 402 was incomplete)
+(\end occurred when \ifnum on line 402 was incomplete)
+(\end occurred when \ifx on line 402 was incomplete)
+(\end occurred when \ifnum on line 402 was incomplete)
+(\end occurred when \ifnum on line 402 was incomplete)
+(\end occurred when \ifnum on line 402 was incomplete)
+(\end occurred when \ifnum on line 402 was incomplete)
+(\end occurred when \ifnum on line 402 was incomplete) 
 Here is how much of TeX's memory you used:
- 7325 strings out of 495354
- 108051 string characters out of 3182739
- 204605 words of memory out of 3000000
- 10268 multiletter control sequences out of 15000+200000
+ 7359 strings out of 495354
+ 108968 string characters out of 3182739
+ 209291 words of memory out of 3000000
+ 10294 multiletter control sequences out of 15000+200000
  11550 words of font info for 44 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  29i,7n,35p,1611b,327s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb
-><C:/Program Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb>
-<C:/Program Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex8.p
-fb><C:/Program Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pf
-b><C:/Program Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb>
-<C:/Program Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C
-:/Program Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/
-Program Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Pr
-ogram Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Prog
-ram Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program
- Files (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Fi
-les (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files
- (x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files 
-(x86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x
-86)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x8
-6)/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on experiment.pdf (8 pages, 327755 bytes).
+<C:/Program Files (x86)/C
+TEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files (x86)/CT
+EX/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files (x86)/CTE
+X/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><C:/Program Files (x86)/
+CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/C
+TEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files (x86)/CTE
+X/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)/CTEX/
+MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/CTEX/Mi
+KTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)/CTEX/MiKT
+eX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files (x86)/CTEX/MiKTeX
+/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files (x86)/CTEX/MiKTeX/fo
+nts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/CTEX/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files (x86)/CTEX/MiKTeX/fonts/ty
+pe1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/CTEX/MiKTeX/fonts/typ
+e1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/CTEX/MiKTeX/fonts/type1
+/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/CTEX/MiKTeX/fonts/type1/
+public/amsfonts/cm/cmtt10.pfb>
+Output written on experiment.pdf (8 pages, 332327 bytes).
 PDF statistics:
- 441 PDF objects out of 1000 (max. 8388607)
- 88 named destinations out of 1000 (max. 500000)
- 294 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 462 PDF objects out of 1000 (max. 8388607)
+ 93 named destinations out of 1000 (max. 500000)
+ 321 words of extra memory for PDF output out of 10000 (max. 10000000)
 
