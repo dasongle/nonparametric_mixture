@@ -661,6 +661,7 @@ Given the observations $\mathcal{D}_{X_1X_2X_3}=\{(x_1^i, x_2^i, x_3^i)\}_{i\in[
 %
 
 Find two arbitrary matrices $\bm{A,B}\in \mathbb{R}^{k \times \infty}$, so that $\bm{A}\hat{\mathcal{C}}_{X_1X_2}\bm{B}^\top$ is invertible. Theoretically, we could randomly select $k$ columns from $\Phi$ and $\Psi$ and set $\bm{A} = \Phi_k^\top, \bm{B} = \Psi_k^\top$. In practial, the first $k$ leading eigenvector directions of respect \emph{RKHS} works better.
+\bxcomment{Should we mention using SVD is better because it improves the conditioning number of $\bm{A}\hat{\mathcal{C}}_{X_1X_2}\bm{B}^\top$?}
 
  Then, we have
 %
@@ -698,6 +699,8 @@ Pair_3\nu = \lambda \nu &\Rightarrow& (Pair_3)^\top Pair_3\nu = \lambda^2 \nu \\
 &\Rightarrow& \frac{1}{m^2}{GH^\top GHG}\beta
 = \lambda^2{G}\beta
 \end{eqnarray*}
+\bxcomment{$Pair_3$ here is not symmetric. We are calculating the right singular vectors here, not the eigenvector. Maybe we should rephrase and remove $Pair_3\nu = \lambda \nu$ part}
+
 %
 Then, we symmetrize and whiten the third-order embedding
 %
@@ -738,6 +741,7 @@ whitening the data and apply power method to decompose it
 \hat{S}_k^{-\frac{1}{2}}\beta^\top{G}
 \end{eqnarray*}
 %
+
 
 \bibliographystyle{icml2014}
 \bibliography{../nonparametric_mixture,../bibfile,../experiment/mlv_kernel}
