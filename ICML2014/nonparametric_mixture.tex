@@ -390,7 +390,7 @@ Allman et al.~\cite{Allman09} showed that, under mild conditions, a finite mixtu
 We require that the conditional probability table $\{P(X|h)\}_{h\in [k]}$ to  have full column rank for identifiability in this case.
 
 
-{\bf Example 2.} Suppose we have a $k$-component mixture of one dimensional  spherical Gaussian distributions. The Gaussian components have identical covariance  $\sigma^2$, but their mean values are distinct. Note that this model is not identifiable under the framework of~\cite{Hsu13} since the mean values are just scalars and therefore, rank deficient. However, if we embed the density functions using universal kernels such as Gaussian RBF kernel, it can be shown that the mixture model becomes identifiable. This is because we are working with the entire density function which are linear independent from each other in this case. Thus, the non-parametric framework allows us to incorporate a wider range of latent variable  models.
+{\bf Example 2.} Suppose we have a $k$-component mixture of one dimensional  spherical Gaussian distributions. The Gaussian components have identical covariance  $\sigma^2$, but their mean values are distinct. Note that this model is not identifiable under the framework of~\cite{Hsu13} since the mean values are just scalars and therefore, rank deficient. However, if we embed the density functions using universal kernels such as Gaussian RBF kernel, it can be shown that the mixture model becomes identifiable. This is because we are working with the entire density function which are linearly independent from each other in this case. Thus, the non-parametric framework allows us to incorporate a wider range of latent variable  models.
 
 
 
@@ -613,7 +613,9 @@ In the mixture of Gaussians setting, the EM algorithm is best since the model is
 
 In the mixture of Gaussian and Gamma setting, our kernel spectral algorithm achieves superior results compared to other algorithms. These results demonstrate that our algorithm is able to automatically adapt to the shape of the density.
 
-We also plotted the actual recovered conditional densities in Figure~\ref{fig:shape}. The kernel spectral algorithm recovers nicely both the Gaussian and Gamma components, while the EM algorithm fails to fit one component.
+We also plotted the actual recovered conditional densities in Figure~\ref{fig:shape}. The kernel spectral algorithm recovers nicely both the Gaussian and Gamma components, while the EM algorithm fails to fit one component. 
+
+We also note that the performance of EM degrades as the number of components increases, and our method outperforms EM in higher dimensions. This is the key advantage of our method in that it has favorable performance in higher dimensions, which agrees with the theoretical result in Theorem~\ref{thm:samplebound} that the sample complexity depends only quadratically in the number of components, when other parameters are held fixed.
 
 \begin{figure}[t]
   \centering
@@ -621,7 +623,7 @@ We also plotted the actual recovered conditional densities in Figure~\ref{fig:sh
 	\renewcommand{\arraystretch}{0.8}
   \begin{tabular}{c}
   \includegraphics[width=0.65\columnwidth]{../experiment/visualization/em_visual_k_2_view_1-crop} \\
-  (a) Mixture of Gaussians with EM\\
+  (a) EM using Mixture of Gaussians Model\\
   \includegraphics[width=0.65\columnwidth]{../experiment/visualization/visual_k_2_view_1-crop-crop} \\
   (b) Kernel Spectral
   \end{tabular}
@@ -639,7 +641,7 @@ We also plotted the actual recovered conditional densities in Figure~\ref{fig:sh
 		(b) number of clusters $k=3$
 	\end{tabular}
   \vspace{-3mm}
-  \caption{Clustering results on DLBCL flow cytometry data. Each group of bars represents F-scores from EM-GMM with diagonal covariances~(blue) and kernel spectral method~(red). The datasets are ordered by increasing sample size.}\label{fig:real_data}
+  \caption{Clustering results on two different datasets from the DLBCL flow cytometry data. Each group of bars represents F-scores from EM-GMM with diagonal covariances~(blue) and kernel spectral method~(red). The datasets are ordered by increasing sample size.}\label{fig:real_data}
   \vspace{-3mm}
 \end{figure*}
 
@@ -651,7 +653,11 @@ Flow cytometry (FCM) data are multivariate measurements from flow cytometers tha
 We used the DLBCL Lymphoma dataset collection from~\cite{cytometry_nature} to compare our kernel algorithm with multi-view mixture of Gaussian model.
 This collection contains 30 datasets, and each dataset consists of tens of thousands of cell measurements in 5 dimensions. Each dataset is a separate clustering task, and we fit a multi-view model to each dataset separately and use the maximum-a-posteriori assignment for obtaining the cluster labels.  All the cell measurements have been manually labeled, therefore we can evaluate the clustering performance using the f-score.
 
-We splitted the 5 dimensions into three views: dimension 1 and 2 as the first view, 3 and 4 the second and 5 the third view. For each dataset, we selected the best kernel bandwidth by 5-fold cross validation using log-likelihood. For EM algorithm for mixture of Gaussians (GMM) with diagonal covariances, we used a very generous 20 restarts. Figure~\ref{fig:real_data} presents the results sorted by the number of clusters. Our method (kernel spectral) outperforms EM-GMM in a majority of datasets. However, there are also datasets where kernel spectral algorithm has a large gap in performance compared to GMM. These are the datasets where the multi-view assumptions are heavily violated. Obtaining improved performance in these datasets will be a subject of our future study where we plan to develop even more robustness kernel spectral algorithms.
+We split the 5 dimensional into three views: dimension 1 and 2 as the first view, 3 and 4 the second and 5 the third view. For each dataset, we select the best kernel bandwidth by 5-fold cross validation using log-likelihood. For EM algorithm for mixture of Gaussians (GMM) with diagonal covariances, we use a very generous 20 restarts. Figure~\ref{fig:real_data} presents the results sorted by the number of clusters. Our method (kernel spectral) outperforms EM-GMM in a majority of datasets. However, there are also datasets where kernel spectral algorithm has a large gap in performance compared to GMM. These are the datasets where the multi-view assumptions are heavily violated. Obtaining improved performance in these datasets will be a subject of our future study where we plan to develop even more robust kernel spectral algorithms.
+
+
+\clearpage
+\newpage
 
 \bibliographystyle{icml2014}
 \bibliography{../nonparametric_mixture,../bibfile,../experiment/mlv_kernel}
