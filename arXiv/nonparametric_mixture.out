@@ -1,0 +1,25 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Notation}{}% 2
+\BOOKMARK [1][-]{section.3}{Kernel Embedding of Distributions}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Kernel Embedding as Multi-Linear Operator}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Finite Sample Estimate}{section.3}% 5
+\BOOKMARK [1][-]{section.4}{Multi-View Latent Variable Models}{}% 6
+\BOOKMARK [2][-]{subsection.4.1}{Conditional Embedding Operator}{section.4}% 7
+\BOOKMARK [2][-]{subsection.4.2}{Factorized Kernel Embedding}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.3}{Identifiability of Parameters}{section.4}% 9
+\BOOKMARK [1][-]{section.5}{Kernel Algorithm}{}% 10
+\BOOKMARK [2][-]{subsection.5.1}{Population Case}{section.5}% 11
+\BOOKMARK [2][-]{subsection.5.2}{Finite Sample Case}{section.5}% 12
+\BOOKMARK [1][-]{section.6}{Sample Complexity}{}% 13
+\BOOKMARK [1][-]{section.7}{Experiments}{}% 14
+\BOOKMARK [2][-]{subsection.7.1}{Synthetic Data}{section.7}% 15
+\BOOKMARK [2][-]{subsection.7.2}{Flow Cytometry Data}{section.7}% 16
+\BOOKMARK [1][-]{section.8}{Symmetrization}{}% 17
+\BOOKMARK [1][-]{section.9}{Robust Tensor Power Method}{}% 18
+\BOOKMARK [1][-]{section.10}{Proof of Theorem 2}{}% 19
+\BOOKMARK [2][-]{subsection.10.1}{Recap of Perturbation Bounds for the Tensor Power Method}{section.10}% 20
+\BOOKMARK [2][-]{subsection.10.2}{Concentration Bounds}{section.10}% 21
+\BOOKMARK [3][-]{subsubsection.10.2.1}{Analysis of Whitening}{subsection.10.2}% 22
+\BOOKMARK [3][-]{subsubsection.10.2.2}{Tensor Concentration Bounds}{subsection.10.2}% 23
+\BOOKMARK [3][-]{subsubsection.10.2.3}{Concentration bounds for Empirical Operators}{subsection.10.2}% 24
+\BOOKMARK [1][-]{section.11}{Experiment on Single Conditional Distribution}{}% 25
