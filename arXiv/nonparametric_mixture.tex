@@ -675,7 +675,9 @@ The proof is in Appendix~\ref{app:samplebound}.
 
 \paragraph{Remarks: }We note that the sample complexity is  $\poly(k, \rho, 1/\pi_{\min}, 1/\sigma_k(\Ccal_{X_1, X_2}))$ of a low order, and in particular,  it is $O(k^2)$, when the other parameters are fixed. For the special case of discrete measurements, where the kernel $k(x,x')=\delta(x,x')$, we have $\rho=1$. Note that the sample complexity depends in this case only on the number of components $k$ and not on the dimensionality of the observed state space.   Thus, the robust tensor method has efficient sample and computational complexities for non-parametric latent variable estimation.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experiments}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 {\bf Methods.} We compared our kernel nonparametric algorithm with three alternatives
 \begin{enumerate}[noitemsep,nolistsep]
@@ -689,7 +691,7 @@ Our method has a hyper-parameter, kernel bandwidth, which we selected for each v
 
 \subsection{Synthetic Data}
 
-\subsubsection{General Case: Different Conditional Distribution}
+\subsubsection{General Case: Different Conditional Distributions}
 We generated three-dimensional synthetic data from various mixture models. The variables corresponding to the dimensions are independent given the latent component indicator. More specifically, we explored two settings:
 \begin{enumerate}[noitemsep,nolistsep]
   \item Gaussian conditional densities with different variances;
@@ -792,13 +794,13 @@ We split the 5 dimensional into three views: dimension 1 and 2 as the first view
 \clearpage
 \newpage
 
-\onecolumn
+
+
+%%-----------------------------------------------------------------------------------------------------------------------------------------------
 
 \begin{center}
 {\Large Appendix}
 \end{center}
-
-%%-----------------------------------------------------------------------------------------------------------------------------------------------
 
 \input{concentration-bounds.tex}
 
