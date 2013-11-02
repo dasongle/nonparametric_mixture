@@ -10,16 +10,17 @@
 \BOOKMARK [1][-]{section.5}{Kernel Algorithm}{}% 10
 \BOOKMARK [2][-]{subsection.5.1}{Population Case}{section.5}% 11
 \BOOKMARK [2][-]{subsection.5.2}{Finite Sample Case}{section.5}% 12
-\BOOKMARK [1][-]{section.6}{Sample Complexity}{}% 13
-\BOOKMARK [1][-]{section.7}{Experiments}{}% 14
-\BOOKMARK [2][-]{subsection.7.1}{Synthetic Data}{section.7}% 15
-\BOOKMARK [2][-]{subsection.7.2}{Flow Cytometry Data}{section.7}% 16
-\BOOKMARK [1][-]{section.8}{Symmetrization}{}% 17
-\BOOKMARK [1][-]{section.9}{Robust Tensor Power Method}{}% 18
-\BOOKMARK [1][-]{section.10}{Proof of Theorem 2}{}% 19
-\BOOKMARK [2][-]{subsection.10.1}{Recap of Perturbation Bounds for the Tensor Power Method}{section.10}% 20
-\BOOKMARK [2][-]{subsection.10.2}{Concentration Bounds}{section.10}% 21
-\BOOKMARK [3][-]{subsubsection.10.2.1}{Analysis of Whitening}{subsection.10.2}% 22
-\BOOKMARK [3][-]{subsubsection.10.2.2}{Tensor Concentration Bounds}{subsection.10.2}% 23
-\BOOKMARK [3][-]{subsubsection.10.2.3}{Concentration bounds for Empirical Operators}{subsection.10.2}% 24
-\BOOKMARK [1][-]{section.11}{Experiment on Single Conditional Distribution}{}% 25
+\BOOKMARK [2][-]{subsection.5.3}{Symmetrization}{section.5}% 13
+\BOOKMARK [1][-]{section.6}{Sample Complexity}{}% 14
+\BOOKMARK [1][-]{section.7}{Experiments}{}% 15
+\BOOKMARK [2][-]{subsection.7.1}{Synthetic Data}{section.7}% 16
+\BOOKMARK [3][-]{subsubsection.7.1.1}{General Case: Different Conditional Distribution}{subsection.7.1}% 17
+\BOOKMARK [3][-]{subsubsection.7.1.2}{Symmetric Case: Same Conditional Distribution}{subsection.7.1}% 18
+\BOOKMARK [2][-]{subsection.7.2}{Flow Cytometry Data}{section.7}% 19
+\BOOKMARK [1][-]{section.8}{Robust Tensor Power Method}{}% 20
+\BOOKMARK [1][-]{section.9}{Proof of Theorem 2}{}% 21
+\BOOKMARK [2][-]{subsection.9.1}{Recap of Perturbation Bounds for the Tensor Power Method}{section.9}% 22
+\BOOKMARK [2][-]{subsection.9.2}{Concentration Bounds}{section.9}% 23
+\BOOKMARK [3][-]{subsubsection.9.2.1}{Analysis of Whitening}{subsection.9.2}% 24
+\BOOKMARK [3][-]{subsubsection.9.2.2}{Tensor Concentration Bounds}{subsection.9.2}% 25
+\BOOKMARK [3][-]{subsubsection.9.2.3}{Concentration bounds for Empirical Operators}{subsection.9.2}% 26
