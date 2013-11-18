@@ -1,0 +1,9 @@
+Most previous work on kernel embedding of distributions, such as two sample tests and independence tests, do *not* consider the presence of latent variables, and we are considering the novel aspect of the spectral properties of the kernel embedding in this case and connect them to the spectral properties of infinite dimensional tensors and higher order tensors.  
+
+We are *not* aware of any prior work using kernel embeddins to explicitly recover the parameter of the laten variable models. The related work of Song et al. Kernel embedding of hidden Markov models, ICML 2010, and Song et al. Kernel embedding of latent tree models, NIPS 2011 focus on estimating the marginal density of the observed various but not the exact latent parameters. In contrast, our algorithm can recover the exact latent parameters, and we proved that the estimator is consistent and analyzed its finite sample complexity.  
+
+In term of the analysis, previous tensor decomposition algorithm only analyzing the perturbation of orthogonal tensor. In our current paper, we take further into account the whitening perturbation and the tensor decomposition perturbation into a unified sample complexity analysis. 
+
+In term of comparing to alternatives. We have compared to the best known algorithms for estimating latent variable models (EM), and the recent nonparametric algorithm of Kasahara & Shimotsu, 2010. First, EM is robust to model misspecification, it tries to find the best model in the family to fit the data. Second, there is few nonparametric methods for recovering parameters of latent variable models. We are *not* aware of any other methods other than the one by Kasahara & Shimotsu, 2010.
+
+We've corrected the dataset number to 24 to be consistent. 
