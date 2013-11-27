@@ -633,7 +633,7 @@ Apply the algorithm for symmetric case in previous section to $\widehat{\mathcal
 \section{Sample Complexity}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Let $\rho:=\sup_{x \in \Xcal} k(x,x)$,   $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, $\pi_{\min}:=\min_{i\in [k]} \pi_i$ and $\sigma_k(\Ccal_{X_1X_2})$ be the $k$-th singular value of $\Ccal_{X_1X_2}$.
+Let $\rho:=\sup_{x \in \Xcal} k(x,x)$,   $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, $\pi_{\min}:=\min_{i\in [k]} \pi_i$ and $\sigma_k(\Ccal_{X_1X_2})$ be the $k$-th largest singular value of $\Ccal_{X_1X_2}$.
 
 %Assume that the mixing weights $\pi_1\geq \pi_2\ldots$ are in decreasing order.  Let $E_{X_1, X_2, X_3}$ be the residual tensor \beq\label{eqn:triplesexpression}\Ccal_{X_1 X_2 X_3}= \sum_{h\in [k]} \pi_h \cdot \mu_{X|h} \otimes \mu_{X|h} \otimes \mu_{X|h} + E_{X_1, X_2, X_3}\eeq
 
@@ -641,7 +641,7 @@ Let $\rho:=\sup_{x \in \Xcal} k(x,x)$,   $\| \cdot\|_{}$ be the Hilbert-Schmidt 
 \begin{theorem}[Sample Bounds]\label{thm:samplebound}
 Pick  any $\delta\in (0,1)$. When the number of samples $m$ satisfies
 \[ m >\frac{\theta\rho^2  \log\frac{\delta}{2}}{\sigma^2_k(\Ccal_{X_1, X_2})},
-\quad \theta:= \max\left(\frac{C_3 k^2}{\sigma_k( \Ccal_{X_1, X_2})}, \frac{C_4k^{2/3}\iffalse(1+\sigma_{k+1}(\Ccal_{X_1, X_2}))^2 \fi }{\pi_{\min}^{1/3}}\right),\] for some constants $C_3, C_4>0$, and the number of iterations $N$  and  the number of random initialization vectors $L$  (drawn uniformly on the sphere $\mathcal{S}^{k-1}$)  satisfy
+\quad \theta:= \max\left(\frac{C_3 k^2 \rho}{\sigma_k( \Ccal_{X_1, X_2})}, \frac{C_4k^{2/3}\iffalse(1+\sigma_{k+1}(\Ccal_{X_1, X_2}))^2 \fi }{\pi_{\min}^{1/3}}\right),\] for some constants $C_3, C_4>0$, and the number of iterations $N$  and  the number of random initialization vectors $L$  (drawn uniformly on the sphere $\mathcal{S}^{k-1}$)  satisfy
 \begin{align*}
   N \geq C_2 \cdot \biggl( \log(k) + \log\log\Bigl(
  \frac{1}{\sqrt{\pi}_{\min}\epsilon_T} \Bigr) \biggr),
@@ -667,7 +667,7 @@ T - \sum_{j=1}^k \hat\lambda_j \hat{\phi}_j^{\otimes 3}
 \biggr\| \leq 55\eps_T,
 \] where $\eps_T$ is the tensor perturbation bound
 \begin{align*} \eps_T := \|\h{\Tcal} - \Tcal\| \leq&
-\frac{12 \rho \sqrt{\log\frac{\delta}{2}}}{\sqrt{m} \, \sigma_k^{1.5}(\Ccal_{X_1, X_2})} \\ &+ \frac{512 \sqrt{2} \rho^3 \left(\log\frac{\delta}{2}\right)^{1.5}}{m^{1.5} \,\sigma_k^{3}(\Ccal_{X_1, X_2}) \sqrt{\pi}_{\min}}\end{align*}
+\frac{8 \rho^{1.5} \sqrt{\log\frac{\delta}{2}}}{\sqrt{m} \, \sigma_k^{1.5}(\Ccal_{X_1, X_2})} + \frac{512 \sqrt{2} \rho^3 \left(\log\frac{\delta}{2}\right)^{1.5}}{m^{1.5} \,\sigma_k^{3}(\Ccal_{X_1, X_2}) \sqrt{\pi}_{\min}}\end{align*}
 \end{theorem}
 
 Thus, the above result provides bounds on the estimated eigen-pairs using the robust tensor power method.
@@ -786,7 +786,12 @@ We split the 5 dimensional into three views: dimension 1 and 2 as the first view
 \end{figure*}
 
 
+\subsubsection*{Acknowledgements}
+A. Anandkumar is supported
+in part by Microsoft Faculty Fellowship, NSF Career award CCF-1254106, NSF Award CCF-1219234, and ARO YIP Award W911NF-13-1-0084.
 
+ 
+ \vspace{1em}
 
 \bibliographystyle{icml2014}
 \bibliography{../nonparametric_mixture,../bibfile,../experiment/mlv_kernel}

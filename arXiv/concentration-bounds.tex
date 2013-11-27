@@ -149,7 +149,7 @@ We now establish the following perturbation bound on the whitening procedure. Re
 
 \bprf The proof is along the lines of Lemma 16 of~\cite{AnandkumarEtal:community12}, but adapted to whitening using the covariance operator here.
  \begin{align*}\|\Diag(\pi)^{1/2} M^\top(\h{\Wcal}-\Wcal)\|&=
-\|\Diag(\pi)^{1/2} M^\top W(A D^{1/2} A^\top -I)\|\\ &\leq\|\Diag(\pi)^{1/2} M^\top \Wcal\| \|D^{1/2}-I\|. \end{align*} Since $\Wcal$ whitens $\Ccal_{X_1 X_2}=M \Diag(\pi) M^\top\iffalse+E\fi$, we have that $\|\Diag(\pi)^{1/2} M^\top \Wcal\| =1$\iffalse\leq \|I-E\|^{1/2}\leq 1+ \sigma_{k+1}(\Ccal_{X_1 X_2})\fi. Now we control $\|D^{1/2}-I\|$.  Let $\tl{E}:= \Ccal_{X_1,X_{2}} -B_k$, where recall that $B=0.5( \widehat \Ccal_{X_1,X_{2}}+ \h{\Ccal}_{X_1 X_2}^\top)$ and $B_k$ is its restriction to top-$k$ singular values. Thus, we have $\|\tl{E}\|_{HS} \leq \epsilon_{pairs} + \sigma_{k+1}(B)\leq 2\epsilon_{pairs}\iffalse+\sigma_{k+1}(\Ccal_{X_1 X_2})\fi$.
+\|\Diag(\pi)^{1/2} M^\top W(A D^{1/2} A^\top -I)\|\\ &\leq\|\Diag(\pi)^{1/2} M^\top \Wcal\| \|D^{1/2}-I\|. \end{align*} Since $\Wcal$ whitens $\Ccal_{X_1 X_2}=M \Diag(\pi) M^\top\iffalse+E\fi$, we have that $\|\Diag(\pi)^{1/2} M^\top \Wcal\| =1$\iffalse\leq \|I-E\|^{1/2}\leq 1+ \sigma_{k+1}(\Ccal_{X_1 X_2})\fi. Now we control $\|D^{1/2}-I\|$.  Let $\tl{E}:= \Ccal_{X_1,X_{2}} -B_k$, where recall that $B=0.5( \widehat \Ccal_{X_1,X_{2}}+ \h{\Ccal}_{X_1 X_2}^\top)$ and $B_k$ is its restriction to top-$k$ singular values. Thus, we have $\|\tl{E}\| \leq \epsilon_{pairs} + \sigma_{k+1}(B)\leq 2\epsilon_{pairs}\iffalse+\sigma_{k+1}(\Ccal_{X_1 X_2})\fi$.
  We now have
 \begin{align*}
 \|D^{1/2}-I\|&\leq \|(D^{1/2}-I)(D^{1/2}+I)\|\leq \|D-I\|
@@ -210,7 +210,7 @@ Further we require that $\epsilon_T \leq C_1/k$, which implies that each of the 
 \[ \frac{2\sqrt{2} \epsilon_{triples}}{\sigma_k^{1.5}(\Ccal_{X_1, X_2})} < \frac{C}{k}\quad\Rightarrow\quad m > \frac{C_3 k^2 \rho^3 \log \frac{\delta}{2}}{\sigma_k^{3}(\Ccal_{X_1, X_2})},\]
 for some constant $C_3$ with probability $1-\delta$ from Lemma~\ref{lemma:triples}. Similarly for the second term in \eqref{eqn:epsilonT}, we have
 \[\frac{\epsilon_W^3}{\sqrt{\pi_{\min}}}< \frac{C}{k},\]and from Lemma~\ref{lemma:whiten}, this implies that \[ \epsilon_{pairs} \leq \frac{C' \pi_{\min}^{1/6} \sigma_k(\Ccal_{X_1, X_2})}{k^{1/3}\iffalse(1+\sigma_{k+1}(\Ccal_{X_1, X_2}))\fi},\]Thus, we have
-\[  m > \frac{C_4 k^{\frac{2}{3}} \rho^3 \log\frac{\delta}{2}\iffalse (1+\sigma_{k+1}(\Ccal_{X_1, X_2}))^2\fi}{\pi_{\min}^{\frac{1}{3}} \sigma^2_k(\Ccal_{X_1, X_2})}, \]for some other constant $C_4$ with probability $1-\delta$. \iffalse Additionally, we also require
+\[  m > \frac{C_4 k^{\frac{2}{3}} \rho^2 \log\frac{\delta}{2}\iffalse (1+\sigma_{k+1}(\Ccal_{X_1, X_2}))^2\fi}{\pi_{\min}^{\frac{1}{3}} \sigma^2_k(\Ccal_{X_1, X_2})}, \]for some other constant $C_4$ with probability $1-\delta$. \iffalse Additionally, we also require
 \[ (1+\sigma_{k+1}(\Ccal_{X_1, X_2}))\sigma_{k+1}(\Ccal_{X_1, X_2})\leq \frac{C_5 \pi_{\min}^{1/6} \sigma_k(\Ccal_{X_1, X_2})}{k^{1/3}}.\]\fi
  Thus, we have the result in Theorem~\ref{thm:samplebound}.
 
