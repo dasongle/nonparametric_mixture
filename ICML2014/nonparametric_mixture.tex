@@ -651,9 +651,30 @@ We also note that the performance of EM degrades as the number of components inc
 Flow cytometry (FCM) data are multivariate measurements from flow cytometers that record light scatter and fluorescence emission properties of hundreds of thousands of individual cells. They are important to the studying of the cell structures of normal and abnormal cells and the diagnosis of human diseases. \citet{cytometry_nature} introduced the FlowCAP-challenge whose main task is grouping the flow cytometry data automatically. Clustering on the FCM data is a difficult task because the distribution of the data is non-Gaussian and heavily skewed.
 
 We used the DLBCL Lymphoma dataset collection from~\cite{cytometry_nature} to compare our kernel algorithm with multi-view mixture of Gaussian model.
-This collection contains 30 datasets, and each dataset consists of tens of thousands of cell measurements in 5 dimensions. Each dataset is a separate clustering task, and we fit a multi-view model to each dataset separately and use the maximum-a-posteriori assignment for obtaining the cluster labels.  All the cell measurements have been manually labeled, therefore we can evaluate the clustering performance using the f-score.
+This collection contains 24 datasets, and each dataset consists of tens of thousands of cell measurements in 5 dimensions. Each dataset is a separate clustering task, and we fit a multi-view model to each dataset separately and use the maximum-a-posteriori assignment for obtaining the cluster labels.  All the cell measurements have been manually labeled, therefore we can evaluate the clustering performance using the f-score.
 
 We split the 5 dimensional into three views: dimension 1 and 2 as the first view, 3 and 4 the second and 5 the third view. For each dataset, we select the best kernel bandwidth by 5-fold cross validation using log-likelihood. For EM algorithm for mixture of Gaussians (GMM) with diagonal covariances, we use a very generous 20 restarts. Figure~\ref{fig:real_data} presents the results sorted by the number of clusters. Our method (kernel spectral) outperforms EM-GMM in a majority of datasets. However, there are also datasets where kernel spectral algorithm has a large gap in performance compared to GMM. These are the datasets where the multi-view assumptions are heavily violated. Obtaining improved performance in these datasets will be a subject of our future study where we plan to develop even more robust kernel spectral algorithms.
+
+
+\subsection{USPS Handwritten Digits Data}
+The USPS handwritten digit data contains a total of 110,000 digit images, with 11,000 samples for each digit. Each image is grey-level with size 16 by 16 pixels. We extracted three different features from the images, all reduced to 50 dimensions through PCA: 1) raw image pixels, 2) Histogram of Gradients (HOG) features, and 3) Local Binary Patterns (LBP) features. These three features can be considered multiple views for a single image. Similar to the flow cytometry data, we used the clustering task as a way to evaluate how different methods model the multi-view latent variant structure in the data. The evaluation metric was the f-score used in the flow cytometry data and Normalized Mutual Information (NMI).
+
+The results are summarized in Table~\ref{tbl:usps}. Our kernel multi-view spectral methods achieve better clustering scores compared with two EM alternatives. 
+
+\begin{table}
+{\centering
+\begin{tabular}{l|ccc}
+\hline
+Method & Kernel & EM-GMM & EM-nonpara \\
+\hline
+f-score & 0.439 & 0.3395 & 0.3893 \\
+\hline
+NMI & 0.3642 & 0.2325 & 0.3135 \\
+\hline
+\end{tabular}
+\caption{Clustering results on USPS handwritten digit dataset.}
+\label{tbl:usps}}
+\end{table}
 
 
 \clearpage

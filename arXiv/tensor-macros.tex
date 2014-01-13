@@ -1,0 +1,121 @@
+
+\newcommand{\sk}[1]{\noindent{\textcolor{cyan}{\{{\bf SK:} \em #1\}}}}
+\newcommand{\djh}[1]{\noindent{\textcolor{blue}{\textbf{\#\#\# DJH:} \textsf{#1} \#\#\#}}}
+\newcommand{\aacomment}[1]{\noindent{\textcolor{blue}{\textbf{\#\#\# AA:} \textsf{#1} \#\#\#}}}
+\newcommand{\dbcomment}[1]{\noindent{\textcolor{cyan}{\textbf{\#\#\# DB:} \textsf{#1} \#\#\#}}}
+\newcommand{\bxcomment}[1]{\noindent{\textcolor{red}{\textbf{\#\#\# BX:} \textsf{#1} \#\#\#}}}
+\newcommand{\rg}[1]{\noindent{\textcolor{blue}{\textbf{\#\#\# RG:} \textsf{#1} \#\#\#}}}
+\DeclareMathOperator{\Ber}{Ber}
+
+\def\tcr{\textcolor{red}}
+\def\tcb{\textcolor{blue}}
+\def\tha{{\mbox{\tiny th}}}
+\def\Ibb{{\mathbb I}}
+
+\DeclareMathOperator{\thres}{Thres}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator\Diag{Diag}
+
+\DeclareMathOperator{\polylog}{polylog}
+% \DeclareMathOperator*{\argmin}{arg\,min}
+% \DeclareMathOperator*{\argmax}{arg\,max}
+\newcommand\E{\mathbb{E}}
+\newcommand\R{\mathbb{R}}
+\renewcommand\t{{\scriptscriptstyle\top}}
+\newcommand\myvec[1]{\underline{#1}}
+\newcommand\prior[1]{\ensuremath{\myvec{\pi_{#1}}}}
+\newcommand\com[1]{\ensuremath{\myvec{o_{#1}}}}
+\newcommand\e[1]{\ensuremath{\myvec{e_{#1}}}}
+%\newcommand\ind[1]{\ensuremath{\mathds{1}_{\{#1\}}}}
+% \renewcommand\inner[1]{\ensuremath{\left<#1\right>}}
+\newcommand\norm[1]{\left\|#1\right\|}
+%\newcommand\bigO{\mathbb{O}}
+\newcommand\bigO{O}
+\newcommand\tlO{\tilde{\bigO}}
+\def\t{{\scriptscriptstyle\top}}
+\def\tl{\widetilde}
+\def\h{\widehat}
+\def\halpha{\widehat{\alpha}}
+\def\tT{\tilde{T}}
+\newcommand\dotp[1]{\langle #1 \rangle}
+\def\Sig{\varSigma}
+\def\tree{\mathcal{T}}
+\def\hp{\hphantom}
+\def\eps{\epsilon}
+\def\veps{\varepsilon}
+\def\simiid{{\overset{iid}{\sim}}}
+\def\Pbb{{\mathbb P}}
+\DeclareMathOperator{\poly}{poly}
+\DeclareMathOperator{\Gammadist}{GammaCDF}
+\def\Ac{{\cal A}}
+\def\Bc{{\cal B}}
+\def\bfd{{\mathbf d}}
+\def\bfm{{\mathbf m}}
+\def\Cc{{\cal C}}
+\DeclareMathOperator{\Span}{span}
+\renewcommand\th[1]{\ensuremath{\theta_{#1}}}
+\newcommand\hth[1]{\ensuremath{\hat{\theta}_{#1}}}
+\newcommand\teps{\ensuremath{\tilde{\eps}}}
+\newcommand\hv{\ensuremath{\hat{v}}}
+\newcommand\hlambda{\ensuremath{\hat{\lambda}}}
+\newcommand\lambdamin{\ensuremath{\lambda_{\min}}}
+\newcommand\lambdamax{\ensuremath{\lambda_{\max}}}
+\newcommand\deflate{\mathcal{E}}
+ \newcommand\tlambdamin{\ensuremath{\tilde{\lambda}_{\min}}}
+
+\DeclareMathOperator{\eqa}{\overset{(a)}{=}}
+
+
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+%\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\range}{range}
+%\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\Pairs}{Pairs}
+\DeclareMathOperator{\Triples}{T}
+
+\newcommand\Dir{\operatorname{Dir}}
+
+% environments
+%\newtheorem{theorem}{Theorem}[section]
+%\newtheorem*{namedtheorem}{\theoremname}
+%\newcommand{\theoremname}{testing}
+%\newenvironment{named}[1]{ \renewcommand{\theoremname}{#1} \begin{namedtheorem}} {\end{namedtheorem}}
+%\newtheorem{thm}[theorem]{Theorem}
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{lem}[theorem]{Lemma}
+%\newtheorem*{claim}{Claim}
+%\newtheorem{clm}[theorem]{Claim}
+%\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{prop}[theorem]{Proposition}
+%\newtheorem{fact}[theorem]{Fact}
+%\newtheorem{res}{Restriction}
+%\newtheorem{observation}{Observation}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{cor}[theorem]{Corollary}
+%\theoremstyle{definition}
+%\newtheorem{definition}[theorem]{Definition}
+%\newtheorem{defn}[theorem]{Definition}
+
+\newcommand{\bp}{\begin{psfrags}}
+\newcommand{\ep}{\end{psfrags}}
+\newcommand{\bprfof}{\begin{proof_of}}
+\newcommand{\eprfof}{\end{proof_of}}
+\newcommand{\bprf}{\begin{myproof}}
+\newcommand{\eprf}{\end{myproof}}
+
+\newenvironment{myproof}{\noindent{\em Proof:} \hspace*{1em}}{
+    \hspace*{\fill} $\Box$ }
+\newenvironment{proof_of}[1]{\noindent {\em Proof of #1: }}{\hspace*{\fill} $\Box$ }
+
+\def\viz{{viz.,\ \/}}
+\def\Ebb{{\mathbb E}}
+\def\nn{\nonumber}
+\def\beq{\begin{equation}}
+\def\eeq{\end{equation}\noindent}
+\def\beqn{\begin{eqnarray}}
+\def\eeqn{\end{eqnarray} \noindent}
+\def\beqnn{  \begin{eqnarray*}}
+\def\eeqnn{\end{eqnarray*}  \noindent}
+\def\bcase{  \begin{numcases}}
+\def\ecase{\end{numcases}   \noindent}
