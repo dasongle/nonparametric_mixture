@@ -19,7 +19,7 @@ iterations  $N$.
 \FOR{$t = 1$ to $N$}
 \STATE $\tilde{T}\leftarrow T$.
 \FOR{$j=1$ to $i-1$ (when $i>1$)}
-\IF{$|\lambda_j \inner{\th{t}^{(\tau)}, \phi_j}|>\xi$}
+\IF{$|\lambda_j \inner{\th{t}^{(\tau)}}{\phi_j}|>\xi$}
 \STATE $\tilde{T}\leftarrow \tilde{T}- \lambda_j \phi_j^{\otimes 3}$.
 \ENDIF
 \ENDFOR
@@ -52,7 +52,7 @@ $(\lambda, \Phi)$.
 %
 %\begin{theorem}[Sample Bounds]\label{thm:samplebound}
 %Pick  any $\delta\in (0,1)$. When the number of samples $m$ satisfies
-%\beq m >\frac{\rho\rho^2  \log\frac{\delta}{2}}{\sigma_k(\Ccal_{X_1, X_2})},
+%\beq m >\frac{\rho\rho^2  \log\frac{2}{\delta}}{\sigma_k(\Ccal_{X_1, X_2})},
 %\quad \rho:= \max\left(\frac{512  }{\sigma^3_k(\Ccal_{X_1, X_2})}, \frac{C' k^2 }{\sigma_k^{3}(\Ccal_{X_1, X_2})},\frac{C^{''} k^{\frac{2}{3}} }{\pi_{\min}^{\frac{1}{3}} }\right),\eeq for some constants $C', C^{''}>0$, and the number of iterations $N$  and  the number of random initialization vectors $L$  (drawn uniformly on the sphere $\mathcal{S}^{k-1}$)  satisfy
 %\begin{align*}
 %N \geq C_2 \cdot \biggl( \log(k) + \log\log\Bigl(
@@ -79,7 +79,7 @@ $(\lambda, \Phi)$.
 %\biggr\| \leq 55\eps_T,
 %\] where $\eps_T$ is the tensor perturbation bound
 %\[ \eps_T := \|\h{\Tcal} - \Tcal\| \leq
-%\frac{12 \rho \sqrt{\log\frac{\delta}{2}}}{\sqrt{m} \, \sigma_k^{1.5}(\Ccal_{X_1, X_2})} + \frac{512 \sqrt{2} \rho^3 \left(\log\frac{\delta}{2}\right)^{1.5}}{m^{1.5} \,\sigma_k^{3}(\Ccal_{X_1, X_2}) \sqrt{\pi}_{\min}}\]
+%\frac{12 \rho \sqrt{\log\frac{2}{\delta}}}{\sqrt{m} \, \sigma_k^{1.5}(\Ccal_{X_1, X_2})} + \frac{512 \sqrt{2} \rho^3 \left(\log\frac{2}{\delta}\right)^{1.5}}{m^{1.5} \,\sigma_k^{3}(\Ccal_{X_1, X_2}) \sqrt{\pi}_{\min}}\]
 %
 %\end{theorem}
 %The above result provides bounds on the estimated eigen-pairs using the robust tensor power method.
@@ -91,8 +91,8 @@ $(\lambda, \Phi)$.
 
 We now recap the result of~\citet[Thm. 13]{AnandkumarEtal:community12} that establishes bounds on the eigen-estimates under good initialization vectors for the above procedure.
 Let $\Tcal=\sum_{i\in [k]}\lambda_i v_i$, where $v_i$ are orthonormal vectors and $\lambda_1\geq \lambda_2\geq\ldots \lambda_k$. Let $\h{\Tcal}=\Tcal+E$ be the perturbed tensor with $\|E\|\leq \epsilon_{T}$. Recall that $N$ denotes the number of iterations of the tensor power method.
-We call an initialization vector $u$ to be $(\gamma, R_0)$-good  if there exists $v_i$ such that $\inner{u, v_i}> R_0$
-  and $|\inner{u, v_i}| -\max_{j<i} |\inner{u,v_j}| > \gamma  |\inner{u,v_i}|$.   Choose $\gamma=1/100$.
+We call an initialization vector $u$ to be $(\gamma, R_0)$-good  if there exists $v_i$ such that $\inner{u}{v_i}> R_0$
+  and $|\inner{u}{v_i}| -\max_{j<i} |\inner{u}{v_j}| > \gamma  |\inner{u}{v_i}|$.   Choose $\gamma=1/100$.
 
 
 \begin{theorem}
@@ -149,7 +149,7 @@ We now establish the following perturbation bound on the whitening procedure. Re
 
 \bprf The proof is along the lines of Lemma 16 of~\cite{AnandkumarEtal:community12}, but adapted to whitening using the covariance operator here.
  \begin{align*}\|\Diag(\pi)^{1/2} M^\top(\h{\Wcal}-\Wcal)\|&=
-\|\Diag(\pi)^{1/2} M^\top W(A D^{1/2} A^\top -I)\|\\ &\leq\|\Diag(\pi)^{1/2} M^\top \Wcal\| \|D^{1/2}-I\|. \end{align*} Since $\Wcal$ whitens $\Ccal_{X_1 X_2}=M \Diag(\pi) M^\top\iffalse+E\fi$, we have that $\|\Diag(\pi)^{1/2} M^\top \Wcal\| =1$\iffalse\leq \|I-E\|^{1/2}\leq 1+ \sigma_{k+1}(\Ccal_{X_1 X_2})\fi. Now we control $\|D^{1/2}-I\|$.  Let $\tl{E}:= \Ccal_{X_1,X_{2}} -B_k$, where recall that $B=0.5( \widehat \Ccal_{X_1,X_{2}}+ \h{\Ccal}_{X_1 X_2}^\top)$ and $B_k$ is its restriction to top-$k$ singular values. Thus, we have $\|\tl{E}\|_{HS} \leq \epsilon_{pairs} + \sigma_{k+1}(B)\leq 2\epsilon_{pairs}\iffalse+\sigma_{k+1}(\Ccal_{X_1 X_2})\fi$.
+\|\Diag(\pi)^{1/2} M^\top W(A D^{1/2} A^\top -I)\|\\ &\leq\|\Diag(\pi)^{1/2} M^\top \Wcal\| \|D^{1/2}-I\|. \end{align*} Since $\Wcal$ whitens $\Ccal_{X_1 X_2}=M \Diag(\pi) M^\top\iffalse+E\fi$, we have that $\|\Diag(\pi)^{1/2} M^\top \Wcal\| =1$\iffalse\leq \|I-E\|^{1/2}\leq 1+ \sigma_{k+1}(\Ccal_{X_1 X_2})\fi. Now we control $\|D^{1/2}-I\|$.  Let $\tl{E}:= \Ccal_{X_1,X_{2}} -B_k$, where recall that $B=0.5( \widehat \Ccal_{X_1,X_{2}}+ \h{\Ccal}_{X_1 X_2}^\top)$ and $B_k$ is its restriction to top-$k$ singular values. Thus, we have $\|\tl{E}\| \leq \epsilon_{pairs} + \sigma_{k+1}(B)\leq 2\epsilon_{pairs}\iffalse+\sigma_{k+1}(\Ccal_{X_1 X_2})\fi$.
  We now have
 \begin{align*}
 \|D^{1/2}-I\|&\leq \|(D^{1/2}-I)(D^{1/2}+I)\|\leq \|D-I\|
@@ -205,12 +205,12 @@ We now substitute for $\epsilon_{pairs}$ and $\epsilon_{triples}$ in \eqref{eqn:
 %\paragraph{Case of $k$-component mixture: }Here, $E_{X_1, X_2}=0$ and $E_{X_1,X_2,X_3}=0$ in \eqref{eqn:pairsexpression} and \eqref{eqn:triplesexpression}.
 
 From Lemma~\ref{lemma:pairs}, we have that
-\[ \epsilon_{pairs}  \leqslant \frac{2\sqrt{2}\rho \sqrt{\log\frac{\delta}{2}}}{\sqrt{m}}, \]with probability $1-\delta$. It is required that $\epsilon_{pairs} < 0.5 \sigma_k(\Ccal_{X_1, X_2})$, which yields that \beq\label{eqn:cond1} m > \frac{32 \rho^2 \log\frac{\delta}{2}}{\sigma^2_k(\Ccal_{X_1, X_2})}.\eeq
+\[ \epsilon_{pairs}  \leqslant \frac{2\sqrt{2}\rho \sqrt{\log\frac{2}{\delta}}}{\sqrt{m}}, \]with probability $1-\delta$. It is required that $\epsilon_{pairs} < 0.5 \sigma_k(\Ccal_{X_1, X_2})$, which yields that \beq\label{eqn:cond1} m > \frac{32 \rho^2 \log\frac{2}{\delta}}{\sigma^2_k(\Ccal_{X_1, X_2})}.\eeq
 Further we require that $\epsilon_T \leq C_1/k$, which implies that each of the terms in \eqref{eqn:epsilonT} is less than $C/k$, for some constant $C$. Thus, we have
-\[ \frac{2\sqrt{2} \epsilon_{triples}}{\sigma_k^{1.5}(\Ccal_{X_1, X_2})} < \frac{C}{k}\quad\Rightarrow\quad m > \frac{C_3 k^2 \rho^2 \log \frac{\delta}{2}}{\sigma_k^{3}(\Ccal_{X_1, X_2})},\]
+\[ \frac{2\sqrt{2} \epsilon_{triples}}{\sigma_k^{1.5}(\Ccal_{X_1, X_2})} < \frac{C}{k}\quad\Rightarrow\quad m > \frac{C_3 k^2 \rho^3 \log \frac{2}{\delta}}{\sigma_k^{3}(\Ccal_{X_1, X_2})},\]
 for some constant $C_3$ with probability $1-\delta$ from Lemma~\ref{lemma:triples}. Similarly for the second term in \eqref{eqn:epsilonT}, we have
 \[\frac{\epsilon_W^3}{\sqrt{\pi_{\min}}}< \frac{C}{k},\]and from Lemma~\ref{lemma:whiten}, this implies that \[ \epsilon_{pairs} \leq \frac{C' \pi_{\min}^{1/6} \sigma_k(\Ccal_{X_1, X_2})}{k^{1/3}\iffalse(1+\sigma_{k+1}(\Ccal_{X_1, X_2}))\fi},\]Thus, we have
-\[  m > \frac{C_4 k^{\frac{2}{3}} \rho^2 \log\frac{\delta}{2}\iffalse (1+\sigma_{k+1}(\Ccal_{X_1, X_2}))^2\fi}{\pi_{\min}^{\frac{1}{3}} \sigma^2_k(\Ccal_{X_1, X_2})}, \]for some other constant $C_4$ with probability $1-\delta$. \iffalse Additionally, we also require
+\[  m > \frac{C_4 k^{\frac{2}{3}} \rho^2 \log\frac{2}{\delta}\iffalse (1+\sigma_{k+1}(\Ccal_{X_1, X_2}))^2\fi}{\pi_{\min}^{\frac{1}{3}} \sigma^2_k(\Ccal_{X_1, X_2})}, \]for some other constant $C_4$ with probability $1-\delta$. \iffalse Additionally, we also require
 \[ (1+\sigma_{k+1}(\Ccal_{X_1, X_2}))\sigma_{k+1}(\Ccal_{X_1, X_2})\leq \frac{C_5 \pi_{\min}^{1/6} \sigma_k(\Ccal_{X_1, X_2})}{k^{1/3}}.\]\fi
  Thus, we have the result in Theorem~\ref{thm:samplebound}.
 
@@ -223,18 +223,20 @@ Concentration results for the singular value decomposition of empirical operator
 
 \begin{lemma}[Concentration bounds for pairs]\label{lemma:pairs} Let $\rho:=\sup_{x \in \Omega} k(x,x)$, and $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, we have for \beq \epsilon_{pairs}:=\nbr{\Ccal_{X_1 X_2} - \widehat \Ccal_{X_1 X_2}}_{},\label{eqn:deltapairs} \eeq
 \begin{eqnarray}
-	\Pr \cbr{\epsilon_{pairs}  \leqslant \frac{2\sqrt{2}\rho \sqrt{\log\frac{\delta}{2}}}{\sqrt{m}} } \geqslant 1-\delta. \label{eq:operator_concentration}
+	\Pr \cbr{\epsilon_{pairs}  \leqslant \frac{2\sqrt{2}\rho \sqrt{\log\frac{2}{\delta}}}{\sqrt{m}} } \geqslant 1-\delta. \label{eq:operator_concentration}
 \end{eqnarray}
 \end{lemma}
 
 \begin{proof}
 We will use similar arguments as in~\cite{RosBelVit2010} which deals with symmetric operator. Let $\xi_{i}$ be defined as
 \begin{eqnarray}
-\xi_{i}\, =\, \phi(x_t^i) \otimes \phi(x_{t'}^i) - \Ccal_{X_t,X_{t'}}.
+\xi_{i}\, =\, \phi(x_1^i) \otimes \phi(x_2^i) - \Ccal_{X_1,X_2}.
 \end{eqnarray}
 It is easy to see that $\mathbb{E}[\xi_{i}] = 0$. Further, we have
 \begin{eqnarray}
-	\sup_{x_1,x_2} \nbr{\phi(x_1) \otimes \phi(x_2)}^{2}_{} \leqslant \rho^{2},
+	\sup_{x_1,x_2} \nbr{\phi(x_1) \otimes \phi(x_2)}^{2}_{}
+    = \sup_{x_1,x_2} k(x_1, x_1) k(x_2,x_2)
+    \leqslant \rho^{2},
 \end{eqnarray}
 which implies that $\nbr{\Ccal_{X_1 X_2}}_{} \leqslant \rho$, and $\nbr{\xi_i}_{} \leqslant 2 \rho$. The result then follows from the Hoeffding's inequality in Hilbert space.
 \end{proof}
@@ -243,6 +245,20 @@ Similarly, we have the concentration bound for 3rd order embedding.
 
 \begin{lemma}[Concentration bounds for triples]\label{lemma:triples} Let $\rho:=\sup_{x \in \Omega} k(x,x)$, and $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, we have for \beq \epsilon_{triples}:=\nbr{\Ccal_{X_1 X_2 X_3} - \widehat \Ccal_{X_1 X_2 X_3}}_{},\label{eqn:deltapairs} \eeq
 \begin{eqnarray}
-	\Pr \cbr{\epsilon_{triples}  \leqslant \frac{3\sqrt{2}\rho \sqrt{\log\frac{\delta}{2}}}{\sqrt{m}} } \geqslant 1-\delta. \label{eq:operator_concentration2}
+	\Pr \cbr{\epsilon_{triples}  \leqslant \frac{2\sqrt{2}\rho^{3/2} \sqrt{\log\frac{2}{\delta}}}{\sqrt{m}} } \geqslant 1-\delta. \label{eq:operator_concentration2}
 \end{eqnarray}
 \end{lemma}
+
+\begin{proof}
+We will use similar arguments as in~\cite{RosBelVit2010} which deals with symmetric operator. Let $\xi_{i}$ be defined as
+\begin{eqnarray}
+\xi_{i}\, =\, \phi(x_1^i) \otimes \phi(x_2^i) \otimes \phi(x_3^i)  - \Ccal_{X_1 X_2 X_3}.
+\end{eqnarray}
+It is easy to see that $\mathbb{E}[\xi_{i}] = 0$. Further, we have
+\begin{eqnarray}
+	\sup_{x_1,x_2,x_3} \nbr{\phi(x_1) \otimes \phi(x_2) \otimes \phi(x_3)}^{2}_{}
+    = \sup_{x_1,x_2,x_3} k(x_1, x_1) k(x_2,x_2) k(x_3,x_3)
+    \leqslant \rho^{3},
+\end{eqnarray}
+which implies that $\nbr{\Ccal_{X_1 X_2 X_3}}_{} \leqslant \rho^{3/2}$, and $\nbr{\xi_i}_{} \leqslant 2 \rho^{3/2}$. The result then follows from the Hoeffding's inequality in Hilbert space.
+\end{proof}
