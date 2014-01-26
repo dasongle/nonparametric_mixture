@@ -19,7 +19,7 @@ iterations  $N$.
 \FOR{$t = 1$ to $N$}
 \STATE $\tilde{T}\leftarrow T$.
 \FOR{$j=1$ to $i-1$ (when $i>1$)}
-\IF{$|\lambda_j \inner{\th{t}^{(\tau)}}{\phi_j}|>\xi$}
+\IF{$|\lambda_j \inner{\th{t}^{(\tau)}, \phi_j}|>\xi$}
 \STATE $\tilde{T}\leftarrow \tilde{T}- \lambda_j \phi_j^{\otimes 3}$.
 \ENDIF
 \ENDFOR
@@ -52,7 +52,7 @@ $(\lambda, \Phi)$.
 %
 %\begin{theorem}[Sample Bounds]\label{thm:samplebound}
 %Pick  any $\delta\in (0,1)$. When the number of samples $m$ satisfies
-%\beq m >\frac{\rho\rho^2  \log\frac{2}{\delta}}{\sigma_k(\Ccal_{X_1, X_2})},
+%\beq m >\frac{\rho\rho^2  \log\frac{\delta}{2}}{\sigma_k(\Ccal_{X_1, X_2})},
 %\quad \rho:= \max\left(\frac{512  }{\sigma^3_k(\Ccal_{X_1, X_2})}, \frac{C' k^2 }{\sigma_k^{3}(\Ccal_{X_1, X_2})},\frac{C^{''} k^{\frac{2}{3}} }{\pi_{\min}^{\frac{1}{3}} }\right),\eeq for some constants $C', C^{''}>0$, and the number of iterations $N$  and  the number of random initialization vectors $L$  (drawn uniformly on the sphere $\mathcal{S}^{k-1}$)  satisfy
 %\begin{align*}
 %N \geq C_2 \cdot \biggl( \log(k) + \log\log\Bigl(
@@ -79,7 +79,7 @@ $(\lambda, \Phi)$.
 %\biggr\| \leq 55\eps_T,
 %\] where $\eps_T$ is the tensor perturbation bound
 %\[ \eps_T := \|\h{\Tcal} - \Tcal\| \leq
-%\frac{12 \rho \sqrt{\log\frac{2}{\delta}}}{\sqrt{m} \, \sigma_k^{1.5}(\Ccal_{X_1, X_2})} + \frac{512 \sqrt{2} \rho^3 \left(\log\frac{2}{\delta}\right)^{1.5}}{m^{1.5} \,\sigma_k^{3}(\Ccal_{X_1, X_2}) \sqrt{\pi}_{\min}}\]
+%\frac{12 \rho \sqrt{\log\frac{\delta}{2}}}{\sqrt{m} \, \sigma_k^{1.5}(\Ccal_{X_1, X_2})} + \frac{512 \sqrt{2} \rho^3 \left(\log\frac{\delta}{2}\right)^{1.5}}{m^{1.5} \,\sigma_k^{3}(\Ccal_{X_1, X_2}) \sqrt{\pi}_{\min}}\]
 %
 %\end{theorem}
 %The above result provides bounds on the estimated eigen-pairs using the robust tensor power method.
@@ -205,12 +205,12 @@ We now substitute for $\epsilon_{pairs}$ and $\epsilon_{triples}$ in \eqref{eqn:
 %\paragraph{Case of $k$-component mixture: }Here, $E_{X_1, X_2}=0$ and $E_{X_1,X_2,X_3}=0$ in \eqref{eqn:pairsexpression} and \eqref{eqn:triplesexpression}.
 
 From Lemma~\ref{lemma:pairs}, we have that
-\[ \epsilon_{pairs}  \leqslant \frac{2\sqrt{2}\rho \sqrt{\log\frac{2}{\delta}}}{\sqrt{m}}, \]with probability $1-\delta$. It is required that $\epsilon_{pairs} < 0.5 \sigma_k(\Ccal_{X_1, X_2})$, which yields that \beq\label{eqn:cond1} m > \frac{32 \rho^2 \log\frac{2}{\delta}}{\sigma^2_k(\Ccal_{X_1, X_2})}.\eeq
+\[ \epsilon_{pairs}  \leqslant \frac{2\sqrt{2}\rho \sqrt{\log\frac{\delta}{2}}}{\sqrt{m}}, \]with probability $1-\delta$. It is required that $\epsilon_{pairs} < 0.5 \sigma_k(\Ccal_{X_1, X_2})$, which yields that \beq\label{eqn:cond1} m > \frac{32 \rho^2 \log\frac{\delta}{2}}{\sigma^2_k(\Ccal_{X_1, X_2})}.\eeq
 Further we require that $\epsilon_T \leq C_1/k$, which implies that each of the terms in \eqref{eqn:epsilonT} is less than $C/k$, for some constant $C$. Thus, we have
-\[ \frac{2\sqrt{2} \epsilon_{triples}}{\sigma_k^{1.5}(\Ccal_{X_1, X_2})} < \frac{C}{k}\quad\Rightarrow\quad m > \frac{C_3 k^2 \rho^3 \log \frac{2}{\delta}}{\sigma_k^{3}(\Ccal_{X_1, X_2})},\]
+\[ \frac{2\sqrt{2} \epsilon_{triples}}{\sigma_k^{1.5}(\Ccal_{X_1, X_2})} < \frac{C}{k}\quad\Rightarrow\quad m > \frac{C_3 k^2 \rho^3 \log \frac{\delta}{2}}{\sigma_k^{3}(\Ccal_{X_1, X_2})},\]
 for some constant $C_3$ with probability $1-\delta$ from Lemma~\ref{lemma:triples}. Similarly for the second term in \eqref{eqn:epsilonT}, we have
 \[\frac{\epsilon_W^3}{\sqrt{\pi_{\min}}}< \frac{C}{k},\]and from Lemma~\ref{lemma:whiten}, this implies that \[ \epsilon_{pairs} \leq \frac{C' \pi_{\min}^{1/6} \sigma_k(\Ccal_{X_1, X_2})}{k^{1/3}\iffalse(1+\sigma_{k+1}(\Ccal_{X_1, X_2}))\fi},\]Thus, we have
-\[  m > \frac{C_4 k^{\frac{2}{3}} \rho^2 \log\frac{2}{\delta}\iffalse (1+\sigma_{k+1}(\Ccal_{X_1, X_2}))^2\fi}{\pi_{\min}^{\frac{1}{3}} \sigma^2_k(\Ccal_{X_1, X_2})}, \]for some other constant $C_4$ with probability $1-\delta$. \iffalse Additionally, we also require
+\[  m > \frac{C_4 k^{\frac{2}{3}} \rho^2 \log\frac{\delta}{2}\iffalse (1+\sigma_{k+1}(\Ccal_{X_1, X_2}))^2\fi}{\pi_{\min}^{\frac{1}{3}} \sigma^2_k(\Ccal_{X_1, X_2})}, \]for some other constant $C_4$ with probability $1-\delta$. \iffalse Additionally, we also require
 \[ (1+\sigma_{k+1}(\Ccal_{X_1, X_2}))\sigma_{k+1}(\Ccal_{X_1, X_2})\leq \frac{C_5 \pi_{\min}^{1/6} \sigma_k(\Ccal_{X_1, X_2})}{k^{1/3}}.\]\fi
  Thus, we have the result in Theorem~\ref{thm:samplebound}.
 
@@ -223,7 +223,7 @@ Concentration results for the singular value decomposition of empirical operator
 
 \begin{lemma}[Concentration bounds for pairs]\label{lemma:pairs} Let $\rho:=\sup_{x \in \Omega} k(x,x)$, and $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, we have for \beq \epsilon_{pairs}:=\nbr{\Ccal_{X_1 X_2} - \widehat \Ccal_{X_1 X_2}}_{},\label{eqn:deltapairs} \eeq
 \begin{eqnarray}
-	\Pr \cbr{\epsilon_{pairs}  \leqslant \frac{2\sqrt{2}\rho \sqrt{\log\frac{2}{\delta}}}{\sqrt{m}} } \geqslant 1-\delta. \label{eq:operator_concentration}
+	\Pr \cbr{\epsilon_{pairs}  \leqslant \frac{2\sqrt{2}\rho \sqrt{\log\frac{\delta}{2}}}{\sqrt{m}} } \geqslant 1-\delta. \label{eq:operator_concentration}
 \end{eqnarray}
 \end{lemma}
 
@@ -245,7 +245,7 @@ Similarly, we have the concentration bound for 3rd order embedding.
 
 \begin{lemma}[Concentration bounds for triples]\label{lemma:triples} Let $\rho:=\sup_{x \in \Omega} k(x,x)$, and $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, we have for \beq \epsilon_{triples}:=\nbr{\Ccal_{X_1 X_2 X_3} - \widehat \Ccal_{X_1 X_2 X_3}}_{},\label{eqn:deltapairs} \eeq
 \begin{eqnarray}
-	\Pr \cbr{\epsilon_{triples}  \leqslant \frac{2\sqrt{2}\rho^{3/2} \sqrt{\log\frac{2}{\delta}}}{\sqrt{m}} } \geqslant 1-\delta. \label{eq:operator_concentration2}
+	\Pr \cbr{\epsilon_{triples}  \leqslant \frac{2\sqrt{2}\rho^{3/2} \sqrt{\log\frac{\delta}{2}}}{\sqrt{m}} } \geqslant 1-\delta. \label{eq:operator_concentration2}
 \end{eqnarray}
 \end{lemma}
 
