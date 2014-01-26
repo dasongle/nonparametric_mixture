@@ -297,7 +297,10 @@ which is called the conditional embedding operator. If we use the standard basis
 \begin{align}
   \mu_{X|h} = \Ccal_{X|H} e_h
 \end{align}
-Once we have the conditional embedding $\mu_{X|h}$, we can compute the conditional expectation of a function $f\in \Fcal$ as $\int_{\Xcal} f(x)\,dx = \inner{f}{\mu_{X|h}}_{\Fcal}$. For data from $\RR^d$, if certain kernels are chosen, such as the normalized Gaussian RBF kernel $k(x,x') = \exp(-\|x-x'\|^2/(2 s^2)) / \sqrt{(2\pi s)^d}$, the conditional density $p(x|h)$ can be approximated by the embedding, $\widetilde{p}(x|h) = \inner{\phi(x)}{\mu_{X|h}}_{\Fcal}=\EE_{X|h}[k(x,X)]$. Essentially, this is the convolution of the conditional density with the kernel function. If the kernel bandwidth $s \rightarrow 0$, one can show that the approximation error (bias) $|\widetilde{p}(x|h)-p(x|h)|$ goes to 0~\cite{Wasserman06}.
+Once we have the conditional embedding $\mu_{X|h}$, we can compute the conditional expectation of a function $f\in \Fcal$ as $\int_{\Xcal} f(x) p(x|h) \,dx = \inner{f}{\mu_{X|h}}_{\Fcal}$. 
+
+\paragraph{Remarks.} For data from $\RR^d$, if certain kernels are chosen, such as the normalized Gaussian RBF kernel $k(x,x') = \exp(-\|x-x'\|^2/(2 s^2)) / \sqrt{(2\pi s^2)^d}$, the conditional density $p(x|h)$ can be approximated by the embedding, $\widetilde{p}(x|h) := \inner{\phi(x)}{\mu_{X|h}}_{\Fcal}=\EE_{X|h}[k(x,X)]$. Essentially, this is the convolution of the conditional density with the kernel function. One can show that the approximation error (bias) $|\widetilde{p}(x|h)-p(x|h)|$ scales as $O(s^2)$
+if $p''(x|h)$ is absolutely continuous and $\int_{\RR^d} (p'''(x|h))^2\,dx < \infty$~\cite{Wasserman06}. When the kernel bandwidth $s \rightarrow 0$, the approximation error goes to 0.  
 
 \subsection{Factorized Kernel Embedding}
 
@@ -451,6 +454,7 @@ We  denote the implicit feature matrix by
   \Psi &:= (\phi(x_2^1), \ldots, \phi(x_2^m), \phi(x_1^1),  \ldots, \phi(x_1^m)),
 \end{align*}
 and the corresponding kernel matrix by $K = \Phi^\top \Phi$ and $L = \Psi^\top \Psi$ respectively.
+Furthermore, we denote $K_{:x_1^i}:=\Phi^\top \phi(x_1^i)$ as the column of $K$ corresponding to $x_1^i$. 
 Then the steps in the population case can be mapped one-by-one into kernel operations.
 
 {\bf Step 1.} We  perform a kernel eigenvalue decomposition of the empirical 2nd order embedding
@@ -497,9 +501,9 @@ using $\widehat \Wcal:= \widehat \Ucal_k \widehat S_k^{-1/2}$, and obtain
   &\widehat \Tcal := \frac{1}{3m}\sum_{i=1}^m (\xi(x_1^i) \otimes \xi(x_2^i) \otimes \xi(x_3^i) \\
   &+ \xi(x_3^i) \otimes \xi(x_1^i) \otimes \xi(x_2^i) + \xi(x_2^i) \otimes \xi(x_3^i) \otimes \xi(x_1^i)),
 \end{align*}
-where
+where 
 $$
-	\xi(x_1^i) := \widehat S_k^{-1/2} (\beta_1,\ldots,\beta_k)^\top \Phi^\top \phi(x_1^i)~ \in~\RR^k.
+	\xi(x_1^i) := \widehat S_k^{-1/2} (\beta_1,\ldots,\beta_k)^\top K_{:x_1^i}~ \in~\RR^k.
 $$
 
 {\bf Step 3.} We run tensor power method~\cite{AnandkumarEtal:community12} on the finite dimension tensor $\widehat \Tcal$ to obtain its leading $k$ eigenvectors $\widehat M:=(\widehat v_1,\ldots,\widehat v_k)$.
@@ -537,9 +541,9 @@ Pick  any $\delta\in (0,1)$. When the number of samples $m$ satisfies
   N \geq C_2 \cdot \biggl( \log(k) + \log\log\Bigl(
  \frac{1}{\sqrt{\pi_{\min}}\epsilon_T} \Bigr) \biggr),
 \end{align*}
-for constant $C_2>0$ and  $L = \poly(k) \log(1/\delta)$,  the robust power method in~\cite{AnandkumarEtal:community12} yields eigen-pairs $(\h{\lambda}_i, \h{\phi}_i)$ such that there exists a permutation $\eta$, with probability $1-4\delta$, we have
+for constant $C_2>0$ and  $L = \poly(k) \log(1/\delta)$,  the robust power method in~\cite{AnandkumarEtal:community12} yields eigen-pairs $(\h{\lambda}_i, \h{v}_i)$ such that there exists a permutation $\eta$, with probability $1-4\delta$, we have
 \begin{align*}
-&\|\pi^{-1/2}_{j} \mu_{X|h=j}-\h{\phi}_{\eta(j)}\| \leq 8 \epsilon_T \cdot\pi^{-1/2}_{j}
+&\|\pi^{-1/2}_{j} \mu_{X|h=j}-\h{v}_{\eta(j)}\|_{\Fcal} \leq 8 \epsilon_T \cdot\pi^{-1/2}_{j}
 , \\
 &|\pi^{-1/2}_{j}-\h{\lambda}_{\eta(j)}| \leq  5\epsilon_T, \quad \forall j \in [k]
 ,
@@ -562,7 +566,23 @@ Thus, the above result provides bounds on the estimated eigen-pairs using the ro
 
 \paragraph{Remark 1:} We note that the sample complexity is  $\poly(k, \rho, 1/\pi_{\min}, 1/\sigma_k(\Ccal_{X_1, X_2}))$ of a low order, and in particular,  it is $O(k^2)$, when the other parameters are fixed. For the special case of discrete measurements, where the kernel $k(x,x')=\delta(x,x')$, we have $\rho=1$. Note that the sample complexity depends in this case only on the number of components $k$ and not on the dimensionality of the observed state space.   Thus, the robust tensor method has efficient sample and computational complexities for non-parametric latent variable estimation.
 
-\paragraph{Remark 2:} \Le{for density estimation; bias-variance tradeoff:mention}
+\paragraph{Remark 2:} For $x\in \RR^d$ and the kernel $k(x,x') = \exp(-\|x-x'\|^2/(2 s^2)) / \sqrt{(2\pi s^2)^d}$, the recovered conditional embedding $\widehat \mu_{X|h}$ can be used to estimate the conditional density, $p(x|h) \approx \widehat p(x|h) := \inner{\phi(x)}{\widehat \mu_{X|h}}_{\Fcal}.$ 
+Theorem~\ref{thm:samplebound} essentially gives us the estimation error
+\begin{align*}
+  |\widetilde p(x|h) - \widehat p(x|h)| 
+  &\leq \|\phi(x)\|_{\Fcal} \|\mu_{X|h} - \widehat \mu_{X|h}\|_{\Fcal} \\
+  &=O(\rho^{0.5})\cdot O(\smallfrac{\rho^3}{m^{1.5}}) = O(\smallfrac{1}{s^{3.5d}m^{1.5}}) 
+\end{align*}
+where we used $\rho = O(1/s^d)$. 
+Combining it with the analysis of the approximation error for kernel density estimator, we can obtain a finite sample bound for conditional density estimation. That is, with high probability, 
+\begin{align*}
+  |p(x|h) - \widehat p(x|h)| 
+  &\leq |p(x|h) - \widetilde p(x|h)| + |\widetilde p(x|h) - \widehat p(x|h)| \\
+  &\leq O(s^2) + O(\smallfrac{1}{s^{3.5d}m^{1.5}}) 
+\end{align*}
+Then we can balance the approximation and estimation errors by choosing an appropriate $s$. 
+In particular, we choose $s = O(m^{-1.5/(2+3.5d)})$ which leads to $|p(x|h) - \widehat p(x|h)| = O(m^{-3/(2+3.5d)})$. 
+Note that this is the first theoretical result of the kind for estiamting conditional density in the unsupervised setting.  
 
 \section{Discussion}
 
