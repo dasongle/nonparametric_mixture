@@ -50,7 +50,7 @@
 \usepackage{enumitem}
 
 \usepackage{color}
-\newcommand{\Note}[1]{{\color{red}{\bf\sf [note: #1]}}}
+\newcommand{\Le}[1]{{\color{red}{\bf\sf [note: #1]}}}
 
 % The \icmltitle you define below is probably too long as a header.
 % Therefore, a short form for the running title is supplied here:
@@ -81,8 +81,7 @@
 ]
 
 \begin{abstract}
-		Spectral methods have greatly advanced the estimation of latent variable models, generating a sequence of novel and efficient algorithms with strong theoretical guarantees. However, current spectral algorithms are largely restricted to mixtures of discrete or Gaussian distributions. In this paper, we propose a kernel method for learning multi-view latent variable models, allowing each mixture component to be nonparametric.
-		The key idea of the method is to embed the joint distribution of a multi-view latent variable into a reproducing kernel Hilbert space, and then the latent parameters are recovered using a robust tensor power method. We establish that the  sample complexity for the proposed method is quadratic in the number of latent components and is a low order polynomial in the other relevant parameters. Thus, our non-parametric tensor approach to learning latent variable models enjoys good sample and computational efficiencies. Moreover, the non-parametric tensor power method compares favorably to EM algorithm and other existing spectral algorithms in our experiments.
+		Spectral methods have greatly advanced the estimation of latent variable models, generating a sequence of novel and efficient algorithms with strong theoretical guarantees. However, current spectral algorithms are largely restricted to mixtures of discrete or Gaussian distributions. In this paper, we propose a kernel method for learning multi-view latent variable models, allowing each mixture component to be nonparametric, and moreover the approach can be readily adapted to other related settings such as independent component analysis and latent variable models with Dirichlet priors. The key idea of our method is to embed the joint distribution of a multi-view latent variable into a reproducing kernel Hilbert space, and then the latent parameters are recovered using a robust tensor power method. We establish that the  sample complexity for the proposed method is quadratic in the number of latent components and is a low order polynomial in the other relevant parameters. Thus, our nonparametric tensor approach to learning latent variable models enjoys good sample and computational efficiencies. In both synthetic and real world datasets, the nonparametric tensor power method compares favorably to EM algorithm and other existing spectral algorithms.
 \end{abstract}
 
 \section{Introduction} \label{sec:intro}
@@ -99,16 +98,18 @@
 Latent variable models have been used to address various machine learning
 problems, ranging from modeling temporal dynamics, to text document analysis and to social network analysis~\citep{RabJua86,Clark90,HofRafHan02,BleNgJor03}.
 Recently, there is a surge of interest in designing spectral algorithms for estimating the parameters of latent variable models~\citep{HsuKakZha09,ParSonXin11,SonParXin11,FosRodUng12,AnandkumarEtal:tensor12, AnandkumarEtal:twosvd12, Franz13}. Compared to the Expectation-Maximization (EM) algorithm \citep{DemLaiRub77} traditionally used for this task, spectral algorithms are better in terms of their computational efficiency and provable guarantees.
-Current spectral algorithms are largely restricted to mixture
-of discrete or Gaussian distributions, e.g.~\citep{AnandkumarEtal:tensor12,Hsu13}. When the mixture components are distributions other than these standard distributions, the theoretical guarantees for these algorithms are no longer applicable, and their empirical performance can be very poor.
+However, current spectral algorithms are largely restricted to mixture
+of discrete or Gaussian distributions, e.g.~\citep{AnandkumarEtal:tensor12,HsuKak13}. When the mixture components are distributions other than these standard distributions, the theoretical guarantees for these algorithms are no longer applicable, and their empirical performance can be very poor.
 
-In this paper, we propose a kernel method for estimating the parameters of multi-view latent variable models where the mixture components can be nonparametric. The key idea  is to embed the joint distribution of such a model into a reproducing kernel Hilbert space, and exploit the low rank structure of the embedded distribution (or covariance operators). The key computation   involves a kernel singular value decomposition of the two-view covariance operator, followed by a robust tensor power method on the three-view covariance operator. These standard matrix operations makes the algorithm very efficient and easy to deploy.
+In this paper, we propose a kernel method for \emph{estimating the parameters} of multi-view latent variable models where the mixture components can be nonparametric. The key idea  is to embed the joint distribution of such a model into a reproducing kernel Hilbert space, and exploit the low rank structure of the embedded distribution (or covariance operators). The key computation   involves a kernel singular value decomposition of the two-view covariance operator, followed by a robust tensor power method on the three-view covariance operator. These standard matrix operations makes the algorithm very efficient and easy to deploy.
 
-The kernel algorithm proposed in this paper is more general than the previous spectral algorithms which work only for distributions with parametric assumptions~\citep{AnandkumarEtal:tensor12,Hsu13}. When we use delta kernel, our algorithm reduces to the spectral algorithm for discrete mixture components analyzed in~\citep{AnandkumarEtal:tensor12}. When we use universal kernels, such as Gaussian RBF kernel, our algorithm can recover Gaussian mixture components as well as mixture components with other distributions. In this sense, our work also provides a unifying framework for previous spectral algorithms. We prove sample complexity bounds for the nonparametric tensor power method and establish  that the sample complexity is quadratic in the number of latent components, and is a low order polynomial in the other relevant parameters such as the lower bound on mixing weights. Thus, we propose a computational and sample efficient nonparametric approach to learning latent variable models.
+Kernel methods have  been previously applied to learning latent variable models. However, none of these previous kernel methods can provably recover the actual parameters of the models, or the conditional density associated with each mixture component if it exists. For instance, \citet{SonParXin11, SonDai13}~estimated an (unknown) invertible transformation of the latent parameters. While these works can recover the marginal distribution of the observed variables by making use of the low rank structure of the latent variable models, it is not clear how one can recover the conditional density based on these estimates. \citet{SgoJanPetSch13}~used kernel independence measure to cluster data points, and treated each cluster as a mixture component. Although one can then employ a post-processing step to obtain the conditional density, it is difficult to provide theoretical guarantees to such an approach since the clustering step only finds a local minimum. \citet{BenChaHun09} designed an EM-like algorithm for learning the conditional densities in latent variable models. This algorithm alternate between an E-step, proportional assignment of data point to components, and the M-step, kernel density estimation based on weighted data point. Again it is difficult to theoretical guarantees to such an algorithm.
 
- Kernel methods have  been previously applied to learning latent variable models. However, none of the previous works explicitly recovers the actual parameters of the models~\cite{SonParXin11, SonDai13, SgoJanPetSch13}. Most of them estimate an (unknown) invertible  transformation of the latent parameters, and it is not clear how one can recover the actual parameters based on these estimates. Furthermore, these works focused on predictive task: recover the marginal distribution of the observed variables by making use of the low rank structure of the latent variable models. It is significantly more challenging to design kernel algorithms for actual parameter recovery and analyze theoretical properties of these algorithms.
+The kernel algorithm proposed in this paper is also significantly more general than the previous spectral algorithms which work only for distributions with parametric assumptions~\cite[eg.][]{AnandkumarEtal:tensor12,HsuKak13}. In fact, when we use delta kernel, our algorithm recovers the previous algorithm of~\citet{AnandkumarEtal:tensor12} for discrete mixture components as a special case. When we use universal kernels, such as Gaussian RBF kernel, our algorithm can recover Gaussian mixture components as well as mixture components with other distributions. In this sense, our work also provides a unifying framework for previous spectral algorithms. We prove sample complexity bounds for the nonparametric tensor power method and establish  that the sample complexity is quadratic in the number of latent components, and is a low order polynomial in the other relevant parameters such as the lower bound on mixing weights. Thus, we propose a computational and sample efficient nonparametric approach to learning latent variable models.
 
 We compare our kernel algorithm to the EM algorithm and previous spectral algorithms. We show that when the model assumptions are correct for the EM algorithm and previous spectral algorithms, our algorithm converges in terms of estimation error to these competitors. In the opposite cases when the model assumptions are incorrect, our algorithm is able to adapt to the nonparametric mixture components and beating alternatives by a very large margin.
+
+\Le{stress unsupervised}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Notation}
@@ -122,8 +123,7 @@ A \emph{reproducing kernel Hilbert space (RKHS)} $\Fcal$ on $\Xcal$ with a kerne
 functions $f(\cdot):\Xcal \mapsto \RR$ with inner product $\inner{\cdot}{\cdot}_{\Fcal}$. Its element $k(x,\cdot)$ satisfies the reproducing property:
 $\inner{f(\cdot)}{k(x, \cdot)}_{\Fcal} = f(x)$, and consequently, $\inner{k(x,\cdot)}{k(x', \cdot)}_{\Fcal} = k(x,x')$,
 meaning that we can view the evaluation of a function $f$ at any point $x\in\Xcal$ as an inner product. Alternatively, $k(x,\cdot)$ can  be viewed as an implicit feature map $\phi(x)$ where $k(x,x')=\inner{\phi(x)}{\phi(x')}_{\Fcal}$.
-Popular kernel functions on $\RR^n$ include the Gaussian RBF kernel $k(x,x') = \exp(-s
-  \nbr{x-x'}^2)$ and the Laplace kernel $\exp(-s \|x - x'\|)$. Kernel functions have also been defined on
+Popular kernel functions on $\RR^n$ include the Gaussian RBF kernel $k(x,x') = \exp(- \nbr{x-x'}^2 /(2 s^2))$ and the Laplace kernel $\exp(-\|x - x'\| / (2 s^2))$. Kernel functions have also been defined on
 graphs, time series, dynamical systems, images and other structured
 objects \, \cite{SchTsuVer04}. Thus the methodology presented below can be readily generalized to a diverse range of data types as long as kernel functions are defined.
 % Similarly, we denote by $\Gcal$ an RKHS on $\Hcal$ with kernel $l(h,h')$, and by $\psi(h)$ the corresponding feature map.
@@ -296,7 +296,10 @@ which is called the conditional embedding operator. If we use the standard basis
 \begin{align}
   \mu_{X|h} = \Ccal_{X|H} e_h
 \end{align}
-Once we have the conditional embedding $\mu_{X|h}$, we can estimate the density $p(x|h)$ by performing an inner product $p(x|h) = \inner{\phi(x)}{\mu_{X|h}}$.
+Once we have the conditional embedding $\mu_{X|h}$, we can compute the conditional expectation of a function $f\in \Fcal$ as $\int_{\Xcal} f(x) p(x|h) \,dx = \inner{f}{\mu_{X|h}}_{\Fcal}$.
+
+\paragraph{Remarks.} For data from $\RR^d$, if certain kernels are chosen, such as the normalized Gaussian RBF kernel $k(x,x') = \exp(-\|x-x'\|^2/(2 s^2)) / \sqrt{(2\pi s^2)^d}$, the conditional density $p(x|h)$ can be approximated by the embedding, $\widetilde{p}(x|h) := \inner{\phi(x)}{\mu_{X|h}}_{\Fcal}=\EE_{X|h}[k(x,X)]$. Essentially, this is the convolution of the conditional density with the kernel function. One can show that the approximation error (bias) $|\widetilde{p}(x|h)-p(x|h)|$ scales as $O(s^2)$
+if $p''(x|h)$ is absolutely continuous and $\int_{\RR^d} (p'''(x|h))^2\,dx < \infty$~\cite{Wasserman06}. When the kernel bandwidth $s \rightarrow 0$, the approximation error goes to 0.
 
 \subsection{Factorized Kernel Embedding}
 
@@ -335,7 +338,7 @@ $\PP(X_1,X_2)$ (second order embedding)
   &= \Ccal_{X|H}\, \rbr{\int_{\Hcal} e_h \otimes e_h\, \PP(dh)}\, \Ccal_{X|H}^\top \nonumber \\
   &= \Ccal_{X|H}\, \Ccal_{HH}\, \Ccal_{X|H}^\top, \label{eq:pair_factorization}
 \end{align}
-and that of $\PP(X_1,X_2,X3)$ (third order embedding)
+and that of $\PP(X_1,X_2,X_3)$ (third order embedding)
 \begin{align}
   &\Ccal_{X_1 X_2 X_3}
   = \Ccal_{HHH} \times_1 \Ccal_{X|H} \times_2 \Ccal_{X|H} \times_3 \Ccal_{X|H}. \label{eq:triple_factorization}
@@ -350,7 +353,7 @@ We note that $\Ccal_{X|H} = \rbr{\mu_{X|h=1},\ \mu_{X|h=2},\ \ldots,\ \mu_{X|h=k
   \Ccal_{X_1 X_2 X_3}
   &= \sum_{h \in [k]} \pi_h\cdot \mu_{X|h} \otimes \mu_{X|h} \otimes \mu_{X|h} \label{eq:joint3}
 \end{align}
-Allman et al.~\cite{Allman09} showed that, under mild conditions, a finite mixture of nonparametric product distributions is identifiable. The multi-view latent variable model in~\eq{eq:joint3} has the same form as a finite mixture of nonparametric product distribution, and therefore we can adapt Allman's results to the current setting.
+\citet{AllMatRho09} showed that, under mild conditions, a finite mixture of nonparametric product distributions is identifiable. The multi-view latent variable model in~\eq{eq:joint3} has the same form as a finite mixture of nonparametric product distribution, and therefore we can adapt Allman's results to the current setting.
 \begin{proposition}[Identifiability]\label{prop:identifiability}
 \vspace{-2mm}
   Let $\PP(X_1,X_2,X_3)$ be a multi-view latent variable model, such that the conditional distributions $\cbr{\PP(X|h)}_{h \in [k]}$ are linearly independent. Then, the set of parameters $\cbr{\pi_h, \mu_{X|h}}_{h \in [k]}$ are identifiable from $\Ccal_{X_1 X_2 X_3}$, up to label swapping of the hidden variable $H$.
@@ -390,7 +393,7 @@ Allman et al.~\cite{Allman09} showed that, under mild conditions, a finite mixtu
 We require that the conditional probability table $\{P(X|h)\}_{h\in [k]}$ to  have full column rank for identifiability in this case.
 
 
-{\bf Example 2.} Suppose we have a $k$-component mixture of one dimensional  spherical Gaussian distributions. The Gaussian components have identical covariance  $\sigma^2$, but their mean values are distinct. Note that this model is not identifiable under the framework of~\cite{Hsu13} since the mean values are just scalars and therefore, rank deficient. However, if we embed the density functions using universal kernels such as Gaussian RBF kernel, it can be shown that the mixture model becomes identifiable. This is because we are working with the entire density function which are linearly independent from each other in this case. Thus, the non-parametric framework allows us to incorporate a wider range of latent variable  models.
+{\bf Example 2.} Suppose we have a $k$-component mixture of one dimensional  spherical Gaussian distributions. The Gaussian components have identical covariance  $\sigma^2$, but their mean values are distinct. Note that this model is not identifiable under the framework of~\citet{HsuKak13} since the mean values are just scalars and therefore, rank deficient. However, if we embed the density functions using universal kernels such as Gaussian RBF kernel, it can be shown that the mixture model becomes identifiable. This is because we are working with the entire density function which are linearly independent from each other in this case. Thus, the non-parametric framework allows us to incorporate a wider range of latent variable  models.
 
 
 
@@ -412,7 +415,7 @@ We first design a kernel algorithm to recover the parameters, $\cbr{\pi_h, \mu_{
 
 \subsection{Population Case}
 
-We  first derive the algorithm for the population case as if we could access the true operator $\Ccal_{X_1 X_2}$ and $\Ccal_{X_1 X_2 X_3}$. Its finite sample counterpart  will be presented in the next section. The algorithm can be thought of as a kernel generalization of the algorithm in~\cite{AnandkumarEtal:community12} using embedding representations.
+We  first derive the algorithm for the population case as if we could access the true operator $\Ccal_{X_1 X_2}$ and $\Ccal_{X_1 X_2 X_3}$. Its finite sample counterpart  will be presented in the next section. The algorithm can be thought of as a kernel generalization of the algorithm in~\citet{AnandkumarEtal:community12} using embedding representations.
 
 {\bf Step 1.} We perform eigen-decomposition of $\Ccal_{X_1 X_2}$,
 $$\Ccal_{X_1 X_2} = \sum_{i=1}^{\infty} \sigma_i \cdot u_i \otimes u_i$$
@@ -450,6 +453,7 @@ We  denote the implicit feature matrix by
   \Psi &:= (\phi(x_2^1), \ldots, \phi(x_2^m), \phi(x_1^1),  \ldots, \phi(x_1^m)),
 \end{align*}
 and the corresponding kernel matrix by $K = \Phi^\top \Phi$ and $L = \Psi^\top \Psi$ respectively.
+Furthermore, we denote $K_{:x_1^i}:=\Phi^\top \phi(x_1^i)$ as the column of $K$ corresponding to $x_1^i$.
 Then the steps in the population case can be mapped one-by-one into kernel operations.
 
 {\bf Step 1.} We  perform a kernel eigenvalue decomposition of the empirical 2nd order embedding
@@ -498,7 +502,7 @@ using $\widehat \Wcal:= \widehat \Ucal_k \widehat S_k^{-1/2}$, and obtain
 \end{align*}
 where
 $$
-	\xi(x_1^i) := \widehat S_k^{-1/2} (\beta_1,\ldots,\beta_k)^\top \Phi^\top \phi(x_1^i)~ \in~\RR^k.
+	\xi(x_1^i) := \widehat S_k^{-1/2} (\beta_1,\ldots,\beta_k)^\top K_{:x_1^i}~ \in~\RR^k.
 $$
 
 {\bf Step 3.} We run tensor power method~\cite{AnandkumarEtal:community12} on the finite dimension tensor $\widehat \Tcal$ to obtain its leading $k$ eigenvectors $\widehat M:=(\widehat v_1,\ldots,\widehat v_k)$.
@@ -508,31 +512,37 @@ $$
   \widehat \Ccal_{X|H} = (\widehat \mu_{X|h=1},\ldots, \widehat \mu_{X|h=k}) = \Phi (\beta_1,\ldots,\beta_k) \widehat  S_k^{1/2} \widehat M.
 \end{align*}
 
+\begin{algorithm}[t!]
+\caption{Algorithm with Gram matrix}
+% 	\textbf{In}: Two kernel matrices $K$ and $L$, and desired rank $r$ \\
+	\textbf{Out}: $\widehat S_k$ and $(\beta_1,\ldots,\beta_k)$\\[-0.4cm]
+  \begin{algorithmic}[1]
+    \STATE Cholesky decomposition:\ $K=R^\top R$
+    \STATE Eigen-decomposition:\ $\frac{1}{4m^2} R L R^\top \widetilde{\beta} = \widehat \sigma^2\,\widetilde{\beta}$
+    \STATE Use $k$ leading eigenvalues:\ $\widehat S_k = \diag(\widehat \sigma_1,\ldots,\widehat \sigma_k)$
+    \STATE Use $k$ leading eigenvectors:\ $(\widetilde{\beta}_1,\ldots,\widetilde{\beta}_k)$ to
+    compute:\ $(\beta_1,\ldots,\beta_k) = R^\dagger (\widetilde{\beta}_1,\ldots,\widetilde{\beta}_k)$
+  \end{algorithmic}
+  \label{alg:svd}
+\end{algorithm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Sample Complexity}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Let $\rho:=\sup_{x \in \Xcal} k(x,x)$,   $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, $\pi_{\min}:=\min_{i\in [k]} \pi_i$ and $\sigma_k(\Ccal_{X_1X_2})$ be the $k$-th singular value of $\Ccal_{X_1X_2}$.
-
-%Assume that the mixing weights $\pi_1\geq \pi_2\ldots$ are in decreasing order.  Let $E_{X_1, X_2, X_3}$ be the residual tensor \beq\label{eqn:triplesexpression}\Ccal_{X_1 X_2 X_3}= \sum_{h\in [k]} \pi_h \cdot \mu_{X|h} \otimes \mu_{X|h} \otimes \mu_{X|h} + E_{X_1, X_2, X_3}\eeq
-
+Let $\rho:=\sup_{x \in \Xcal} k(x,x)$,   $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, $\pi_{\min}:=\min_{i\in [k]} \pi_i$ and $\sigma_k(\Ccal_{X_1X_2})$ be the $k$-th largest singular value of $\Ccal_{X_1X_2}$.
 
 \begin{theorem}[Sample Bounds]\label{thm:samplebound}
 Pick  any $\delta\in (0,1)$. When the number of samples $m$ satisfies
-\[ m >\frac{\theta\rho^2  \log\frac{\delta}{2}}{\sigma^2_k(\Ccal_{X_1, X_2})},
-\quad \theta:= \max\left(\frac{C_3 k^2}{\sigma_k( \Ccal_{X_1, X_2})}, \frac{C_4k^{2/3}\iffalse(1+\sigma_{k+1}(\Ccal_{X_1, X_2}))^2 \fi }{\pi_{\min}^{1/3}}\right),\] for some constants $C_3, C_4>0$, and the number of iterations $N$  and  the number of random initialization vectors $L$  (drawn uniformly on the sphere $\mathcal{S}^{k-1}$)  satisfy
+\[ m >\frac{\theta\rho^2  \log\frac{2}{\delta}}{\sigma^2_k(\Ccal_{X_1, X_2})},
+\quad \theta:= \max\left(\frac{C_3 k^2 \rho}{\sigma_k( \Ccal_{X_1, X_2})}, \frac{C_4k^{2/3}\iffalse(1+\sigma_{k+1}(\Ccal_{X_1, X_2}))^2 \fi }{\pi_{\min}^{1/3}}\right),\] for some constants $C_3, C_4>0$, and the number of iterations $N$  and  the number of random initialization vectors $L$  (drawn uniformly on the sphere $\mathcal{S}^{k-1}$)  satisfy
 \begin{align*}
   N \geq C_2 \cdot \biggl( \log(k) + \log\log\Bigl(
- \frac{1}{\sqrt{\pi}_{\min}\epsilon_T} \Bigr) \biggr),
-% \sqrt{\frac{\ln(L/\log_2(k/\delta))}{\ln(k)}}
-% \cdot \Biggl( 1 - \frac{\ln(\ln(L/\log_2(k/\delta))) +
-% C_3}{4\ln(L/\log_2(k/\delta))} -
-% \sqrt{\frac{\ln(8)}{\ln(L/\log_2(k/\delta))}} \Biggr)
-% \geq 1.02 \Biggl( 1 + \sqrt{\frac{\ln(4)}{\ln(k)}}
-% \Biggr)
-% .
+ \frac{1}{\sqrt{\pi_{\min}}\epsilon_T} \Bigr) \biggr),
 \end{align*}
-for constant $C_2>0$ and  $L = \poly(k) \log(1/\delta)$,  the robust power method in~\cite{AnandkumarEtal:community12} yields eigen-pairs $(\h{\lambda}_i, \h{\phi}_i)$ such that there exists a permutation $\eta$, with probability $1-4\delta$, we have
+for constant $C_2>0$ and  $L = \poly(k) \log(1/\delta)$,  the robust power method in~\cite{AnandkumarEtal:community12} yields eigen-pairs $(\h{\lambda}_i, \h{v}_i)$ such that there exists a permutation $\eta$, with probability $1-4\delta$, we have
 \begin{align*}
-&\|\pi^{-1/2}_{j} \mu_{X|h=j}-\h{\phi}_{\eta(j)}\| \leq 8 \epsilon_T \cdot\pi^{-1/2}_{j}
+&\|\pi^{-1/2}_{j} \mu_{X|h=j}-\h{v}_{\eta(j)}\|_{\Fcal} \leq 8 \epsilon_T \cdot\pi^{-1/2}_{j}
 , \\
 &|\pi^{-1/2}_{j}-\h{\lambda}_{\eta(j)}| \leq  5\epsilon_T, \quad \forall j \in [k]
 ,
@@ -542,15 +552,88 @@ and
 \biggl\|
 T - \sum_{j=1}^k \hat\lambda_j \hat{\phi}_j^{\otimes 3}
 \biggr\| \leq 55\eps_T,
-\] where $\eps_T$ is the tensor perturbation bound
-\begin{align*} \eps_T := \|\h{\Tcal} - \Tcal\| \leq&
-\frac{12 \rho \sqrt{\log\frac{\delta}{2}}}{\sqrt{m} \, \sigma_k^{1.5}(\Ccal_{X_1, X_2})} \\ &+ \frac{512 \sqrt{2} \rho^3 \left(\log\frac{\delta}{2}\right)^{1.5}}{m^{1.5} \,\sigma_k^{3}(\Ccal_{X_1, X_2}) \sqrt{\pi}_{\min}}\end{align*}
+\] where $\eps_T:= \|\h{\Tcal} - \Tcal\|$ is the tensor perturbation bound
+\begin{align*} \eps_T \leq
+\frac{8 \rho^{1.5} \sqrt{\log\frac{2}{\delta}}}{\sqrt{m} \, \sigma_k^{1.5}(\Ccal_{X_1, X_2})} + \frac{512 \sqrt{2} \rho^3 \left(\log\frac{2}{\delta}\right)^{1.5}}{m^{1.5} \,\sigma_k^{3}(\Ccal_{X_1, X_2}) \sqrt{\pi_{\min}}}\end{align*}
 \end{theorem}
 
-Thus, the above result provides bounds on the estimated eigen-pairs using the robust tensor power method.
-The proof is in Appendix~\ref{app:samplebound}.
+Thus, the above result provides bounds on the estimated eigen-pairs using the robust tensor power method. The proof is in Appendix~\ref{app:samplebound}.
 
-\paragraph{Remarks: }We note that the sample complexity is  $\poly(k, \rho, 1/\pi_{\min}, 1/\sigma_k(\Ccal_{X_1, X_2}))$ of a low order, and in particular,  it is $O(k^2)$, when the other parameters are fixed. For the special case of discrete measurements, where the kernel $k(x,x')=\delta(x,x')$, we have $\rho=1$. Note that the sample complexity depends in this case only on the number of components $k$ and not on the dimensionality of the observed state space.   Thus, the robust tensor method has efficient sample and computational complexities for non-parametric latent variable estimation.
+\begin{proof}
+	proof sketch
+\end{proof}
+
+\paragraph{Remark 1:} We note that the sample complexity is  $\poly(k, \rho, 1/\pi_{\min}, 1/\sigma_k(\Ccal_{X_1, X_2}))$ of a low order, and in particular,  it is $O(k^2)$, when the other parameters are fixed. For the special case of discrete measurements, where the kernel $k(x,x')=\delta(x,x')$, we have $\rho=1$. Note that the sample complexity depends in this case only on the number of components $k$ and not on the dimensionality of the observed state space.   Thus, the robust tensor method has efficient sample and computational complexities for non-parametric latent variable estimation.
+
+\paragraph{Remark 2:} For $x\in \RR^d$ and the kernel $k(x,x') = \exp(-\|x-x'\|^2/(2 s^2)) / \sqrt{(2\pi s^2)^d}$, the recovered conditional embedding $\widehat \mu_{X|h}$ can be used to estimate the conditional density, $p(x|h) \approx \widehat p(x|h) := \inner{\phi(x)}{\widehat \mu_{X|h}}_{\Fcal}.$
+Theorem~\ref{thm:samplebound} essentially gives us the estimation error
+\begin{align*}
+  |\widetilde p(x|h) - \widehat p(x|h)|
+  &\leq \|\phi(x)\|_{\Fcal} \|\mu_{X|h} - \widehat \mu_{X|h}\|_{\Fcal} \\
+  &=O(\rho^{0.5})\cdot O(\smallfrac{\rho^3}{m^{1.5}}) = O(\smallfrac{1}{s^{3.5d}m^{1.5}})
+\end{align*}
+where we used $\rho = O(1/s^d)$.
+Combining it with the analysis of the approximation error for kernel density estimator, we can obtain a finite sample bound for conditional density estimation. That is, with high probability,
+\begin{align*}
+  |p(x|h) - \widehat p(x|h)|
+  &\leq |p(x|h) - \widetilde p(x|h)| + |\widetilde p(x|h) - \widehat p(x|h)| \\
+  &\leq O(s^2) + O(\smallfrac{1}{s^{3.5d}m^{1.5}})
+\end{align*}
+Then we can balance the approximation and estimation errors by choosing an appropriate $s$.
+In particular, we choose $s = O(m^{-1.5/(2+3.5d)})$ which leads to $|p(x|h) - \widehat p(x|h)| = O(m^{-3/(2+3.5d)})$.
+Note that this is the first theoretical result of the kind for estiamting conditional density in the unsupervised setting.
+
+\section{Discussion}
+
+mention HMM, ICA and LDA
+
+add about how h can be ICA/LDA
+
+
+
+% \section{Sample Complexity}
+%
+% Let $\rho:=\sup_{x \in \Xcal} k(x,x)$,   $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, $\pi_{\min}:=\min_{i\in [k]} \pi_i$ and $\sigma_k(\Ccal_{X_1X_2})$ be the $k$-th singular value of $\Ccal_{X_1X_2}$.
+%
+% %Assume that the mixing weights $\pi_1\geq \pi_2\ldots$ are in decreasing order.  Let $E_{X_1, X_2, X_3}$ be the residual tensor \beq\label{eqn:triplesexpression}\Ccal_{X_1 X_2 X_3}= \sum_{h\in [k]} \pi_h \cdot \mu_{X|h} \otimes \mu_{X|h} \otimes \mu_{X|h} + E_{X_1, X_2, X_3}\eeq
+%
+%
+% \begin{theorem}[Sample Bounds]\label{thm:samplebound}
+% Pick  any $\delta\in (0,1)$. When the number of samples $m$ satisfies
+% \[ m >\frac{\theta\rho^2  \log\frac{2}{\delta}}{\sigma^2_k(\Ccal_{X_1, X_2})},
+% \quad \theta:= \max\left(\frac{C_3 k^2}{\sigma_k( \Ccal_{X_1, X_2})}, \frac{C_4k^{2/3}\iffalse(1+\sigma_{k+1}(\Ccal_{X_1, X_2}))^2 \fi }{\pi_{\min}^{1/3}}\right),\] for some constants $C_3, C_4>0$, and the number of iterations $N$  and  the number of random initialization vectors $L$  (drawn uniformly on the sphere $\mathcal{S}^{k-1}$)  satisfy
+% \begin{align*}
+%   N \geq C_2 \cdot \biggl( \log(k) + \log\log\Bigl(
+%  \frac{1}{\sqrt{\pi}_{\min}\epsilon_T} \Bigr) \biggr),
+% % \sqrt{\frac{\ln(L/\log_2(k/\delta))}{\ln(k)}}
+% % \cdot \Biggl( 1 - \frac{\ln(\ln(L/\log_2(k/\delta))) +
+% % C_3}{4\ln(L/\log_2(k/\delta))} -
+% % \sqrt{\frac{\ln(8)}{\ln(L/\log_2(k/\delta))}} \Biggr)
+% % \geq 1.02 \Biggl( 1 + \sqrt{\frac{\ln(4)}{\ln(k)}}
+% % \Biggr)
+% % .
+% \end{align*}
+% for constant $C_2>0$ and  $L = \poly(k) \log(1/\delta)$,  the robust power method in~\cite{AnandkumarEtal:community12} yields eigen-pairs $(\h{\lambda}_i, \h{\phi}_i)$ such that there exists a permutation $\eta$, with probability $1-4\delta$, we have
+% \begin{align*}
+% &\|\pi^{-1/2}_{j} \mu_{X|h=j}-\h{\phi}_{\eta(j)}\| \leq 8 \epsilon_T \cdot\pi^{-1/2}_{j}
+% , \\
+% &|\pi^{-1/2}_{j}-\h{\lambda}_{\eta(j)}| \leq  5\epsilon_T, \quad \forall j \in [k]
+% ,
+% \end{align*}
+% and
+% \[
+% \biggl\|
+% T - \sum_{j=1}^k \hat\lambda_j \hat{\phi}_j^{\otimes 3}
+% \biggr\| \leq 55\eps_T,
+% \] where $\eps_T$ is the tensor perturbation bound
+% \begin{align*} \eps_T := \|\h{\Tcal} - \Tcal\| \leq&
+% \frac{12 \rho \sqrt{\log\frac{2}{\delta}}}{\sqrt{m} \, \sigma_k^{1.5}(\Ccal_{X_1, X_2})} \\ &+ \frac{512 \sqrt{2} \rho^3 \left(\log\frac{2}{\delta}\right)^{1.5}}{m^{1.5} \,\sigma_k^{3}(\Ccal_{X_1, X_2}) \sqrt{\pi}_{\min}}\end{align*}
+% \end{theorem}
+%
+% Thus, the above result provides bounds on the estimated eigen-pairs using the robust tensor power method.
+% The proof is in Appendix~\ref{app:samplebound}.
+%
+% \paragraph{Remarks: }We note that the sample complexity is  $\poly(k, \rho, 1/\pi_{\min}, 1/\sigma_k(\Ccal_{X_1, X_2}))$ of a low order, and in particular,  it is $O(k^2)$, when the other parameters are fixed. For the special case of discrete measurements, where the kernel $k(x,x')=\delta(x,x')$, we have $\rho=1$. Note that the sample complexity depends in this case only on the number of components $k$ and not on the dimensionality of the observed state space.   Thus, the robust tensor method has efficient sample and computational complexities for non-parametric latent variable estimation.
 
 \section{Experiments}
 
@@ -559,8 +642,8 @@ The proof is in Appendix~\ref{app:samplebound}.
   \vspace{-1mm}
   \item The EM algorithm for mixture of Gaussians. The EM algorithm is not guaranteed to find the global solution in each trial. Thus we randomly initialize it $10$ times.
   \item The EM-like algorithm for mixture of nonparametric densities~\citep{BenChaHun09}. We initialied the algorithm with $k$-means as~\citet{BenChaHun09} suggested.
-  \item The spectral algorithm for mixture of spherical Gaussians~\citep{Hsu13}. The assumption in~\citet{Hsu13} is very restrictive: the collection of spherical Gaussian centers need to span a $k$-dimension subpsace.
-  \item A discretization based spectral algorithm~\citep{Hiroyuki10}. This algorithm approximates the joint distribution of the observed variables with histogram and then applies the spectral algorithm to recover the discretized conditional density. 
+  \item The spectral algorithm for mixture of spherical Gaussians~\citep{HsuKak13}. The assumption in~\citet{HsuKak13} is very restrictive: the collection of spherical Gaussian centers need to span a $k$-dimension subspace.
+  \item A discretization based spectral algorithm~\citep{HirKat10}. This algorithm approximates the joint distribution of the observed variables with histogram and then applies the spectral algorithm to recover the discretized conditional density.
   \vspace{-1mm}
 \end{enumerate}
 %\comment{The error of this algorithm is typically $10$ times larger than alternatives. To make the curves for other methods clearer, we did not plot the performance of \citet{Hiroyuki10} algorithm in the figures.}
@@ -617,7 +700,7 @@ where $\{x^j\}_{j\in[m]}$ is a set of uniformly-spaced test points.
 \vspace{-1mm}
 %
 
-{\bf Results.} We first illustrated the actual recovered conditional densities of our method and EM-GMM in Figure~\ref{fig:shape} as a concrete example. The kernel spectral algorithm recovers nicely both the Gaussian and Gamma components, while the EM-GMM fails to fit the Gamma component. 
+{\bf Results.} We first illustrated the actual recovered conditional densities of our method and EM-GMM in Figure~\ref{fig:shape} as a concrete example. The kernel spectral algorithm recovers nicely both the Gaussian and Gamma components, while the EM-GMM fails to fit the Gamma component.
 
 The results are plotted in Figure~\ref{fig:synthetic}. It is clear that the kernel spectral method converges rapidly with the data increment in all experiment settings.
 
@@ -625,7 +708,7 @@ In the mixture of Gaussians setting, the EM algorithm is best since the model is
 
 It is worthy to note that both the discretization spectral algorithm and nonparametric EM-like algorithm perform inferior. This is predictable. In the discretization spectral method, the joint distribution is estimated by histogram. It is well-known that the histogram estimation suffers from poor performance even for $3$-dimension data. In the nonparametric EM-like algorithm, besides the local minima problem, its performance highly depends on the initilization. And the flexibility of nonparametric form of densities makes these two side effects even significant.
 
-%We also note that the performance of EM GMM degrades as the number of components increases, and our method outperforms EM in higher dimensions. 
+%We also note that the performance of EM GMM degrades as the number of components increases, and our method outperforms EM in higher dimensions.
 We also note that the our method outperforms the EM-GMM more as the number of components increases.
 This is the key advantage of our method in that it has favorable performance in higher dimensions, which agrees with the theoretical result in Theorem~\ref{thm:samplebound} that the sample complexity depends only quadratically in the number of components, when other parameters are held fixed.
 
@@ -667,16 +750,16 @@ This is the key advantage of our method in that it has favorable performance in 
     (e) Gaussian/Gamma $k=2$ & (f) Gaussian/Gamma $k=3$ & (g) Gaussian/Gamma $k=4$ & (h) Gaussian/Gamma $k=8$ \\
   \end{tabular}
   \vspace{-3mm}
-  \caption{(a)-(d) Mixture of Gaussian distributions with $k=2,3,4,8$ components. (e)-(h) Mixture of Gaussian/Gamma distribution with $k=2,3,4,8$. For the former case, the performance of kernel spectral algorithm converge to those of EM algorithm for mixture of Gaussian model. For the latter case, the performance of kernel spectral algorithm are consistently much better than EM algorithm for mixture of Gaussian model. Spherical Gaussian spectral algorithm does not work for $k=4,8$, and hence not plotted.}\label{fig:synthetic}
+  \caption{(a)-(d) Mixture of Gaussian distributions with $k=2,3,4,8$ components. (e)-(h) Mixture of Gaussian/Gamma distribution with $k=2,3,4,8$. For the former case, the performance of kernel spectral algorithm converge to those of EM algorithm for mixture of Gaussian model. For the latter case, the performance of kernel spectral algorithm are consistently much better than EM algorithm for mixture of Gaussian model. Spherical Gaussian spectral algorithm does not work for $k=4,8$, and hence not plotted. \Le{remind Hsu et al fails in example c,d in figure 2: lack full rank views}}\label{fig:synthetic}
   \vspace{-3mm}
 \end{figure*}
 
 \begin{figure*}[t!]
   \centering
 	\begin{tabular}{c}
-		\includegraphics[width=0.82\textwidth]{../experiment/figure/paired_bar_chat_k_2} \\
+		\includegraphics[width=0.82\textwidth]{../experiment/figure_new/paired_bar_chat_k_2} \\
 		(a) number of clusters $k=2$ \\
-		\includegraphics[width=0.98\textwidth]{../experiment/figure/paired_bar_chat_k_3}  \\
+		\includegraphics[width=0.98\textwidth]{../experiment/figure_new/paired_bar_chat_k_3}  \\
 		(b) number of clusters $k=3$
 	\end{tabular}
   \vspace{-3mm}
@@ -687,9 +770,9 @@ This is the key advantage of our method in that it has favorable performance in 
 \subsection{Flow Cytometry Data}
 % \input{../experiment/real_data_experiment_short.tex}
 
-Flow cytometry (FCM) data are multivariate measurements from flow cytometers that record light scatter and fluorescence emission properties of hundreds of thousands of individual cells. They are important to the studying of the cell structures of normal and abnormal cells and the diagnosis of human diseases. \citet{cytometry_nature} introduced the FlowCAP-challenge whose main task is grouping the flow cytometry data automatically. Clustering on the FCM data is a difficult task because the distribution of the data is non-Gaussian and heavily skewed.
+Flow cytometry (FCM) data are multivariate measurements from flow cytometers that record light scatter and fluorescence emission properties of hundreds of thousands of individual cells. They are important to the studying of the cell structures of normal and abnormal cells and the diagnosis of human diseases. \citet{AghFinEtal13} introduced the FlowCAP-challenge whose main task is grouping the flow cytometry data automatically. Clustering on the FCM data is a difficult task because the distribution of the data is non-Gaussian and heavily skewed.
 
-We used the DLBCL Lymphoma dataset collection from~\cite{cytometry_nature} to compare our kernel algorithm with multi-view mixture of Gaussian model.
+We used the DLBCL Lymphoma dataset collection from~\cite{AghFinEtal13} to compare our kernel algorithm with multi-view mixture of Gaussian model.
 This collection contains 24 datasets, and each dataset consists of tens of thousands of cell measurements in 5 dimensions. Each dataset is a separate clustering task, and we fit a multi-view model to each dataset separately and use the maximum-a-posteriori assignment for obtaining the cluster labels.  All the cell measurements have been manually labeled, therefore we can evaluate the clustering performance using the f-score.
 
 We split the 5 dimensional into three views: dimension 1 and 2 as the first view, 3 and 4 the second and 5 the third view. For each dataset, we select the best kernel bandwidth by 5-fold cross validation using log-likelihood. For EM algorithm for mixture of Gaussians (GMM) with diagonal covariances, we use a very generous 20 restarts. Figure~\ref{fig:real_data} presents the results sorted by the number of clusters. Our method (kernel spectral) outperforms EM-GMM in a majority of datasets. However, there are also datasets where kernel spectral algorithm has a large gap in performance compared to GMM. These are the datasets where the multi-view assumptions are heavily violated. Obtaining improved performance in these datasets will be a subject of our future study where we plan to develop even more robust kernel spectral algorithms.
@@ -698,7 +781,7 @@ We split the 5 dimensional into three views: dimension 1 and 2 as the first view
 \subsection{USPS Handwritten Digits Data}
 The USPS handwritten digit data contains a total of 110,000 digit images, with 11,000 samples for each digit. Each image is grey-level with size 16 by 16 pixels. We extracted three different features from the images, all reduced to 50 dimensions through PCA: 1) raw image pixels, 2) Histogram of Gradients (HOG) features, and 3) Local Binary Patterns (LBP) features. These three features can be considered multiple views for a single image. Similar to the flow cytometry data, we used the clustering task as a way to evaluate how different methods model the multi-view latent variant structure in the data. The evaluation metric was the f-score used in the flow cytometry data and Normalized Mutual Information (NMI).
 
-The results are summarized in Table~\ref{tbl:usps}. Our kernel multi-view spectral methods achieve better clustering scores compared with two EM alternatives. 
+The results are summarized in Table~\ref{tbl:usps}. Our kernel multi-view spectral methods achieve better clustering scores compared with two EM alternatives.
 
 \begin{table}
 {\centering
@@ -720,7 +803,7 @@ NMI & 0.3642 & 0.2325 & 0.3135 \\
 \newpage
 
 \bibliographystyle{icml2014}
-\bibliography{../nonparametric_mixture,../bibfile,../experiment/mlv_kernel}
+\bibliography{../nonparametric_mixture,../bibfile}
 
 \clearpage
 \newpage
