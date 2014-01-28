@@ -4,44 +4,44 @@ The method computes the eigenvectors of a   tensor through deflation, using a se
 Given the initialization vector, the method then runs a tensor power update, and runs for $N$ iterations to obtain an eigenvector. The successive eigenvectors are obtained via deflation.
 
 \begin{algorithm}
-\caption{$\{\lambda, \Phi\}\leftarrow $TensorEigen$(T,\, \{v_i\}_{i\in [L]}, N)$}\label{alg:robustpower}
+\caption{$\{\lambda, M\}\leftarrow $TensorEigen$(\Tcal,\, \{v_i\}_{i\in [k]}, N)$}\label{alg:robustpower}
 \begin{algorithmic}
 \renewcommand{\algorithmicrequire}{\textbf{Input: }}
 \renewcommand{\algorithmicensure}{\textbf{Output: }}
-\REQUIRE Tensor $T\in \R^{k \times k \times k}$, set of $L$ initialization vectors $\{v_i\}_{i\in L}$, number of
+\REQUIRE Tensor $\Tcal\in \R^{k \times k \times k}$, set of $k$ initialization vectors $\{v_i\}_{i\in [k]}$, number of
 iterations  $N$.
 %\ENSURE Eigenpairs:  $\lambda$ is the vector of eigenvalues and $\Phi$ is the matrix of eigenvectors of  $T$.
-\ENSURE the estimated eigenvalue/eigenvector pairs $\{\lambda, \Phi\}$, where $\lambda$ is the vector of eigenvalues and $\Phi$ is the matrix of eigenvectors.
+\ENSURE the estimated eigenvalue/eigenvector pairs $\{\lambda, M\}$, where $\lambda=(\lambda_1,\ldots,\lambda_k)^\top$ is the vector of eigenvalues and $M=(v_1,\ldots,v_k)$ is the matrix of eigenvectors.
 
 \FOR{$i =1$ to $k$}
-\FOR{$\tau = 1$ to $L$}
+\FOR{$\tau = 1$ to $k$}
 \STATE $\th{0}\leftarrow v_\tau$.
 \FOR{$t = 1$ to $N$}
-\STATE $\tilde{T}\leftarrow T$.
+\STATE $\widetilde{\Tcal}\leftarrow \Tcal$.
 \FOR{$j=1$ to $i-1$ (when $i>1$)}
-\IF{$|\lambda_j \inner{\th{t}^{(\tau)}}{\phi_j}|>\xi$}
-\STATE $\tilde{T}\leftarrow \tilde{T}- \lambda_j \phi_j^{\otimes 3}$.
+\IF{$|\lambda_j \inner{\th{t}^{(\tau)}}{v_j}|>\xi$}
+\STATE $\widetilde{\Tcal}\leftarrow \widetilde{\Tcal}- \lambda_j \phi_j^{\otimes 3}$.
 \ENDIF
 \ENDFOR
 
 \STATE Compute power iteration update
 $
 \th{t}^{(\tau)}  :=
-\frac{\tilde{T}(I, \th{t-1}^{(\tau)}, \th{t-1}^{(\tau)})}
+\frac{\widetilde{\Tcal}(I, \th{t-1}^{(\tau)}, \th{t-1}^{(\tau)})}
 {\|\tilde{T}(I, \th{t-1}^{(\tau)}, \th{t-1}^{(\tau)})\|}
 $\ENDFOR
 \ENDFOR
 
-\STATE Let $\tau^* := \arg\max_{\tau \in L} \{ \tilde{T}(\th{N}^{(\tau)},
+\STATE Let $\tau^* := \arg\max_{\tau \in L} \{ \widetilde{\Tcal}(\th{N}^{(\tau)},
 \th{N}^{(\tau)}, \th{N}^{(\tau)}) \}$.
 
 \STATE Do $N$ power iteration updates starting from
-$\th{N}^{(\tau^*)}$ to obtain eigenvector estimate $\phi_i$, and set $\lambda_i :=
-\tilde{T}(\phi_i, \phi_i, \phi_i)$.
+$\th{N}^{(\tau^*)}$ to obtain eigenvector estimate $v_i$, and set $\lambda_i :=
+\widetilde{\Tcal}(v_i, v_i, v_i)$.
 
 \ENDFOR
 \RETURN the estimated eigenvalue/eigenvectors
-$(\lambda, \Phi)$.
+$(\lambda, M)$.
 
 \end{algorithmic}
 \end{algorithm}
