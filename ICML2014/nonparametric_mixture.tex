@@ -51,6 +51,7 @@
 
 \usepackage{color}
 \newcommand{\Le}[1]{{\color{red}{\bf\sf [note: #1]}}}
+\newcommand{\bodai}[1]{{\color{violet}{\bf\sf [Dai remark: #1]}}}
 
 % The \icmltitle you define below is probably too long as a header.
 % Therefore, a short form for the running title is supplied here:
@@ -116,8 +117,8 @@ Note that this is a very challenging problem, since we do not have samples to di
 Our solution is to embed the distribution of the observed variables in such a model into a reproducing kernel Hilbert space, and exploit tensor decomposition of the embedded distribution (or covariance operators)
 to recover the unobserved embedding $\mu_{X_t|h}=\int_{\Xcal} \phi(x)\, d\PP(x|h)$ of the mixture components. The key computation of our algorithm involves a kernel singular value decomposition of the two-view covariance operator, followed by a robust tensor power method on the three-view covariance operator. These standard matrix operations makes the algorithm very efficient and easy to deploy.
 
-Although kernel methods have been previously applied to learning latent variable models, none of them can provably recover the exact latent component $\PP(X_t|h)$ or its sufficient statitiscs to support integral query on this distribution. For instance, \citet{SonParXin11, SonDai13}~estimated an (unknown) invertible transformation of the sufficient statistics of the latent component $\PP(X_t|h)$, and only supported integral query associated with the distribution of the observed variables. \citet{SgoJanPetSch13}~used kernel independence measure to cluster data points, and treated each cluster as a latent component. Besides computational issues, it is also difficult to provide theoretical guarantees to such an approach since the clustering step only finds a local minimum. \citet{BenChaHun09} designed an EM-like algorithm for
-learning the conditional densities in latent variable models. This algorithm alternate between an E-step, proportional assignment of data points to components, and the M-step, kernel density estimation based on weighted data points. Similarly, theoretical analysis of such a local search heurstic is difficult.
+Although kernel methods have been previously applied to learning latent variable models, none of them can provably recover the exact latent component $\PP(X_t|h)$ or its sufficient statitiscs to support integral query on this distribution. For instance, \citet{SonParXin11, SonDai13}~estimated an (unknown) invertible transformation of the sufficient statistics of the latent component $\PP(X_t|h)$, and only supported integral query associated with the distribution of the observed variables. \citet{SgoJanPetSch13}~used kernel independence measure to cluster data points, and treated each cluster as a latent component. Besides computational issues, it is also difficult to provide theoretical guarantees to such an approach since the clustering step only finds a local minimum. \citet{BenChaHun09} designed an EM-like algorithm for learning the conditional densities in latent variable models. This algorithm alternate between an E-step, proportional assignment of data points to components, and the M-step, kernel density estimation based on weighted data points. Similarly, theoretical analysis of such a local search heurstic is difficult.
+\bodai{One reviewer comment that he is not clear why kernel density estimatior is not working here.}
 
 The kernel algorithm proposed in this paper is also significantly more general than the previous spectral algorithms which work only for distributions with parametric assumptions~\cite{AnandkumarEtal:tensor12,HsuKak13}. In fact, when we use the delta kernel, our algorithm recovers the previous algorithm of~\citet{AnandkumarEtal:tensor12} for discrete mixture components as a special case. When we use universal kernels, such as the Gaussian RBF kernel, our algorithm can recover Gaussian mixture components as well as mixture components with other distributions. In this sense, our work also provides a unifying framework for previous spectral algorithms. We prove sample complexity bounds for the nonparametric tensor power method and establish  that the sample complexity is quadratic in the number of latent components, and is a low order polynomial in the other relevant parameters such as the lower bound on mixing weights. Thus, we propose a computational and sample efficient nonparametric approach to learning
 latent variable models.
@@ -280,7 +281,7 @@ special class of Bayesian networks in which
 %   \item observed variables $X_1, X_2, \ldots, X_\ell$ are conditionally independent given a {\bf discrete} latent variable $H$, and
 % 	\item the conditional distributions, $\PP(X_t|H)$, of the $X_t, t \in [\ell]$ given the hidden variable $H$ can be different.
 % \end{itemize}
-The conditional independent structure of a multi-view latent variable model is illustrated in Figure~\ref{fig:graphical-model}(a), and many complicated graphical models, such as the hidden Markov model in Figure~\ref{fig:graphical-model}(b), can be reduced to a multi-view latent variable model. {\bf For simplicity of exposition, we will explain our method using the model with symmetric view}. That is the conditional distribution are the same for each view,~\ie, $\PP(X|h) = \PP(X_1|h) =  \PP(X_2|h) =\PP(X_3|h)$. In Appendix~\ref{sec:symmetrization}, we will show that multi-view models with different views can be reduced to ones with symmetric view.
+The conditional independent structure of a multi-view latent variable model is illustrated in Figure~\ref{fig:graphical-model}(a), and many complicated graphical models, such as the hidden Markov model in Figure~\ref{fig:graphical-model}(b), can be reduced to a multi-view latent variable model. {\bf For simplicity of exposition, we will explain our method using the model with symmetric view}. That is the conditional distribution are the same for each view,~\ie, $\PP(X|h) = \PP(X_1|h) =  \PP(X_2|h) =\PP(X_3|h)$. In Appendix~\ref{sec:symmetrization}, we will show that multi-view models with different views can be reduced to ones with symmetric view. \bodai{`to ones with symmetric view' is not exact. It actually reduced to $d$ different models with symmetric view where $d$ is the number of view.}
 
 \begin{figure}[t]
 \begin{center}
@@ -496,12 +497,13 @@ Finally, we remark that the identifiability result in Proposition~\ref{prop:iden
 \vspace{-2mm}
 
 We first design a kernel algorithm to recover the parameters, $\cbr{\pi_h, \mu_{X|h}}_{h \in [k]}$, of the multi-view latent variable model based on $\Ccal_{X_1 X_2}$ and $\Ccal_{X_1 X_2 X_3}$. This can be easily extended to the sample versions and this is discussed in Section~\ref{sec:sample}. Again for simplicity of exposition, the algorithm is explained for symmetric view case. The more general version is presented in Appendix~\ref{sec:symmetrization}.
-
+\bodai{One reviewer concerns about computational complexity and claims that the algorithm should be written in terms of kernel matrix. Or at least, we need to specify the size of the gram matrix and tensor. }
+ 
 \vspace{-3mm}
 \subsection{Population Case}
 \vspace{-2mm}
 
-We  first derive the algorithm for the population case as if we could access the true operator $\Ccal_{X_1 X_2}$ and $\Ccal_{X_1 X_2 X_3}$. Its finite sample counterpart  will be presented in the next section. The algorithm can be thought of as a kernel generalization of the algorithm in~\citet{AnandkumarEtal:community12} using embedding representations.
+We first derive the algorithm for the population case as if we could access the true operator $\Ccal_{X_1 X_2}$ and $\Ccal_{X_1 X_2 X_3}$. Its finite sample counterpart  will be presented in the next section. The algorithm can be thought of as a kernel generalization of the algorithm in~\citet{AnandkumarEtal:community12} using embedding representations.
 
 {\bf Step 1.} We perform eigen-decomposition of $\Ccal_{X_1 X_2}$,
 $$\Ccal_{X_1 X_2} = \sum\nolimits_{i=1}^{\infty} \sigma_i \cdot u_i \otimes u_i$$
@@ -529,7 +531,7 @@ which is a tensor with orthogonal factors. Essentially, each column $v_i$ of $M$
 $$
   \Ccal_{X|H} = (\Wcal^\top)^\dagger M \diag(\lambda).
 $$
-
+\bodai{I think the $\diag{\lambda}$ should be removed. It is used for recovering ratio.}
 \vspace{-3mm}
 \subsection{Finite Sample Case}\label{sec:sample}
 \vspace{-2mm}
@@ -608,6 +610,7 @@ $
 \begin{align*}
   \widehat \Ccal_{X|H} = \Phi (\beta_1,\ldots,\beta_k) \widehat  S_k^{1/2} \widehat M \diag(\widehat \lambda).
 \end{align*}
+\bodai{remove $\diag{\hat\lambda}$}
 The overall kernel algorithm is summarized in Algorithm~\ref{alg:multiview}.
 
 \begin{algorithm}[t!]
@@ -784,8 +787,7 @@ $$p(x|h)=\frac{(x-\mu)^{(d-1)}e^{-x/\theta}}{\theta^d \Gamma(d)},~x\geq \mu$$
 where we chose the shape parameter $d\le 1$ such that density is very skewed. Furthermore, we chose the mean and variance parameters of the Gaussian/Gamma density such that component pair-wise overlap is relatively small according to the Fisher ratio $\frac{(\mu_1 - \mu_2)^2}{\sigma_1^2+\sigma_2^2}$.
 
 We also varied the number of samples $m$ for the observed variables $X_1,X_2$ and $X_3$ from $50$ to $10,000$, and
-experimented with $k=2,3,4$ or $8$ mixture components.
-The mixture proportion for the $h$-th component is set to be $\pi_h= \frac{2h}{\kappa(k+1)},~\forall h\in[k]$ (unbalanced). It is worth noting that as $k$ becomes larger, it is more difficult to recover parameters. This is because only a small number of data will be generated for the first several clusters. For every $n,k$ in each setting, we randomly generated 10 sets of samples and reported the average results. {\bf We note that the values for the latent variables are not given to the algorithms, and hence this is an unsupervised setting to recover the conditional density $p(x|h)$.}
+experimented with $k=2,3,4$ or $8$ mixture components. The mixture proportion for the $h$-th component is set to be $\pi_h= \frac{2h}{\kappa(k+1)},~\forall h\in[k]$ (unbalanced). It is worth noting that as $k$ becomes larger, it is more difficult to recover parameters. This is because only a small number of data will be generated for the first several clusters. For every $n,k$ in each setting, we randomly generated 10 sets of samples and reported the average results. {\bf We note that the values for the latent variables are not given to the algorithms, and hence this is an unsupervised setting to recover the conditional density $p(x|h)$.}
 
 {\bf Error measure.} We measured the performance of algorithms by the
 following weighted $\ell_2$ norm difference
@@ -872,7 +874,7 @@ This is the key advantage of our method in that it has favorable performance in 
     (e) Gaussian/Gamma $k=2$ & (f) Gaussian/Gamma $k=3$ & (g) Gaussian/Gamma $k=4$ & (h) Gaussian/Gamma $k=8$ \\[-1mm]
   \end{tabular}
   \vspace{-4mm}
-  \caption{(a)-(d) Mixture of Gaussian distributions with $k=2,3,4,8$ components. (e)-(h) Mixture of Gaussian/Gamma distribution with $k=2,3,4,8$. For the former case, the performance of kernel spectral algorithm converge to those of EM algorithm for mixture of Gaussian model. For the latter case, the performance of kernel spectral algorithm are consistently much better than EM algorithm for mixture of Gaussian model. Spherical Gaussian spectral algorithm does not work for $k=4,8$, and hence not plotted.}\label{fig:synthetic}
+  \caption{(a)-(d) Mixture of Gaussian distributions with $k=2,3,4,8$ components. (e)-(h) Mixture of Gaussian/Gamma distribution with $k=2,3,4,8$. For the former case, the performance of kernel spectral algorithm converge to those of EM algorithm for mixture of Gaussian model. For the latter case, the performance of kernel spectral algorithm are consistently much better than EM algorithm for mixture of Gaussian model. Spherical Gaussian spectral algorithm does not work for $k=4,8$\bodai{since $k > d$ will cause rank defiency.}, and hence not plotted.}\label{fig:synthetic}
   \vspace{-3mm}
 \end{figure*}
 
