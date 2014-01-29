@@ -497,8 +497,6 @@ Finally, we remark that the identifiability result in Proposition~\ref{prop:iden
 \vspace{-2mm}
 
 We first design a kernel algorithm to recover the parameters, $\cbr{\pi_h, \mu_{X|h}}_{h \in [k]}$, of the multi-view latent variable model based on $\Ccal_{X_1 X_2}$ and $\Ccal_{X_1 X_2 X_3}$. This can be easily extended to the sample versions and this is discussed in Section~\ref{sec:sample}. Again for simplicity of exposition, the algorithm is explained for symmetric view case. The more general version is presented in Appendix~\ref{sec:symmetrization}.
-\bodai{One reviewer concerns about computational complexity and claims that the algorithm should be written in terms of kernel matrix. Or at least, we need to specify the size of the gram matrix and tensor. }
- 
 \vspace{-3mm}
 \subsection{Population Case}
 \vspace{-2mm}
@@ -531,7 +529,6 @@ which is a tensor with orthogonal factors. Essentially, each column $v_i$ of $M$
 $$
   \Ccal_{X|H} = (\Wcal^\top)^\dagger M \diag(\lambda).
 $$
-\bodai{I think the $\diag{\lambda}$ should be removed. It is used for recovering ratio.}
 \vspace{-3mm}
 \subsection{Finite Sample Case}\label{sec:sample}
 \vspace{-2mm}
@@ -610,7 +607,6 @@ $
 \begin{align*}
   \widehat \Ccal_{X|H} = \Phi (\beta_1,\ldots,\beta_k) \widehat  S_k^{1/2} \widehat M \diag(\widehat \lambda).
 \end{align*}
-\bodai{remove $\diag{\hat\lambda}$}
 The overall kernel algorithm is summarized in Algorithm~\ref{alg:multiview}.
 
 \begin{algorithm}[t!]
