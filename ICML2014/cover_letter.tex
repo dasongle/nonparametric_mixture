@@ -66,17 +66,23 @@
 
 Dear program chairs and reviewers,
 
-We would like to acknowledge anonymous reviewers for their valuable comments on our paper ``nonparametric estimation of multi-view latent variable models''. We have revised it based on these suggestions. Please find our major changes and the answers to their questions below.
+We would like to acknowledge anonymous reviewers for their valuable comments on our paper ``nonparametric estimation of multi-view latent variable models''. We have revised it based on these suggestions, and significantly improved the paper. Please find our major improvement and the answers to the reviewer questions below.
 
-
-\section*{List of Major Changes}
+\section*{List of Major Improvements}
 
 \begin{itemize}
-\item[1] We rewrite the introduction part to make our problem setting clear and emphasize the novelty.
-\item[2] We explain the extraction form of conditional density from Hilbert space embedding.
-\item[3] We add more discussions on the sample complexity. The bound for integral and the conditional density recovery error bound under unsupervised setting is derived based on the main theorem.
-\item[4] We add discussion on generalizing our method to nonlinear independent component analysis and latent variable models with Dirichlet priors.
-\item[5] We add more competitors, the spectral algorithm for mixture of spherical Gaussians (Hsu \& Kakade, 2013), EM-like algorithm for nonparametric model (Benaglia et al., 2009) and the recent nonparametric algorithm of Kasahara \& Shimotsu, 2010, on both synthetic datasets and real-world datasets.
+\item[1] We have rewritten the introduction and emphasized that the learning problem is {\bf unsupervised} where there is no training data for the latent variables. Hence traditional kernel density estimation can not be applied.
+
+\item[2] We derived new results for the estimation of conditional density based on our Hilbert space embedding and tensor decomposition approach. We show that we can obtain a conditional density estimation with rate $O(m^{-1/3})$ in the unsupervised setting. This is the first results of the kind for conditional density estimation given no training data for the hidden variables.
+
+\item[3] We have also included a completely algorithm for our method, including the kernel whitening step and kernel tensor decomposition step. All the steps are described using kernel matrix operations, making it easy to implement.
+
+\item[4] We added a proof sketch for the sample complexity analysis emphasizing the difference from previous approach. Furthermore, we also added extensive discussion of the implication of the sample complexity analysis, including implication for estimating high dimensional integral and conditional density in the unsupervised setting.
+
+\item[5] We added discussion on generalizing our method to nonlinear independent component analysis and latent variable models with Dirichlet priors.
+
+\item[6] We added a new advanced nonparametric competitor, EM-like algorithm for nonparametric mixture model (Benaglia et al., 2009). Furthermore, we have carried out more extensive and systematic experiments, compare our method to all 4 competitor in all experimental settings (both synthetic datasets and real-world datasets). Overall, our method performed significantly better than other methods in settings.
+
 \end{itemize}
 
 \section*{To Meta-Reviwer}
@@ -84,15 +90,15 @@ A discussion about the difference between the proposed method and previous relat
 
 \section*{To Reviewer 1}
 
-\textbf{Novelty of the proposed model} 
+\textbf{Novelty of the proposed model}
 
-Most previous work on kernel embedding of distributions, such as two sample tests and independence tests, do not consider the presence of latent variables. We consider novel aspect of the spectral properties of kernel embeddings and connect them to the spectral properties of infinite dimensional tensors and provide a sample complexity analysis. 
+Most previous work on kernel embedding of distributions, such as two sample tests and independence tests, do not consider the presence of latent variables. We consider novel aspect of the spectral properties of kernel embeddings and connect them to the spectral properties of infinite dimensional tensors and provide a sample complexity analysis.
 
-We are not aware of any prior work using kernel embeddings to explicitly recover the parameters of the latent variable model. The related work of Kernel embedding of hidden Markov models (Song et al. ICML 2010), and Kernel embedding of latent tree models (Song et al. NIPS 2011) focus on estimating the marginal density of the observed various but not the latent parameters. In contrast, our algorithm can recover the exact latent parameters, and we prove that the estimator is consistent and analyze its finite sample complexity in this work. 
+We are not aware of any prior work using kernel embeddings to explicitly recover the parameters of the latent variable model in the unsupervised setting. The related work of Kernel embedding of hidden Markov models (Song et al. ICML 2010), and Kernel embedding of latent tree models (Song et al. NIPS 2011) focus on estimating the marginal density of the observed various but not the latent parameters. In contrast, our algorithm can recover the exact latent parameters, and we prove that the estimator is consistent and analyze its finite sample complexity in this work.
 
 \textbf{Novelty of technical analysis}
 
-In terms of the analysis, previous work on tensor decomposition (Anandkumar Et al 2012) provided analysis when there is perturbation on the orthogonal tensor. In our current paper, we take into account the whitening perturbation and the sample bounds to achieve a certain level of concentration of the empirical moments and present a unified sample complexity analysis. This is novel. 
+In terms of the analysis, previous work on tensor decomposition (Anandkumar Et al 2012) provided analysis when there is perturbation on the orthogonal tensor. In our current paper, we take into account the whitening perturbation and the sample bounds to achieve a certain level of concentration of the empirical moments and present a unified sample complexity analysis. This is novel.
 
 \textbf{Experimental details}
 
@@ -101,24 +107,33 @@ We've corrected the dataset number to 24 to be consistent. We \emph{only} split 
 
 \section*{To Reviewer 2}
 
-The Hilbert space embedding of density is not only benefitting the calculation of integrals and expectations. A more important contribution is that providing another nonparametric form for modeling. Instead of making assumption about the density form, e.g., density in exponential family, the kernel embedding of density significantly relaxs this restrication and thus makes the model more flexiable. Actually, this advantage is obvious in our experiment where the parametric model performance worse with incorrect assumption. 
+The Hilbert space embedding of density is not only benefitting the calculation of integrals and expectations. A more important contribution is that providing another nonparametric form for modeling. Instead of making assumption about the density form, e.g., density in exponential family, the kernel embedding of density significantly relaxs this restrication and thus makes the model more flexiable. Actually, this advantage is obvious in our experiment where the parametric model performance worse with incorrect assumption.
 
 
-Regarding the form of the kernel function, any kernel suitable for kernel density estimation is also applicable for our method.
-\bodai{this reviewer also questions about the kernel form saying `'you need a kernel which concentrates around x; think of a delta-distribution. So rule out polynomial kernels and, I guess, kernels on structures like graphs.''}
+{\bf We note that in our problem setting, we are not given the observations of $h$. This is an \emph{unsupervised} setting so that it is impossible to use traditional kernel density estimation to recover the conditional density.} We add explanation of using Hilbert space embeddings for estimating integral and conditional density.
 
-It should be aware that in our problem setting, we are not give the observations of $h$. This is an \emph{unsupervised} setting so that it is impossible to use kernel density estimation to recover the conditional density.
+Regarding the form of the kernel function for kernel density estimation, we need to choose kernels suitable for the task. For instance for data from $\RR^d$, we can use normalized Gaussian RBF kernel as we showed in our analysis. Indeed to estimate conditional density, we need to decrease the kernel bandwidth as we increasing the number of data points to obtain consistent estimator.
+% \bodai{this reviewer also questions about the kernel form saying `'you need a kernel which concentrates around x; think of a delta-distribution. So rule out polynomial kernels and, I guess, kernels on structures like graphs.''}
 
-We add the extraction form of conditional density from Hilbert space embedding explicitly in main text. As you claimed, the Hilbert space embedding of density is efficiently in calculation of integrals, the MAP is very easy to estimated here. After we obtain the conditional distributions and prior $p(h)$, we could apply Bayes rule to find the posterior. In our setting, the conditional distributions are in the corresponding \emph{RKHS}, and thus given $h$, the observation $\{x_1,x_2,x_3\}$ has probability $p(x_1|h) = \langle\phi(x_1), \Phi \rangle A, p(x_2|h) = \langle\psi(x_1), \Psi \rangle B, p(x_1|h) = \langle\upsilon(x_1), \Upsilon \rangle C$\footnote{We denote $\Phi A, \Psi B, \Upsilon C$ as the conditional operators obtained via our algorithm.}
 
+Furthermore, the maximum-a-posterior assignment for a latent variable can also be readily computed here after the parameters of the multi-view models are estimated. After we obtain the conditional density and prior $p(h)$, we could apply Bayes rule to find the posterior. In our setting, the conditional distributions are in the corresponding \emph{RKHS}, and thus given $h$, the observation $\{x_1,x_2,x_3\}$ has probability $p(x_1|h) = \langle\phi(x_1), \Phi \rangle A, p(x_2|h) = \langle\psi(x_1), \Psi \rangle B, p(x_1|h) = \langle\upsilon(x_1), \Upsilon \rangle C$\footnote{We denote $\Phi A, \Psi B, \Upsilon C$ as the conditional operators obtained via our algorithm.}
 So, the normalizer could be computed as $Z = [p(H)\circ p(x_1|H)\circ p(x_2|H)\circ p(x_3|H)] \times \bm{1}$ where $\circ$ denotes element-wise product. And we have the posterior is
 %
 \begin{eqnarray*}
-p(h|x_1, x_2, x_3) = \frac{p(h)\circ p(x_1|h)\circ p(x_2|h)\circ p(x_3|h)}{Z} \propto p(h)\circ p(x_1|h)\circ p(x_2|h)\circ p(x_3|h)
+p(h|x_1, x_2, x_3) = \frac{p(h)\cdot p(x_1|h)\cdot p(x_2|h)\cdot p(x_3|h)}{Z} \propto p(h)\cdot p(x_1|h)\cdot p(x_2|h)\cdot p(x_3|h)
 \end{eqnarray*}
 %
-We could select the $h$ with maximum $p(h|x_1, x_2, x_3)$. In our experiment, $Z$ is even no need to compute, 
+We could select the $h$ with maximum $p(h|x_1, x_2, x_3)$. In our experiment, $Z$ is even no need to compute,
 
 \section*{To Reviewer 3}
+
+We added discussion on generalizing our method to nonlinear independent component analysis and latent variable models with Dirichlet priors. Indeed, these can be done by generalizing our method.
+
+We have rewritten section 5.2 with pure kernel notation.
+We have also included a completely algorithm for our method, including the kernel whitening step and kernel tensor decomposition step. All the steps are described using kernel matrix operations, making it easy to implement.
+
+We added a proof sketch for the sample complexity analysis emphasizing the difference from previous approach. Furthermore, we also added extensive discussion of the implication of the sample complexity analysis, including implication for estimating high dimensional integral and conditional density in the unsupervised setting.
+
+For real world data, we have checked the correlation across view to show the violation of the multi-view conditions. Hsu et al. method ran in rank deficiency problem.
 
 \end{document}
