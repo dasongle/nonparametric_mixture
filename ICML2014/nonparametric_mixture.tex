@@ -42,6 +42,8 @@
 \newcommand{\hmu}{\widehat{\mu}}
 \newcommand{\hCcal}{\widehat{\Ccal}}
 \newcommand\tl{\widetilde}
+\newcommand{\aacomment}[1]{\noindent{\textcolor{blue}{\textbf{\#\#\# AA:} \textsf{#1} \#\#\#}}}
+
 % \newcommand{\bm}{\mathbf}
 \input{../tensor-macros}
 \usepackage{tikz}
@@ -669,13 +671,13 @@ and $\|\Tcal - \sum\nolimits_{j=1}^k \hat\lambda_j \hat{\phi}_j^{\otimes 3} \| \
 	\leq& \nbr{f}_{\Fcal} \nbr{\mu_{X|h} - \widehat \mu_{X|h}}_{\Fcal}
 	\leq O\rbr{\smallfrac{\rho^3}{m^{1.5}}}
 \end{align*}
-assuming $\nbr{f}_{\Fcal}$ is bounded by a constant. We note that this is a first result of the kind where no training samples are provided for the latent variables.
+assuming $\nbr{f}_{\Fcal}$ is bounded by a constant. We note that this is a first result of the kind where no training samples are provided for the latent variables, i.e. under unsupervised learning.
 
 {\bf Remark 3:} For $x\in \RR^d$ and the normalized Gaussian RBF kernel in~\eq{eq:normalizedrbf}, the recovered conditional embedding $\widehat \mu_{X|h}$ can be used to estimate the conditional density, $p(x|h) \approx \widehat p(x|h) := \inner{\phi(x)}{\widehat \mu_{X|h}}_{\Fcal}$. In this case, the error can be decomposed into two terms
 \begin{align*}
   \abr{p(x|h) - \widehat p(x|h)}
   \leq \underbrace{\abr{p(x|h) - \widetilde p(x|h)}}_{O(s^2)~\text{as in~\eq{eq:kdebias}}} + \underbrace{\abr{\widetilde p(x|h) - \widehat p(x|h)}}_{\text{estimation error}}
-\end{align*}
+\end{align*}\aacomment{remind again that $s$ is kernel bandwidth and $\tilde{p}$ is ..}
 where the estimation error can be analyzed similarly as in Remark 2. That is
 $|\widetilde p(x|h) - \widehat p(x|h)|
   \leq \|\phi(x)\|_{\Fcal} \|\mu_{X|h} - \widehat \mu_{X|h}\|_{\Fcal}
@@ -688,7 +690,7 @@ Combining the two sources of errors, we obtain a finite sample bound for conditi
   \leq O(s^2) + O\rbr{\smallfrac{1}{s^{3.5d}m^{1.5}}}
 \end{align*}
 We obtain the final bound $|p(x|h) - \widehat p(x|h)| = O(m^{-3/(2+3.5d)})$ if we balance the two terms by setting $s = O(m^{-1.5/(2+3.5d)})$.
-Note that this is also the first theoretical result of the kind for estimating conditional density in the unsupervised setting.
+Note that this is also the first theoretical result of the kind for estimating conditional density in the unsupervised setting.\aacomment{this is bad! we have number of samples exponential in $d$ and $d$ is large. why are we using $\rho =O(1/s^d)$.. i don't think we should state the result in this manner.}
 
 \vspace{-3mm}
 \section{Discussion}
@@ -749,6 +751,8 @@ we need to start with a modified 4-th order kernel embedding, and then reduce a 
 %
 % \paragraph{Remarks: }We note that the sample complexity is  $\poly(k, \rho, 1/\pi_{\min}, 1/\sigma_\kappa(\Ccal_{X_1, X_2}))$ of a low order, and in particular,  it is $O(k^2)$, when the other parameters are fixed. For the special case of discrete measurements, where the kernel $\kappa(x,x')=\delta(x,x')$, we have $\rho=1$. Note that the sample complexity depends in this case only on the number of components $k$ and not on the dimensionality of the observed state space.   Thus, the robust tensor method has efficient sample and computational complexities for non-parametric latent variable estimation.
 
+\aacomment{one of the reviewers wanted the proof sketch}
+
 \vspace{-3mm}
 \section{Experiments}
 \vspace{-2mm}
@@ -758,7 +762,7 @@ we need to start with a modified 4-th order kernel embedding, and then reduce a 
   \vspace{-1mm}
   \item The EM algorithm for mixture of Gaussians. The EM algorithm is not guaranteed to find the global solution in each trial. Thus we randomly initialize it $10$ times.
   \item The EM-like algorithm for mixture of nonparametric densities~\citep{BenChaHun09}. We initialied the algorithm with $k$-means as~\citet{BenChaHun09}.
-  \item The spectral algorithm for mixture of spherical Gaussians~\citep{HsuKak13}. The assumption in~\citet{HsuKak13} is restrictive: the centers of the Gaussian need to span a $k$-dimension subspace \bodai{and $k<d$}. 
+  \item The spectral algorithm for mixture of spherical Gaussians~\citep{HsuKak13}. The assumption in~\citet{HsuKak13} is restrictive: the centers of the Gaussian need to span a $k$-dimension subspace \bodai{and $k<d$}.
   \item A discretization based spectral algorithm~\citep{HirKat10}. This algorithm approximates the joint distribution of the observed variables with histogram and then applies the spectral algorithm to recover the discretized conditional density.
   \vspace{-1mm}
 \end{enumerate}
@@ -897,7 +901,7 @@ Flow cytometry (FCM) data are multivariate measurements from flow cytometers tha
 We used the DLBCL Lymphoma dataset collection from~\cite{AghFinEtal13} to compare our kernel algorithm with multi-view mixture of Gaussian model.
 This collection contains 24 datasets, and each dataset consists of tens of thousands of cell measurements in 5 dimensions. Each dataset is a separate clustering task, and we fit a multi-view model to each dataset separately and use the maximum-a-posteriori assignment for obtaining the cluster labels.  All the cell measurements have been manually labeled, therefore we can evaluate the clustering performance using the f-score.
 
-We split the 5 dimensional into three views: dimension 1 and 2 as the first view, 3 and 4 the second, and 5 the third view based on correlation between views. For each dataset, we select the best kernel bandwidth by 5-fold cross validation using log-likelihood. For EM algorithm for mixture of Gaussians (GMM) with diagonal covariances, we use a very generous 20 restarts. Figure~\ref{fig:real_data} presents the results sorted by the number of clusters. Our method (kernel spectral) outperforms EM-GMM in a majority of datasets. However, there are also datasets where kernel spectral algorithm has a large gap in performance compared to GMM. These are the datasets where the multi-view assumptions are heavily violated. Obtaining improved performance in these datasets will be a subject of our future study where we plan to develop even more robust kernel spectral algorithms.
+We split the 5 dimensional into three views: dimension 1 and 2 as the first view, 3 and 4 the second, and 5 the third view based on correlation between views, since we would like the views to satisfy the conditional independence assumptions to ensure good performance for the kernel spectral method\aacomment{added this}. For each dataset, we select the best kernel bandwidth by 5-fold cross validation using log-likelihood. For EM algorithm for mixture of Gaussians (GMM) with diagonal covariances, we use a very generous 20 restarts. Figure~\ref{fig:real_data} presents the results sorted by the number of clusters. Our method (kernel spectral) outperforms EM-GMM in a majority of datasets. However, there are also datasets where kernel spectral algorithm has a large gap in performance compared to GMM. These are the datasets where the multi-view assumptions are heavily violated. Obtaining improved performance in these datasets will be a subject of our future study where we plan to develop even more robust kernel spectral algorithms.\aacomment{reviewer had asked how did we verify that multi-view assumption was violated. we should add this..multiple reviewers had asked about this experiment..reviewer also asked why \citep{HsuKak13} algo is not run for this.. can we quickly run this}
 
 % \vspace{-3mm}
 % \subsection{USPS Handwritten Digits Data}
