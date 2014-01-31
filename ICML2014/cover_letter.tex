@@ -75,13 +75,13 @@ We would like to acknowledge anonymous reviewers for their valuable comments on 
 
 \item[2] We derived new results for the estimation of conditional density based on our Hilbert space embedding and tensor decomposition approach. We show that we can obtain a conditional density estimation with rate $O(m^{-1/3})$ in the unsupervised setting. This is the first results of the kind for conditional density estimation given no training data for the hidden variables.
 
-\item[3] We have also included a completely algorithm for our method, including the kernel whitening step and kernel tensor decomposition step. All the steps are described using kernel matrix operations, making it easy to implement.
+\item[3] We have also included a complete algorithm for our method, including the kernel whitening step and kernel tensor decomposition step. All the steps are described using kernel matrix operations, making it easy to implement.
 
 \item[4] We added a proof sketch for the sample complexity analysis emphasizing the difference from previous approach. Furthermore, we also added extensive discussion of the implication of the sample complexity analysis, including implication for estimating high dimensional integral and conditional density in the unsupervised setting.
 
 \item[5] We added discussion on generalizing our method to nonlinear independent component analysis and latent variable models with Dirichlet priors.
 
-\item[6] We added a new advanced nonparametric competitor, EM-like algorithm for nonparametric mixture model (Benaglia et al., 2009). Furthermore, we have carried out more extensive and systematic experiments, compare our method to all 4 competitor in all experimental settings (both synthetic datasets and real-world datasets). Overall, our method performed significantly better than other methods in settings.
+\item[6] We added a new advanced nonparametric competitor, EM-like algorithm for nonparametric mixture model (Benaglia et al., 2009). Furthermore, we have carried out more extensive and systematic experiments, compare our method to all 4 competitor in all experimental settings (both synthetic datasets and real-world datasets). Overall, our method performed significantly better than other methods in these settings.
 
 \end{itemize}
 
@@ -94,7 +94,7 @@ A discussion about the difference between the proposed method and previous relat
 
 Most previous work on kernel embedding of distributions, such as two sample tests and independence tests, do not consider the presence of latent variables. We consider novel aspect of the spectral properties of kernel embeddings and connect them to the spectral properties of infinite dimensional tensors and provide a sample complexity analysis.
 
-We are not aware of any prior work using kernel embeddings to explicitly recover the parameters of the latent variable model in the unsupervised setting. The related work of Kernel embedding of hidden Markov models (Song et al. ICML 2010), and Kernel embedding of latent tree models (Song et al. NIPS 2011) focus on estimating the marginal density of the observed various but not the latent parameters. In contrast, our algorithm can recover the exact latent parameters, and we prove that the estimator is consistent and analyze its finite sample complexity in this work.
+We are not aware of any prior work using kernel embeddings to explicitly recover the parameters of the latent variable model in the unsupervised setting. The related work of Kernel embedding of hidden Markov models (Song et al. ICML 2010), and Kernel embedding of latent tree models (Song et al. NIPS 2011) focus on estimating the marginal density of the observed but not the latent parameters. In contrast, our algorithm can recover the exact latent parameters, and we prove that the estimator is consistent and analyze its finite sample complexity in this work.
 
 \textbf{Novelty of technical analysis}
 
