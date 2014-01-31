@@ -102,7 +102,7 @@ In terms of the analysis, previous work on tensor decomposition (Anandkumar Et a
 
 \textbf{Experimental details}
 
-We've corrected the dataset number to 24 to be consistent. We \emph{only} split the dimensions but not the datasets. The dimensions are split according to the correlation between dimensions, so that weakly correlated dimensions go into different views.
+We've corrected the dataset number to 24 to be consistent. We {\bf \emph{only}} split the dimensions but not the datasets. The dimensions are split according to the correlation between dimensions, so that weakly correlated dimensions go into different views.
 
 
 \section*{To Reviewer 2}
@@ -134,6 +134,6 @@ We have also included a completely algorithm for our method, including the kerne
 
 We added a proof sketch for the sample complexity analysis emphasizing the difference from previous approach. Furthermore, we also added extensive discussion of the implication of the sample complexity analysis, including implication for estimating high dimensional integral and conditional density in the unsupervised setting.
 
-For real world data, we have checked the correlation across view to show the violation of the multi-view conditions. Hsu et al. method ran in rank deficiency problem.
+For real world data, we have checked the correlation across view to show the violation of the multi-view conditions. The Hsu et al. method (Hsu \& Kakade, 2013) ran in rank deficiency problem since the clusters cover together in most cases, so that the centers cannot span to a subspace with enough rank.
 
 \end{document}
