@@ -114,10 +114,11 @@ We add the extraction form of conditional density from Hilbert space embedding e
 So, the normalizer could be computed as $Z = [p(H)\circ p(x_1|H)\circ p(x_2|H)\circ p(x_3|H)] \times \bm{1}$ where $\circ$ denotes element-wise product. And we have the posterior is
 %
 \begin{eqnarray*}
-p(h|x_1, x_2, x_3) = \frac{p(h)\circ p(x_1|h)\circ p(x_2|h)\circ p(x_3|h)}{Z} \propto {p(h)\circ p(x_1|h)\circ p(x_2|h)\circ p(x_3|h)
+p(h|x_1, x_2, x_3) = \frac{p(h)\circ p(x_1|h)\circ p(x_2|h)\circ p(x_3|h)}{Z} \propto p(h)\circ p(x_1|h)\circ p(x_2|h)\circ p(x_3|h)
 \end{eqnarray*}
 %
 We could select the $h$ with maximum $p(h|x_1, x_2, x_3)$. In our experiment, $Z$ is even no need to compute, 
+
 \section*{To Reviewer 3}
 
 \end{document}
