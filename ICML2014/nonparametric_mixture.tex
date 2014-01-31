@@ -548,8 +548,7 @@ We  denote the implicit feature matrix by
   \Phi &:= (\phi(x_1^1), \ldots, \phi(x_1^m), \phi(x_2^1),  \ldots, \phi(x_2^m)),  \\
   \Psi &:= (\phi(x_2^1), \ldots, \phi(x_2^m), \phi(x_1^1),  \ldots, \phi(x_1^m)),
 \end{align*}
-and the corresponding kernel matrix by $K = \Phi^\top \Phi$ and $L = \Psi^\top \Psi$ respectively.
-Furthermore, we denote $K_{:x}:=\Phi^\top \phi(x)$ as a column vector containing the kernel between $x$ and data points in $\Phi$. For three vectors $\xi_1, \xi_2$ and $\xi_3$, denote the symmetric tensor obtained from their outer product
+and the corresponding kernel matrix by $K = \Phi^\top \Phi$ and $L = \Psi^\top \Psi$ respectively. And we denote $K_{:x}:=\Phi^\top \phi(x)$ as a column vector containing the kernel between $x$ and data points in $\Phi$. For three vectors $\xi_1, \xi_2$ and $\xi_3$, denote the symmetric tensor obtained from their outer product
 $$
 	\otimes\sbr{\xi_1,\xi_2,\xi_3} := \xi_1\otimes\xi_2\otimes\xi_3 + \xi_3\otimes\xi_1\otimes\xi_2 + \xi_2\otimes\xi_3\otimes\xi_1.
 $$
@@ -568,6 +567,7 @@ Its leading $k$ eigenvectors $\widehat \Ucal_k = (\widehat u_1,\ldots,\widehat u
 	&~\Rightarrow~
 	\frac{1}{4m^2} K L K \beta = \widehat \sigma^2 \,K \beta.
 \end{align*}
+\vspace{-1mm}
 Let the Cholesky decomposition of $K$ be $R^\top R$. Then by redefining $\widetilde{\beta}=R\beta$, and solving an eigenvalue problem
 \begin{align}
  \frac{1}{4m^2} R L R^\top \widetilde{\beta} =\widehat  \sigma^2 \, \widetilde{\beta},~~\text{and obtain}~\beta = R^{\dagger} \widetilde{\beta}.
