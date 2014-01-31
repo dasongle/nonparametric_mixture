@@ -1,0 +1,88 @@
+% Use the following line _only_ if you're still using LaTeX 2.09.
+%\documentstyle[icml2014,epsf,natbib]{article}
+% If you rely on Latex2e packages, like most moden people use this:
+\documentclass{article}
+
+% use Times
+\usepackage{times}
+% For figures
+\usepackage{graphicx} % more modern
+%\usepackage{epsfig} % less modern
+\usepackage{subfigure}
+
+% For citations
+\usepackage{natbib}
+
+% For algorithms
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+% As of 2011, we use the hyperref package to produce hyperlinks in the
+% resulting PDF.  If this breaks your system, please commend out the
+% following usepackage line and replace \usepackage{icml2014} with
+% \usepackage[nohyperref]{icml2014} above.
+\usepackage{hyperref}
+
+% Packages hyperref and algorithmic misbehave sometimes.  We can fix
+% this with the following command.
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+
+% Employ the following version of the ``usepackage'' statement for
+% submitting the draft version of the paper for review.  This will set
+% the note in the first column to ``Under review.  Do not distribute.''
+% \usepackage{icml2014}
+% Employ this version of the ``usepackage'' statement after the paper has
+% been accepted, when creating the final version.  This will set the
+% note in the first column to ``Proceedings of the...''
+%\usepackage[accepted]{icml2014}
+
+
+% other packages
+\usepackage{../Definitions}
+\newcommand{\hmu}{\widehat{\mu}}
+\newcommand{\hCcal}{\widehat{\Ccal}}
+\newcommand\tl{\widetilde}
+\newcommand{\aacomment}[1]{\noindent{\textcolor{blue}{\textbf{\#\#\# AA:} \textsf{#1} \#\#\#}}}
+
+% \newcommand{\bm}{\mathbf}
+\input{../tensor-macros}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{exscale,relsize}
+\usepackage{enumitem}
+
+\usepackage{color}
+\newcommand{\Le}[1]{{\color{red}{\bf\sf [note: #1]}}}
+\newcommand{\bodai}[1]{{\color{violet}{\bf\sf [Dai remark: #1]}}}
+\newcommand{\boxie}[1]{{\color{green}{\bf\sf [Bo Xie comment: #1]}}}
+
+% The \icmltitle you define below is probably too long as a header.
+% Therefore, a short form for the running title is supplied here:
+% \icmltitlerunning{Nonparametric Estimation of Multi-view Latent Variable Models}
+
+\begin{document}
+
+\section*{Cover Letter}
+
+Dear program chairs and reviewers,
+
+We would like to acknowledge anonymous reviewers for their valuable comments on our paper ``nonparametric estimation of multi-view latent variable models''. We have revised it based on these suggestions. Please find our major changes and the answers to their questions below.
+
+
+\section*{List of Major Changes}
+
+\begin{itemize}
+\item[1] We rewrite the introduction part to make our problem setting clear and emphasize the novelty.
+\item[2] We explain the extraction form of conditional density from Hilbert space embedding.
+\item[3] We add more discussions on the sample complexity. The bound for integral and the conditional density recovery error bound under unsupervised setting is derived based on the main theorem.
+\item[4] We add discussion on generalizing our method to nonlinear independent component analysis and latent variable models with Dirichlet priors.
+\item[5] We add more competitors on both synthetic datasets and real-world datasets.
+\end{itemize}
+
+\section*{To Meta-Reviwer}
+A discussion about the difference between the proposed method to previous related work are added. We compare the proposed method to more competitors on both synthetic datasets and real-world datasets to strengthen the experiments. 
+\section*{To Reviewer 1}
+\section*{To Reviewer 2}
+\section*{To Reviewer 3}
+
+\end{document}
