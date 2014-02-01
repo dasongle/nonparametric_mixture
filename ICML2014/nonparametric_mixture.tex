@@ -773,7 +773,7 @@ we need to start with a modified 4-th order kernel embedding, and then reduce to
 \begin{enumerate}[noitemsep,nolistsep]
   \vspace{-1mm}
   \item The EM algorithm for mixture of Gaussians. The EM algorithm is not guaranteed to find the global solution in each trial. Thus we randomly initialize it $10$ times.
-  \item The EM-like algorithm for mixture of nonparametric densities~\citep{BenChaHun09}. We initialied the algorithm with $k$-means as~\citet{BenChaHun09}.
+  \item The EM-like algorithm for mixture of nonparametric densities~\citep{BenChaHun09}. We initialize the algorithm with $k$-means as~\citet{BenChaHun09}.
   \item The spectral algorithm for mixture of spherical Gaussians~\citep{HsuKak13}. Their assumption is restrictive: the centers of the Gaussian need to span a $k$-dimension subspace, thus it is not applicable for rank deficiency case where $k\ge l$.
   \item A discretization based spectral algorithm~\citep{HirKat10}. This algorithm approximates the joint distribution of the observed variables with histogram and then applies the spectral algorithm to recover the discretized conditional density.
   \vspace{-1mm}
