@@ -74,7 +74,7 @@
 \icmlauthor{Le Song}{lsong@cc.gatech.edu}
 \icmladdress{Georgia Institute of Technology,
             Atlanta, GA 30345 USA}
-\vskip -0.05in            
+\vskip -0.05in
 \icmlauthor{Animashree Anandkumar}{a.anandkumar@uci.edu}
 \icmladdress{University of California, Irvine, CA 92697, USA}
 \vskip -0.05in
@@ -92,7 +92,7 @@
 
 \begin{abstract}
 		Spectral methods have greatly advanced the estimation of latent variable models, generating a sequence of novel and efficient algorithms with strong theoretical guarantees.
-		However, current spectral algorithms are largely restricted to mixtures of discrete or Gaussian distributions. In this paper, we propose a kernel method for learning multi-view latent variable models, allowing each mixture component to be nonparametric and learned from data in an \emph{unsupervised} fashion. The key idea of our method is to embed the joint distribution of a multi-view latent variable model into a reproducing kernel Hilbert space, and then the latent parameters are recovered using a robust tensor power method. We establish that the  sample complexity for the proposed method is quadratic in the number of latent components and is a low order polynomial in the other relevant parameters. Thus, our nonparametric tensor approach to learning latent variable models enjoys good sample and computational efficiencies. As a special case of our framework, we also obtain a first \emph{unsupervised} conditional density estimator of the kind with provable guarantees. 	In both synthetic and real world 
+		However, current spectral algorithms are largely restricted to mixtures of discrete or Gaussian distributions. In this paper, we propose a kernel method for learning multi-view latent variable models, allowing each mixture component to be nonparametric and learned from data in an \emph{unsupervised} fashion. The key idea of our method is to embed the joint distribution of a multi-view latent variable model into a reproducing kernel Hilbert space, and then the latent parameters are recovered using a robust tensor power method. We establish that the  sample complexity for the proposed method is quadratic in the number of latent components and is a low order polynomial in the other relevant parameters. Thus, our nonparametric tensor approach to learning latent variable models enjoys good sample and computational efficiencies. As a special case of our framework, we also obtain a first \emph{unsupervised} conditional density estimator of the kind with provable guarantees. 	In both synthetic and real world
 datasets, the nonparametric tensor power method compares favorably to EM algorithm and other spectral algorithms.
 \end{abstract}
 
@@ -125,10 +125,10 @@ given samples only from the observed variables $\{X_t\}_{t \in [\ell]}$, but \em
 Our solution is to embed the distribution of the observed variables in such a model into a reproducing kernel Hilbert space, and exploit tensor decomposition of the embedded distribution (or covariance operators)
 to recover the unobserved embedding $\mu_{X_t|h}=\int_{\Xcal} \phi(x)\, d\PP(x|h)$ of the mixture components. The key computation of our algorithm involves a kernel singular value decomposition of the two-view covariance operator, followed by a robust tensor power method on the three-view covariance operator. These standard matrix operations makes the algorithm very efficient and easy to deploy.
 
-Although kernel methods have been previously applied to learning latent variable models, none of them can provably recover the exact latent component $\PP(X_t|h)$ or its sufficient statitiscs to support integral query on this distribution. For instance, \citet{SonBooSidGorSmo10,SonParXin11, SonDai13}~estimated an (unknown) invertible transformation of the sufficient statistics of the latent component $\PP(X_t|h)$, and only supported integral query associated with the distribution of the observed variables. \citet{SgoJanPetSch13}~used kernel independence measure to cluster data points, and treated each cluster as a latent component. Besides computational issues, it is also difficult to provide theoretical guarantees to such an approach since the clustering step only finds a local minimum. \citet{BenChaHun09} designed an EM-like algorithm for learning the conditional densities in latent variable models. This algorithm alternates between the E-step, proportional assignment of data points to components, and the M-step, kernel 
+Although kernel methods have been previously applied to learning latent variable models, none of them can provably recover the exact latent component $\PP(X_t|h)$ or its sufficient statitiscs to support integral query on this distribution. For instance, \citet{SonBooSidGorSmo10,SonParXin11, SonDai13}~estimated an (unknown) invertible transformation of the sufficient statistics of the latent component $\PP(X_t|h)$, and only supported integral query associated with the distribution of the observed variables. \citet{SgoJanPetSch13}~used kernel independence measure to cluster data points, and treated each cluster as a latent component. Besides computational issues, it is also difficult to provide theoretical guarantees to such an approach since the clustering step only finds a local minimum. \citet{BenChaHun09} designed an EM-like algorithm for learning the conditional densities in latent variable models. This algorithm alternates between the E-step, proportional assignment of data points to components, and the M-step, kernel
 density estimation based on weighted data points. Similarly, theoretical analysis of such a local search heurstic is difficult.
 
-The kernel algorithm proposed in this paper is also significantly more general than the previous spectral algorithms which work only for distributions with parametric assumptions~\cite{AnandkumarEtal:tensor12,HsuKak13}. In fact, when we use the delta kernel, our algorithm recovers the previous algorithm of~\citet{AnandkumarEtal:tensor12} for discrete mixture components as a special case. When we use universal kernels, such as the Gaussian RBF kernel, our algorithm can recover Gaussian mixture components as well as mixture components with other distributions. In this sense, our work also provides a unifying framework for previous spectral algorithms. We prove sample complexity bounds for the nonparametric tensor power method and show that it is both computational and sample efficient. As a special case of our framework, we also obtain a first \emph{unsupervised} conditional density estimator of the kind with provable guarantees. Furthermore, our approach can also be generalized to other latent variable 
+The kernel algorithm proposed in this paper is also significantly more general than the previous spectral algorithms which work only for distributions with parametric assumptions~\cite{AnandkumarEtal:tensor12,HsuKak13}. In fact, when we use the delta kernel, our algorithm recovers the previous algorithm of~\citet{AnandkumarEtal:tensor12} for discrete mixture components as a special case. When we use universal kernels, such as the Gaussian RBF kernel, our algorithm can recover Gaussian mixture components as well as mixture components with other distributions. In this sense, our work also provides a unifying framework for previous spectral algorithms. We prove sample complexity bounds for the nonparametric tensor power method and show that it is both computational and sample efficient. As a special case of our framework, we also obtain a first \emph{unsupervised} conditional density estimator of the kind with provable guarantees. Furthermore, our approach can also be generalized to other latent variable
 learning tasks such as independent component analysis and latent variable models with Dirichlet priors.
 % establish  that the sample complexity is quadratic in the number of latent components, and is a low order polynomial in the other relevant parameters such as the lower bound on mixing weights. Thus, we propose a computational and sample efficient nonparametric approach to learning
 % latent variable models.
@@ -361,7 +361,7 @@ which is called the conditional embedding operator. If we use the standard basis
 \end{align}
 Once we have the conditional embedding $\mu_{X|h}$, we can compute the conditional expectation of a function $f\in \Fcal$ as $\int_{\Xcal} f(x) \,d\PP(x|h)  = \inner{f}{\mu_{X|h}}_{\Fcal}$.
 
-{\bf Remarks.} For data from $\RR^d$ and the normalized Gaussian RBF kernel in~\eq{eq:normalizedrbf}, the conditional density $p(x|h)$ exists, and it can be approximated by the embedding as $\widetilde{p}(x|h) := \inner{\phi(x)}{\mu_{X|h}}_{\Fcal}=\EE_{X|h}[\kappa(x,X)]$. Essentially, this is the convolution of the conditional density with the kernel function. 
+{\bf Remarks.} For data from $\RR^d$ and the normalized Gaussian RBF kernel in~\eq{eq:normalizedrbf}, the conditional density $p(x|h)$ exists, and it can be approximated by the embedding as $\widetilde{p}(x|h) := \inner{\phi(x)}{\mu_{X|h}}_{\Fcal}=\EE_{X|h}[\kappa(x,X)]$. Essentially, this is the convolution of the conditional density with the kernel function.
 % For density $p(x|h)$ from H\"older class $\Sigma(\alpha, L)$ whose $\ell=\lfloor\alpha\rfloor$ derivative $p^{(\ell)}$ satisfies ~\cite{Tsybakov09}
 % $$
 % 	|p^{(\ell)}(x)-p^{(\ell)}(x')|\leq L|x-x'|^{\alpha-\ell}
@@ -693,7 +693,7 @@ Sketch: we note that our proof is different from those in~\citet{AnandkumarEtal:
 	\leq& \nbr{f}_{\Fcal} \nbr{\mu_{X|h} - \widehat \mu_{X|h}}_{\Fcal}
 	= O\rbr{\smallfrac{1}{\sqrt{m}}}
 \end{align*}
-assuming $\nbr{f}_{\Fcal}$ is bounded and $\rho/\sigma_k=O(1)$. 
+assuming $\nbr{f}_{\Fcal}$ is bounded and $\rho/\sigma_k=O(1)$.
 
 {\bf Remark 3:} For $x\in \RR^d$ and the normalized Gaussian RBF kernel in~\eq{eq:normalizedrbf}, the recovered conditional embedding $\widehat \mu_{X|h}$ can be used to estimate the conditional density, $p(x|h) \approx \widehat p(x|h) := \inner{\phi(x)}{\widehat \mu_{X|h}}_{\Fcal}$. In this case, the error can be decomposed into two terms
 \begin{align*}
@@ -717,14 +717,14 @@ Then we have $|p(x|h) - \widehat p(x|h)| = O(m^{-2/(4+d)})$ if we balance the tw
 \section{Discussion}
 \vspace{-2mm}
 
-We note that our algorithm and theoretical results can also be generalized to the settings of latent variable models with Dirichlet priors and nonparametric independent component analysis (ICA) as in~\citet{AnandkumarEtal:tensor12}. In the first setting, a Dirichlet prior is placed on the mixing weights $\pi$ of the multi-view latent variables, 
+We note that our algorithm and theoretical results can also be generalized to the settings of latent variable models with Dirichlet priors and nonparametric independent component analysis (ICA) as in~\citet{AnandkumarEtal:tensor12}. In the first setting, a Dirichlet prior is placed on the mixing weights $\pi$ of the multi-view latent variables,
 $$
         \PP(\pi) = \frac{\Gamma(\theta_0)}{\prod\nolimits_{i \in [k]} \Gamma(\theta_i)} \prod\nolimits_{i \in [k]} \pi_i^{\theta_i - 1}
 $$
 where $\theta_0 = \sum_{i \in [k]} \theta_i$ with $\theta_i > 0$, and $\Gamma(\cdot)$ is the Gamma function. In this case, we only need to modify the second and third order kernel embedding $\Ccal_{X_1X_2}$ and $\Tcal$ respectively, and then Algorithm~\ref{alg:multiview} applies. In the nonparametric ICA setting, the feature map $\phi(X)$ of an observed variable $X$ is assumed to be generated from a latent vector $H \in \RR^k$ with independent coordinates via an operator $\Acal:\RR^k \mapsto \Fcal$,
 $$
         \phi(X) := \Acal\, H + Z
-$$ 
+$$
 where $Z$ is a zero mean random vector independent of $H$. In this case,
 we need to start with a modified 4-th order kernel embedding, and then reduce to a multi-view problem and estimate $\Acal$ via Algorithm~\ref{alg:multiview}.
 
@@ -873,7 +873,7 @@ This is the key advantage of our method in that it has favorable performance in 
 Flow cytometry (FCM) data are multivariate measurements from flow cytometers that record light scatter and fluorescence emission properties of hundreds of thousands of individual cells. They are important to the studying of the cell structures of normal and abnormal cells and the diagnosis of human diseases. \citet{AghFinEtal13} introduced the FlowCAP-challenge whose main task is grouping the flow cytometry data automatically. Clustering on the FCM data is a difficult task because the distribution of the data is non-Gaussian and heavily skewed. We use the DLBCL Lymphoma dataset collection from~\cite{AghFinEtal13} to compare our kernel algorithm with the four alternatives.
 This collection contains 24 datasets with two or three clusters, and each dataset consists of tens of thousands of cell measurements in 5 dimensions. Each dataset is a separate clustering task, so we fit a multi-view model to each dataset separately and use the maximum-a-posteriori assignment to obtain the cluster labels.  All the cell measurements have been manually labeled, therefore we can evaluate the clustering performance using f-score \cite{AghFinEtal13}.
 
-We split the 5 dimensions into three views: dimension 1 and 2 as the first view, 3 and 4 the second, and 5 the third view based on correlation between views, since we would like the views to satisfy the conditional independence assumptions to ensure good performance for the kernel spectral method. For each dataset, we select the best kernel bandwidth by 5-fold cross validation using log-likelihood. Figure~\ref{fig:real_data} presents the results sorted by the number of clusters. Since the data are collapsed in most cases, the centers cannot span a subspace with enough rank. Thus, the method in \citep{HsuKak13} is not applicable. However, our method (kernel spectral) outperforms EM-GMM as well as the other algorithms in a majority of datasets. There are also datasets where kernel spectral algorithm has a large gap in performance compared to GMM. These are the datasets where the multi-view assumptions are heavily violated. For example, in some datasets, the correlation coefficient between dimensions 3 and 5 is 
+We split the 5 dimensions into three views: dimension 1 and 2 as the first view, 3 and 4 the second, and 5 the third view based on correlation between views, since we would like the views to satisfy the conditional independence assumptions to ensure good performance for the kernel spectral method. For each dataset, we select the best kernel bandwidth by 5-fold cross validation using log-likelihood. Figure~\ref{fig:real_data} presents the results sorted by the number of clusters. Since the data are collapsed in most cases, the centers cannot span a subspace with enough rank. Thus, the method in \citep{HsuKak13} is not applicable. However, our method (kernel spectral) outperforms EM-GMM as well as the other algorithms in a majority of datasets. There are also datasets where kernel spectral algorithm has a large gap in performance compared to GMM. These are the datasets where the multi-view assumptions are heavily violated. For example, in some datasets, the correlation coefficient between dimensions 3 and 5 is
 as high as 0.927 given a particular cluster label, suggesting strong correlation between the two views. Obtaining improved and robust performance in these datasets will be a subject of our future study where we plan to develop even more robust kernel spectral algorithms.
 % \aacomment{reviewer had asked how did we verify that multi-view assumption was violated. we should add this..multiple reviewers had asked about this experiment..reviewer also asked why \citep{HsuKak13} algo is not run for this.. can we quickly run this}
 
@@ -984,7 +984,7 @@ Hsu, Daniel and Kakade, Sham~M.
 \newblock Learning mixtures of spherical gaussians: moment methods and spectral
   decompositions.
 \newblock In \emph{Proceedings of the 4th conference on Innovations in
-  Theoretical Computer Science}, ITCS '13, pp.\  11--20.  
+  Theoretical Computer Science}, ITCS '13, pp.\  11--20.
 
 \bibitem[Kasahara \& Shimotsu(2010)Kasahara and Shimotsu]{HirKat10}
 Kasahara, Hiroyuki and Shimotsu, Katsumi.
