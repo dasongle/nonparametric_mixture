@@ -30,7 +30,7 @@
 % Employ the following version of the ``usepackage'' statement for
 % submitting the draft version of the paper for review.  This will set
 % the note in the first column to ``Under review.  Do not distribute.''
-\usepackage[accepted]{icml2014}
+\usepackage{icml2014}
 % Employ this version of the ``usepackage'' statement after the paper has
 % been accepted, when creating the final version.  This will set the
 % note in the first column to ``Proceedings of the...''
@@ -69,34 +69,27 @@
 % submissions: the style file will automatically remove it for you
 % unless you've provided the [accepted] option to the icml2014
 % package.
-\vskip -0.2in
-
-\icmlauthor{Le Song}{lsong@cc.gatech.edu}
-\icmladdress{Georgia Institute of Technology,
-            Atlanta, GA 30345 USA}
-\vskip -0.05in            
-\icmlauthor{Animashree Anandkumar}{a.anandkumar@uci.edu}
-\icmladdress{University of California, Irvine, CA 92697, USA}
-\vskip -0.05in
-\icmlauthor{Bo Dai, Bo Xie}{bdai6,bxie33@gatech.edu}
-\icmladdress{Georgia Institute of Technology, Atlanta, GA 30345 USA}
-
+\icmlauthor{Le Song, Anima, B. Dai and B. Xie}{email@yourdomain.edu}
+\icmladdress{Your Fantastic Institute,
+            314159 Pi St., Palo Alto, CA 94306 USA}
+\icmlauthor{Your CoAuthor's Name}{email@coauthordomain.edu}
+\icmladdress{Their Fantastic Institute,
+            27182 Exp St., Toronto, ON M6H 2T1 CANADA}
 
 % You may provide any keywords that you
 % find helpful for describing your paper; these are used to populate
 % the "keywords" metadata in the PDF but will not be shown in the document
-% \icmlkeywords{Kernel Methods, Latent Variable Models, Spectral Algorithms}
+\icmlkeywords{Kernel Methods, Latent Variable Models, Spectral Algorithms}
 
-\vskip 0.1in
+\vskip 0.3in
 ]
 
 \begin{abstract}
 		Spectral methods have greatly advanced the estimation of latent variable models, generating a sequence of novel and efficient algorithms with strong theoretical guarantees.
-		However, current spectral algorithms are largely restricted to mixtures of discrete or Gaussian distributions. In this paper, we propose a kernel method for learning multi-view latent variable models, allowing each mixture component to be nonparametric and learned from data in an \emph{unsupervised} fashion. The key idea of our method is to embed the joint distribution of a multi-view latent variable model into a reproducing kernel Hilbert space, and then the latent parameters are recovered using a robust tensor power method. We establish that the  sample complexity for the proposed method is quadratic in the number of latent components and is a low order polynomial in the other relevant parameters. Thus, our nonparametric tensor approach to learning latent variable models enjoys good sample and computational efficiencies. As a special case of our framework, we also obtain a first \emph{unsupervised} conditional density estimator of the kind with provable guarantees. 	In both synthetic and real world 
-datasets, the nonparametric tensor power method compares favorably to EM algorithm and other spectral algorithms.
+		However, current spectral algorithms are largely restricted to mixtures of discrete or Gaussian distributions. In this paper, we propose a kernel method for learning multi-view latent variable models, allowing each mixture component to be nonparametric and learned from data in an \emph{unsupervised} fashion. The key idea of our method is to embed the joint distribution of a multi-view latent variable model into a reproducing kernel Hilbert space, and then the latent parameters are recovered using a robust tensor power method. We establish that the  sample complexity for the proposed method is quadratic in the number of latent components and is a low order polynomial in the other relevant parameters. Thus, our nonparametric tensor approach to learning latent variable models enjoys good sample and computational efficiencies. As a special case of our framework, we also obtain a first \emph{unsupervised} conditional density estimator of the kind with provable guarantees. 	In both synthetic and real world datasets, the nonparametric tensor power method compares favorably to EM algorithm and other spectral algorithms.
 \end{abstract}
 
-\vspace{-5mm}
+\vspace{-3mm}
 \section{Introduction} \label{sec:intro}
 \vspace{-2mm}
 
@@ -111,7 +104,7 @@ datasets, the nonparametric tensor power method compares favorably to EM algorit
 
 % Latent variable models have been used to address various machine learning
 % problems, ranging from modeling temporal dynamics, to text document analysis and to social network analysis~\citep{RabJua86,Clark90,HofRafHan02,BleNgJor03}.
-Recently, there is a surge of interest in designing spectral algorithms for estimating the parameters of latent variable models~\citep{HsuKakZha09,SonBooSidGorSmo10,ParSonXin11,SonParXin11,FosRodUng12,AnandkumarEtal:tensor12, AnandkumarEtal:twosvd12}. Compared to the Expectation-Maximization (EM) algorithm \citep{DemLaiRub77} traditionally used for this task, spectral algorithms are better in terms of their computational efficiency and provable guarantees.
+Recently, there is a surge of interest in designing spectral algorithms for estimating the parameters of latent variable models~\citep{HsuKakZha09,ParSonXin11,SonParXin11,FosRodUng12,AnandkumarEtal:tensor12, AnandkumarEtal:twosvd12, Franz13}. Compared to the Expectation-Maximization (EM) algorithm \citep{DemLaiRub77} traditionally used for this task, spectral algorithms are better in terms of their computational efficiency and provable guarantees.
 However, current spectral algorithms are largely restricted to mixture
 of discrete or Gaussian distributions, e.g.~\citep{AnandkumarEtal:tensor12,HsuKak13}. When the mixture components are distributions other than these standard distributions, the theoretical guarantees for these algorithms are no longer applicable, and their empirical performance can be very poor.
 
@@ -120,16 +113,14 @@ We propose a kernel method for obtaining sufficient statistics of a multi-view l
   \PP\rbr{\{X_t\}_{t \in [\ell]}}=\sum\nolimits_{h \in [k]} \PP(h) \cdot \prod\nolimits_{t \in [\ell]} \PP(X_t|h),
   \label{eq:multiview_model}
 \end{align}
-given samples only from the observed variables $\{X_t\}_{t \in [\ell]}$, but \emph{not} the hidden variable $H$. These statistics allow us to answer integral query, $\int_{\Xcal} f(x_t)\, d \PP(x_t|h)$, for functions $f$ from a reproducing kernel Hilbert space (RKHS) \emph{without} the need to assume any parametric form for the involved latent component $\PP(X_t|h)$ (we call this setting ``\emph{unsupervised}''). Note that this is a very challenging problem, since we do not have samples to directly estimate $\PP(X_t|h)$. Hence traditional kernel density estimator does not apply. Furthermore, the nonparametric form of $\PP(X_t|h)$ renders previous spectral methods inapplicable.
+given samples only from the observed variables $\{X_t\}_{t \in [\ell]}$, but \emph{not} the hidden variable $H$. These statistics allow us to answer integral query, $\int_{\Xcal} f(x_t)\, d \PP(x_t|h)$, for functions $f$ from a reproducing kernel Hilbert space (RKHS) \emph{without} the need to assume any parametric form for the involved latent component $\PP(X_t|h)$ (we call this setting ``\emph{unsupervised}''). Note that this is a very challenging problem, since we do not have samples to directly estimate $\PP(X_t|h)$. Hence traditional kernel density estimator does not apply. Furthermore, the nonparametric form $\PP(X_t|h)$ renders previous spectral methods inapplicable.
 
 Our solution is to embed the distribution of the observed variables in such a model into a reproducing kernel Hilbert space, and exploit tensor decomposition of the embedded distribution (or covariance operators)
 to recover the unobserved embedding $\mu_{X_t|h}=\int_{\Xcal} \phi(x)\, d\PP(x|h)$ of the mixture components. The key computation of our algorithm involves a kernel singular value decomposition of the two-view covariance operator, followed by a robust tensor power method on the three-view covariance operator. These standard matrix operations makes the algorithm very efficient and easy to deploy.
 
-Although kernel methods have been previously applied to learning latent variable models, none of them can provably recover the exact latent component $\PP(X_t|h)$ or its sufficient statitiscs to support integral query on this distribution. For instance, \citet{SonBooSidGorSmo10,SonParXin11, SonDai13}~estimated an (unknown) invertible transformation of the sufficient statistics of the latent component $\PP(X_t|h)$, and only supported integral query associated with the distribution of the observed variables. \citet{SgoJanPetSch13}~used kernel independence measure to cluster data points, and treated each cluster as a latent component. Besides computational issues, it is also difficult to provide theoretical guarantees to such an approach since the clustering step only finds a local minimum. \citet{BenChaHun09} designed an EM-like algorithm for learning the conditional densities in latent variable models. This algorithm alternates between the E-step, proportional assignment of data points to components, and the M-step, kernel 
-density estimation based on weighted data points. Similarly, theoretical analysis of such a local search heurstic is difficult.
+Although kernel methods have been previously applied to learning latent variable models, none of them can provably recover the exact latent component $\PP(X_t|h)$ or its sufficient statitiscs to support integral query on this distribution. For instance, \citet{SonParXin11, SonDai13}~estimated an (unknown) invertible transformation of the sufficient statistics of the latent component $\PP(X_t|h)$, and only supported integral query associated with the distribution of the observed variables. \citet{SgoJanPetSch13}~used kernel independence measure to cluster data points, and treated each cluster as a latent component. Besides computational issues, it is also difficult to provide theoretical guarantees to such an approach since the clustering step only finds a local minimum. \citet{BenChaHun09} designed an EM-like algorithm for learning the conditional densities in latent variable models. This algorithm alternates between the E-step, proportional assignment of data points to components, and the M-step, kernel density estimation based on weighted data points. Similarly, theoretical analysis of such a local search heurstic is difficult.
 
-The kernel algorithm proposed in this paper is also significantly more general than the previous spectral algorithms which work only for distributions with parametric assumptions~\cite{AnandkumarEtal:tensor12,HsuKak13}. In fact, when we use the delta kernel, our algorithm recovers the previous algorithm of~\citet{AnandkumarEtal:tensor12} for discrete mixture components as a special case. When we use universal kernels, such as the Gaussian RBF kernel, our algorithm can recover Gaussian mixture components as well as mixture components with other distributions. In this sense, our work also provides a unifying framework for previous spectral algorithms. We prove sample complexity bounds for the nonparametric tensor power method and show that it is both computational and sample efficient. As a special case of our framework, we also obtain a first \emph{unsupervised} conditional density estimator of the kind with provable guarantees. Furthermore, our approach can also be generalized to other latent variable 
-learning tasks such as independent component analysis and latent variable models with Dirichlet priors.
+The kernel algorithm proposed in this paper is also significantly more general than the previous spectral algorithms which work only for distributions with parametric assumptions~\cite{AnandkumarEtal:tensor12,HsuKak13}. In fact, when we use the delta kernel, our algorithm recovers the previous algorithm of~\citet{AnandkumarEtal:tensor12} for discrete mixture components as a special case. When we use universal kernels, such as the Gaussian RBF kernel, our algorithm can recover Gaussian mixture components as well as mixture components with other distributions. In this sense, our work also provides a unifying framework for previous spectral algorithms. We prove sample complexity bounds for the nonparametric tensor power method and show that it is both computational and sample efficient. As a special case of our framework, we also obtain a first \emph{unsupervised} conditional density estimator of the kind with provable guarantees. Furthermore, our approach can also be generalized to other latent variable learning tasks such as independent component analysis and latent variable models with Dirichlet priors.
 % establish  that the sample complexity is quadratic in the number of latent components, and is a low order polynomial in the other relevant parameters such as the lower bound on mixing weights. Thus, we propose a computational and sample efficient nonparametric approach to learning
 % latent variable models.
 
@@ -253,7 +244,7 @@ using three collections of orthonormal bases $\cbr{u_{i_1}}_{i_1=1}^\infty$, $\c
 % % \end{align}
 % % When $\Ccal_{X_{1:\ell}}$ has the form of $\EE_{X_{1:\ell}}\sbr{\phi(X_1)\otimes\ldots\otimes \phi(X_\ell)}$, the above inner product reduces to $\EE_{X_{1:\ell}}[\widetilde{\Ccal}_{X_{1:\ell}} \times_1 \phi(X_1) \times_2 \ldots \times_\ell \phi(X_\ell)]$.
 
-The joint embedding, $\Ccal_{X_1 X_2}$, can be viewed as infinite dimensional matrices. For instance, we can perform singular value decomposition
+The joint embedding, $\Ccal_{X_1 X_2}$, is a 2nd order tensor, and we can essentially use notations and operations for matrices. For instance, we can perform singular value decomposition
 $
     \Ccal_{X_1X_2} = \sum_{i=1}^{\infty} \sigma_i \cdot u_{i_1} \otimes u_{i_2},
 $
@@ -351,7 +342,7 @@ For simplicity of exposition, we focus on a simple model with three observed var
 \begin{align}
   \mu_{X|h} = \int_{\Xcal} \phi(x)\, d \PP(x | h).
 \end{align}
-If we vary the value of $H$, we  obtain the kernel embedding for different $\PP(X|h)$. Conceptually, we can tile these embeddings into a matrix (with infinite number of rows)
+If we vary the value of $H$, we  obtain the kernel embedding for different $\PP(X|h)$. Conceptually, we can tile these embeddings into a matrix (with potentially infinite row dimension)
 \begin{align}
   \Ccal_{X|H} = \rbr{\mu_{X|h=1},\mu_{X|h=2},\ldots,\mu_{X|h=k}},
 \end{align}
@@ -361,16 +352,16 @@ which is called the conditional embedding operator. If we use the standard basis
 \end{align}
 Once we have the conditional embedding $\mu_{X|h}$, we can compute the conditional expectation of a function $f\in \Fcal$ as $\int_{\Xcal} f(x) \,d\PP(x|h)  = \inner{f}{\mu_{X|h}}_{\Fcal}$.
 
-{\bf Remarks.} For data from $\RR^d$ and the normalized Gaussian RBF kernel in~\eq{eq:normalizedrbf}, the conditional density $p(x|h)$ exists, and it can be approximated by the embedding as $\widetilde{p}(x|h) := \inner{\phi(x)}{\mu_{X|h}}_{\Fcal}=\EE_{X|h}[\kappa(x,X)]$. Essentially, this is the convolution of the conditional density with the kernel function. 
-% For density $p(x|h)$ from H\"older class $\Sigma(\alpha, L)$ whose $\ell=\lfloor\alpha\rfloor$ derivative $p^{(\ell)}$ satisfies ~\cite{Tsybakov09}
-% $$
-% 	|p^{(\ell)}(x)-p^{(\ell)}(x')|\leq L|x-x'|^{\alpha-\ell}
-% $$
-For continuous density $p(x|h)$ with suitable smoothness conditions, the approximation error is of the order~\cite{Wasserman06}
+{\bf Remarks.} For data from $\RR^d$ and the normalized Gaussian RBF kernel in~\eq{eq:normalizedrbf}, the conditional density $p(x|h)$ exists, and it can be approximated by the embedding as $\widetilde{p}(x|h) := \inner{\phi(x)}{\mu_{X|h}}_{\Fcal}=\EE_{X|h}[\kappa(x,X)]$. Essentially, this is the convolution of the conditional density with the kernel function. For density $p(x|h)$ from H\"older class $\Sigma(\alpha, L)$ whose $\ell=\lfloor\alpha\rfloor$ derivative $p^{(\ell)}$ satisfies ~\cite{Tsybakov09}
+$$
+	|p^{(\ell)}(x)-p^{(\ell)}(x')|\leq L|x-x'|^{\alpha-\ell}
+$$
+One can show that the approximation error is bounded by
 \begin{align}
-  |p(x|h) - \widetilde p(x|h)| = O(s^2).
+  |p(x|h) - \widetilde p(x|h)| \leq O(s^\alpha).
 	\label{eq:kdebias}
 \end{align}
+When the kernel bandwidth $s \rightarrow 0$, the error goes to 0.
 
 \vspace{-3mm}
 \subsection{Factorized Kernel Embedding}
@@ -656,8 +647,8 @@ Let $\rho:=\sup_{x \in \Xcal} \kappa(x,x)$,   $\| \cdot\|_{}$ be the Hilbert-Sch
 \begin{theorem} \label{thm:samplebound}
 \vspace{-3mm}
 Pick  any $\delta\in (0,1)$. When the number of samples $m$ satisfies
-\[ m >\frac{\theta\rho^2  \log\frac{2}{\delta}}{\sigma^2_k(\Ccal_{X_1 X_2})},
-\quad \theta:= \max\left(\frac{C_3 k^2 \rho}{\sigma_k( \Ccal_{X_1 X_2})}, \frac{C_4k^{2/3}\iffalse(1+\sigma_{k+1}(\Ccal_{X_1 X_2}))^2 \fi }{\pi_{\min}^{1/3}}\right),\] for some constants $C_3, C_4>0$, and the number of iterations $N$  and  the number of random initialization vectors $L$  (drawn uniformly on the sphere $\mathcal{S}^{k-1}$)  satisfy
+\[ m >\frac{\theta\rho^2  \log\frac{2}{\delta}}{\sigma^2_\kappa(\Ccal_{X_1, X_2})},
+\quad \theta:= \max\left(\frac{C_3 k^2 \rho}{\sigma_\kappa( \Ccal_{X_1, X_2})}, \frac{C_4k^{2/3}\iffalse(1+\sigma_{k+1}(\Ccal_{X_1, X_2}))^2 \fi }{\pi_{\min}^{1/3}}\right),\] for some constants $C_3, C_4>0$, and the number of iterations $N$  and  the number of random initialization vectors $L$  (drawn uniformly on the sphere $\mathcal{S}^{k-1}$)  satisfy
 \begin{align*}
   N \geq C_2 \cdot \biggl( \log(k) + \log\log\Bigl(
  \frac{1}{\sqrt{\pi_{\min}}\epsilon_{\Tcal}} \Bigr) \biggr),
@@ -675,7 +666,7 @@ for constant $C_2>0$ and  $L = \poly(k) \log(1/\delta)$,  the robust power metho
 % \end{align*}
 and $\|\Tcal - \sum\nolimits_{j=1}^k \hat\lambda_j \hat{\phi}_j^{\otimes 3} \| \leq 55\eps_{\Tcal}$ where $\eps_{\Tcal}:= \|\h{\Tcal} - \Tcal\|$ is the tensor perturbation bound
 \begin{align*} \eps_{\Tcal} \leq
-\frac{8 \rho^{1.5} \sqrt{\log\frac{2}{\delta}}}{\sqrt{m} \, \sigma_k^{1.5}(\Ccal_{X_1 X_2})} + \frac{512 \sqrt{2} \rho^3 \left(\log\frac{2}{\delta}\right)^{1.5}}{m^{1.5} \,\sigma_k^{3}(\Ccal_{X_1 X_2}) \sqrt{\pi_{\min}}}
+\frac{8 \rho^{1.5} \sqrt{\log\frac{2}{\delta}}}{\sqrt{m} \, \sigma_k^{1.5}(\Ccal_{X_1, X_2})} + \frac{512 \sqrt{2} \rho^3 \left(\log\frac{2}{\delta}\right)^{1.5}}{m^{1.5} \,\sigma_k^{3}(\Ccal_{X_1, X_2}) \sqrt{\pi_{\min}}}
 \end{align*}
 \vspace{-3mm}
 \end{theorem}
@@ -685,48 +676,94 @@ Sketch: we note that our proof is different from those in~\citet{AnandkumarEtal:
 \vspace{-4mm}
 \end{proof}
 
-{\bf Remark 1:} We note that the sample complexity is  $\poly(k, \rho, 1/\pi_{\min}, 1/\sigma_k(\Ccal_{X_1 X_2}))$ of a low order, and in particular,  it is $O(k^2)$, when the other parameters are fixed. For the special case of discrete measurements, where the kernel $\kappa(x,x')=\delta(x,x')$, we have $\rho=1$. Note that the sample complexity depends in this case only on the number of components $k$ and not on the dimensionality of the observed state space.   Thus, the robust tensor method has efficient sample and computational complexities for non-parametric latent variable estimation.
+{\bf Remark 1:} We note that the sample complexity is  $\poly(k, \rho, 1/\pi_{\min}, 1/\sigma_\kappa(\Ccal_{X_1, X_2}))$ of a low order, and in particular,  it is $O(k^2)$, when the other parameters are fixed. For the special case of discrete measurements, where the kernel $\kappa(x,x')=\delta(x,x')$, we have $\rho=1$. Note that the sample complexity depends in this case only on the number of components $k$ and not on the dimensionality of the observed state space.   Thus, the robust tensor method has efficient sample and computational complexities for non-parametric latent variable estimation.
 
 {\bf Remark 2:} Theorem~\ref{thm:samplebound} also gives us an error bound for estimating the integral of a function $f\in \Fcal$ with respect to a mixture component in unsupervised fashion. That is
 \begin{align*}
 	&\abr{\int_{\Xcal} f(x)\, d\PP(x|h) - \inner{f}{\widehat \mu_{X|h}}_{\Fcal}} \\
 	\leq& \nbr{f}_{\Fcal} \nbr{\mu_{X|h} - \widehat \mu_{X|h}}_{\Fcal}
-	= O\rbr{\smallfrac{1}{\sqrt{m}}}
+	\leq O\rbr{\smallfrac{\rho^3}{m^{1.5}}}
 \end{align*}
-assuming $\nbr{f}_{\Fcal}$ is bounded and $\rho/\sigma_k=O(1)$. 
+assuming $\nbr{f}_{\Fcal}$ is bounded by a constant. We note that this is a first result of the kind when no training samples are provided for the latent variables (unsupervised setting).
 
 {\bf Remark 3:} For $x\in \RR^d$ and the normalized Gaussian RBF kernel in~\eq{eq:normalizedrbf}, the recovered conditional embedding $\widehat \mu_{X|h}$ can be used to estimate the conditional density, $p(x|h) \approx \widehat p(x|h) := \inner{\phi(x)}{\widehat \mu_{X|h}}_{\Fcal}$. In this case, the error can be decomposed into two terms
 \begin{align*}
   \abr{p(x|h) - \widehat p(x|h)}
-  \leq \underbrace{\abr{p(x|h) - \widetilde p(x|h)}}_{O(s^2)~\text{bias as in~\eq{eq:kdebias}}} + \underbrace{\abr{\widetilde p(x|h) - \widehat p(x|h)}}_{\text{estimation error}}
+  \leq \underbrace{\abr{p(x|h) - \widetilde p(x|h)}}_{O(s^\alpha)~\text{bias as in~\eq{eq:kdebias}}} + \underbrace{\abr{\widetilde p(x|h) - \widehat p(x|h)}}_{\text{estimation error}}
 \end{align*}
 where $s$ is kernel bandwidth and $\widetilde p$ is the density convolved with the kernel function. The estimation error is bounded by
 $|\widetilde p(x|h) - \widehat p(x|h)|
   \leq \|\phi(x)\|_{\Fcal} \|\mu_{X|h} - \widehat \mu_{X|h}\|_{\Fcal}
-  =O(\rho^{1/2} \cdot m^{-1/2}) = O(s^{-d/2} m^{-1/2})
+  =O(\rho^{0.5})\cdot O(\smallfrac{\rho^3}{m^{1.5}}) = O(\smallfrac{1}{s^{3.5d}m^{1.5}})
 $
-assuming $\rho/\sigma_k=O(1)$ and using $\rho = s^{-d}$.
+where we used $\rho = O(1/s^d)$.
 Combining the two sources of errors, we obtain a finite sample bound for conditional density estimation. That is, with high probability,
 \begin{align*}
   |p(x|h) - \widehat p(x|h)|
-  = O(s^2 + s^{-d/2} m^{-1/2})
+  \leq O(s^\alpha) + O\rbr{\smallfrac{1}{s^{3.5d}m^{1.5}}}
 \end{align*}
-Then we have $|p(x|h) - \widehat p(x|h)| = O(m^{-2/(4+d)})$ if we balance the two terms by setting $s = O(m^{-1/(4+d)})$.
+Then we have $|p(x|h) - \widehat p(x|h)| = O(m^{-3\alpha/(2\alpha+7d)})$ if we balance the two terms by setting $s = O(m^{-3/(2\alpha+7d)})$.
+Furthermore, if the smoothness level $\alpha$ of the true density grows as $O(d)$, then we obtain a final rate $O(m^{-1/3})$.
+Note that this is also the first theoretical result of the kind for estimating conditional density in the unsupervised setting.
 
 \vspace{-3mm}
 \section{Discussion}
 \vspace{-2mm}
 
-We note that our algorithm and theoretical results can also be generalized to the settings of latent variable models with Dirichlet priors and nonparametric independent component analysis (ICA) as in~\citet{AnandkumarEtal:tensor12}. In the first setting, a Dirichlet prior is placed on the mixing weights $\pi$ of the multi-view latent variables, 
+We note that our algorithm and theoretical results can also be generalized to the settings of latent variable models with Dirichlet priors and nonparametric independent component analysis (ICA) as in~\citet{AnandkumarEtal:tensor12}. In the first setting, a Dirichlet prior is placed on the mixing weights $\pi$ of the multi-view latent variables,
 $$
-        \PP(\pi) = \frac{\Gamma(\theta_0)}{\prod\nolimits_{i \in [k]} \Gamma(\theta_i)} \prod\nolimits_{i \in [k]} \pi_i^{\theta_i - 1}
+	\PP(\pi) = \frac{\Gamma(\theta_0)}{\prod\nolimits_{i \in [k]} \Gamma(\theta_i)} \prod\nolimits_{i \in [k]} \pi_i^{\theta_i - 1}
 $$
 where $\theta_0 = \sum_{i \in [k]} \theta_i$ with $\theta_i > 0$, and $\Gamma(\cdot)$ is the Gamma function. In this case, we only need to modify the second and third order kernel embedding $\Ccal_{X_1X_2}$ and $\Tcal$ respectively, and then Algorithm~\ref{alg:multiview} applies. In the nonparametric ICA setting, the feature map $\phi(X)$ of an observed variable $X$ is assumed to be generated from a latent vector $H \in \RR^k$ with independent coordinates via an operator $\Acal:\RR^k \mapsto \Fcal$,
 $$
-        \phi(X) := \Acal\, H + Z
-$$ 
+	\phi(X) := \Acal\, H + Z
+$$
 where $Z$ is a zero mean random vector independent of $H$. In this case,
 we need to start with a modified 4-th order kernel embedding, and then reduce to a multi-view problem and estimate $\Acal$ via Algorithm~\ref{alg:multiview}.
+
+% \section{Sample Complexity}
+%
+% Let $\rho:=\sup_{x \in \Xcal} \kappa(x,x)$,   $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, $\pi_{\min}:=\min_{i\in [k]} \pi_i$ and $\sigma_\kappa(\Ccal_{X_1X_2})$ be the $k$-th singular value of $\Ccal_{X_1X_2}$.
+%
+% %Assume that the mixing weights $\pi_1\geq \pi_2\ldots$ are in decreasing order.  Let $E_{X_1, X_2, X_3}$ be the residual tensor \beq\label{eqn:triplesexpression}\Ccal_{X_1 X_2 X_3}= \sum_{h\in [k]} \pi_h \cdot \mu_{X|h} \otimes \mu_{X|h} \otimes \mu_{X|h} + E_{X_1, X_2, X_3}\eeq
+%
+%
+% \begin{theorem}[Sample Bounds]\label{thm:samplebound}
+% Pick  any $\delta\in (0,1)$. When the number of samples $m$ satisfies
+% \[ m >\frac{\theta\rho^2  \log\frac{2}{\delta}}{\sigma^2_\kappa(\Ccal_{X_1, X_2})},
+% \quad \theta:= \max\left(\frac{C_3 k^2}{\sigma_\kappa( \Ccal_{X_1, X_2})}, \frac{C_4k^{2/3}\iffalse(1+\sigma_{k+1}(\Ccal_{X_1, X_2}))^2 \fi }{\pi_{\min}^{1/3}}\right),\] for some constants $C_3, C_4>0$, and the number of iterations $N$  and  the number of random initialization vectors $L$  (drawn uniformly on the sphere $\mathcal{S}^{k-1}$)  satisfy
+% \begin{align*}
+%   N \geq C_2 \cdot \biggl( \log(k) + \log\log\Bigl(
+%  \frac{1}{\sqrt{\pi}_{\min}\epsilon_{\Tcal}} \Bigr) \biggr),
+% % \sqrt{\frac{\ln(L/\log_2(k/\delta))}{\ln(k)}}
+% % \cdot \Biggl( 1 - \frac{\ln(\ln(L/\log_2(k/\delta))) +
+% % C_3}{4\ln(L/\log_2(k/\delta))} -
+% % \sqrt{\frac{\ln(8)}{\ln(L/\log_2(k/\delta))}} \Biggr)
+% % \geq 1.02 \Biggl( 1 + \sqrt{\frac{\ln(4)}{\ln(k)}}
+% % \Biggr)
+% % .
+% \end{align*}
+% for constant $C_2>0$ and  $L = \poly(k) \log(1/\delta)$,  the robust power method in~\cite{AnandkumarEtal:community12} yields eigen-pairs $(\h{\lambda}_i, \h{\phi}_i)$ such that there exists a permutation $\eta$, with probability $1-4\delta$, we have
+% \begin{align*}
+% &\|\pi^{-1/2}_{j} \mu_{X|h=j}-\h{\phi}_{\eta(j)}\| \leq 8 \epsilon_{\Tcal} \cdot\pi^{-1/2}_{j}
+% , \\
+% &|\pi^{-1/2}_{j}-\h{\lambda}_{\eta(j)}| \leq  5\epsilon_{\Tcal}, \quad \forall j \in [k]
+% ,
+% \end{align*}
+% and
+% \[
+% \biggl\|
+% T - \sum_{j=1}^k \hat\lambda_j \hat{\phi}_j^{\otimes 3}
+% \biggr\| \leq 55\eps_{\Tcal},
+% \] where $\eps_{\Tcal}$ is the tensor perturbation bound
+% \begin{align*} \eps_{\Tcal} := \|\h{\Tcal} - \Tcal\| \leq&
+% \frac{12 \rho \sqrt{\log\frac{2}{\delta}}}{\sqrt{m} \, \sigma_k^{1.5}(\Ccal_{X_1, X_2})} \\ &+ \frac{512 \sqrt{2} \rho^3 \left(\log\frac{2}{\delta}\right)^{1.5}}{m^{1.5} \,\sigma_k^{3}(\Ccal_{X_1, X_2}) \sqrt{\pi}_{\min}}\end{align*}
+% \end{theorem}
+%
+% Thus, the above result provides bounds on the estimated eigen-pairs using the robust tensor power method.
+% The proof is in Appendix~\ref{app:samplebound}.
+%
+% \paragraph{Remarks: }We note that the sample complexity is  $\poly(k, \rho, 1/\pi_{\min}, 1/\sigma_\kappa(\Ccal_{X_1, X_2}))$ of a low order, and in particular,  it is $O(k^2)$, when the other parameters are fixed. For the special case of discrete measurements, where the kernel $\kappa(x,x')=\delta(x,x')$, we have $\rho=1$. Note that the sample complexity depends in this case only on the number of components $k$ and not on the dimensionality of the observed state space.   Thus, the robust tensor method has efficient sample and computational complexities for non-parametric latent variable estimation.
 
 \vspace{-3mm}
 \section{Experiments}
@@ -873,8 +910,7 @@ This is the key advantage of our method in that it has favorable performance in 
 Flow cytometry (FCM) data are multivariate measurements from flow cytometers that record light scatter and fluorescence emission properties of hundreds of thousands of individual cells. They are important to the studying of the cell structures of normal and abnormal cells and the diagnosis of human diseases. \citet{AghFinEtal13} introduced the FlowCAP-challenge whose main task is grouping the flow cytometry data automatically. Clustering on the FCM data is a difficult task because the distribution of the data is non-Gaussian and heavily skewed. We use the DLBCL Lymphoma dataset collection from~\cite{AghFinEtal13} to compare our kernel algorithm with the four alternatives.
 This collection contains 24 datasets with two or three clusters, and each dataset consists of tens of thousands of cell measurements in 5 dimensions. Each dataset is a separate clustering task, so we fit a multi-view model to each dataset separately and use the maximum-a-posteriori assignment to obtain the cluster labels.  All the cell measurements have been manually labeled, therefore we can evaluate the clustering performance using f-score \cite{AghFinEtal13}.
 
-We split the 5 dimensions into three views: dimension 1 and 2 as the first view, 3 and 4 the second, and 5 the third view based on correlation between views, since we would like the views to satisfy the conditional independence assumptions to ensure good performance for the kernel spectral method. For each dataset, we select the best kernel bandwidth by 5-fold cross validation using log-likelihood. Figure~\ref{fig:real_data} presents the results sorted by the number of clusters. Since the data are collapsed in most cases, the centers cannot span a subspace with enough rank. Thus, the method in \citep{HsuKak13} is not applicable. However, our method (kernel spectral) outperforms EM-GMM as well as the other algorithms in a majority of datasets. There are also datasets where kernel spectral algorithm has a large gap in performance compared to GMM. These are the datasets where the multi-view assumptions are heavily violated. For example, in some datasets, the correlation coefficient between dimensions 3 and 5 is 
-as high as 0.927 given a particular cluster label, suggesting strong correlation between the two views. Obtaining improved and robust performance in these datasets will be a subject of our future study where we plan to develop even more robust kernel spectral algorithms.
+We split the 5 dimensions into three views: dimension 1 and 2 as the first view, 3 and 4 the second, and 5 the third view based on correlation between views, since we would like the views to satisfy the conditional independence assumptions to ensure good performance for the kernel spectral method. For each dataset, we select the best kernel bandwidth by 5-fold cross validation using log-likelihood. Figure~\ref{fig:real_data} presents the results sorted by the number of clusters. Since the data are collapsed in most cases, the centers cannot span a subspace with enough rank. Thus, the method in \citep{HsuKak13} is not applicable. However, our method (kernel spectral) outperforms EM-GMM as well as the other algorithms in a majority of datasets. There are also datasets where kernel spectral algorithm has a large gap in performance compared to GMM. These are the datasets where the multi-view assumptions are heavily violated. For example, in some datasets, the correlation coefficient between dimensions 3 and 5 is as high as 0.927 given a particular cluster label, suggesting strong correlation between the two views. Obtaining improved and robust performance in these datasets will be a subject of our future study where we plan to develop even more robust kernel spectral algorithms.
 % \aacomment{reviewer had asked how did we verify that multi-view assumption was violated. we should add this..multiple reviewers had asked about this experiment..reviewer also asked why \citep{HsuKak13} algo is not run for this.. can we quickly run this}
 
 % \vspace{-3mm}
@@ -889,184 +925,16 @@ as high as 0.927 given a particular cluster label, suggesting strong correlation
 \section*{\small Acknowledgement}
 \vspace{-3mm}
 {\small
-This research was supported in part by NSF/NIH BIGDATA 1R01GM108341, NSF IIS1116886, NSF CAREER IIS1350983 and a Raytheon faculty fellowship to L. Song.
+This research was supported in part by NSF/NIH BIGDATA 1R01GM108341-01, NSF IIS1116886, and a Raytheon faculty fellowship to L. Song. A. Anandkumar is supported in part by  Microsoft Faculty Fellowship, NSF Career award CCF-
+1254106, NSF Award CCF-1219234, NSF BIGDATA IIS-1251267 and ARO YIP Award W911NF-13-1-0084.
+
 }
 
 \clearpage
 \newpage
 
-% \bibliographystyle{icml2014}
-% \bibliography{../nonparametric_mixture,../bibfile}
-
-\begin{thebibliography}{25}
-\providecommand{\natexlab}[1]{#1}
-\providecommand{\url}[1]{\texttt{#1}}
-\expandafter\ifx\csname urlstyle\endcsname\relax
-  \providecommand{\doi}[1]{doi: #1}\else
-  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
-
-\bibitem[Aghaeepour et~al.(2013)Aghaeepour, Finak, Consortium, Consortium,
-  Hoos, Mosmann, Brinkman, Gottardo, and Scheuermann]{AghFinEtal13}
-Aghaeepour, Nima, Finak, Greg, Consortium, The~FlowCAP, Consortium, The~DREAM,
-  Hoos, Holger, Mosmann, Tim~R, Brinkman, Ryan, Gottardo, Raphael, and
-  Scheuermann, Richard~H.
-\newblock Critical assessment of automated flow cytometry data analysis
-  techniques.
-\newblock \emph{Nature Methods}, 10\penalty0 (3):\penalty0 228--238, 2013.
-
-\bibitem[Allman et~al.(2009)Allman, Matias, and Rhodes]{AllMatRho09}
-Allman, Elizabeth, Matias, Catherine, and Rhodes, John.
-\newblock Identifiability of parameters in latent structure models with many
-  observed variables.
-\newblock \emph{The Annals of Statistics}, 37\penalty0 (6A):\penalty0
-  3099--3132, 2009.
-
-\bibitem[Anandkumar et~al.(2012{\natexlab{a}})Anandkumar, Ge, Hsu, Kakade, and
-  Telgarsky]{AnandkumarEtal:tensor12}
-Anandkumar, A., Ge, R., Hsu, D., Kakade, S.~M., and Telgarsky, M.
-\newblock {Tensor Methods for Learning Latent Variable Models}.
-\newblock \emph{Available at arXiv:1210.7559}, Oct. 2012{\natexlab{a}}.
-
-\bibitem[Anandkumar et~al.(2013{\natexlab{a}})Anandkumar, Ge, Hsu, and
-  Kakade]{AnandkumarEtal:community12}
-Anandkumar, A., Ge, R., Hsu, D., and Kakade, S.~M.
-\newblock {A Tensor Spectral Approach to Learning Mixed Membership Community
-  Models}.
-\newblock \emph{ArXiv 1302.2684}, Feb. 2013{\natexlab{a}}.
-
-\bibitem[Anandkumar et~al.(2013{\natexlab{b}})Anandkumar, Hsu, Janzamin, and
-  Kakade]{AnandkumarEtal:overcomplete13}
-Anandkumar, A., Hsu, D., Janzamin, M., and Kakade, S.~M.
-\newblock {When are Overcomplete Topic Models Identifiable? Uniqueness of
-  Tensor Tucker Decompositions with Structured Sparsity}.
-\newblock \emph{ArXiv 1308.2853}, Aug. 2013{\natexlab{b}}.
-
-\bibitem[Anandkumar et~al.(2012{\natexlab{b}})Anandkumar, Foster, Hsu, Kakade,
-  and Liu]{AnandkumarEtal:twosvd12}
-Anandkumar, Animashree, Foster, Dean~P., Hsu, Daniel, Kakade, Sham~M., and Liu,
-  Yi-Kai.
-\newblock A spectral algorithm for latent dirichlet allocation.
-\newblock \emph{Available at arXiv:1204.6703}, 2012{\natexlab{b}}.
-
-\bibitem[Benaglia et~al.(2009)Benaglia, Chauveau, and Hunter]{BenChaHun09}
-Benaglia, Tatiana, Chauveau, Didier, and Hunter, David~R.
-\newblock An em-like algorithm for semi-and nonparametric estimation in
-  multivariate mixtures.
-\newblock \emph{Journal of Computational and Graphical Statistics}, 18\penalty0
-  (2):\penalty0 505--526, 2009.
-
-\bibitem[De~Lathauwer et~al.(2007)De~Lathauwer, Castaing, and
-  Cardoso]{DeLathauwerEtal:FOOBI}
-De~Lathauwer, L., Castaing, J., and Cardoso, J.-F.
-\newblock Fourth-order cumulant-based blind identification of underdetermined
-  mixtures.
-\newblock \emph{IEEE Tran. on Signal Processing}, 55:\penalty0 2965--2973, June
-  2007.
-
-\bibitem[Dempster et~al.(1977)Dempster, Laird, and Rubin]{DemLaiRub77}
-Dempster, A.~P., Laird, N.~M., and Rubin, D.~B.
-\newblock Maximum likelihood from incomplete data via the {EM} algorithm.
-\newblock \emph{Journal of the Royal Statistical Society B}, 39\penalty0
-  (1):\penalty0 1--22, 1977.
-
-\bibitem[Foster et~al.(2012)Foster, Rodu, and Ungar]{FosRodUng12}
-Foster, D.P., Rodu, J., and Ungar, L.H.
-\newblock Spectral dimensionality reduction for hmms.
-\newblock \emph{Arxiv preprint arXiv:1203.6130}, 2012.
-
-\bibitem[Hsu et~al.(2009)Hsu, Kakade, and Zhang]{HsuKakZha09}
-Hsu, D., Kakade, S., and Zhang, T.
-\newblock A spectral algorithm for learning hidden markov models.
-\newblock In \emph{Proc.\ Annual Conf.\ Computational Learning Theory}, 2009.
-
-\bibitem[Hsu \& Kakade(2013)Hsu and Kakade]{HsuKak13}
-Hsu, Daniel and Kakade, Sham~M.
-\newblock Learning mixtures of spherical gaussians: moment methods and spectral
-  decompositions.
-\newblock In \emph{Proceedings of the 4th conference on Innovations in
-  Theoretical Computer Science}, ITCS '13, pp.\  11--20.  
-
-\bibitem[Kasahara \& Shimotsu(2010)Kasahara and Shimotsu]{HirKat10}
-Kasahara, Hiroyuki and Shimotsu, Katsumi.
-\newblock Nonparametric identification of multivariate mixtures.
-\newblock \emph{Journal of the Royal Statistical Society - Series B}, 2010.
-
-\bibitem[Kolda \& Bader(2009)Kolda and Bader]{KolBad09}
-Kolda, Tamara~G. and Bader, Brett~W.
-\newblock Tensor decompositions and applications.
-\newblock \emph{SIAM Review}, 51\penalty0 (3):\penalty0 455--500, 2009.
-
-\bibitem[Kruskal(1977)]{Kruskal:77}
-Kruskal, J.B.
-\newblock {Three-way arrays: Rank and uniqueness of trilinear decompositions,
-  with application to arithmetic complexity and statistics}.
-\newblock \emph{Linear algebra and its applications}, 18\penalty0 (2):\penalty0
-  95--138, 1977.
-
-\bibitem[Parikh et~al.(2011)Parikh, Song, and Xing]{ParSonXin11}
-Parikh, A., Song, L., and Xing, E.~P.
-\newblock A spectral algorithm for latent tree graphical models.
-\newblock In \emph{Proceedings of the International Conference on Machine
-  Learning}, 2011.
-
-\bibitem[Rosasco et~al.(2010)Rosasco, Belkin, and Vito]{RosBelVit2010}
-Rosasco, L., Belkin, M., and Vito, E.D.
-\newblock On learning with integral operators.
-\newblock \emph{Journal of Machine Learning Research}, 11:\penalty0 905--934,
-  2010.
-
-\bibitem[Sch{\"o}lkopf et~al.(2004)Sch{\"o}lkopf, Tsuda, and Vert]{SchTsuVer04}
-Sch{\"o}lkopf, B., Tsuda, K., and Vert, J.-P.
-\newblock \emph{Kernel Methods in Computational Biology}.
-\newblock MIT Press, Cambridge, MA, 2004.
-
-\bibitem[Sgouritsa et~al.(2013)Sgouritsa, Janzing, Peters, and
-  Sch\"{o}lkopf]{SgoJanPetSch13}
-Sgouritsa, Eleni, Janzing, Dominik, Peters, Jonas, and Sch\"{o}lkopf, Bernhard.
-\newblock Identifying finite mixtures of nonparametric product distributions
-  and causal inference of confounders.
-\newblock In \emph{Conference on Uncertainty on Artificial Intelligence (UAI)},
-  2013.
-
-\bibitem[Smola et~al.(2007)Smola, Gretton, Song, and
-  {Sch\"olkopf}]{SmoGreSonSch07}
-Smola, A.~J., Gretton, A., Song, L., and {Sch\"olkopf}, B.
-\newblock A {H}ilbert space embedding for distributions.
-\newblock In \emph{Proceedings of the International Conference on Algorithmic
-  Learning Theory}, volume 4754, pp.\  13--31. Springer, 2007.
-
-\bibitem[Song \& Dai(2013)Song and Dai]{SonDai13}
-Song, L. and Dai, B.
-\newblock Robust low rank kernel embedding of multivariate distributions.
-\newblock In \emph{Neural Information Processing Systems (NIPS)}, 2013.
-
-\bibitem[Song et~al.(2010)Song, Boots, Siddiqi, Gordon, and
-  Smola]{SonBooSidGorSmo10}
-Song, L., Boots, B., Siddiqi, S., Gordon, G., and Smola, A.~J.
-\newblock Hilbert space embeddings of hidden markov models.
-\newblock In \emph{International Conference on Machine Learning}, 2010.
-
-\bibitem[Song et~al.(2011)Song, Parikh, and Xing]{SonParXin11}
-Song, L., Parikh, A., and Xing, E.P.
-\newblock Kernel embeddings of latent tree graphical models.
-\newblock In \emph{Advances in Neural Information Processing Systems},
-  volume~25, 2011.
-
-\bibitem[Sriperumbudur et~al.(2008)Sriperumbudur, Gretton, Fukumizu, Lanckriet,
-  and Sch{\"{o}}lkopf]{SriGreFukLanetal08}
-Sriperumbudur, B., Gretton, A., Fukumizu, K., Lanckriet, G., and
-  Sch{\"{o}}lkopf, B.
-\newblock Injective {H}ilbert space embeddings of probability measures.
-\newblock In \emph{Proc.\ Annual Conf.\ Computational Learning Theory}, pp.\
-  111--122, 2008.
-
-\bibitem[Wasserman(2006)]{Wasserman06}
-Wasserman, L.
-\newblock \emph{All of Nonparametric Statistics}.
-\newblock Springer, 2006.
-
-\end{thebibliography}
-
+\bibliographystyle{icml2014}
+\bibliography{../nonparametric_mixture,../bibfile}
 
 \clearpage
 \newpage
@@ -1185,51 +1053,6 @@ whitening the data and apply power method to decompose it
 %
 
 \input{concentration-bounds.tex}
-
 \input{../experiment/single_cond_exp.tex}
-
-% \section{Sample Complexity}
-%
-% Let $\rho:=\sup_{x \in \Xcal} \kappa(x,x)$,   $\| \cdot\|_{}$ be the Hilbert-Schmidt norm, $\pi_{\min}:=\min_{i\in [k]} \pi_i$ and $\sigma_k(\Ccal_{X_1X_2})$ be the $k$-th singular value of $\Ccal_{X_1X_2}$.
-%
-% %Assume that the mixing weights $\pi_1\geq \pi_2\ldots$ are in decreasing order.  Let $E_{X_1, X_2, X_3}$ be the residual tensor \beq\label{eqn:triplesexpression}\Ccal_{X_1 X_2 X_3}= \sum_{h\in [k]} \pi_h \cdot \mu_{X|h} \otimes \mu_{X|h} \otimes \mu_{X|h} + E_{X_1, X_2, X_3}\eeq
-%
-%
-% \begin{theorem}[Sample Bounds]\label{thm:samplebound}
-% Pick  any $\delta\in (0,1)$. When the number of samples $m$ satisfies
-% \[ m >\frac{\theta\rho^2  \log\frac{2}{\delta}}{\sigma^2_k(\Ccal_{X_1 X_2})},
-% \quad \theta:= \max\left(\frac{C_3 k^2}{\sigma_k( \Ccal_{X_1 X_2})}, \frac{C_4k^{2/3}\iffalse(1+\sigma_{k+1}(\Ccal_{X_1 X_2}))^2 \fi }{\pi_{\min}^{1/3}}\right),\] for some constants $C_3, C_4>0$, and the number of iterations $N$  and  the number of random initialization vectors $L$  (drawn uniformly on the sphere $\mathcal{S}^{k-1}$)  satisfy
-% \begin{align*}
-%   N \geq C_2 \cdot \biggl( \log(k) + \log\log\Bigl(
-%  \frac{1}{\sqrt{\pi}_{\min}\epsilon_{\Tcal}} \Bigr) \biggr),
-% % \sqrt{\frac{\ln(L/\log_2(k/\delta))}{\ln(k)}}
-% % \cdot \Biggl( 1 - \frac{\ln(\ln(L/\log_2(k/\delta))) +
-% % C_3}{4\ln(L/\log_2(k/\delta))} -
-% % \sqrt{\frac{\ln(8)}{\ln(L/\log_2(k/\delta))}} \Biggr)
-% % \geq 1.02 \Biggl( 1 + \sqrt{\frac{\ln(4)}{\ln(k)}}
-% % \Biggr)
-% % .
-% \end{align*}
-% for constant $C_2>0$ and  $L = \poly(k) \log(1/\delta)$,  the robust power method in~\cite{AnandkumarEtal:community12} yields eigen-pairs $(\h{\lambda}_i, \h{\phi}_i)$ such that there exists a permutation $\eta$, with probability $1-4\delta$, we have
-% \begin{align*}
-% &\|\pi^{-1/2}_{j} \mu_{X|h=j}-\h{\phi}_{\eta(j)}\| \leq 8 \epsilon_{\Tcal} \cdot\pi^{-1/2}_{j}
-% , \\
-% &|\pi^{-1/2}_{j}-\h{\lambda}_{\eta(j)}| \leq  5\epsilon_{\Tcal}, \quad \forall j \in [k]
-% ,
-% \end{align*}
-% and
-% \[
-% \biggl\|
-% T - \sum_{j=1}^k \hat\lambda_j \hat{\phi}_j^{\otimes 3}
-% \biggr\| \leq 55\eps_{\Tcal},
-% \] where $\eps_{\Tcal}$ is the tensor perturbation bound
-% \begin{align*} \eps_{\Tcal} := \|\h{\Tcal} - \Tcal\| \leq&
-% \frac{12 \rho \sqrt{\log\frac{2}{\delta}}}{\sqrt{m} \, \sigma_k^{1.5}(\Ccal_{X_1 X_2})} \\ &+ \frac{512 \sqrt{2} \rho^3 \left(\log\frac{2}{\delta}\right)^{1.5}}{m^{1.5} \,\sigma_k^{3}(\Ccal_{X_1 X_2}) \sqrt{\pi}_{\min}}\end{align*}
-% \end{theorem}
-%
-% Thus, the above result provides bounds on the estimated eigen-pairs using the robust tensor power method.
-% The proof is in Appendix~\ref{app:samplebound}.
-%
-% \paragraph{Remarks: }We note that the sample complexity is  $\poly(k, \rho, 1/\pi_{\min}, 1/\sigma_k(\Ccal_{X_1 X_2}))$ of a low order, and in particular,  it is $O(k^2)$, when the other parameters are fixed. For the special case of discrete measurements, where the kernel $\kappa(x,x')=\delta(x,x')$, we have $\rho=1$. Note that the sample complexity depends in this case only on the number of components $k$ and not on the dimensionality of the observed state space.   Thus, the robust tensor method has efficient sample and computational complexities for non-parametric latent variable estimation.
 
 \end{document}
