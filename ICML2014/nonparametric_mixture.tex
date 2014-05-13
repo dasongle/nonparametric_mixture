@@ -125,7 +125,8 @@ given samples only from the observed variables $\{X_t\}_{t \in [\ell]}$, but \em
 Our solution is to embed the distribution of the observed variables in such a model into a reproducing kernel Hilbert space, and exploit tensor decomposition of the embedded distribution (or covariance operators)
 to recover the unobserved embedding $\mu_{X_t|h}=\int_{\Xcal} \phi(x)\, d\PP(x|h)$ of the mixture components. The key computation of our algorithm involves a kernel singular value decomposition of the two-view covariance operator, followed by a robust tensor power method on the three-view covariance operator. These standard matrix operations makes the algorithm very efficient and easy to deploy.
 
-Although kernel methods have been previously applied to learning latent variable models, none of them can provably recover the exact latent component $\PP(X_t|h)$ or its sufficient statitiscs to support integral query on this distribution. For instance, \citet{SonBooSidGorSmo10,SonParXin11, SonDai13}~estimated an (unknown) invertible transformation of the sufficient statistics of the latent component $\PP(X_t|h)$, and only supported integral query associated with the distribution of the observed variables. \citet{SgoJanPetSch13}~used kernel independence measure to cluster data points, and treated each cluster as a latent component. Besides computational issues, it is also difficult to provide theoretical guarantees to such an approach since the clustering step only finds a local minimum. \citet{BenChaHun09} designed an EM-like algorithm for learning the conditional densities in latent variable models. This algorithm alternates between the E-step, proportional assignment of data points to components, and the M-step, kernel
+Although kernel methods have been previously applied to learning latent variable models, none of them can provably recover the exact latent component $\PP(X_t|h)$ or its sufficient statitiscs to support integral query on this distribution. For instance, \citet{SonBooSidGorSmo10,SonParXin11, SonDai13}~estimated an (unknown) invertible transformation of the sufficient statistics of the latent component $\PP(X_t|h)$, and only supported integral query associated with the distribution of the observed variables. \citet{SgoJanPetSch13}~used kernel independence measure to cluster data points, and treated each cluster as a latent component. Besides computational issues, it is also difficult to provide theoretical guarantees to such an approach since the clustering step only finds a local minimum. \citet{BenChaHun09} designed an EM-like algorithm for learning the conditional densities in latent variable models. This algorithm alternates between the E-step, proportional assignment of data points to components, and the 
+M-step, kernel
 density estimation based on weighted data points. Similarly, theoretical analysis of such a local search heurstic is difficult.
 
 The kernel algorithm proposed in this paper is also significantly more general than the previous spectral algorithms which work only for distributions with parametric assumptions~\cite{AnandkumarEtal:tensor12,HsuKak13}. In fact, when we use the delta kernel, our algorithm recovers the previous algorithm of~\citet{AnandkumarEtal:tensor12} for discrete mixture components as a special case. When we use universal kernels, such as the Gaussian RBF kernel, our algorithm can recover Gaussian mixture components as well as mixture components with other distributions. In this sense, our work also provides a unifying framework for previous spectral algorithms. We prove sample complexity bounds for the nonparametric tensor power method and show that it is both computational and sample efficient. As a special case of our framework, we also obtain a first \emph{unsupervised} conditional density estimator of the kind with provable guarantees. Furthermore, our approach can also be generalized to other latent variable
@@ -677,23 +678,23 @@ and $\|\Tcal - \sum\nolimits_{j=1}^k \hat\lambda_j \hat{\phi}_j^{\otimes 3} \| \
 \begin{align*} \eps_{\Tcal} \leq
 \frac{8 \rho^{1.5} \sqrt{\log\frac{2}{\delta}}}{\sqrt{m} \, \sigma_k^{1.5}(\Ccal_{X_1 X_2})} + \frac{512 \sqrt{2} \rho^3 \left(\log\frac{2}{\delta}\right)^{1.5}}{m^{1.5} \,\sigma_k^{3}(\Ccal_{X_1 X_2}) \sqrt{\pi_{\min}}}
 \end{align*}
-\vspace{-3mm}
+\vspace{-4mm}
 \end{theorem}
-
+%
 \begin{proof}
-Sketch: we note that our proof is different from those in~\citet{AnandkumarEtal:tensor12} which only analyze the perturbation of the tensor decomposition. Our proof further takes into account the error introduced by the approximate whitening step, and its effects to the tensor decomposition.
+Sketch: Our proof is different from those in~\citet{AnandkumarEtal:tensor12} which only analyze the perturbation of the tensor decomposition. Our proof further takes into account the error introduced by the approximate whitening step, and its effects to the tensor decomposition.
 \vspace{-4mm}
 \end{proof}
 
-{\bf Remark 1:} We note that the sample complexity is  $\poly(k, \rho, 1/\pi_{\min}, 1/\sigma_k(\Ccal_{X_1 X_2}))$ of a low order, and in particular,  it is $O(k^2)$, when the other parameters are fixed. For the special case of discrete measurements, where the kernel $\kappa(x,x')=\delta(x,x')$, we have $\rho=1$. Note that the sample complexity depends in this case only on the number of components $k$ and not on the dimensionality of the observed state space.   Thus, the robust tensor method has efficient sample and computational complexities for non-parametric latent variable estimation.
+{\bf Remark 1:} We note that the sample complexity is  $\poly(k, \rho, 1/\pi_{\min}, 1/\sigma_k(\Ccal_{X_1 X_2}))$ of a low order, and in particular,  it is $O(k^2)$, when the other parameters are fixed. For the special case of discrete measurements, where the kernel $\kappa(x,x')=\delta(x,x')$, we have $\rho=1$. Note that the sample complexity depends in this case only on the number of components $k$ and not on the dimensionality of the observed state space.  
 
-{\bf Remark 2:} Theorem~\ref{thm:samplebound} also gives us an error bound for estimating the integral of a function $f\in \Fcal$ with respect to a mixture component in unsupervised fashion. That is
+{\bf Remark 2:} Theorem~\ref{thm:samplebound} also gives us an error bound for estimating the integral of a function $f\in \Fcal$ with respect to a mixture component in unsupervised fashion. Under the conditions specified in the theorem, we have 
 \begin{align*}
   &\abr{\int_{\Xcal} f(x)\, d\PP(x|h) - \inner{f}{\widehat \mu_{X|h}}_{\Fcal}} \\
   \leq& \nbr{f}_{\Fcal} \nbr{\mu_{X|h} - \widehat \mu_{X|h}}_{\Fcal}
   = O\rbr{\smallfrac{1}{\sqrt{m}}}
 \end{align*}
-assuming $\nbr{f}_{\Fcal}$ is bounded and $\rho/\sigma_k=O(1)$.
+assuming $\nbr{f}_{\Fcal}$ is bounded and $\rho/\sigma_k=O(1)$. We are not aware of any other result of the similar type in this unsupervised setting. 
 
 {\bf Remark 3:} For $x\in \RR^d$ and the normalized Gaussian RBF kernel in~\eq{eq:normalizedrbf}, the recovered conditional embedding $\widehat \mu_{X|h}$ can be used to estimate the conditional density, $p(x|h) \approx \widehat p(x|h) := \inner{\phi(x)}{\widehat \mu_{X|h}}_{\Fcal}$. In this case, the error can be decomposed into two terms
 \begin{align*}
@@ -705,32 +706,32 @@ $|\widetilde p(x|h) - \widehat p(x|h)|
   \leq \|\phi(x)\|_{\Fcal} \|\mu_{X|h} - \widehat \mu_{X|h}\|_{\Fcal}
   =O(\rho^{1/2} \cdot m^{-1/2}) = O(s^{-d/2} m^{-1/2})
 $
-assuming $\rho/\sigma_k=O(1)$ and using $\rho = s^{-d}$.
-Combining the two sources of errors, we obtain a finite sample bound for conditional density estimation. That is, with high probability,
+assuming $\rho/\sigma_k=O(1)$ and using $\rho = O(s^{-d})$.
+Under the conditions specified in Theorem~\ref{thm:samplebound}, we combine the analysis for the two sources of errors, and obtain the bound
 \begin{align*}
   |p(x|h) - \widehat p(x|h)|
   = O(s^2 + s^{-d/2} m^{-1/2})
 \end{align*}
-Then we have $|p(x|h) - \widehat p(x|h)| = O(m^{-2/(4+d)})$ if we balance the two terms by setting $s = O(m^{-1/(4+d)})$.
+Then we have $|p(x|h) - \widehat p(x|h)| = O(m^{-2/(4+d)})$ if we balance the two terms by setting $s = O(m^{-1/(4+d)})$. We are not aware of any other result of the similar type in this unsupervised setting. 
 
 \vspace{-3mm}
 \section{Discussion}
 \vspace{-2mm}
 
-We note that our algorithm and theoretical results can also be generalized to the settings of latent variable models with Dirichlet priors and nonparametric independent component analysis (ICA) as in~\citet{AnandkumarEtal:tensor12}. In the first setting, a Dirichlet prior is placed on the mixing weights $\pi$ of the multi-view latent variables,
-$$
+Our algorithm and theoretical results can also be generalized to the settings of latent variable models with Dirichlet priors and nonparametric independent component analysis (ICA) as in~\citet{AnandkumarEtal:tensor12}. In the first setting, a Dirichlet prior is placed on the mixing weights $\pi$ of the multi-view latent variables,
+$
         \PP(\pi) = \frac{\Gamma(\theta_0)}{\prod\nolimits_{i \in [k]} \Gamma(\theta_i)} \prod\nolimits_{i \in [k]} \pi_i^{\theta_i - 1}
-$$
+$
 where $\theta_0 = \sum_{i \in [k]} \theta_i$ with $\theta_i > 0$, and $\Gamma(\cdot)$ is the Gamma function. In this case, we only need to modify the second and third order kernel embedding $\Ccal_{X_1X_2}$ and $\Tcal$ respectively, and then Algorithm~\ref{alg:multiview} applies. In the nonparametric ICA setting, the feature map $\phi(X)$ of an observed variable $X$ is assumed to be generated from a latent vector $H \in \RR^k$ with independent coordinates via an operator $\Acal:\RR^k \mapsto \Fcal$,
-$$
-        \phi(X) := \Acal\, H + Z
-$$
+$
+        \phi(X) := \Acal\, H + Z, 
+$
 where $Z$ is a zero mean random vector independent of $H$. In this case,
 we need to start with a modified 4-th order kernel embedding, and then reduce to a multi-view problem and estimate $\Acal$ via Algorithm~\ref{alg:multiview}.
 
-\vspace{-3mm}
-\section{Experiments}
 \vspace{-2mm}
+\section{Experiments}
+\vspace{-1mm}
 
 {\bf Methods.} We compared our kernel spectral algorithm with four alternatives
 \begin{enumerate}[noitemsep,nolistsep]
